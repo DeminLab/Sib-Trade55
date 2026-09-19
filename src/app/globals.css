@@ -264,3 +264,46 @@
 .blog-body th {
   @apply bg-muted font-semibold;
 }
+
+/* ============================================================================
+   Badge pop animation for cart & wishlist icons
+   ============================================================================ */
+
+.icon-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  background: var(--foreground);
+  color: var(--background);
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.icon-badge.pop {
+  animation: badge-pop 320ms ease-out;
+}
+
+@keyframes badge-pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.45); }
+  100% { transform: scale(1); }
+}
+
+/* Heart pop for wishlist */
+.heart-pop {
+  animation: heart-pop 320ms ease-out;
+}
+
+@keyframes heart-pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}

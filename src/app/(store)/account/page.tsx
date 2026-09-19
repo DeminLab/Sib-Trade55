@@ -10,10 +10,10 @@ import { useAuthGuard } from "@/hooks/use-auth-guard"
 import { useAuthStore } from "@/store/auth"
 
 const accountLinks = [
-  { name: "Orders", description: "View your order history and track shipments", href: "/account/orders", icon: Package },
-  { name: "Addresses", description: "Manage your shipping and billing addresses", href: "/account/addresses", icon: MapPin },
-  { name: "Wishlist", description: "Products you've saved for later", href: "/wishlist", icon: Heart },
-  { name: "Settings", description: "Update your profile and preferences", href: "/account/settings", icon: Settings },
+  { name: "Заказы", description: "История заказов и отслеживание доставки", href: "/account/orders", icon: Package },
+  { name: "Адреса", description: "Управление адресами доставки и оплаты", href: "/account/addresses", icon: MapPin },
+  { name: "Избранное", description: "Сохранённые товары", href: "/wishlist", icon: Heart },
+  { name: "Настройки", description: "Обновление профиля и настроек", href: "/account/settings", icon: Settings },
 ]
 
 export default function AccountPage() {
@@ -25,10 +25,10 @@ export default function AccountPage() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
-      <PageHeader title="My Account" description={`Welcome back, ${user?.firstName}!`}>
+<PageHeader title="Мой аккаунт" description={`Добро пожаловать, ${user?.firstName}!`}>
         <Button variant="outline" onClick={() => { logout(); router.push("/") }}>
           <LogOut className="mr-2 h-4 w-4" />
-          Sign Out
+          Выйти
         </Button>
       </PageHeader>
 

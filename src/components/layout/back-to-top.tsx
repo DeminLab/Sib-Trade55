@@ -28,7 +28,7 @@ export function BackToTop() {
           ? "translate-y-0 opacity-100"
           : "pointer-events-none translate-y-4 opacity-0"
       )}
-      aria-label="Back to top"
+      aria-label="Наверх"
     >
       <ArrowUp className="h-4 w-4" />
     </button>

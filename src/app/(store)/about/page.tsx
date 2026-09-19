@@ -2,86 +2,62 @@ import type { Metadata } from "next"
 import Link from "next/link"
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "О компании",
   description:
-    "Learn about the Next.js Ecommerce Starter template and Epic Design Labs, the team behind it.",
+    "Изготовление металлоконструкций, продажа сантехники и строительных материалов. СИБ-ТРЕЙД — Новосибирск.",
 }
 
 export default function AboutPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
-      <h1 className="text-3xl font-bold tracking-tight">About This Starter</h1>
+      <h1 className="text-3xl font-bold tracking-tight">О компании СИБ-ТРЕЙД</h1>
       <div className="mt-8 space-y-6 text-muted-foreground">
         <p>
-          The Next.js Ecommerce Starter is a free, open-source template designed
-          to give developers and businesses a production-ready foundation for
-          building modern online stores. It&apos;s built with Next.js, Tailwind CSS,
-          and shadcn/ui — and it&apos;s designed to connect to any checkout or
-          payment system.
+          СИБ-ТРЕЙД — это компания, которая начала работу с небольшой мастерской
+          в Новосибирске и выросла в надёжного поставщика металлоконструкций,
+          сантехники и строительных материалов.
         </p>
         <p>
-          Whether you&apos;re a developer looking for a clean starting point or a
-          business that needs a custom storefront, this template covers the
-          essentials: product catalog, cart, checkout, search, authentication,
-          wishlist, and more — all built with accessibility, SEO, and
-          performance in mind.
+          Мы работаем как с частными заказчиками, так и с строительными компаниями.
+          Наша цель —提供优质ные товары и услуги по честным ценам.
         </p>
 
         <h2 className="!mt-12 text-xl font-semibold text-foreground">
-          Built by Epic Design Labs
-        </h2>
-        <p>
-          This starter was created by{" "}
-          <a
-            href="https://epicdesignlabs.com"
-            target="_blank"
-            rel="noopener"
-            className="underline hover:text-foreground"
-          >
-            Epic Design Labs
-          </a>
-          , a design and development studio that helps businesses build
-          high-performing ecommerce experiences. We work with brands of all
-          sizes to design, develop, and optimize online stores that convert.
-        </p>
-
-        <h2 className="!mt-12 text-xl font-semibold text-foreground">
-          What&apos;s Included
+          Что мы предлагаем
         </h2>
         <ul className="list-inside list-disc space-y-2">
-          <li>30+ pages with responsive layouts</li>
-          <li>Product catalog with categories, subcategories, and brands</li>
-          <li>Shopping cart with slide-out drawer</li>
-          <li>Pluggable checkout provider (connect any payment system)</li>
-          <li>Search modal with instant results</li>
-          <li>Wishlist and recently viewed products</li>
-          <li>Authentication with protected routes</li>
-          <li>Full SEO setup (metadata, structured data, sitemap)</li>
-          <li>Accessibility compliant (WCAG best practices)</li>
-          <li>Internationalization ready (next-intl with EN/ES)</li>
-          <li>Theme variables for easy rebranding</li>
+          <li>Изготовление металлоконструкций по индивидуальным размерам</li>
+          <li>Широкий ассортимент сантехники от ведущих производителей</li>
+          <li>Строительные материалы оптом и в розницу</li>
+          <li>Профессиональный инструмент</li>
+          <li>Доставка по Новосибирску и Новосибирской области</li>
+          <li>Гарантия на все товары и работы</li>
         </ul>
 
         <h2 className="!mt-12 text-xl font-semibold text-foreground">
-          Need a Developer?
+          Почему выбирают нас
+        </h2>
+        <ul className="list-inside list-disc space-y-2">
+          <li>Собственное производство металлоконструкций</li>
+          <li>Работаем с 2015 года</li>
+          <li>Более 5 000 выполненных заказов</li>
+          <li>Индивидуальный подход к каждому клиенту</li>
+          <li>Прозрачное ценообразование</li>
+        </ul>
+
+        <h2 className="!mt-12 text-xl font-semibold text-foreground">
+          Контакты
         </h2>
         <p>
-          This template is free to use, modify, and deploy. If you need help
-          customizing it, integrating a payment provider, or building something
-          more complex, our team is here to help.{" "}
+          Телефон: +7 (383) 123-45-67<br />
+          Email: info@sib-trade.ru<br />
+          Адрес: г. Новосибирск, ул. Промышленная, 15
+        </p>
+        <p>
           <Link href="/contact" className="underline hover:text-foreground">
-            Get in touch
+            Свяжитесь с нами
           </Link>{" "}
-          or visit{" "}
-          <a
-            href="https://epicdesignlabs.com"
-            target="_blank"
-            rel="noopener"
-            className="underline hover:text-foreground"
-          >
-            epicdesignlabs.com
-          </a>
-          .
+          — ответим на любые вопросы.
         </p>
       </div>
     </div>

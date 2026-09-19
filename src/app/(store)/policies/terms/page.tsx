@@ -1,66 +1,62 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Terms of Service",
-  description: "Terms and conditions for using our website and services.",
+  title: "Условия использования",
+  description: "Условия и положения использования сайта и услуг.",
 }
 
 export default function TermsPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
-      <h1 className="text-3xl font-bold tracking-tight">Terms of Service</h1>
+      <h1 className="text-3xl font-bold tracking-tight">Условия использования</h1>
       <p className="mt-4 text-sm text-muted-foreground">
-        Last updated: January 1, 2025
+        Последнее обновление: 1 января 2025 г.
       </p>
       <div className="mt-8 space-y-6 text-muted-foreground">
         <h2 className="text-xl font-semibold text-foreground">
-          Acceptance of Terms
+          Принятие условий
         </h2>
         <p>
-          By accessing and using this website, you accept and agree to be bound
-          by these Terms of Service. If you do not agree, please do not use our
-          services.
+          Используя этот сайт, вы принимаете данные условия. Если вы не согласны
+          с какими-либо условиями, пожалуйста, не используйте наш сайт.
         </p>
 
         <h2 className="text-xl font-semibold text-foreground">
-          Use of Service
+          Использование сайта
         </h2>
         <p>
-          You agree to use our services only for lawful purposes and in
-          accordance with these terms. You are responsible for maintaining the
-          confidentiality of your account credentials.
+          Вы соглашаетесь использовать сайт только в законных целях. Вы несёте
+          ответственность за конфиденциальность своих данных для входа.
         </p>
 
         <h2 className="text-xl font-semibold text-foreground">
-          Products and Pricing
+          Товары и цены
         </h2>
         <p>
-          We strive to display accurate product information and pricing.
-          However, errors may occur. We reserve the right to correct any errors
-          and to cancel orders placed at incorrect prices.
+          Мы стараемся отображать точную информацию о товарах и ценах. Однако
+          возможны ошибки. Мы оставляем за собой право исправлять ошибки и
+          отменять заказы, размещённые по ошибочным ценам.
         </p>
 
         <h2 className="text-xl font-semibold text-foreground">
-          Intellectual Property
+          Интеллектуальная собственность
         </h2>
         <p>
-          All content on this website, including text, images, and logos, is
-          protected by intellectual property laws. You may not reproduce or
-          distribute any content without our written permission.
+          Все материалы на сайте, включая тексты, изображения и логотипы,
+          защищены законодательством об интеллектуальной собственности.
         </p>
 
         <h2 className="text-xl font-semibold text-foreground">
-          Limitation of Liability
+          Ограничение ответственности
         </h2>
         <p>
-          To the fullest extent permitted by law, we shall not be liable for
-          any indirect, incidental, or consequential damages arising from your
-          use of our services.
+          Компания не несёт ответственности за косвенные, случайные или
+          сопутствующие убытки, возникшие в результате использования сайта.
         </p>
 
-        <h2 className="text-xl font-semibold text-foreground">Contact</h2>
+        <h2 className="text-xl font-semibold text-foreground">Контакты</h2>
         <p>
-          For questions about these terms, contact us at legal@store.com.
+          По вопросам использования сайта обращайтесь: info@sib-trade.ru
         </p>
       </div>
     </div>

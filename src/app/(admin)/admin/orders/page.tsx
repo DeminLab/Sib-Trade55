@@ -5,11 +5,11 @@ import { EmptyState } from "@/components/ui/empty-state"
 export default function AdminOrdersPage() {
   return (
     <div>
-      <PageHeader title="Orders" description="Manage and track customer orders." />
+      <PageHeader title="Заказы" description="Управление заказами клиентов." />
       <EmptyState
         icon={Package}
-        title="No orders yet"
-        description="Orders will appear here once customers start purchasing."
+title="Заказов пока нет"
+        description="Они появятся здесь после первых покупок."
       />
     </div>
   )

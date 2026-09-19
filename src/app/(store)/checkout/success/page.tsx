@@ -30,7 +30,7 @@ function CheckoutSuccessContent() {
     return (
       <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="text-center">
-          <h1 className="text-3xl font-bold tracking-tight">Loading...</h1>
+          <h1 className="text-3xl font-bold tracking-tight">Загрузка...</h1>
         </div>
       </div>
     )
@@ -42,23 +42,22 @@ function CheckoutSuccessContent() {
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
       <div className="flex flex-col items-center text-center">
         <CheckCircle className="h-16 w-16 text-success" />
-        <h1 className="mt-6 text-3xl font-bold tracking-tight">
-          Thank you for your order!
+<h1 className="mt-6 text-3xl font-bold tracking-tight">
+          Спасибо за заказ!
         </h1>
         <p className="mt-4 text-muted-foreground">
-          Your order has been confirmed. We&apos;ll send you an email with
-          tracking details once it ships.
+          Ваш заказ подтверждён. Мы отправим вам email с трекингом после отправки.
         </p>
 
         {order && (
           <Card className="mt-8 w-full text-left">
             <CardContent className="pt-6 space-y-4">
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Order number</span>
+                <span className="text-muted-foreground">Номер заказа</span>
                 <span className="font-medium">{order.orderNumber}</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Date</span>
+                <span className="text-muted-foreground">Дата</span>
                 <span>{formatDate(order.createdAt)}</span>
               </div>
               <Separator />
@@ -72,20 +71,20 @@ function CheckoutSuccessContent() {
               ))}
               <Separator />
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Subtotal</span>
+                <span className="text-muted-foreground">Подытог</span>
                 <span>{formatPrice(order.subtotal)}</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Shipping</span>
-                <span>{order.shipping === 0 ? "Free" : formatPrice(order.shipping)}</span>
+<span className="text-muted-foreground">Доставка</span>
+                <span>{order.shipping === 0 ? "Бесплатно" : formatPrice(order.shipping)}</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Tax</span>
+                <span className="text-muted-foreground">Налог</span>
                 <span>{formatPrice(order.tax)}</span>
               </div>
               <Separator />
               <div className="flex justify-between font-medium">
-                <span>Total</span>
+                <span>Итого</span>
                 <span>{formatPrice(order.total)}</span>
               </div>
             </CardContent>
@@ -94,10 +93,10 @@ function CheckoutSuccessContent() {
 
         <div className="mt-8 flex gap-4">
           <Button asChild>
-            <Link href="/account/orders">View Orders</Link>
+            <Link href="/account/orders">Мои заказы</Link>
           </Button>
           <Button variant="outline" asChild>
-            <Link href="/shop">Continue Shopping</Link>
+            <Link href="/shop">Продолжить покупки</Link>
           </Button>
         </div>
       </div>

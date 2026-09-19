@@ -20,7 +20,7 @@ export default function CartPage() {
   if (!mounted) {
     return (
       <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
-        <PageHeader title="Shopping Cart" />
+        <PageHeader title="Корзина" />
       </div>
     )
   }
@@ -28,12 +28,12 @@ export default function CartPage() {
   if (items.length === 0) {
     return (
       <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
-        <PageHeader title="Shopping Cart" />
+        <PageHeader title="Корзина" />
         <EmptyState
           icon={ShoppingBag}
-          title="Your cart is empty"
-          description="Looks like you haven't added anything to your cart yet."
-          actionLabel="Continue Shopping"
+          title="Ваша корзина пуста"
+          description="Вы пока не добавили ни одного товара."
+          actionLabel="Продолжить покупки"
           actionHref="/shop"
         />
       </div>
@@ -44,7 +44,7 @@ export default function CartPage() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-8 pb-16 sm:px-6 sm:py-16 lg:px-8">
-      <PageHeader title="Shopping Cart" />
+      <PageHeader title="Корзина" />
       <div className="mt-8">
         <div className="divide-y">
           {items.map((item) => (
@@ -55,10 +55,10 @@ export default function CartPage() {
         <CartSummary subtotal={subtotal} />
         <div className="mt-8 flex flex-col gap-3">
           <Button size="lg" asChild>
-            <Link href="/checkout">Proceed to Checkout</Link>
+            <Link href="/checkout">Перейти к оформлению</Link>
           </Button>
           <Button variant="outline" asChild>
-            <Link href="/shop">Continue Shopping</Link>
+            <Link href="/shop">Продолжить покупки</Link>
           </Button>
         </div>
       </div>

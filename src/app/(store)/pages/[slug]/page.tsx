@@ -28,7 +28,7 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { slug } = await params
   const page = await pageRepository.getBySlug(slug)
-  if (!page) return { title: "Not Found" }
+  if (!page) return { title: "Не найдено" }
 
   return {
     title: page.title,
@@ -55,7 +55,7 @@ export default async function CmsPageDetail({ params }: PageProps) {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             breadcrumbJsonLd([
-              { name: "Pages", href: "/pages" },
+              { name: "Страницы", href: "/pages" },
               { name: page.title, href: `/pages/${page.slug}` },
             ])
           ),
@@ -65,7 +65,7 @@ export default async function CmsPageDetail({ params }: PageProps) {
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
-            <BreadcrumbLink render={<Link href="/pages" />}>Pages</BreadcrumbLink>
+            <BreadcrumbLink render={<Link href="/pages" />}>Страницы</BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
@@ -78,7 +78,7 @@ export default async function CmsPageDetail({ params }: PageProps) {
         <header>
           <h1 className="text-4xl font-bold tracking-tight">{page.title}</h1>
           <p className="mt-2 text-sm text-muted-foreground">
-            Updated {formatDate(page.updatedAt ?? page.publishedAt)}
+            Обновлено {formatDate(page.updatedAt ?? page.publishedAt)}
           </p>
         </header>
 

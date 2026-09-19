@@ -6,8 +6,8 @@ import { ProductGrid } from "@/components/products/product-grid"
 import { Pagination } from "@/components/products/pagination"
 
 export const metadata: Metadata = {
-  title: "Search",
-  description: "Search our product catalog.",
+title: "Поиск",
+  description: "Поиск товаров в каталоге.",
 }
 
 interface SearchPageProps {
@@ -26,13 +26,13 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 
   return (
     <div className="mx-auto max-w-[1440px] px-4 py-16 sm:px-6 lg:px-8">
-      <h1 className="text-3xl font-bold tracking-tight">Search</h1>
+      <h1 className="text-3xl font-bold tracking-tight">Поиск</h1>
 
       <form className="relative mt-8 max-w-lg" action="/search" method="get">
         <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <Input
           name="q"
-          placeholder="Search for products..."
+          placeholder="Поиск товаров..."
           defaultValue={query}
           className="pl-10 text-base"
         />
@@ -42,7 +42,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
         <div className="mt-8">
           <p className="text-sm text-muted-foreground">
             {results.pagination.total}{" "}
-            {results.pagination.total === 1 ? "result" : "results"} for &quot;
+            {results.pagination.total === 1 ? "результат" : "результатов"} для &quot;
             {query}&quot;
           </p>
           <div className="mt-6">
@@ -61,7 +61,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
       {!hasQuery && (
         <div className="mt-16 text-center">
           <p className="text-sm text-muted-foreground">
-            Try searching for a product name, category, or keyword.
+            Попробуйте поискать по названию, категории или ключевому слову.
           </p>
         </div>
       )}
@@ -69,8 +69,8 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
       {hasQuery && results && results.items.length === 0 && (
         <div className="mt-16 text-center">
           <p className="text-muted-foreground">
-            No products found for &quot;{query}&quot;. Try a different search
-            term.
+            Товары по запросу &quot;{query}&quot; не найдены. Попробуйте другой
+            запрос.
           </p>
         </div>
       )}

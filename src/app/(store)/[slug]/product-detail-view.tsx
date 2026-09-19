@@ -100,7 +100,7 @@ export function ProductDetailView({
   function handleToggleWishlist() {
     if (isWishlisted) {
       removeFromWishlist(product.id)
-      toast("Removed from wishlist")
+      toast("Удалено из избранного")
     } else {
       addToWishlist({
         productId: product.id,
@@ -109,12 +109,12 @@ export function ProductDetailView({
         price: selectedVariant!.price,
         image: product.images[0] ?? { url: "", alt: product.name },
       })
-      toast.success("Added to wishlist")
+      toast.success("Добавлено в избранное")
     }
   }
 
   const breadcrumbLd = breadcrumbJsonLd([
-    { name: "Shop", href: "/shop" },
+    { name: "Каталог", href: "/shop" },
     ...categoryAncestors.map((c) => ({ name: c.name, href: `/${c.slug}` })),
     { name: product.name, href: `/${product.slug}` },
   ])
@@ -152,7 +152,7 @@ export function ProductDetailView({
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
-            <BreadcrumbLink render={<Link href="/shop" />}>Shop</BreadcrumbLink>
+            <BreadcrumbLink render={<Link href="/shop" />}>Каталог</BreadcrumbLink>
           </BreadcrumbItem>
           {categoryAncestors.map((cat, idx) => {
             const isLast = idx === categoryAncestors.length - 1
@@ -217,7 +217,7 @@ export function ProductDetailView({
                         selectedVariant.compareAtPrice!) *
                       100
                   )}
-                  % off
+                  % скидка
                 </Badge>
               </>
             )}
@@ -247,7 +247,7 @@ export function ProductDetailView({
               <Button
                 variant="outline"
                 size="icon"
-                aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
+                aria-label={isWishlisted ? "Удалить из избранного" : "Добавить в избранное"}
                 onClick={handleToggleWishlist}
               >
                 <Heart className={`h-4 w-4 ${isWishlisted ? "fill-wishlist text-wishlist" : ""}`} />
@@ -260,13 +260,13 @@ export function ProductDetailView({
               onClick={handleAddToCart}
             >
               <ShoppingBag className="mr-2 h-4 w-4" />
-              {inStock ? "Add to Cart" : "Out of Stock"}
+              {inStock ? "В корзину" : "Нет в наличии"}
             </Button>
           </div>
 
           {!inStock && (
             <p className="mt-2 text-sm text-destructive">
-              This item is currently out of stock.
+              Этого товара сейчас нет в наличии.
             </p>
           )}
 
@@ -292,7 +292,7 @@ export function ProductDetailView({
       {relatedProducts.length > 0 && (
         <section className="mt-16">
           <h2 className="text-xl font-bold tracking-tight">
-            You may also like
+            Вам может понравиться
           </h2>
           <div className="mt-6">
             <ProductGrid products={relatedProducts} />

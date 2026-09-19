@@ -1,48 +1,54 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Shipping Policy",
-  description: "Learn about our shipping options, rates, and delivery times.",
+  title: "Доставка",
+  description: "Условия доставки, стоимость и сроки.",
 }
 
 export default function ShippingPolicyPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
-      <h1 className="text-3xl font-bold tracking-tight">Shipping Policy</h1>
+      <h1 className="text-3xl font-bold tracking-tight">Доставка</h1>
       <div className="mt-8 space-y-6 text-muted-foreground">
         <h2 className="text-xl font-semibold text-foreground">
-          Domestic Shipping
+          Доставка по Новосибирску
         </h2>
         <ul className="list-inside list-disc space-y-2">
-          <li>Standard Shipping (5-7 business days): $5.99</li>
-          <li>Express Shipping (2-3 business days): $12.99</li>
-          <li>Overnight Shipping (1 business day): $24.99</li>
-          <li>Free shipping on all orders over $75</li>
+          <li>Стандартная доставка (1-3 рабочих дня): 500 ₽</li>
+          <li>Бесплатная доставка при заказе от 50 000 ₽</li>
+          <li>Срочная доставка (в день заказа): 1 500 ₽</li>
         </ul>
 
         <h2 className="text-xl font-semibold text-foreground">
-          International Shipping
+          Доставка по Новосибирской области
         </h2>
         <p>
-          We ship to most countries worldwide. International shipping rates are
-          calculated at checkout based on destination and package weight.
-          Delivery typically takes 7-14 business days.
+          Стоимость доставки рассчитывается индивидуально в зависимости от
+          расстояния и объёма заказа. Точный расчёт — при оформлении заказа.
         </p>
 
         <h2 className="text-xl font-semibold text-foreground">
-          Order Processing
+          Доставка по России
         </h2>
         <p>
-          Orders placed before 2:00 PM EST on business days are processed the
-          same day. Orders placed after 2:00 PM EST or on weekends will be
-          processed the next business day.
+          Доставка осуществляется транспортными компаниями. Стоимость и сроки
+          зависят от региона. Средние сроки — 5-14 рабочих дней.
         </p>
 
-        <h2 className="text-xl font-semibold text-foreground">Tracking</h2>
+        <h2 className="text-xl font-semibold text-foreground">
+          Самовывоз
+        </h2>
         <p>
-          You will receive a shipping confirmation email with a tracking number
-          once your order has shipped. You can also track your order from your
-          account dashboard.
+          Бесплатно. Пн-пт, 9:00–18:00. Адрес: г. Новосибирск, ул. Промышленная, 15.
+          Предварительно согласуйте забор заказа с менеджером.
+        </p>
+
+        <h2 className="text-xl font-semibold text-foreground">
+          Обработка заказов
+        </h2>
+        <p>
+          Заказы обрабатываются в течение 1-2 рабочих дней. Заказы, размещённые
+          после 16:00 или в выходные, обрабатываются следующий рабочий день.
         </p>
       </div>
     </div>

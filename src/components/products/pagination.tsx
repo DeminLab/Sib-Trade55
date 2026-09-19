@@ -38,13 +38,13 @@ export function Pagination({
   return (
     <nav
       className="flex items-center justify-center gap-1"
-      aria-label="Pagination"
+      aria-label="Пагинация"
     >
       {hasPrev ? (
         <Link
           href={buildHref(page - 1)}
           className="inline-flex h-10 w-10 items-center justify-center rounded-md hover:bg-accent"
-          aria-label="Previous page"
+          aria-label="Предыдущая страница"
         >
           <ChevronLeft className="h-4 w-4" />
         </Link>
@@ -74,7 +74,7 @@ export function Pagination({
         <Link
           href={buildHref(page + 1)}
           className="inline-flex h-10 w-10 items-center justify-center rounded-md hover:bg-accent"
-          aria-label="Next page"
+          aria-label="Следующая страница"
         >
           <ChevronRight className="h-4 w-4" />
         </Link>

@@ -53,7 +53,7 @@ export function CartItem({ item }: CartItemProps) {
               </p>
             )}
             <p className="text-xs text-muted-foreground">
-              {formatPrice(item.price)} each
+              {formatPrice(item.price)} за шт.
             </p>
           </div>
           <Button
@@ -61,7 +61,7 @@ export function CartItem({ item }: CartItemProps) {
             size="icon"
             className="h-6 w-6"
             onClick={() => removeItem(item.variantId)}
-            aria-label={`Remove ${item.name}`}
+            aria-label={`Удалить ${item.name}`}
           >
             <X className="h-3 w-3" />
           </Button>

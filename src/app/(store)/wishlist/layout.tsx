@@ -1,8 +1,8 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Wishlist",
-  description: "Your saved products.",
+title: "Избранное",
+  description: "Сохранённые товары.",
 }
 
 export default function WishlistLayout({ children }: { children: React.ReactNode }) {

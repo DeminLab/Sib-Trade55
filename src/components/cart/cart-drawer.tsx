@@ -33,30 +33,30 @@ export function CartDrawer() {
               onClick={closeCart}
               className="text-sm text-muted-foreground hover:text-foreground sm:hidden"
             >
-              &larr; Back
+              &larr; Назад
             </button>
             <button
               onClick={closeCart}
               className="hidden rounded-md p-1 text-muted-foreground hover:text-foreground sm:block sm:ml-auto"
-              aria-label="Close cart"
+              aria-label="Закрыть корзину"
             >
               <X className="h-5 w-5" />
             </button>
           </div>
           <SheetTitle className="mt-2 text-2xl font-bold tracking-tight">
-            Cart ({items.length} {items.length === 1 ? "item" : "items"})
+            Корзина ({items.length} {items.length === 1 ? "товар" : "товаров"})
           </SheetTitle>
         </SheetHeader>
 
         {items.length === 0 ? (
           <div className="flex flex-1 flex-col items-center justify-center text-center">
             <ShoppingBag className="h-12 w-12 text-muted-foreground/50" />
-            <p className="mt-4 text-sm font-medium">Your cart is empty</p>
+            <p className="mt-4 text-sm font-medium">Ваша корзина пуста</p>
             <p className="mt-1 text-xs text-muted-foreground">
-              Add items to get started
+              Добавьте товары, чтобы начать
             </p>
             <Button className="mt-6" onClick={closeCart} asChild>
-              <Link href="/shop">Continue Shopping</Link>
+              <Link href="/shop">Продолжить покупки</Link>
             </Button>
           </div>
         ) : (
@@ -72,20 +72,20 @@ export function CartDrawer() {
             <SheetFooter className="!mt-0 shrink-0 border-t !px-4 !pt-4 !pb-8">
               <div className="w-full space-y-3">
                 <div className="flex justify-between text-sm font-medium">
-                  <span>Subtotal</span>
+                  <span>Подытог</span>
                   <span>{formatPrice(subtotal)}</span>
                 </div>
                 <p className="text-xs text-muted-foreground">
-                  Shipping and taxes calculated at checkout.
+                  Стоимость доставки и налоги рассчитываются при оформлении.
                 </p>
                 <Button className="w-full" size="lg" asChild onClick={closeCart}>
-                  <Link href="/checkout">Checkout</Link>
+                  <Link href="/checkout">Оформить заказ</Link>
                 </Button>
                 <button
                   className="mb-4 w-full py-2 text-center text-sm text-muted-foreground underline hover:text-foreground sm:mb-0 sm:hidden"
                   onClick={closeCart}
                 >
-                  Continue Shopping
+                  Продолжить покупки
                 </button>
               </div>
             </SheetFooter>

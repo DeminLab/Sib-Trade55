@@ -38,7 +38,7 @@ export function ProductCard({ product }: ProductCardProps) {
     e.stopPropagation()
     if (isWishlisted) {
       removeItem(product.id)
-      toast("Removed from wishlist")
+      toast("Удалено из избранного")
     } else {
       addItem({
         productId: product.id,
@@ -47,7 +47,7 @@ export function ProductCard({ product }: ProductCardProps) {
         price,
         image: image ?? { url: PLACEHOLDER_IMAGE, alt: product.name },
       })
-      toast.success("Added to wishlist")
+      toast.success("Добавлено в избранное")
     }
   }
 
@@ -66,13 +66,13 @@ export function ProductCard({ product }: ProductCardProps) {
             variant="secondary"
             className="absolute top-3 left-3 bg-white text-xs"
           >
-            Sale
+            Скидка
           </Badge>
         )}
         <button
           onClick={handleWishlist}
           className="absolute top-2 right-2 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white shadow-sm transition-opacity hover:bg-neutral-50 sm:opacity-0 sm:group-hover:opacity-100"
-          aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
+          aria-label={isWishlisted ? "Удалить из избранного" : "Добавить в избранное"}
         >
           <Heart
             className={`h-4 w-4 ${isWishlisted ? "fill-current text-wishlist" : "text-neutral-600"}`}
@@ -96,7 +96,7 @@ export function ProductCard({ product }: ProductCardProps) {
         </div>
         {product.variants.length > 1 && (
           <p className="mt-1 text-xs text-muted-foreground">
-            {product.variants.length} options
+            {product.variants.length} опций
           </p>
         )}
       </div>

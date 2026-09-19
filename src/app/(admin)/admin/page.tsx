@@ -3,16 +3,16 @@ import { PageHeader } from "@/components/ui/page-header"
 import { DollarSign, Package, ShoppingCart, Users } from "lucide-react"
 
 const stats = [
-  { name: "Total Revenue", value: "$12,345", icon: DollarSign },
-  { name: "Orders", value: "156", icon: ShoppingCart },
-  { name: "Products", value: "48", icon: Package },
-  { name: "Customers", value: "2,340", icon: Users },
+  { name: "Общая выручка", value: "12 345 $", icon: DollarSign },
+  { name: "Заказы", value: "156", icon: ShoppingCart },
+  { name: "Товары", value: "48", icon: Package },
+  { name: "Клиенты", value: "2 340", icon: Users },
 ]
 
 export default function AdminDashboardPage() {
   return (
     <div>
-      <PageHeader title="Dashboard" description="Overview of your store performance." />
+      <PageHeader title="Панель управления" description="Обзор показателей магазина." />
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat) => (
@@ -32,11 +32,11 @@ export default function AdminDashboardPage() {
 
       <Card className="mt-8">
         <CardHeader>
-          <CardTitle>Recent Orders</CardTitle>
+          <CardTitle>Последние заказы</CardTitle>
         </CardHeader>
         <CardContent>
           <p className="text-sm text-muted-foreground">
-            No orders yet. Orders will appear here once customers start purchasing.
+            Заказов пока нет. Они появятся здесь после первых покупок.
           </p>
         </CardContent>
       </Card>

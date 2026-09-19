@@ -28,27 +28,27 @@ export default function RegisterPage() {
     if (!validation.success) { toast.error(validation.error.issues[0].message); return }
     setLoading(true)
     const success = register({ firstName: form.firstName, lastName: form.lastName, email: form.email, password: form.password })
-    if (success) { toast.success("Account created!"); router.push("/account") }
-    else { toast.error("An account with this email already exists") }
+if (success) { toast.success("Аккаунт создан!"); router.push("/account") }
+    else { toast.error("Аккаунт с таким email уже существует") }
     setLoading(false)
   }
 
   return (
     <AuthCardLayout
-      title="Create an account"
-      subtitle="Join us to start shopping"
-      footerText="Already have an account?"
-      footerLinkText="Sign in"
+title="Создать аккаунт"
+      subtitle="Зарегистрируйтесь, чтобы начать покупки"
+      footerText="Уже есть аккаунт?"
+      footerLinkText="Войти"
       footerLinkHref="/auth/login"
     >
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-2">
-            <Label htmlFor="firstName">First name</Label>
+<Label htmlFor="firstName">Имя</Label>
             <Input id="firstName" name="firstName" value={form.firstName} onChange={handleChange} required />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="lastName">Last name</Label>
+            <Label htmlFor="lastName">Фамилия</Label>
             <Input id="lastName" name="lastName" value={form.lastName} onChange={handleChange} required />
           </div>
         </div>
@@ -57,15 +57,15 @@ export default function RegisterPage() {
           <Input id="email" name="email" type="email" placeholder="you@example.com" value={form.email} onChange={handleChange} required />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="password">Password</Label>
+          <Label htmlFor="password">Пароль</Label>
           <Input id="password" name="password" type="password" value={form.password} onChange={handleChange} required />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="confirmPassword">Confirm password</Label>
+          <Label htmlFor="confirmPassword">Подтвердите пароль</Label>
           <Input id="confirmPassword" name="confirmPassword" type="password" value={form.confirmPassword} onChange={handleChange} required />
         </div>
         <Button type="submit" className="w-full" disabled={loading}>
-          {loading ? "Creating..." : "Create Account"}
+          {loading ? "Создание..." : "Создать аккаунт"}
         </Button>
       </form>
     </AuthCardLayout>

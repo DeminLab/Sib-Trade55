@@ -1,53 +1,50 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Privacy Policy",
-  description: "How we collect, use, and protect your personal information.",
+  title: "Политика конфиденциальности",
+  description: "Как мы собираем, используем и защищаем ваши персональные данные.",
 }
 
 export default function PrivacyPolicyPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
-      <h1 className="text-3xl font-bold tracking-tight">Privacy Policy</h1>
+      <h1 className="text-3xl font-bold tracking-tight">Политика конфиденциальности</h1>
       <p className="mt-4 text-sm text-muted-foreground">
-        Last updated: January 1, 2025
+        Последнее обновление: 1 января 2025 г.
       </p>
       <div className="mt-8 space-y-6 text-muted-foreground">
         <h2 className="text-xl font-semibold text-foreground">
-          Information We Collect
+          Какие данные мы собираем
         </h2>
         <p>
-          We collect information you provide directly, such as your name, email
-          address, shipping address, and payment information when you make a
-          purchase. We also automatically collect certain information about your
-          device and browsing activity.
+          Мы собираем данные, которые вы предоставляете напрямую: имя, email,
+          адрес доставки и информацию об оплате при оформлении заказа. Также мы
+          автоматически собираем информацию об устройстве и активности на сайте.
         </p>
 
         <h2 className="text-xl font-semibold text-foreground">
-          How We Use Your Information
+          Как мы используем ваши данные
         </h2>
         <ul className="list-inside list-disc space-y-2">
-          <li>To process and fulfill your orders</li>
-          <li>To communicate with you about your orders</li>
-          <li>To send promotional emails (with your consent)</li>
-          <li>To improve our website and services</li>
-          <li>To detect and prevent fraud</li>
+          <li>Для обработки и выполнения ваших заказов</li>
+          <li>Для связи с вами по поводу заказов</li>
+          <li>Для отправки информационных рассылок (с вашего согласия)</li>
+          <li>Для улучшения работы сайта</li>
+          <li>Для предотвращения мошенничества</li>
         </ul>
 
         <h2 className="text-xl font-semibold text-foreground">
-          Data Protection
+          Защита данных
         </h2>
         <p>
-          We implement industry-standard security measures to protect your
-          personal information. Your payment data is processed securely and
-          never stored on our servers.
+          Мы используем стандартные отраслевые методы защиты персональных данных.
+          Данные об оплате обрабатываются безопасно и не хранятся на наших серверах.
         </p>
 
-        <h2 className="text-xl font-semibold text-foreground">Your Rights</h2>
+        <h2 className="text-xl font-semibold text-foreground">Ваши права</h2>
         <p>
-          You have the right to access, update, or delete your personal
-          information at any time. Contact us at privacy@store.com with any
-          requests.
+          Вы имеете право на доступ, изменение или удаление ваших персональных
+          данных в любое время. Свяжитесь с нами по адресу info@sib-trade.ru.
         </p>
       </div>
     </div>

@@ -16,25 +16,25 @@ export function CartSummary({ subtotal }: CartSummaryProps) {
   return (
     <div className="space-y-3">
       <div className="flex justify-between text-sm">
-        <span className="text-muted-foreground">Subtotal</span>
+        <span className="text-muted-foreground">Подытог</span>
         <span>{formatPrice(subtotal)}</span>
       </div>
       <div className="flex justify-between text-sm">
-        <span className="text-muted-foreground">Shipping</span>
-        <span>{shipping === 0 ? "Free" : formatPrice(shipping)}</span>
+        <span className="text-muted-foreground">Доставка</span>
+        <span>{shipping === 0 ?             "Бесплатно" : formatPrice(shipping)}</span>
       </div>
       <div className="flex justify-between text-sm">
-        <span className="text-muted-foreground">Estimated tax</span>
+        <span className="text-muted-foreground">Примерный налог</span>
         <span>{formatPrice(tax)}</span>
       </div>
       <Separator />
       <div className="flex justify-between font-medium">
-        <span>Total</span>
+        <span>Итого</span>
         <span>{formatPrice(total)}</span>
       </div>
       {subtotal > 0 && subtotal < siteConfig.freeShippingThreshold && (
         <p className="text-xs text-muted-foreground">
-          Add {formatPrice(siteConfig.freeShippingThreshold - subtotal)} more for free shipping
+          Добавьте ещё {formatPrice(siteConfig.freeShippingThreshold - subtotal)} для бесплатной доставки
         </p>
       )}
     </div>

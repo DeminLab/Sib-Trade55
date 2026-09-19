@@ -5,8 +5,8 @@ import { PageHeader } from "@/components/ui/page-header"
 import { brandRepository } from "@/lib/repositories"
 
 export const metadata: Metadata = {
-  title: "All Brands",
-  description: "Browse all brands in our store.",
+  title: "Бренды",
+  description: "Все бренды нашего магазина.",
 }
 
 export default async function BrandsPage() {
@@ -15,8 +15,8 @@ export default async function BrandsPage() {
   return (
     <div className="mx-auto max-w-[1440px] px-4 py-16 sm:px-6 lg:px-8">
       <PageHeader
-        title="All Brands"
-        description={`${brands.length} brands`}
+        title="Все бренды"
+        description={`${brands.length} ${brands.length === 1 ? "бренд" : "брендов"}`}
       />
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

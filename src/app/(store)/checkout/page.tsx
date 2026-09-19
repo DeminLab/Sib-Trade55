@@ -34,7 +34,7 @@ export default function CheckoutPage() {
     city: "",
     state: "",
     postalCode: "",
-    country: "US",
+    country: "RU",
   })
 
   useEffect(() => setMounted(true), [])
@@ -42,7 +42,7 @@ export default function CheckoutPage() {
   if (!mounted) {
     return (
       <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold tracking-tight">Checkout</h1>
+        <h1 className="text-3xl font-bold tracking-tight">Оформление заказа</h1>
       </div>
     )
   }
@@ -50,13 +50,13 @@ export default function CheckoutPage() {
   if (items.length === 0) {
     return (
       <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold tracking-tight">Checkout</h1>
+        <h1 className="text-3xl font-bold tracking-tight">Оформление заказа</h1>
         <div className="mt-16 text-center">
           <p className="text-muted-foreground">
-            Your cart is empty. Add some products before checking out.
+            Ваша корзина пуста. Добавьте товары перед оформлением.
           </p>
           <Button className="mt-8" asChild>
-            <Link href="/shop">Continue Shopping</Link>
+            <Link href="/shop">Продолжить покупки</Link>
           </Button>
         </div>
       </div>
@@ -73,7 +73,7 @@ export default function CheckoutPage() {
     e.preventDefault()
 
     if (!form.email || !form.firstName || !form.lastName || !form.line1 || !form.city || !form.state || !form.postalCode) {
-      toast.error("Please fill in all required fields")
+      toast.error("Заполните все обязательные поля")
       return
     }
 
@@ -128,13 +128,13 @@ export default function CheckoutPage() {
 
     addOrder(order)
     clearCart()
-    toast.success("Order placed successfully!")
+    toast.success("Заказ успешно оформлен!")
     router.push(`/checkout/success?order_id=${orderId}`)
   }
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
-      <h1 className="text-3xl font-bold tracking-tight">Checkout</h1>
+      <h1 className="text-3xl font-bold tracking-tight">Оформление заказа</h1>
 
       <form onSubmit={handleSubmit} className="mt-8 grid gap-8 lg:grid-cols-5">
         {/* Form */}
@@ -142,7 +142,7 @@ export default function CheckoutPage() {
           {/* Contact */}
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg">Contact Information</CardTitle>
+              <CardTitle className="text-lg">Контактные данные</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
@@ -163,38 +163,38 @@ export default function CheckoutPage() {
           {/* Shipping */}
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg">Shipping Address</CardTitle>
+              <CardTitle className="text-lg">Адрес доставки</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="firstName">First name</Label>
+<Label htmlFor="firstName">Имя</Label>
                   <Input id="firstName" name="firstName" value={form.firstName} onChange={handleChange} required />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="lastName">Last name</Label>
+                  <Label htmlFor="lastName">Фамилия</Label>
                   <Input id="lastName" name="lastName" value={form.lastName} onChange={handleChange} required />
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="line1">Address</Label>
+                <Label htmlFor="line1">Адрес</Label>
                 <Input id="line1" name="line1" value={form.line1} onChange={handleChange} required />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="line2">Apartment, suite, etc. (optional)</Label>
+                <Label htmlFor="line2">Квартира, офис (необязательно)</Label>
                 <Input id="line2" name="line2" value={form.line2} onChange={handleChange} />
               </div>
               <div className="grid grid-cols-3 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="city">City</Label>
+<Label htmlFor="city">Город</Label>
                   <Input id="city" name="city" value={form.city} onChange={handleChange} required />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="state">State</Label>
+                  <Label htmlFor="state">Область</Label>
                   <Input id="state" name="state" value={form.state} onChange={handleChange} required />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="postalCode">ZIP code</Label>
+                  <Label htmlFor="postalCode">Индекс</Label>
                   <Input id="postalCode" name="postalCode" value={form.postalCode} onChange={handleChange} required />
                 </div>
               </div>
@@ -204,12 +204,12 @@ export default function CheckoutPage() {
           {/* Payment note */}
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg">Payment</CardTitle>
+<CardTitle className="text-lg">Оплата</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground">
-                This is a demo store. No real payment will be processed.
-                In production, this section connects to your payment provider.
+                Это демо-магазин. Реальная оплата не производится.
+                В рабочей версии этот раздел подключается к платёжной системе.
               </p>
             </CardContent>
           </Card>
@@ -219,7 +219,7 @@ export default function CheckoutPage() {
         <div className="lg:col-span-2">
           <Card className="sticky top-24">
             <CardHeader>
-              <CardTitle className="text-lg">Order Summary</CardTitle>
+              <CardTitle className="text-lg">Сводка заказа</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               {items.map((item) => (
@@ -233,7 +233,7 @@ export default function CheckoutPage() {
               <Separator />
               <CartSummary subtotal={subtotal} />
               <Button type="submit" size="lg" className="w-full" disabled={loading}>
-                {loading ? "Processing..." : "Place Order"}
+                {loading ? "Обработка..." : "Оформить заказ"}
               </Button>
             </CardContent>
           </Card>

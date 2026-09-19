@@ -14,7 +14,7 @@ export function NewsletterForm() {
 
     setLoading(true)
     setTimeout(() => {
-      toast.success("Thanks for subscribing!")
+      toast.success("Спасибо за подписку!")
       setEmail("")
       setLoading(false)
     }, 500)
@@ -24,15 +24,16 @@ export function NewsletterForm() {
     <form onSubmit={handleSubmit} className="mt-8 flex w-full max-w-md gap-2">
       <input
         type="email"
-        placeholder="Enter your email"
-        aria-label="Email address for newsletter"
+        placeholder="Введите ваш email"
+        aria-label="Email для подписки"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
+        suppressHydrationWarning
         className="flex-1 rounded-md border border-neutral-700 bg-neutral-800 px-4 py-2 text-sm text-white placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-white/20"
       />
       <Button variant="secondary" type="submit" disabled={loading}>
-        {loading ? "..." : "Subscribe"}
+        {loading ? "..." : "Подписаться"}
       </Button>
     </form>
   )

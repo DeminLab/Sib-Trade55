@@ -8,34 +8,30 @@ export interface NavSection {
   items: NavItem[]
 }
 
-// Single source of truth for all navigation across desktop header,
-// mobile menu, and anywhere else. Edit this one file to update all menus.
+// Единственный источник навигации для хедера, мобильного меню и т.д.
 
 export const shopLinks: NavItem[] = [
-  { name: "Electronics", href: "/electronics" },
-  { name: "Clothing", href: "/clothing" },
-  { name: "Home & Kitchen", href: "/home-kitchen" },
-  { name: "Accessories", href: "/accessories" },
-  { name: "Food & Drink", href: "/food-drink" },
+  { name: "Металлоконструкции", href: "/metallokonstruktsii" },
+  { name: "Сантехника", href: "/santehnika" },
+  { name: "Стройматериалы", href: "/stroymaterialy" },
+  { name: "Инструменты", href: "/instrumenty" },
 ]
 
 export const accountLinks: NavItem[] = [
-  { name: "My Account", href: "/account" },
-  { name: "Wishlist", href: "/wishlist" },
-  { name: "Orders", href: "/account/orders" },
+  { name: "Мой аккаунт", href: "/account" },
+  { name: "Избранное", href: "/wishlist" },
+  { name: "Заказы", href: "/account/orders" },
 ]
 
 export const infoLinks: NavItem[] = [
-  { name: "All Brands", href: "/brands" },
-  { name: "Blog", href: "/blog" },
-  { name: "Pages", href: "/pages" },
-  { name: "About", href: "/about" },
-  { name: "Contact", href: "/contact" },
+  { name: "О компании", href: "/about" },
+  { name: "Контакты", href: "/contact" },
+  { name: "Доставка", href: "/policies/shipping" },
   { name: "FAQ", href: "/faq" },
 ]
 
 export const mobileMenuSections: NavSection[] = [
-  { label: "Shop", items: shopLinks },
-  { label: "Account", items: accountLinks },
-  { label: "Info", items: infoLinks },
+  { label: "Каталог", items: shopLinks },
+  { label: "Аккаунт", items: accountLinks },
+  { label: "Информация", items: infoLinks },
 ]

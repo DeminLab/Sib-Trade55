@@ -23,7 +23,7 @@ export function BrandView({ brand, products, pagination }: BrandViewProps) {
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
-            <BreadcrumbLink render={<Link href="/brands" />}>Brands</BreadcrumbLink>
+            <BreadcrumbLink render={<Link href="/brands" />}>Бренды</BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
@@ -38,7 +38,7 @@ export function BrandView({ brand, products, pagination }: BrandViewProps) {
           {brand.description}
         </p>
         <p className="mt-1 text-sm text-muted-foreground">
-          {pagination.total} {pagination.total === 1 ? "product" : "products"}
+          {pagination.total} {pagination.total === 1 ? "товар" : "товаров"}
         </p>
       </div>
 

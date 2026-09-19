@@ -5,9 +5,9 @@ import { LayoutDashboard, Package, Users } from "lucide-react"
 import { useAuthGuard } from "@/hooks/use-auth-guard"
 
 const adminNav = [
-  { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
-  { name: "Orders", href: "/admin/orders", icon: Package },
-  { name: "Customers", href: "/admin/customers", icon: Users },
+  { name: "Панель", href: "/admin", icon: LayoutDashboard },
+  { name: "Заказы", href: "/admin/orders", icon: Package },
+  { name: "Клиенты", href: "/admin/customers", icon: Users },
 ]
 
 export default function AdminLayout({
@@ -23,12 +23,12 @@ export default function AdminLayout({
     return (
       <div className="flex min-h-screen items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold">Access Denied</h1>
+<h1 className="text-2xl font-bold">Доступ запрещён</h1>
           <p className="mt-2 text-muted-foreground">
-            You need admin privileges to access this page.
+            Для доступа к этой странице нужны права администратора.
           </p>
           <Link href="/" className="mt-4 inline-block text-sm underline">
-            Go Home
+            На главную
           </Link>
         </div>
       </div>
@@ -40,8 +40,8 @@ export default function AdminLayout({
       {/* Sidebar */}
       <aside className="hidden w-64 border-r bg-neutral-50 lg:block">
         <div className="flex h-16 items-center border-b px-6">
-          <Link href="/admin" className="text-lg font-semibold">
-            Admin
+<Link href="/admin" className="text-lg font-semibold">
+            Админ
           </Link>
         </div>
         <nav className="space-y-1 p-4">
@@ -61,7 +61,7 @@ export default function AdminLayout({
             href="/"
             className="text-sm text-muted-foreground hover:text-foreground"
           >
-            &larr; Back to Store
+            &larr; На сайт
           </Link>
         </div>
       </aside>

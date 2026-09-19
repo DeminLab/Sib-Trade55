@@ -19,7 +19,7 @@ export default function WishlistPage() {
   if (!mounted) {
     return (
       <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
-        <PageHeader title="Wishlist" />
+        <PageHeader title="Избранное" />
       </div>
     )
   }
@@ -31,12 +31,12 @@ export default function WishlistPage() {
   if (wishlistedProducts.length === 0) {
     return (
       <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
-        <PageHeader title="Wishlist" />
+        <PageHeader title="Избранное" />
         <EmptyState
           icon={Heart}
-          title="Your wishlist is empty"
-          description="Save products you love to find them easily later."
-          actionLabel="Browse Products"
+title="Ваш список избранного пуст"
+          description="Сохраняйте понравившиеся товары, чтобы найти их потом."
+          actionLabel="Смотреть каталог"
           actionHref="/shop"
         />
       </div>
@@ -46,8 +46,8 @@ export default function WishlistPage() {
   return (
     <div className="mx-auto max-w-[1440px] px-4 py-16 sm:px-6 lg:px-8">
       <PageHeader
-        title="Wishlist"
-        description={`${wishlistedProducts.length} ${wishlistedProducts.length === 1 ? "item" : "items"}`}
+        title="Избранное"
+        description={`${wishlistedProducts.length} ${wishlistedProducts.length === 1 ? "товар" : "товаров"}`}
       />
       <div className="mt-8 grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 lg:grid-cols-4">
         {wishlistedProducts.map((product) => (

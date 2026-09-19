@@ -7,50 +7,50 @@ import {
 } from "@/components/ui/accordion"
 
 export const metadata: Metadata = {
-  title: "FAQ",
-  description: "Frequently asked questions about orders, shipping, returns, and more.",
+  title: "Часто задаваемые вопросы",
+  description: "Ответы на вопросы о товарах, доставке, оплате и возврате.",
 }
 
 const faqs = [
   {
-    question: "How long does shipping take?",
+    question: "Какие сроки доставки?",
     answer:
-      "Standard shipping typically takes 5-7 business days. Express shipping is available at checkout and delivers within 2-3 business days.",
+      "По Новосибирску — 1-3 рабочих дня. По Новосибирской области — 3-7 рабочих дней. По России — рассчитывается индивидуально при оформлении заказа.",
   },
   {
-    question: "What is your return policy?",
+    question: "Можно ли вернуть товар?",
     answer:
-      "We offer a 30-day return policy on all items. Products must be in their original condition with tags attached. Visit our returns page for more details.",
+      "Да, мы принимаем возврат в течение 14 дней. Товар должен быть в nguyênой упаковке и без следов использования. Металлоконструкции по индивидуальному заказу — возврату не подлежат.",
   },
   {
-    question: "Do you ship internationally?",
+    question: "Какие способы оплаты вы принимаете?",
     answer:
-      "Yes, we ship to most countries worldwide. International shipping rates and delivery times vary by destination. You can see the exact cost at checkout.",
+      "Наличный расчёт, безналичный расчёт (для юридических лиц с НДС), перевод на карту, рассрочка для постоянных клиентов.",
   },
   {
-    question: "How can I track my order?",
+    question: "Предоставляете ли вы гарантию?",
     answer:
-      "Once your order ships, you'll receive a confirmation email with a tracking number. You can also track your order from your account dashboard.",
+      "На металлоконструкции — от 3 до 10 лет в зависимости от типа. На сантехнику — гарантия производителя (обычно 1-5 лет). На стройматериалы — соответствие ГОСТ.",
   },
   {
-    question: "What payment methods do you accept?",
+    question: "Можно ли заказать металлоконструкцию по индивидуальным размерам?",
     answer:
-      "We accept all major credit cards (Visa, Mastercard, American Express), PayPal, and Apple Pay. All transactions are secured with SSL encryption.",
+      "Конечно! Мы изготавливаем лестницы, ворота, заборы, навесы и другие конструкции по вашим размерам. Выезд замерщика бесплатный по Новосибирску.",
   },
   {
-    question: "How do I contact customer support?",
+    question: "Работаете ли вы с юридическими лицами?",
     answer:
-      "You can reach us via our contact page, email us at support@store.com, or call (555) 123-4567. Our support team is available Monday through Friday, 9am to 5pm EST.",
+      "Да, работаем с организациями всех форм собственности. Предоставляем полный пакет документов, счета-фактуры, акты. Возможна отсрочка платежа для постоянных клиентов.",
   },
   {
-    question: "Can I change or cancel my order?",
+    question: "Как рассчитать стоимость доставки?",
     answer:
-      "You can modify or cancel your order within 1 hour of placing it. After that, please contact our support team and we'll do our best to accommodate your request.",
+      "По Новосибирску — 500 ₽, бесплатная доставка от 50 000 ₽. По области и России — стоимость рассчитывается менеджером в зависимости от объёма и расстояния. Позвоните нам для точного расчёта.",
   },
   {
-    question: "Do you offer gift cards?",
+    question: "Можно ли забрать заказ самовывозом?",
     answer:
-      "Yes! Digital gift cards are available in denominations of $25, $50, $100, and $200. They're delivered instantly via email and never expire.",
+      "Да, самовывоз доступен с пн по пт с 9:00 до 18:00 по адресу: г. Новосибирск, ул. Промышленная, 15. Предварительно согласуйте забор с менеджером.",
   },
 ]
 
@@ -58,11 +58,10 @@ export default function FAQPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
       <h1 className="text-3xl font-bold tracking-tight">
-        Frequently Asked Questions
+        Часто задаваемые вопросы
       </h1>
       <p className="mt-4 text-muted-foreground">
-        Find answers to common questions about our products, shipping, and
-        policies.
+        Ответы на популярные вопросы о наших товарах, доставке и условиях работы.
       </p>
 
       <Accordion className="mt-8">
@@ -79,16 +78,15 @@ export default function FAQPage() {
       </Accordion>
 
       <div className="mt-12 rounded-lg border bg-neutral-50 p-6 text-center">
-        <h2 className="text-lg font-semibold">Still have questions?</h2>
+        <h2 className="text-lg font-semibold">Остались вопросы?</h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          Can&apos;t find what you&apos;re looking for? Our support team is
-          happy to help.
+          Не нашли ответ? Наши специалисты готовы помочь.
         </p>
         <a
           href="/contact"
           className="mt-4 inline-block text-sm font-medium underline hover:text-foreground"
         >
-          Contact Support
+          Связаться с нами
         </a>
       </div>
     </div>

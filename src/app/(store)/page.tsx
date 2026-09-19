@@ -12,28 +12,27 @@ import { PLACEHOLDER_IMAGE } from "@/lib/constants"
 import { productRepository, categoryRepository } from "@/lib/repositories"
 
 export const metadata: Metadata = {
-  title: "Next.js Ecommerce Starter — Free Open-Source Template | Epic Design Labs",
+  title: "СИБ-ТРЕЙД — Металлоконструкции, сантехника и стройматериалы",
   description:
-    "A free, production-ready Next.js ecommerce starter built with Tailwind CSS and shadcn/ui. Includes cart, checkout, search, auth, wishlist, i18n, SEO, and accessibility. Open source on GitHub.",
+    "Изготовление металлоконструкций, продажа сантехники, строительных материалов и оборудования. Качество, надёжность, индивидуальный подход.",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Next.js Ecommerce Starter — Free Open-Source Template",
+    title: "СИБ-ТРЕЙД — Металлоконструкции, сантехника и стройматериалы",
     description:
-      "A free, production-ready Next.js ecommerce starter built with Tailwind CSS and shadcn/ui. Open source on GitHub.",
+      "Изготовление металлоконструкций, продажа сантехники, строительных материалов и оборудования.",
     type: "website",
     url: siteConfig.url,
   },
   keywords: [
-    "nextjs ecommerce starter",
-    "next.js ecommerce template",
-    "nextjs store template",
-    "react ecommerce starter",
-    "tailwind ecommerce template",
-    "shadcn ecommerce",
-    "free ecommerce template",
-    "open source ecommerce",
-    "nextjs shopping cart",
-    "ecommerce starter kit",
+    "металлоконструкции",
+    "сантехника",
+    "стройматериалы",
+    "лестницы",
+    "ворота",
+    "заборы",
+    "профнастил",
+    "Новосибирск",
+    "СИБ-ТРЕЙД",
   ],
 }
 
@@ -45,28 +44,40 @@ export default async function HomePage() {
   return (
     <div className="flex flex-col">
       {/* Hero */}
-      <section className="relative flex h-[650px] items-center justify-center bg-neutral-50">
-        <div className="mx-auto max-w-3xl px-4 text-center">
+      <section className="relative flex h-[650px] items-center justify-center overflow-hidden">
+        {/* Background image */}
+        <Image
+          src="/images/hero.png"
+          alt=""
+          fill
+          className="object-cover blur-[2px] scale-105"
+          priority
+          sizes="100vw"
+        />
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-black/50" />
+        {/* Content */}
+        <div className="relative z-10 mx-auto max-w-3xl px-4 text-center">
           <Badge variant="secondary" className="mb-4">
-            Free shipping on orders over {formatPrice(siteConfig.freeShippingThreshold)}
+            Бесплатная доставка от {formatPrice(siteConfig.freeShippingThreshold)}
           </Badge>
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-            Next.js Ecommerce Starter
+          <h1 className="text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl text-white">
+            СИБ-ТРЕЙД
           </h1>
-          <p className="mt-6 text-lg text-muted-foreground">
-            A free, open-source ecommerce template built with Next.js, Tailwind CSS, and shadcn/ui.
-            Production-ready, fully responsive, and designed to connect to any checkout system.
+          <p className="mt-6 text-xl text-white/80">
+            Изготовление металлоконструкций, продажа сантехники и строительных материалов.
+            Качество, надёжность, индивидуальный подход.
           </p>
           <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center">
             <Button size="lg" asChild>
               <Link href="/shop">
-                Shop Now
+                Перейти в каталог
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
-            <Button size="lg" variant="outline" asChild>
-              <Link href="https://github.com/Epic-Design-Labs/nextjs-ecommerce-starter" target="_blank" rel="noopener">
-                View on GitHub
+            <Button size="lg" variant="ghost" asChild className="border border-white text-white hover:bg-white/10 hover:text-white">
+              <Link href="/contact">
+                Связаться с нами
               </Link>
             </Button>
           </div>
@@ -77,13 +88,13 @@ export default async function HomePage() {
       <section className="mx-auto w-full max-w-[1440px] px-4 py-16 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold tracking-tight">
-            Shop by Category
+            Каталог по категориям
           </h2>
           <Link
             href="/shop"
             className="text-sm font-medium text-muted-foreground hover:text-foreground"
           >
-            View all
+            Смотреть все
           </Link>
         </div>
         <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
@@ -112,13 +123,13 @@ export default async function HomePage() {
       <section className="mx-auto w-full max-w-[1440px] px-4 py-16 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold tracking-tight">
-            Featured Products
+            Популярные товары
           </h2>
           <Link
             href="/shop"
             className="text-sm font-medium text-muted-foreground hover:text-foreground"
           >
-            View all
+            Смотреть все
           </Link>
         </div>
         <div className="mt-8">
@@ -126,26 +137,26 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Developer CTA */}
+      {/* CTA */}
       <section className="border-t bg-neutral-50">
         <div className="mx-auto flex max-w-[1440px] flex-col items-center px-4 py-16 text-center sm:px-6 lg:px-8">
           <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
-            Need help building your store?
+            Нужна консультация?
           </h2>
           <p className="mt-4 max-w-xl text-muted-foreground">
-            This starter is free and open source. Grab it from GitHub and build your own,
-            or work with our team at Epic Design Labs to bring your vision to life.
+            Наши специалисты помогут подобрать товары, рассчитать объёмы и оформить доставку.
+            Работаем с физическими и юридическими лицами.
           </p>
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
             <Button size="lg" asChild>
-              <Link href="https://github.com/Epic-Design-Labs/nextjs-ecommerce-starter" target="_blank" rel="noopener">
-                Get the Starter
+              <Link href="/contact">
+                Связаться с нами
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
             <Button size="lg" variant="outline" asChild>
-              <Link href="https://epicdesignlabs.com" target="_blank" rel="noopener">
-                Hire a Developer
+              <Link href="/shop">
+                Смотреть каталог
               </Link>
             </Button>
           </div>
@@ -156,10 +167,10 @@ export default async function HomePage() {
       <section className="bg-neutral-900 text-white">
         <div className="mx-auto flex max-w-[1440px] flex-col items-center px-4 py-16 text-center sm:px-6 lg:px-8">
           <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
-            Join our newsletter
+            Подпишитесь на рассылку
           </h2>
           <p className="mt-4 text-neutral-400">
-            Get updates on new arrivals and exclusive offers.
+            Узнавайте о новинках и специальных предложениях.
           </p>
           <NewsletterForm />
         </div>

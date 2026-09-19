@@ -1,52 +1,52 @@
 // ============================================================================
-// Store Configuration — Single source of truth for all store-wide settings.
-// Edit this file to customize the store name, contact info, social links, etc.
+// Конфигурация сайта — единственный источник всех настроек магазина.
+// Редактируйте этот файл для настройки названия, контактов и т.д.
 // ============================================================================
 
 export const siteConfig = {
-  // Branding
-  name: "Next.js Ecommerce Starter",
-  tagline: "A free, open-source Next.js ecommerce template.",
+  // Бренд
+  name: "СИБ-ТРЕЙД",
+  tagline: "Металлоконструкции, сантехника и стройматериалы",
   description:
-    "A free, production-ready Next.js ecommerce starter template built with Tailwind CSS and shadcn/ui. Responsive, accessible, SEO optimized, and ready to connect to any checkout system. Built by Epic Design Labs.",
+    "Изготовление металлоконструкций, продажа сантехники, строительных материалов и оборудования. Качество, надёжность, индивидуальный подход.",
 
-  // Announcement bar (set to "" to hide)
-  announcement: "Free shipping on all orders over $75 — Shop now!",
+  // Баннер (установите "" для скрытия)
+  announcement: "Бесплатная доставка от 50 000 ₽ — Закажите сейчас!",
 
   // URLs
-  url: process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000",
+  url: process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:2000",
 
-  // Contact
+  // Контакты
   contact: {
-    email: "support@epicdesignlabs.com",
-    phone: "",
+    email: "info@sib-trade.ru",
+    phone: "+7 (383) 123-45-67",
     address: {
-      street: "",
-      suite: "",
-      city: "",
-      state: "",
-      zip: "",
+      street: "ул. Промышленная",
+      suite: "15",
+      city: "Новосибирск",
+      state: "Новосибирская область",
+      zip: "630099",
     },
   },
 
-  // Social links (set to "" to hide)
+  // Соцсети (установите "" для скрытия)
   social: {
-    twitter: "https://x.com/epicdesignlabs",
-    instagram: "https://instagram.com/epicdesignlabs",
-    facebook: "https://facebook.com/epicdesignlabs",
+    twitter: "",
+    instagram: "",
+    facebook: "",
     youtube: "",
     tiktok: "",
   },
 
-  // Shipping
-  freeShippingThreshold: 7500, // in cents ($75.00)
-  taxRate: 0.08, // 8%
+  // Доставка
+  freeShippingThreshold: 50000, // 50 000 ₽
+  taxRate: 0, // 0% (НДС включён в цену)
 
-  // Currency & locale
-  currency: "USD",
-  locale: "en-US",
+  // Валюта и локаль
+  currency: "RUB",
+  locale: "ru-RU",
 
-  // Legal
+  // Авторское право
   copyrightYear: new Date().getFullYear(),
 } as const
 

@@ -28,20 +28,20 @@ export default function LoginPage() {
     setLoading(true)
     const success = login(email, password)
     if (success) {
-      toast.success("Welcome back!")
+      toast.success("С возвращением!")
       router.push("/account")
     } else {
-      toast.error("Invalid email or password")
+      toast.error("Неверный email или пароль")
     }
     setLoading(false)
   }
 
   return (
     <AuthCardLayout
-      title="Welcome back"
-      subtitle="Sign in to your account to continue"
-      footerText="Don't have an account?"
-      footerLinkText="Sign up"
+title="С возвращением"
+      subtitle="Войдите в аккаунт, чтобы продолжить"
+      footerText="Нет аккаунта?"
+      footerLinkText="Зарегистрироваться"
       footerLinkHref="/auth/register"
     >
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -51,20 +51,20 @@ export default function LoginPage() {
         </div>
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <Label htmlFor="password">Password</Label>
+<Label htmlFor="password">Пароль</Label>
             <Link href="/auth/forgot-password" className="text-xs text-muted-foreground hover:text-foreground">
-              Forgot password?
+              Забыли пароль?
             </Link>
           </div>
           <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
         </div>
         <Button type="submit" className="w-full" disabled={loading}>
-          {loading ? "Signing in..." : "Sign In"}
+          {loading ? "Вход..." : "Войти"}
         </Button>
       </form>
       <div className="mt-4 rounded-md bg-neutral-50 p-3">
         <p className="text-xs text-muted-foreground">
-          <strong>Demo accounts:</strong><br />
+          <strong>Демо-аккаунты:</strong><br />
           admin@example.com / password123<br />
           demo@example.com / password123
         </p>

@@ -2,100 +2,165 @@
   "categories": [
     {
       "id": "cat-1",
-      "name": "Electronics",
-      "slug": "electronics",
-      "description": "Headphones, speakers, and everyday tech essentials. Built to last and designed to sound great wherever you go.",
+      "name": "Металлоконструкции",
+      "slug": "metallokonstruktsii",
+      "description": "Изготовление металлоконструкций любой сложности: лестницы, козырьки, ворота, заборы, каркасы зданий и сооружений.",
       "image": {
         "url": "/images/products/placeholder.svg",
-        "alt": "Electronics"
+        "alt": "Металлоконструкции"
       },
       "order": 1
     },
     {
       "id": "cat-2",
-      "name": "Clothing",
-      "slug": "clothing",
-      "description": "Comfortable, well-made basics for every day. Organic fabrics and relaxed fits that look good and feel even better.",
+      "name": "Сантехника",
+      "slug": "santehnika",
+      "description": "Сантехническое оборудование: ванны, душевые кабины, унитазы, раковины, смесители, трубы и фитинги от ведущих производителей.",
       "image": {
         "url": "/images/products/placeholder.svg",
-        "alt": "Clothing"
+        "alt": "Сантехника"
       },
       "order": 2
     },
     {
       "id": "cat-3",
-      "name": "Home & Kitchen",
-      "slug": "home-kitchen",
-      "description": "Thoughtful pieces for your living space. From lighting to textiles, everything you need to make a house feel like home.",
+      "name": "Стройматериалы",
+      "slug": "stroymaterialy",
+      "description": "Широкий ассортимент строительных материалов: цемент, кирпич, пиломатериалы, утеплители, кровля, отделочные материалы.",
       "image": {
         "url": "/images/products/placeholder.svg",
-        "alt": "Home & Kitchen"
+        "alt": "Стройматериалы"
       },
       "order": 3
     },
     {
       "id": "cat-4",
-      "name": "Accessories",
-      "slug": "accessories",
-      "description": "Bags, wallets, and everyday carry. Crafted from premium materials that age beautifully with use.",
+      "name": "Инструменты",
+      "slug": "instrumenty",
+      "description": "Профессиональный и бытовой инструмент для строительства и ремонта. Электроинструмент, ручной инструмент, расходные материалы.",
       "image": {
         "url": "/images/products/placeholder.svg",
-        "alt": "Accessories"
+        "alt": "Инструменты"
       },
       "order": 4
     },
     {
-      "id": "cat-6",
-      "name": "Food & Drink",
-      "slug": "food-drink",
-      "description": "Coffee, tea, and specialty treats. Sourced from small producers who care about quality and sustainability.",
-      "image": {
-        "url": "/images/products/placeholder.svg",
-        "alt": "Food & Drink"
-      },
-      "order": 6
-    },
-    {
       "id": "cat-1-1",
-      "name": "Headphones",
-      "slug": "headphones",
-      "description": "Over-ear, on-ear, and in-ear headphones for every listening style. From noise-cancelling to open-back, find your perfect pair.",
+      "name": "Лестницы",
+      "slug": "lestnitsy",
+      "description": "Металлические лестницы: винтовые, маршевые, пожарные, на косоурах. Изготовление по индивидуальным размерам.",
       "parentId": "cat-1",
       "order": 1
     },
     {
       "id": "cat-1-2",
-      "name": "Speakers",
-      "slug": "speakers",
-      "description": "Portable and desktop speakers that deliver rich, room-filling sound. Built for home, travel, and everywhere in between.",
+      "name": "Ворота и заборы",
+      "slug": "vorota-zabory",
+      "description": "Въездные ворота, откатные и распашные, заборы из профнастила, решётки, калитки. Установка и обслуживание.",
       "parentId": "cat-1",
       "order": 2
     },
     {
       "id": "cat-1-3",
-      "name": "Chargers & Accessories",
-      "slug": "chargers-accessories",
-      "description": "Wireless chargers, cables, and tech accessories to keep your devices powered and organized.",
+      "name": "Козырьки и навесы",
+      "slug": "kozyrki-navesy",
+      "description": "Козырьки над входом, навесы для автомобиля, беседки и перголы из металла. Любой размер и дизайн.",
       "parentId": "cat-1",
       "order": 3
+    },
+    {
+      "id": "cat-2-1",
+      "name": "Ванны и душевые",
+      "slug": "vanny-dushevye",
+      "description": "Акриловые, стальные и чугунные ванны. Душевые кабины и ограждения. Всё для комфортной ванной комнаты.",
+      "parentId": "cat-2",
+      "order": 1
+    },
+    {
+      "id": "cat-2-2",
+      "name": "Смесители и фурнитура",
+      "slug": "smesiteli-furnitura",
+      "description": "Смесители для кухни и ванной, душевые системы, полотенцесушители. Надёжные бренды по доступным ценам.",
+      "parentId": "cat-2",
+      "order": 2
+    },
+    {
+      "id": "cat-new-100",
+      "name": "Световое оформление",
+      "slug": "svetovoe-oformlenie",
+      "description": "Световое оформление территорий: парковые светильники, фонари, декоративное освещение. Создаём уют и безопасность на улицах, в парках и дворовых территориях.",
+      "image": {
+        "url": "/images/products/placeholder.svg",
+        "alt": "Световое оформление"
+      },
+      "order": 4
+    },
+    {
+      "id": "cat-new-101",
+      "name": "Топиарные фигуры",
+      "slug": "topiarnye-figury",
+      "description": "Фигуры из искусственной травы: мебель, животные, музыкальные инструменты. Почти не требуют ухода и круглый год создают летнее настроение.",
+      "image": {
+        "url": "/images/products/placeholder.svg",
+        "alt": "Топиарные фигуры"
+      },
+      "order": 5
+    },
+    {
+      "id": "cat-new-102",
+      "name": "Уличная мебель",
+      "slug": "ulichnaya-mebel",
+      "description": "Перголы, беседки, качели, навесы из дерева и металла. Минималистичный, но освежающий и комфортный дизайн для общественных и частных территорий.",
+      "image": {
+        "url": "/images/products/placeholder.svg",
+        "alt": "Уличная мебель"
+      },
+      "order": 6
+    },
+    {
+      "id": "cat-new-103",
+      "name": "ЖКХ и благоустройство",
+      "slug": "zhkh-i-blagoustroystvo",
+      "description": "Металлические конструкции для коммунальных служб: скамьи, урны, ограждения, теневые навесы, остановки. Элементы благоустройства дворовых территорий и городских пространств.",
+      "image": {
+        "url": "/images/products/placeholder.svg",
+        "alt": "ЖКХ и благоустройство"
+      },
+      "order": 7
+    },
+    {
+      "id": "cat-new-104",
+      "name": "Продукция для животноводства",
+      "slug": "produktsiya-dlya-zhivotnovodstva",
+      "description": "Металлические конструкции для ферм и животноводческих комплексов: кормушки, поилки, загоны, бункерные кормушки для КРС. Надежные и долговечные решения для сельского хозяйства.",
+      "image": {
+        "url": "/images/products/placeholder.svg",
+        "alt": "Продукция для животноводства"
+      },
+      "order": 8
+    },
+    {
+      "id": "cat-new-105",
+      "name": "Фигуры из металла",
+      "slug": "figury-iz-metalla",
+      "description": "Декоративные металлические фигуры для сада и парка. Материал — не только конструктивный вопрос, но и важный декоративный аспект. Простые вырезы в листе металла создают уникальное впечатление.",
+      "image": {
+        "url": "/images/products/placeholder.svg",
+        "alt": "Фигуры из металла"
+      },
+      "order": 9
     }
   ],
   "products": [
     {
       "id": "prod-1",
-      "name": "Wireless Over-Ear Headphones",
-      "slug": "wireless-over-ear-headphones",
-      "description": "Premium wireless headphones with active noise cancellation, 30-hour battery life, and ultra-comfortable memory foam ear cushions.",
+      "name": "Маршевая лестница из нержавеющей стали",
+      "slug": "marshlevaya-lestnitsa-nerzhaveyushchaya",
+      "description": "Маршевая лестница из нержавеющей стали AISI 304. Ступени с противоскользящим покрытием. Подходит для внутреннего и наружного монтажа.",
       "images": [
         {
           "url": "/images/products/placeholder.svg",
-          "alt": "Wireless headphones front view",
-          "width": 800,
-          "height": 800
-        },
-        {
-          "url": "/images/products/placeholder.svg",
-          "alt": "Wireless headphones side view",
+          "alt": "Маршевая лестница",
           "width": 800,
           "height": 800
         }
@@ -106,28 +171,27 @@
         "cat-1-1"
       ],
       "tags": [
-        "wireless",
-        "noise-cancelling",
-        "bluetooth"
+        "лестница",
+        "нержавеющая сталь",
+        "маршевая"
       ],
       "variants": [
         {
           "id": "var-1-1",
           "productId": "prod-1",
-          "sku": "WH-BLK-001",
-          "name": "Black",
-          "price": 7999,
-          "compareAtPrice": 9999,
-          "currency": "USD",
+          "sku": "LST-SS-001",
+          "name": "3 ступени",
+          "price": 45000,
+          "currency": "RUB",
           "inventory": {
-            "quantity": 50,
+            "quantity": 10,
             "trackInventory": true,
             "allowBackorder": false
           },
           "options": [
             {
-              "name": "Color",
-              "value": "Black"
+              "name": "Размер",
+              "value": "3 ступени"
             }
           ],
           "images": []
@@ -135,20 +199,19 @@
         {
           "id": "var-1-2",
           "productId": "prod-1",
-          "sku": "WH-WHT-001",
-          "name": "White",
-          "price": 7999,
-          "compareAtPrice": 9999,
-          "currency": "USD",
+          "sku": "LST-SS-002",
+          "name": "5 ступеней",
+          "price": 72000,
+          "currency": "RUB",
           "inventory": {
-            "quantity": 35,
+            "quantity": 7,
             "trackInventory": true,
             "allowBackorder": false
           },
           "options": [
             {
-              "name": "Color",
-              "value": "White"
+              "name": "Размер",
+              "value": "5 ступеней"
             }
           ],
           "images": []
@@ -157,415 +220,20 @@
       "featured": true,
       "createdAt": "2025-01-15T10:00:00Z",
       "updatedAt": "2025-01-15T10:00:00Z",
-      "rating": 4.5,
-      "reviewCount": 128,
+      "rating": 4.8,
+      "reviewCount": 34,
       "brandId": "brand-1",
-      "body": "<h2>Immersive Sound, Anywhere</h2><p>Experience studio-quality audio whether you're commuting, working, or relaxing at home. Our wireless over-ear headphones combine premium 40mm drivers with advanced noise-cancelling technology to deliver rich, balanced sound across every frequency.</p><h3>Key Features</h3><ul><li><strong>Active Noise Cancellation</strong> — Three ANC modes adapt to your environment</li><li><strong>30-Hour Battery</strong> — Full day of listening on a single charge</li><li><strong>Memory Foam Cushions</strong> — Designed for extended wear</li><li><strong>Bluetooth 5.3</strong> — Stable connection up to 30 feet</li></ul><h3>Built to Last</h3><p>Constructed with aircraft-grade aluminum and premium vegan leather, these headphones are designed to accompany you for years. Every component — from the adjustable headband to the swiveling ear cups — has been engineered for durability and comfort.</p><blockquote>These are hands-down the most comfortable headphones I've ever owned. The sound is crisp, the noise cancellation is incredible, and I can wear them all day without any discomfort.</blockquote><h3>What's in the Box</h3><ul><li>Wireless headphones</li><li>Premium carrying case</li><li>USB-C charging cable</li><li>3.5mm audio cable</li><li>Quick start guide</li></ul>"
+      "body": "<h2>Надёжная лестница на долгие годы</h2><p>Маршевые лестницы из нержавеющей стали — это классическое решение для частных домов, коттеджей и коммерческих объектов. Нержавеющая сталь AISI 304 обеспечивает коррозионную стойкость и долговечность даже в условиях повышенной влажности.</p><h3>Преимущества</h3><ul><li><strong>Противоскользящие ступени</strong> — безопасный подъём в любую погоду</li><li><strong>Нержавеющая сталь AISI 304</strong> — устойчивость к коррозии</li><li><strong>Индивидуальные размеры</strong> — изготовление по вашим замерам</li><li><strong>Порошковое покрытие</strong> — защита и эстетичный вид</li></ul><h3>Технические характеристики</h3><ul><li>Материал: нержавеющая сталь AISI 304</li><li>Толщина ступеней: 2 мм</li><li>Несущая нагрузка: до 300 кг</li><li>Гарантия: 5 лет</li></ul>"
     },
     {
       "id": "prod-2",
-      "name": "Minimalist Desk Lamp",
-      "slug": "minimalist-desk-lamp",
-      "description": "A clean, adjustable LED desk lamp with three brightness levels and a warm-to-cool color temperature dial. Solid aluminum construction.",
+      "name": "Откатные ворота с автоматикой",
+      "slug": "otkatnye-vorota-avtomatika",
+      "description": "Откатные ворота с автоматическим приводом. Полотно из профнастила, каркас из прямоугольной трубы. Комплект: полотно, направляющая, привод, пульт.",
       "images": [
         {
           "url": "/images/products/placeholder.svg",
-          "alt": "Desk lamp on workspace",
-          "width": 800,
-          "height": 800
-        }
-      ],
-      "status": "active",
-      "categoryIds": [
-        "cat-3"
-      ],
-      "tags": [
-        "lighting",
-        "desk",
-        "minimal"
-      ],
-      "variants": [
-        {
-          "id": "var-2-1",
-          "productId": "prod-2",
-          "sku": "DL-SLV-001",
-          "name": "Silver",
-          "price": 4500,
-          "currency": "USD",
-          "inventory": {
-            "quantity": 25,
-            "trackInventory": true,
-            "allowBackorder": false
-          },
-          "options": [
-            {
-              "name": "Color",
-              "value": "Silver"
-            }
-          ],
-          "images": []
-        },
-        {
-          "id": "var-2-2",
-          "productId": "prod-2",
-          "sku": "DL-BLK-001",
-          "name": "Matte Black",
-          "price": 4500,
-          "currency": "USD",
-          "inventory": {
-            "quantity": 18,
-            "trackInventory": true,
-            "allowBackorder": false
-          },
-          "options": [
-            {
-              "name": "Color",
-              "value": "Matte Black"
-            }
-          ],
-          "images": []
-        }
-      ],
-      "featured": true,
-      "createdAt": "2025-01-20T10:00:00Z",
-      "updatedAt": "2025-01-20T10:00:00Z",
-      "rating": 4.8,
-      "reviewCount": 64,
-      "brandId": "brand-2",
-      "body": "<h2>Thoughtful Light for Your Workspace</h2><p>A desk lamp designed to disappear into the background until you need it. The adjustable arm and tunable color temperature mean you can shape your lighting for focused work, relaxed reading, or video calls.</p><h3>Features</h3><ul><li>Three brightness levels</li><li>Warm-to-cool color temperature dial</li><li>Flexible aluminum arm</li><li>Weighted base for stability</li><li>USB-C powered</li></ul><h3>Design</h3><p>The minimalist silhouette fits any workspace — home office, studio, or shared desk. Available in silver or matte black.</p>"
-    },
-    {
-      "id": "prod-3",
-      "name": "Organic Cotton T-Shirt",
-      "slug": "organic-cotton-tshirt",
-      "description": "Heavyweight 100% organic cotton tee with a relaxed fit. Pre-shrunk and garment-dyed for a lived-in feel from day one.",
-      "images": [
-        {
-          "url": "/images/products/placeholder.svg",
-          "alt": "Cotton t-shirt front",
-          "width": 800,
-          "height": 800
-        }
-      ],
-      "status": "active",
-      "categoryIds": [
-        "cat-2"
-      ],
-      "tags": [
-        "organic",
-        "cotton",
-        "basics"
-      ],
-      "variants": [
-        {
-          "id": "var-3-1",
-          "productId": "prod-3",
-          "sku": "TS-WHT-S",
-          "name": "White / S",
-          "price": 2999,
-          "currency": "USD",
-          "inventory": {
-            "quantity": 100,
-            "trackInventory": true,
-            "allowBackorder": false
-          },
-          "options": [
-            {
-              "name": "Color",
-              "value": "White"
-            },
-            {
-              "name": "Size",
-              "value": "S"
-            }
-          ],
-          "images": []
-        },
-        {
-          "id": "var-3-2",
-          "productId": "prod-3",
-          "sku": "TS-WHT-M",
-          "name": "White / M",
-          "price": 2999,
-          "currency": "USD",
-          "inventory": {
-            "quantity": 80,
-            "trackInventory": true,
-            "allowBackorder": false
-          },
-          "options": [
-            {
-              "name": "Color",
-              "value": "White"
-            },
-            {
-              "name": "Size",
-              "value": "M"
-            }
-          ],
-          "images": []
-        },
-        {
-          "id": "var-3-3",
-          "productId": "prod-3",
-          "sku": "TS-WHT-L",
-          "name": "White / L",
-          "price": 2999,
-          "currency": "USD",
-          "inventory": {
-            "quantity": 60,
-            "trackInventory": true,
-            "allowBackorder": false
-          },
-          "options": [
-            {
-              "name": "Color",
-              "value": "White"
-            },
-            {
-              "name": "Size",
-              "value": "L"
-            }
-          ],
-          "images": []
-        },
-        {
-          "id": "var-3-4",
-          "productId": "prod-3",
-          "sku": "TS-BLK-M",
-          "name": "Black / M",
-          "price": 2999,
-          "currency": "USD",
-          "inventory": {
-            "quantity": 70,
-            "trackInventory": true,
-            "allowBackorder": false
-          },
-          "options": [
-            {
-              "name": "Color",
-              "value": "Black"
-            },
-            {
-              "name": "Size",
-              "value": "M"
-            }
-          ],
-          "images": []
-        }
-      ],
-      "featured": true,
-      "createdAt": "2025-02-01T10:00:00Z",
-      "updatedAt": "2025-02-01T10:00:00Z",
-      "rating": 4.3,
-      "reviewCount": 256,
-      "brandId": "brand-3",
-      "body": "<h2>The Perfect Everyday Tee</h2><p>We spent two years sourcing the right organic cotton and perfecting the fit. The result is a t-shirt that feels like a favorite from day one.</p><h3>Details</h3><ul><li>100% GOTS-certified organic cotton</li><li>Heavyweight 6.5oz fabric</li><li>Garment-dyed for a lived-in feel</li><li>Pre-shrunk</li><li>Side seams for a clean drape</li></ul><h3>Care</h3><p>Machine wash cold, tumble dry low. The more you wash it, the better it gets.</p>"
-    },
-    {
-      "id": "prod-4",
-      "name": "Ceramic Pour-Over Coffee Maker",
-      "slug": "ceramic-pour-over",
-      "description": "Handcrafted ceramic dripper with a walnut wood collar. Brews a clean, bright cup. Includes a reusable stainless steel filter.",
-      "images": [
-        {
-          "url": "/images/products/placeholder.svg",
-          "alt": "Pour-over coffee maker",
-          "width": 800,
-          "height": 800
-        }
-      ],
-      "status": "active",
-      "categoryIds": [
-        "cat-3",
-        "cat-6"
-      ],
-      "tags": [
-        "coffee",
-        "ceramic",
-        "handmade"
-      ],
-      "variants": [
-        {
-          "id": "var-4-1",
-          "productId": "prod-4",
-          "sku": "PO-WHT-001",
-          "name": "Default",
-          "price": 3800,
-          "currency": "USD",
-          "inventory": {
-            "quantity": 40,
-            "trackInventory": true,
-            "allowBackorder": false
-          },
-          "options": [],
-          "images": []
-        }
-      ],
-      "featured": true,
-      "createdAt": "2025-02-10T10:00:00Z",
-      "updatedAt": "2025-02-10T10:00:00Z",
-      "rating": 4.7,
-      "reviewCount": 89,
-      "brandId": "brand-2"
-    },
-    {
-      "id": "prod-5",
-      "name": "Leather Passport Wallet",
-      "slug": "leather-passport-wallet",
-      "description": "Full-grain vegetable-tanned leather passport wallet. Fits a passport, 4 cards, and boarding passes. Ages beautifully over time.",
-      "images": [
-        {
-          "url": "/images/products/placeholder.svg",
-          "alt": "Leather wallet closed",
-          "width": 800,
-          "height": 800
-        },
-        {
-          "url": "/images/products/placeholder.svg",
-          "alt": "Leather wallet open",
-          "width": 800,
-          "height": 800
-        }
-      ],
-      "status": "active",
-      "categoryIds": [
-        "cat-4"
-      ],
-      "tags": [
-        "leather",
-        "travel",
-        "wallet"
-      ],
-      "variants": [
-        {
-          "id": "var-5-1",
-          "productId": "prod-5",
-          "sku": "PW-TAN-001",
-          "name": "Tan",
-          "price": 5200,
-          "currency": "USD",
-          "inventory": {
-            "quantity": 30,
-            "trackInventory": true,
-            "allowBackorder": false
-          },
-          "options": [
-            {
-              "name": "Color",
-              "value": "Tan"
-            }
-          ],
-          "images": []
-        },
-        {
-          "id": "var-5-2",
-          "productId": "prod-5",
-          "sku": "PW-BRN-001",
-          "name": "Dark Brown",
-          "price": 5200,
-          "currency": "USD",
-          "inventory": {
-            "quantity": 22,
-            "trackInventory": true,
-            "allowBackorder": false
-          },
-          "options": [
-            {
-              "name": "Color",
-              "value": "Dark Brown"
-            }
-          ],
-          "images": []
-        }
-      ],
-      "featured": false,
-      "createdAt": "2025-02-15T10:00:00Z",
-      "updatedAt": "2025-02-15T10:00:00Z",
-      "rating": 4.6,
-      "reviewCount": 47,
-      "brandId": "brand-4"
-    },
-    {
-      "id": "prod-6",
-      "name": "Single-Origin Coffee Beans",
-      "slug": "single-origin-coffee-beans",
-      "description": "Ethically sourced single-origin beans from Colombia. Medium roast with notes of chocolate, caramel, and citrus. 12oz bag, whole bean.",
-      "images": [
-        {
-          "url": "/images/products/placeholder.svg",
-          "alt": "Coffee beans bag",
-          "width": 800,
-          "height": 800
-        }
-      ],
-      "status": "active",
-      "categoryIds": [
-        "cat-6"
-      ],
-      "tags": [
-        "coffee",
-        "organic",
-        "fair-trade"
-      ],
-      "variants": [
-        {
-          "id": "var-6-1",
-          "productId": "prod-6",
-          "sku": "CB-12OZ-001",
-          "name": "12oz Bag",
-          "price": 1850,
-          "currency": "USD",
-          "inventory": {
-            "quantity": 200,
-            "trackInventory": true,
-            "allowBackorder": true
-          },
-          "options": [
-            {
-              "name": "Size",
-              "value": "12oz"
-            }
-          ],
-          "images": []
-        },
-        {
-          "id": "var-6-2",
-          "productId": "prod-6",
-          "sku": "CB-2LB-001",
-          "name": "2lb Bag",
-          "price": 3200,
-          "currency": "USD",
-          "inventory": {
-            "quantity": 80,
-            "trackInventory": true,
-            "allowBackorder": true
-          },
-          "options": [
-            {
-              "name": "Size",
-              "value": "2lb"
-            }
-          ],
-          "images": []
-        }
-      ],
-      "featured": false,
-      "createdAt": "2025-03-01T10:00:00Z",
-      "updatedAt": "2025-03-01T10:00:00Z",
-      "rating": 4.9,
-      "reviewCount": 312,
-      "brandId": "brand-5"
-    },
-    {
-      "id": "prod-7",
-      "name": "Portable Bluetooth Speaker",
-      "slug": "portable-bluetooth-speaker",
-      "description": "Waterproof portable speaker with 360-degree sound and 12-hour battery life. Compact enough for any adventure.",
-      "images": [
-        {
-          "url": "/images/products/placeholder.svg",
-          "alt": "Bluetooth speaker",
+          "alt": "Откатные ворота",
           "width": 800,
           "height": 800
         }
@@ -576,269 +244,69 @@
         "cat-1-2"
       ],
       "tags": [
-        "bluetooth",
-        "waterproof",
-        "portable"
+        "ворота",
+        "откатные",
+        "автоматика"
       ],
       "variants": [
         {
-          "id": "var-7-1",
-          "productId": "prod-7",
-          "sku": "BS-BLK-001",
-          "name": "Charcoal",
-          "price": 5999,
-          "currency": "USD",
+          "id": "var-2-1",
+          "productId": "prod-2",
+          "sku": "VG-SL-400",
+          "name": "4 м",
+          "price": 68000,
+          "currency": "RUB",
           "inventory": {
-            "quantity": 45,
+            "quantity": 5,
             "trackInventory": true,
             "allowBackorder": false
           },
           "options": [
             {
-              "name": "Color",
-              "value": "Charcoal"
+              "name": "Ширина проёма",
+              "value": "4 м"
             }
           ],
           "images": []
         },
         {
-          "id": "var-7-2",
-          "productId": "prod-7",
-          "sku": "BS-GRN-001",
-          "name": "Forest Green",
-          "price": 5999,
-          "currency": "USD",
+          "id": "var-2-2",
+          "productId": "prod-2",
+          "sku": "VG-SL-600",
+          "name": "6 м",
+          "price": 95000,
+          "currency": "RUB",
           "inventory": {
-            "quantity": 30,
+            "quantity": 3,
             "trackInventory": true,
             "allowBackorder": false
           },
           "options": [
             {
-              "name": "Color",
-              "value": "Forest Green"
-            }
-          ],
-          "images": []
-        }
-      ],
-      "featured": false,
-      "createdAt": "2025-03-05T10:00:00Z",
-      "updatedAt": "2025-03-05T10:00:00Z",
-      "rating": 4.4,
-      "reviewCount": 93,
-      "brandId": "brand-1"
-    },
-    {
-      "id": "prod-8",
-      "name": "Linen Throw Pillow",
-      "slug": "linen-throw-pillow",
-      "description": "Stonewashed French linen cover with a feather-down insert. 20x20 inches. Removable, machine-washable cover.",
-      "images": [
-        {
-          "url": "/images/products/placeholder.svg",
-          "alt": "Linen throw pillow",
-          "width": 800,
-          "height": 800
-        }
-      ],
-      "status": "active",
-      "categoryIds": [
-        "cat-3"
-      ],
-      "tags": [
-        "linen",
-        "home-decor",
-        "pillow"
-      ],
-      "variants": [
-        {
-          "id": "var-8-1",
-          "productId": "prod-8",
-          "sku": "LP-NAT-001",
-          "name": "Natural",
-          "price": 3400,
-          "currency": "USD",
-          "inventory": {
-            "quantity": 60,
-            "trackInventory": true,
-            "allowBackorder": false
-          },
-          "options": [
-            {
-              "name": "Color",
-              "value": "Natural"
-            }
-          ],
-          "images": []
-        },
-        {
-          "id": "var-8-2",
-          "productId": "prod-8",
-          "sku": "LP-SLT-001",
-          "name": "Slate",
-          "price": 3400,
-          "currency": "USD",
-          "inventory": {
-            "quantity": 40,
-            "trackInventory": true,
-            "allowBackorder": false
-          },
-          "options": [
-            {
-              "name": "Color",
-              "value": "Slate"
-            }
-          ],
-          "images": []
-        }
-      ],
-      "featured": false,
-      "createdAt": "2025-03-10T10:00:00Z",
-      "updatedAt": "2025-03-10T10:00:00Z",
-      "rating": 4.2,
-      "reviewCount": 71,
-      "brandId": "brand-2"
-    },
-    {
-      "id": "prod-9",
-      "name": "Canvas Weekender Bag",
-      "slug": "canvas-weekender-bag",
-      "description": "Waxed canvas weekender with leather handles and brass hardware. Separate shoe compartment. Fits overhead bins.",
-      "images": [
-        {
-          "url": "/images/products/placeholder.svg",
-          "alt": "Canvas weekender bag",
-          "width": 800,
-          "height": 800
-        }
-      ],
-      "status": "active",
-      "categoryIds": [
-        "cat-4"
-      ],
-      "tags": [
-        "bag",
-        "travel",
-        "canvas"
-      ],
-      "variants": [
-        {
-          "id": "var-9-1",
-          "productId": "prod-9",
-          "sku": "WB-OLV-001",
-          "name": "Olive",
-          "price": 8900,
-          "currency": "USD",
-          "inventory": {
-            "quantity": 15,
-            "trackInventory": true,
-            "allowBackorder": false
-          },
-          "options": [
-            {
-              "name": "Color",
-              "value": "Olive"
+              "name": "Ширина проёма",
+              "value": "6 м"
             }
           ],
           "images": []
         }
       ],
       "featured": true,
-      "createdAt": "2025-03-15T10:00:00Z",
-      "updatedAt": "2025-03-15T10:00:00Z",
-      "rating": 4.8,
-      "reviewCount": 34,
-      "brandId": "brand-4"
+      "createdAt": "2025-01-20T10:00:00Z",
+      "updatedAt": "2025-01-20T10:00:00Z",
+      "rating": 4.9,
+      "reviewCount": 21,
+      "brandId": "brand-1",
+      "body": "<h2>Автоматические откатные ворота</h2><p>Откатные ворота — популярное решение для частных домов и промышленных территорий. Бесшумный ход, плавный разгон и торможение. Комплект включает всё необходимое для установки.</p><h3>Комплектация</h3><ul><li>Воротное полотно из профнастила</li><li>Направляющая балка</li><li>Электропривод с пультом управления</li><li>Фундаментные столбы</li><li>Направляющие ролики</li></ul><h3>Преимущества</h3><ul><li>Экономия пространства — не требуют площади для открывания</li><li>Автоматика — удобное управление с пульта</li><li>Долговечность — срок службы более 20 лет</li><li>Гарантия: 3 года</li></ul>"
     },
     {
-      "id": "prod-10",
-      "name": "Hardcover Dot Grid Notebook",
-      "slug": "hardcover-dot-grid-notebook",
-      "description": "192 pages of 100gsm acid-free paper with a dot grid pattern. Lay-flat binding, ribbon bookmark, and elastic closure.",
+      "id": "prod-3",
+      "name": "Акриловая ванна Lux 170",
+      "slug": "akrilovaya-vanna-lux-170",
+      "description": "Акриловая ванна размером 170×75 см. Глубина 46 см. Эргономичная форма, укреплённое дно, системы гидромассажа и аэромассажа.",
       "images": [
         {
           "url": "/images/products/placeholder.svg",
-          "alt": "Dot grid notebook",
-          "width": 800,
-          "height": 800
-        }
-      ],
-      "status": "active",
-      "categoryIds": [
-        "cat-4"
-      ],
-      "tags": [
-        "notebook",
-        "stationery",
-        "writing"
-      ],
-      "variants": [
-        {
-          "id": "var-10-1",
-          "productId": "prod-10",
-          "sku": "NB-BLK-A5",
-          "name": "Black / A5",
-          "price": 2200,
-          "currency": "USD",
-          "inventory": {
-            "quantity": 150,
-            "trackInventory": true,
-            "allowBackorder": true
-          },
-          "options": [
-            {
-              "name": "Color",
-              "value": "Black"
-            },
-            {
-              "name": "Size",
-              "value": "A5"
-            }
-          ],
-          "images": []
-        },
-        {
-          "id": "var-10-2",
-          "productId": "prod-10",
-          "sku": "NB-NVY-A5",
-          "name": "Navy / A5",
-          "price": 2200,
-          "currency": "USD",
-          "inventory": {
-            "quantity": 90,
-            "trackInventory": true,
-            "allowBackorder": true
-          },
-          "options": [
-            {
-              "name": "Color",
-              "value": "Navy"
-            },
-            {
-              "name": "Size",
-              "value": "A5"
-            }
-          ],
-          "images": []
-        }
-      ],
-      "featured": false,
-      "createdAt": "2025-03-20T10:00:00Z",
-      "updatedAt": "2025-03-20T10:00:00Z",
-      "rating": 4.5,
-      "reviewCount": 185,
-      "brandId": "brand-6"
-    },
-    {
-      "id": "prod-11",
-      "name": "Merino Wool Beanie",
-      "slug": "merino-wool-beanie",
-      "description": "Extra-fine merino wool beanie. Soft, breathable, and itch-free. Double-layered for warmth without bulk.",
-      "images": [
-        {
-          "url": "/images/products/placeholder.svg",
-          "alt": "Merino wool beanie",
+          "alt": "Акриловая ванна",
           "width": 800,
           "height": 800
         }
@@ -846,209 +314,307 @@
       "status": "active",
       "categoryIds": [
         "cat-2",
-        "cat-4"
+        "cat-2-1"
       ],
       "tags": [
-        "merino",
-        "wool",
-        "winter"
+        "ванна",
+        "акрил",
+        "гидромассаж"
       ],
       "variants": [
         {
-          "id": "var-11-1",
-          "productId": "prod-11",
-          "sku": "BN-CHR-001",
-          "name": "Charcoal",
-          "price": 3500,
-          "currency": "USD",
+          "id": "var-3-1",
+          "productId": "prod-3",
+          "sku": "VAN-LUX-170",
+          "name": "Без поддона",
+          "price": 35000,
+          "currency": "RUB",
           "inventory": {
-            "quantity": 75,
+            "quantity": 15,
             "trackInventory": true,
             "allowBackorder": false
           },
           "options": [
             {
-              "name": "Color",
-              "value": "Charcoal"
+              "name": "Комплектация",
+              "value": "Без поддона"
             }
           ],
           "images": []
         },
         {
-          "id": "var-11-2",
-          "productId": "prod-11",
-          "sku": "BN-CRM-001",
-          "name": "Cream",
-          "price": 3500,
-          "currency": "USD",
+          "id": "var-3-2",
+          "productId": "prod-3",
+          "sku": "VAN-LUX-170-P",
+          "name": "С поддоном",
+          "price": 42000,
+          "currency": "RUB",
           "inventory": {
-            "quantity": 55,
+            "quantity": 10,
             "trackInventory": true,
             "allowBackorder": false
           },
           "options": [
             {
-              "name": "Color",
-              "value": "Cream"
+              "name": "Комплектация",
+              "value": "С поддоном"
             }
           ],
           "images": []
         }
       ],
-      "featured": false,
-      "createdAt": "2025-04-01T10:00:00Z",
-      "updatedAt": "2025-04-01T10:00:00Z",
-      "rating": 4.6,
-      "reviewCount": 58,
-      "brandId": "brand-3"
-    },
-    {
-      "id": "prod-12",
-      "name": "Hand-Poured Soy Candle",
-      "slug": "hand-poured-soy-candle",
-      "description": "100% natural soy wax candle in a reusable ceramic vessel. 60-hour burn time. Available in three signature scents.",
-      "images": [
-        {
-          "url": "/images/products/placeholder.svg",
-          "alt": "Soy candle",
-          "width": 800,
-          "height": 800
-        }
-      ],
-      "status": "active",
-      "categoryIds": [
-        "cat-3"
-      ],
-      "tags": [
-        "candle",
-        "soy",
-        "home-fragrance"
-      ],
-      "variants": [
-        {
-          "id": "var-12-1",
-          "productId": "prod-12",
-          "sku": "SC-CED-001",
-          "name": "Cedar & Sage",
-          "price": 2800,
-          "currency": "USD",
-          "inventory": {
-            "quantity": 90,
-            "trackInventory": true,
-            "allowBackorder": false
-          },
-          "options": [
-            {
-              "name": "Scent",
-              "value": "Cedar & Sage"
-            }
-          ],
-          "images": []
-        },
-        {
-          "id": "var-12-2",
-          "productId": "prod-12",
-          "sku": "SC-LVN-001",
-          "name": "Lavender & Eucalyptus",
-          "price": 2800,
-          "currency": "USD",
-          "inventory": {
-            "quantity": 65,
-            "trackInventory": true,
-            "allowBackorder": false
-          },
-          "options": [
-            {
-              "name": "Scent",
-              "value": "Lavender & Eucalyptus"
-            }
-          ],
-          "images": []
-        },
-        {
-          "id": "var-12-3",
-          "productId": "prod-12",
-          "sku": "SC-VNL-001",
-          "name": "Vanilla & Tonka",
-          "price": 2800,
-          "currency": "USD",
-          "inventory": {
-            "quantity": 80,
-            "trackInventory": true,
-            "allowBackorder": false
-          },
-          "options": [
-            {
-              "name": "Scent",
-              "value": "Vanilla & Tonka"
-            }
-          ],
-          "images": []
-        }
-      ],
-      "featured": false,
-      "createdAt": "2025-04-05T10:00:00Z",
-      "updatedAt": "2025-04-05T10:00:00Z",
+      "featured": true,
+      "createdAt": "2025-02-01T10:00:00Z",
+      "updatedAt": "2025-02-01T10:00:00Z",
       "rating": 4.7,
-      "reviewCount": 142,
-      "brandId": "brand-2"
+      "reviewCount": 48,
+      "brandId": "brand-2",
+      "body": "<h2>Комфорт каждый день</h2><p>Акриловая ванна Lux 170 — это сочетание элегантного дизайна и практичности. Высококачественный акрил сохраняет тепло, легко чистится и не желтеет со временем.</p><h3>Характеристики</h3><ul><li>Размер: 170×75 см</li><li>Глубина: 46 см</li><li>Материал: литой акрил 4 мм</li><li>Укреплённое дно с армированием</li><li>Слив-перелив: хром</li></ul><h3>Гарантия</h3><p>Гарантия на ванну — 10 лет. Гарантия на акриловое покрытие — 7 лет.</p>"
     },
     {
-      "id": "prod-13",
-      "name": "Japanese Matcha Set",
-      "slug": "japanese-matcha-set",
-      "description": "Traditional matcha preparation set with a ceramic bowl (chawan), bamboo whisk (chasen), and bamboo scoop (chashaku). Includes 30g ceremonial grade matcha.",
+      "id": "prod-4",
+      "name": "Смеситель для кухни с выдвижным изливом",
+      "slug": "smesitel-kuhnya-vydvizhnoy-izliv",
+      "description": "Кухонный смеситель с выдвижным распылителем. Два режима подачи воды. Керамический картридж. Хромированное покрытие.",
       "images": [
         {
           "url": "/images/products/placeholder.svg",
-          "alt": "Matcha set",
+          "alt": "Смеситель для кухни",
           "width": 800,
           "height": 800
         }
       ],
       "status": "active",
       "categoryIds": [
-        "cat-6",
-        "cat-3"
+        "cat-2",
+        "cat-2-2"
       ],
       "tags": [
-        "matcha",
-        "tea",
-        "japanese"
+        "смеситель",
+        "кухня",
+        "хром"
       ],
       "variants": [
         {
-          "id": "var-13-1",
-          "productId": "prod-13",
-          "sku": "MS-SET-001",
-          "name": "Default",
-          "price": 4200,
-          "currency": "USD",
+          "id": "var-4-1",
+          "productId": "prod-4",
+          "sku": "SM-KH-EXT",
+          "name": "Хром",
+          "price": 8500,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 30,
+            "trackInventory": true,
+            "allowBackorder": false
+          },
+          "options": [
+            {
+              "name": "Цвет",
+              "value": "Хром"
+            }
+          ],
+          "images": []
+        },
+        {
+          "id": "var-4-2",
+          "productId": "prod-4",
+          "sku": "SM-BL-EXT",
+          "name": "Матовый чёрный",
+          "price": 9800,
+          "currency": "RUB",
           "inventory": {
             "quantity": 20,
             "trackInventory": true,
             "allowBackorder": false
           },
-          "options": [],
+          "options": [
+            {
+              "name": "Цвет",
+              "value": "Матовый чёрный"
+            }
+          ],
+          "images": []
+        }
+      ],
+      "featured": true,
+      "createdAt": "2025-02-10T10:00:00Z",
+      "updatedAt": "2025-02-10T10:00:00Z",
+      "rating": 4.6,
+      "reviewCount": 67,
+      "brandId": "brand-2"
+    },
+    {
+      "id": "prod-5",
+      "name": "Профнастил стеновой С-8",
+      "slug": "profil-list-stenovoy-s8",
+      "description": "Профнастил стеновой марки С-8. Высота волны 8 мм, ширина полезная 1150 мм. Покрытие полиэстер. Толщина 0,4–0,7 мм.",
+      "images": [
+        {
+          "url": "/images/products/placeholder.svg",
+          "alt": "Профнастил С-8",
+          "width": 800,
+          "height": 800
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-3"
+      ],
+      "tags": [
+        "профнастил",
+        "кровля",
+        "стены"
+      ],
+      "variants": [
+        {
+          "id": "var-5-1",
+          "productId": "prod-5",
+          "sku": "PRF-S8-04",
+          "name": "0,4 мм",
+          "price": 350,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 500,
+            "trackInventory": true,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Толщина",
+              "value": "0,4 мм"
+            }
+          ],
+          "images": []
+        },
+        {
+          "id": "var-5-2",
+          "productId": "prod-5",
+          "sku": "PRF-S8-05",
+          "name": "0,5 мм",
+          "price": 420,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 400,
+            "trackInventory": true,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Толщина",
+              "value": "0,5 мм"
+            }
+          ],
+          "images": []
+        },
+        {
+          "id": "var-5-3",
+          "productId": "prod-5",
+          "sku": "PRF-S8-07",
+          "name": "0,7 мм",
+          "price": 580,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 300,
+            "trackInventory": true,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Толщина",
+              "value": "0,7 мм"
+            }
+          ],
           "images": []
         }
       ],
       "featured": false,
-      "createdAt": "2025-04-08T10:00:00Z",
-      "updatedAt": "2025-04-08T10:00:00Z",
-      "rating": 4.3,
-      "reviewCount": 27,
-      "brandId": "brand-5"
+      "createdAt": "2025-02-15T10:00:00Z",
+      "updatedAt": "2025-02-15T10:00:00Z",
+      "rating": 4.5,
+      "reviewCount": 112,
+      "brandId": "brand-3",
+      "body": "<h2>Профнастил для стен и заборов</h2><p>Профнастил С-8 — универсальный стеновой материал. Подходит для облицовки зданий, устройства заборов и внутренней отделки.</p><h3>Характеристики</h3><ul><li>Марка: С-8</li><li>Высота профиля: 8 мм</li><li>Полезная ширина: 1150 мм</li><li>Покрытие: полиэстер 25 мкм</li><li>Цвета:RAL по каталогу</li></ul><p>Цена указана за 1 погонный метр. Минимальный заказ — 1 лист.</p>"
     },
     {
-      "id": "prod-14",
-      "name": "Wireless Charging Pad",
-      "slug": "wireless-charging-pad",
-      "description": "Slim 15W fast wireless charger compatible with all Qi-enabled devices. Non-slip silicone surface, LED indicator, and built-in safety features.",
+      "id": "prod-6",
+      "name": "Перфоратор Bosch GBH 2-26 DRE",
+      "slug": "perforator-bosch-gbh-2-26-dre",
+      "description": "Профессиональный перфоратор Bosch. Мощность 800 Вт, энергия удара 2,7 Дж. Три режима: сверление, удар, сверление с ударом.",
       "images": [
         {
           "url": "/images/products/placeholder.svg",
-          "alt": "Wireless charging pad",
+          "alt": "Перфоратор Bosch",
+          "width": 800,
+          "height": 800
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-4"
+      ],
+      "tags": [
+        "перфоратор",
+        "Bosch",
+        "электроинструмент"
+      ],
+      "variants": [
+        {
+          "id": "var-6-1",
+          "productId": "prod-6",
+          "sku": "PRF-BSH-226",
+          "name": "Без кейса",
+          "price": 12500,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 25,
+            "trackInventory": true,
+            "allowBackorder": false
+          },
+          "options": [
+            {
+              "name": "Комплектация",
+              "value": "Без кейса"
+            }
+          ],
+          "images": []
+        },
+        {
+          "id": "var-6-2",
+          "productId": "prod-6",
+          "sku": "PRF-BSH-226-K",
+          "name": "С кейсом и бурами",
+          "price": 15800,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 15,
+            "trackInventory": true,
+            "allowBackorder": false
+          },
+          "options": [
+            {
+              "name": "Комплектация",
+              "value": "С кейсом и бурами"
+            }
+          ],
+          "images": []
+        }
+      ],
+      "featured": false,
+      "createdAt": "2025-03-01T10:00:00Z",
+      "updatedAt": "2025-03-01T10:00:00Z",
+      "rating": 4.8,
+      "reviewCount": 89,
+      "brandId": "brand-4"
+    },
+    {
+      "id": "prod-7",
+      "name": "Навес для автомобиля 6×4 м",
+      "slug": "naves-avtomobil-6x4",
+      "description": "Навес для автомобиля из профильной трубы с поликарбонатным покрытием. Размер 6×4 м. Устойчив к снеговым нагрузкам.",
+      "images": [
+        {
+          "url": "/images/products/placeholder.svg",
+          "alt": "Навес для автомобиля",
           "width": 800,
           "height": 800
         }
@@ -1059,27 +625,507 @@
         "cat-1-3"
       ],
       "tags": [
-        "wireless",
-        "charger",
-        "tech"
+        "навес",
+        "автомобиль",
+        "поликарбонат"
       ],
       "variants": [
         {
-          "id": "var-14-1",
-          "productId": "prod-14",
-          "sku": "WC-BLK-001",
-          "name": "Black",
-          "price": 2499,
-          "currency": "USD",
+          "id": "var-7-1",
+          "productId": "prod-7",
+          "sku": "NV-AUTO-64",
+          "name": "6×4 м, прозрачный",
+          "price": 85000,
+          "currency": "RUB",
           "inventory": {
-            "quantity": 120,
+            "quantity": 8,
             "trackInventory": true,
             "allowBackorder": false
           },
           "options": [
             {
-              "name": "Color",
-              "value": "Black"
+              "name": "Цвет поликарбоната",
+              "value": "Прозрачный"
+            }
+          ],
+          "images": []
+        },
+        {
+          "id": "var-7-2",
+          "productId": "prod-7",
+          "sku": "NV-AUTO-64B",
+          "name": "6×4 м, бронза",
+          "price": 89000,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 5,
+            "trackInventory": true,
+            "allowBackorder": false
+          },
+          "options": [
+            {
+              "name": "Цвет поликарбоната",
+              "value": "Бронза"
+            }
+          ],
+          "images": []
+        }
+      ],
+      "featured": false,
+      "createdAt": "2025-03-05T10:00:00Z",
+      "updatedAt": "2025-03-05T10:00:00Z",
+      "rating": 4.7,
+      "reviewCount": 19,
+      "brandId": "brand-1"
+    },
+    {
+      "id": "prod-8",
+      "name": "Цемент М500 50 кг",
+      "slug": "tsement-m500-50kg",
+      "description": "ЦементPortland М500 Д0. Мешок 50 кг. Высокая прочность, морозостойкость. Подходит для фундаментов, стяжек и кладки.",
+      "images": [
+        {
+          "url": "/images/products/placeholder.svg",
+          "alt": "Цемент М500",
+          "width": 800,
+          "height": 800
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-3"
+      ],
+      "tags": [
+        "цемент",
+        "бетон",
+        "кладка"
+      ],
+      "variants": [
+        {
+          "id": "var-8-1",
+          "productId": "prod-8",
+          "sku": "CEM-500-50",
+          "name": "50 кг",
+          "price": 520,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 1000,
+            "trackInventory": true,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Упаковка",
+              "value": "50 кг"
+            }
+          ],
+          "images": []
+        }
+      ],
+      "featured": false,
+      "createdAt": "2025-03-10T10:00:00Z",
+      "updatedAt": "2025-03-10T10:00:00Z",
+      "rating": 4.4,
+      "reviewCount": 203,
+      "brandId": "brand-3"
+    },
+    {
+      "id": "prod-9",
+      "name": "Шуруповёрт DeWALT DCD791",
+      "slug": "shurupovert-dewalt-dcd791",
+      "description": "Аккумуляторный шуруповёрт DeWALT. Напряжение 18 В, крутящийщий момент 70 Нм. Два аккумулятора 2 Ач в комплекте.",
+      "images": [
+        {
+          "url": "/images/products/placeholder.svg",
+          "alt": "Шуруповёрт DeWALT",
+          "width": 800,
+          "height": 800
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-4"
+      ],
+      "tags": [
+        "шуруповёрт",
+        "DeWALT",
+        "аккумуляторный"
+      ],
+      "variants": [
+        {
+          "id": "var-9-1",
+          "productId": "prod-9",
+          "sku": "SH-DWT-791",
+          "name": "2×2 Ач + зарядка",
+          "price": 14900,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 12,
+            "trackInventory": true,
+            "allowBackorder": false
+          },
+          "options": [
+            {
+              "name": "Комплектация",
+              "value": "2×2 Ач + зарядка"
+            }
+          ],
+          "images": []
+        }
+      ],
+      "featured": false,
+      "createdAt": "2025-03-15T10:00:00Z",
+      "updatedAt": "2025-03-15T10:00:00Z",
+      "rating": 4.9,
+      "reviewCount": 56,
+      "brandId": "brand-4"
+    },
+    {
+      "id": "prod-10",
+      "name": "Радиатор алюминиевый Global 500",
+      "slug": "radiator-alyuminiyevyy-global-500",
+      "description": "Алюминиевый радиатор отопления Global. Высота 500 мм, межосевое расстояние 500 мм. Теплоотдача 135 Вт/секция.",
+      "images": [
+        {
+          "url": "/images/products/placeholder.svg",
+          "alt": "Радиатор алюминиевый",
+          "width": 800,
+          "height": 800
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-2",
+        "cat-2-2"
+      ],
+      "tags": [
+        "радиатор",
+        "отопление",
+        "алюминий"
+      ],
+      "variants": [
+        {
+          "id": "var-10-1",
+          "productId": "prod-10",
+          "sku": "RAD-GL-4",
+          "name": "4 секции",
+          "price": 6800,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 40,
+            "trackInventory": true,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Секции",
+              "value": "4 секции"
+            }
+          ],
+          "images": []
+        },
+        {
+          "id": "var-10-2",
+          "productId": "prod-10",
+          "sku": "RAD-GL-8",
+          "name": "8 секций",
+          "price": 12500,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 25,
+            "trackInventory": true,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Секции",
+              "value": "8 секций"
+            }
+          ],
+          "images": []
+        },
+        {
+          "id": "var-10-3",
+          "productId": "prod-10",
+          "sku": "RAD-GL-12",
+          "name": "12 секций",
+          "price": 18200,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 15,
+            "trackInventory": true,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Секции",
+              "value": "12 секций"
+            }
+          ],
+          "images": []
+        }
+      ],
+      "featured": false,
+      "createdAt": "2025-03-20T10:00:00Z",
+      "updatedAt": "2025-03-20T10:00:00Z",
+      "rating": 4.6,
+      "reviewCount": 78,
+      "brandId": "brand-2"
+    },
+    {
+      "id": "prod-11",
+      "name": "Забор из профнастила под ключ",
+      "slug": "zabor-profnastil-pod-klyuch",
+      "description": "Забор из профнастила с установкой. Столбы из профильной трубы 60×60, рёбра жёсткости, полотно из профнастила С-8.",
+      "images": [
+        {
+          "url": "/images/products/placeholder.svg",
+          "alt": "Забор из профнастила",
+          "width": 800,
+          "height": 800
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-1",
+        "cat-1-2"
+      ],
+      "tags": [
+        "забор",
+        "профнастил",
+        "установка"
+      ],
+      "variants": [
+        {
+          "id": "var-11-1",
+          "productId": "prod-11",
+          "sku": "ZAB-18-PR",
+          "name": "1,8 м, прямой",
+          "price": 3200,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 100,
+            "trackInventory": true,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Высота",
+              "value": "1,8 м"
+            }
+          ],
+          "images": []
+        },
+        {
+          "id": "var-11-2",
+          "productId": "prod-11",
+          "sku": "ZAB-22-PR",
+          "name": "2,2 м, прямой",
+          "price": 3800,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 80,
+            "trackInventory": true,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Высота",
+              "value": "2,2 м"
+            }
+          ],
+          "images": []
+        }
+      ],
+      "featured": false,
+      "createdAt": "2025-04-01T10:00:00Z",
+      "updatedAt": "2025-04-01T10:00:00Z",
+      "rating": 4.5,
+      "reviewCount": 64,
+      "brandId": "brand-1"
+    },
+    {
+      "id": "prod-12",
+      "name": "Душевая кабина RODA Compact 80",
+      "slug": "dushevaya-kabina-roda-compact-80",
+      "description": "Душевая кабина 80×80 см. Закалённое стекло 6 мм. Хромированный профиль. Поддон из акрила. Двери раздвижные.",
+      "images": [
+        {
+          "url": "/images/products/placeholder.svg",
+          "alt": "Душевая кабина",
+          "width": 800,
+          "height": 800
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-2",
+        "cat-2-1"
+      ],
+      "tags": [
+        "душевая кабина",
+        "стекло",
+        "акрил"
+      ],
+      "variants": [
+        {
+          "id": "var-12-1",
+          "productId": "prod-12",
+          "sku": "DK-RODA-80",
+          "name": "80×80 см",
+          "price": 48000,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 6,
+            "trackInventory": true,
+            "allowBackorder": false
+          },
+          "options": [
+            {
+              "name": "Размер",
+              "value": "80×80 см"
+            }
+          ],
+          "images": []
+        },
+        {
+          "id": "var-12-2",
+          "productId": "prod-12",
+          "sku": "DK-RODA-90",
+          "name": "90×90 см",
+          "price": 55000,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 4,
+            "trackInventory": true,
+            "allowBackorder": false
+          },
+          "options": [
+            {
+              "name": "Размер",
+              "value": "90×90 см"
+            }
+          ],
+          "images": []
+        }
+      ],
+      "featured": false,
+      "createdAt": "2025-04-05T10:00:00Z",
+      "updatedAt": "2025-04-05T10:00:00Z",
+      "rating": 4.3,
+      "reviewCount": 31,
+      "brandId": "brand-2"
+    },
+    {
+      "id": "prod-13",
+      "name": "Кирпич красный М150",
+      "slug": "kirpich-krasnyy-m150",
+      "description": "Кирпич керамический полнотелый М150. Размер стандартный 250×120×65 мм. Подходит для кладки стен, фундаментов и облицовки.",
+      "images": [
+        {
+          "url": "/images/products/placeholder.svg",
+          "alt": "Кирпич красный",
+          "width": 800,
+          "height": 800
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-3"
+      ],
+      "tags": [
+        "кирпич",
+        "кладка",
+        "стены"
+      ],
+      "variants": [
+        {
+          "id": "var-13-1",
+          "productId": "prod-13",
+          "sku": "KRP-M150-1",
+          "name": "1 штука",
+          "price": 18,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 50000,
+            "trackInventory": true,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Количество",
+              "value": "1 штука"
+            }
+          ],
+          "images": []
+        },
+        {
+          "id": "var-13-2",
+          "productId": "prod-13",
+          "sku": "KRP-M150-PAL",
+          "name": "Паллета (420 шт)",
+          "price": 7200,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 50,
+            "trackInventory": true,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Количество",
+              "value": "Паллета (420 шт)"
+            }
+          ],
+          "images": []
+        }
+      ],
+      "featured": false,
+      "createdAt": "2025-04-08T10:00:00Z",
+      "updatedAt": "2025-04-08T10:00:00Z",
+      "rating": 4.4,
+      "reviewCount": 156,
+      "brandId": "brand-3"
+    },
+    {
+      "id": "prod-14",
+      "name": "Сварочный инвертор Ресанта САИ-220",
+      "slug": "svarka-resanta-sai-220",
+      "description": "Сварочный инвертор Ресанта САИ-220. Ток до 220 А. Работает от сети 220 В. Жидкостное охлаждение. Плавная регулировка тока.",
+      "images": [
+        {
+          "url": "/images/products/placeholder.svg",
+          "alt": "Сварочный инвертор",
+          "width": 800,
+          "height": 800
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-4"
+      ],
+      "tags": [
+        "сварка",
+        "инвертор",
+        "Ресанта"
+      ],
+      "variants": [
+        {
+          "id": "var-14-1",
+          "productId": "prod-14",
+          "sku": "SVR-RES-220",
+          "name": "Базовый",
+          "price": 11500,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 18,
+            "trackInventory": true,
+            "allowBackorder": false
+          },
+          "options": [
+            {
+              "name": "Комплектация",
+              "value": "Базовый"
             }
           ],
           "images": []
@@ -1087,19 +1133,19 @@
         {
           "id": "var-14-2",
           "productId": "prod-14",
-          "sku": "WC-WHT-001",
-          "name": "White",
-          "price": 2499,
-          "currency": "USD",
+          "sku": "SVR-RES-220-P",
+          "name": "С маской и кабелями",
+          "price": 13800,
+          "currency": "RUB",
           "inventory": {
-            "quantity": 85,
+            "quantity": 10,
             "trackInventory": true,
             "allowBackorder": false
           },
           "options": [
             {
-              "name": "Color",
-              "value": "White"
+              "name": "Комплектация",
+              "value": "С маской и кабелями"
             }
           ],
           "images": []
@@ -1108,47 +1154,2005 @@
       "featured": false,
       "createdAt": "2025-04-10T10:00:00Z",
       "updatedAt": "2025-04-10T10:00:00Z",
-      "rating": 4.4,
-      "reviewCount": 203,
-      "brandId": "brand-1"
+      "rating": 4.5,
+      "reviewCount": 94,
+      "brandId": "brand-4"
+    },
+    {
+      "id": "prod-zhku-1",
+      "name": "Скамья 1500",
+      "slug": "skamya-1500",
+      "description": "Скамья парковая металлическая. Длина 1500 мм. Надёжная конструкция для парков, дворов и общественных территорий.",
+      "images": [
+        {
+          "url": "/images/products/1767883803194-234292_medium.webp",
+          "alt": "Скамья 1500",
+          "width": 705,
+          "height": 600
+        },
+        {
+          "url": "/images/products/1767889584415-928341_medium.webp",
+          "alt": "Скамья 1500 вид 2",
+          "width": 705,
+          "height": 600
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-new-103"
+      ],
+      "tags": [
+        "скамья",
+        "благоустройство",
+        "парк"
+      ],
+      "variants": [
+        {
+          "id": "var-zhku-1",
+          "productId": "prod-zhku-1",
+          "sku": "ZHKU-SK-1500",
+          "name": "Стандартная",
+          "price": 0,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 0,
+            "trackInventory": false,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Тип",
+              "value": "Скамья 1500"
+            }
+          ]
+        }
+      ],
+      "featured": false,
+      "createdAt": "2026-01-08T14:50:00Z",
+      "updatedAt": "2026-01-08T14:50:00Z",
+      "rating": 0,
+      "reviewCount": 0,
+      "body": "<h2>Скамья парковая 1500</h2><p>Металлическая скамья для общественных территорий. Зона безопасности: 2500×1890 мм. Длина: 1500 мм, ширина: 890 мм, высота: 920 мм.</p>"
+    },
+    {
+      "id": "prod-zhku-2",
+      "name": "Скамья Квадро",
+      "slug": "skamya-kvadro",
+      "description": "Скамья металлическая стильной квадратной формы. Длина 3000 мм. Современный дизайн для городских пространств.",
+      "images": [
+        {
+          "url": "/images/products/1767889525612-319100_medium.webp",
+          "alt": "Скамья Квадро",
+          "width": 800,
+          "height": 800
+        },
+        {
+          "url": "/images/products/1767889525658-403890_medium.webp",
+          "alt": "Скамья Квадро 2",
+          "width": 800,
+          "height": 800
+        },
+        {
+          "url": "/images/products/1767889525662-98082_medium.webp",
+          "alt": "Скамья Квадро 3",
+          "width": 800,
+          "height": 800
+        },
+        {
+          "url": "/images/products/1767889525664-321249_medium.webp",
+          "alt": "Скамья Квадро 4",
+          "width": 800,
+          "height": 800
+        },
+        {
+          "url": "/images/products/1767889525666-611922_medium.webp",
+          "alt": "Скамья Квадро 5",
+          "width": 800,
+          "height": 800
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-new-103"
+      ],
+      "tags": [
+        "скамья",
+        "квадро",
+        "благоустройство"
+      ],
+      "variants": [
+        {
+          "id": "var-zhku-2",
+          "productId": "prod-zhku-2",
+          "sku": "ZHKU-SK-Q",
+          "name": "Стандартная",
+          "price": 0,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 0,
+            "trackInventory": false,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Тип",
+              "value": "Скамья Квадро"
+            }
+          ]
+        }
+      ],
+      "featured": false,
+      "createdAt": "2026-01-08T15:41:00Z",
+      "updatedAt": "2026-01-08T15:41:00Z",
+      "rating": 0,
+      "reviewCount": 0,
+      "body": "<h2>Скамья парковая Квадро</h2><p>Современная металлическая скамья. Зона безопасности: 4000×1600 мм. Длина: 3000 мм, ширина: 600 мм, высота: 800 мм.</p>"
+    },
+    {
+      "id": "prod-zhku-3",
+      "name": "Скамья Набережная",
+      "slug": "skamya-naberezhnaya",
+      "description": "Скамья для набережных и общественных зон. Длина 2000 мм. Элегантный дизайн с удобными размерами.",
+      "images": [
+        {
+          "url": "/images/products/1767889984933-307934_medium.webp",
+          "alt": "Скамья Набережная",
+          "width": 800,
+          "height": 800
+        },
+        {
+          "url": "/images/products/1767889984962-125248_medium.webp",
+          "alt": "Скамья Набережная 2",
+          "width": 800,
+          "height": 800
+        },
+        {
+          "url": "/images/products/1767889984998-359468_medium.webp",
+          "alt": "Скамья Набережная 3",
+          "width": 800,
+          "height": 800
+        },
+        {
+          "url": "/images/products/1767889985033-540434_medium.webp",
+          "alt": "Скамья Набережная 4",
+          "width": 800,
+          "height": 800
+        },
+        {
+          "url": "/images/products/1767889985068-727255_medium.webp",
+          "alt": "Скамья Набережная 5",
+          "width": 800,
+          "height": 800
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-new-103"
+      ],
+      "tags": [
+        "скамья",
+        "набережная",
+        "благоустройство"
+      ],
+      "variants": [
+        {
+          "id": "var-zhku-3",
+          "productId": "prod-zhku-3",
+          "sku": "ZHKU-SK-N",
+          "name": "Стандартная",
+          "price": 0,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 0,
+            "trackInventory": false,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Тип",
+              "value": "Скамья Набережная"
+            }
+          ]
+        }
+      ],
+      "featured": false,
+      "createdAt": "2026-01-08T16:33:00Z",
+      "updatedAt": "2026-01-08T16:33:00Z",
+      "rating": 0,
+      "reviewCount": 0,
+      "body": "<h2>Скамья парковая Набережная</h2><p>Стильная скамья для набережных. Зона безопасности: 3000×1645 мм. Длина: 2000 мм, ширина: 645 мм, высота: 450 мм.</p>"
+    },
+    {
+      "id": "prod-zhku-4",
+      "name": "Скамья приствольная",
+      "slug": "skamya-pristvolnaya",
+      "description": "Круглая скамья вокруг дерева. Длина 2700 мм. Идеальна для озеленённых территорий и скверов.",
+      "images": [
+        {
+          "url": "/images/products/1767890315978-800126_medium.webp",
+          "alt": "Скамья приствольная",
+          "width": 800,
+          "height": 800
+        },
+        {
+          "url": "/images/products/1767890315979-170533_medium.webp",
+          "alt": "Скамья приствольная 2",
+          "width": 800,
+          "height": 800
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-new-103"
+      ],
+      "tags": [
+        "скамья",
+        "приствольная",
+        "благоустройство"
+      ],
+      "variants": [
+        {
+          "id": "var-zhku-4",
+          "productId": "prod-zhku-4",
+          "sku": "ZHKU-SK-P",
+          "name": "Стандартная",
+          "price": 0,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 0,
+            "trackInventory": false,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Тип",
+              "value": "Скамья приствольная"
+            }
+          ]
+        }
+      ],
+      "featured": false,
+      "createdAt": "2026-01-08T16:38:00Z",
+      "updatedAt": "2026-01-08T16:38:00Z",
+      "rating": 0,
+      "reviewCount": 0,
+      "body": "<h2>Скамья приствольная</h2><p>Круглая скамья вокруг дерева. Зона безопасности: 3700×3700 мм. Длина: 2700 мм, ширина: 2700 мм, высота: 460 мм.</p>"
+    },
+    {
+      "id": "prod-zhku-5",
+      "name": "Скамья парковая с навесом",
+      "slug": "skamya-parkovaya-s-navesom",
+      "description": "Парковая скамья с защитным навесом от дождя и солнца. Длина 1800 мм.",
+      "images": [
+        {
+          "url": "/images/products/1767890423971-779800_medium.webp",
+          "alt": "Скамья с навесом",
+          "width": 800,
+          "height": 800
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-new-103"
+      ],
+      "tags": [
+        "скамья",
+        "навес",
+        "благоустройство"
+      ],
+      "variants": [
+        {
+          "id": "var-zhku-5",
+          "productId": "prod-zhku-5",
+          "sku": "ZHKU-SK-NV",
+          "name": "С навесом",
+          "price": 0,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 0,
+            "trackInventory": false,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Тип",
+              "value": "Скамья с навесом"
+            }
+          ]
+        }
+      ],
+      "featured": false,
+      "createdAt": "2026-01-08T16:40:00Z",
+      "updatedAt": "2026-01-08T16:40:00Z",
+      "rating": 0,
+      "reviewCount": 0,
+      "body": "<h2>Скамья парковая с навесом</h2><p>Скамья с защитным навесом. Зона безопасности: 2800×2580 мм. Длина: 1800 мм, ширина: 1580 мм, высота: 1920 мм.</p>"
+    },
+    {
+      "id": "prod-zhku-6",
+      "name": "Урна с основанием из металла",
+      "slug": "urna-metallicheskie-osnovanie",
+      "description": "Металлическая урна с бетонным основанием. Долговечная и устойчивая конструкция.",
+      "images": [
+        {
+          "url": "/images/products/1767891133435-987047_medium.webp",
+          "alt": "Урна металлическая",
+          "width": 800,
+          "height": 800
+        },
+        {
+          "url": "/images/products/1767891133482-513300_medium.webp",
+          "alt": "Урна металлическая 2",
+          "width": 800,
+          "height": 800
+        },
+        {
+          "url": "/images/products/1767891133535-883995_medium.webp",
+          "alt": "Урна металлическая 3",
+          "width": 800,
+          "height": 800
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-new-103"
+      ],
+      "tags": [
+        "урна",
+        "металл",
+        "благоустройство"
+      ],
+      "variants": [
+        {
+          "id": "var-zhku-6",
+          "productId": "prod-zhku-6",
+          "sku": "ZHKU-URN-M",
+          "name": "Металлическая",
+          "price": 0,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 0,
+            "trackInventory": false,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Тип",
+              "value": "Металлическая"
+            }
+          ]
+        }
+      ],
+      "featured": false,
+      "createdAt": "2026-01-08T16:52:00Z",
+      "updatedAt": "2026-01-08T16:52:00Z",
+      "rating": 0,
+      "reviewCount": 0,
+      "body": "<h2>Урна металлическая</h2><p>Длина: 420 мм, ширина: 420 мм, высота: 700 мм.</p>"
+    },
+    {
+      "id": "prod-zhku-7",
+      "name": "Урна деревянная круглая",
+      "slug": "urna-derevyannaya-kruglaya",
+      "description": "Деревянная урна круглой формы. Экологичный дизайн для парковых зон.",
+      "images": [
+        {
+          "url": "/images/products/1767891212226-566564_medium.webp",
+          "alt": "Урна деревянная",
+          "width": 800,
+          "height": 800
+        },
+        {
+          "url": "/images/products/1767891212282-318768_medium.webp",
+          "alt": "Урна деревянная 2",
+          "width": 800,
+          "height": 800
+        },
+        {
+          "url": "/images/products/1767891212319-353360_medium.webp",
+          "alt": "Урна деревянная 3",
+          "width": 800,
+          "height": 800
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-new-103"
+      ],
+      "tags": [
+        "урна",
+        "дерево",
+        "благоустройство"
+      ],
+      "variants": [
+        {
+          "id": "var-zhku-7",
+          "productId": "prod-zhku-7",
+          "sku": "ZHKU-URN-D",
+          "name": "Деревянная",
+          "price": 0,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 0,
+            "trackInventory": false,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Тип",
+              "value": "Деревянная круглая"
+            }
+          ]
+        }
+      ],
+      "featured": false,
+      "createdAt": "2026-01-08T16:53:00Z",
+      "updatedAt": "2026-01-08T16:53:00Z",
+      "rating": 0,
+      "reviewCount": 0,
+      "body": "<h2>Урна деревянная круглая</h2><p>Длина: 350 мм, ширина: 350 мм, высота: 570 мм.</p>"
+    },
+    {
+      "id": "prod-zhku-8",
+      "name": "Урна деревянная Сити",
+      "slug": "urna-derevyannaya-siti",
+      "description": "Деревянная урна в городском стиле. Вместительная и стильная.",
+      "images": [
+        {
+          "url": "/images/products/1767891298425-968037_medium.webp",
+          "alt": "Урна Сити",
+          "width": 800,
+          "height": 800
+        },
+        {
+          "url": "/images/products/1767891298429-705021_medium.webp",
+          "alt": "Урна Сити 2",
+          "width": 800,
+          "height": 800
+        },
+        {
+          "url": "/images/products/1767891298433-547961_medium.webp",
+          "alt": "Урна Сити 3",
+          "width": 800,
+          "height": 800
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-new-103"
+      ],
+      "tags": [
+        "урна",
+        "сити",
+        "благоустройство"
+      ],
+      "variants": [
+        {
+          "id": "var-zhku-8",
+          "productId": "prod-zhku-8",
+          "sku": "ZHKU-URN-C",
+          "name": "Сити",
+          "price": 0,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 0,
+            "trackInventory": false,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Тип",
+              "value": "Деревянная Сити"
+            }
+          ]
+        }
+      ],
+      "featured": false,
+      "createdAt": "2026-01-08T16:54:00Z",
+      "updatedAt": "2026-01-08T16:54:00Z",
+      "rating": 0,
+      "reviewCount": 0,
+      "body": "<h2>Урна деревянная Сити</h2><p>Длина: 420 мм, ширина: 420 мм, высота: 750 мм.</p>"
+    },
+    {
+      "id": "prod-zhku-9",
+      "name": "Теневой навес",
+      "slug": "tenevoy-naves",
+      "description": "Металлический теневой навес для открытых территорий. Создаёт комфортную тень.",
+      "images": [
+        {
+          "url": "/images/products/1768129378765-780527_medium.webp",
+          "alt": "Теневой навес",
+          "width": 750,
+          "height": 500
+        },
+        {
+          "url": "/images/products/1768129378833-62411_medium.webp",
+          "alt": "Теневой навес 2",
+          "width": 750,
+          "height": 500
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-new-103"
+      ],
+      "tags": [
+        "навес",
+        "тень",
+        "благоустройство"
+      ],
+      "variants": [
+        {
+          "id": "var-zhku-9",
+          "productId": "prod-zhku-9",
+          "sku": "ZHKU-NV-T",
+          "name": "Стандартный",
+          "price": 0,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 0,
+            "trackInventory": false,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Тип",
+              "value": "Теневой навес"
+            }
+          ]
+        }
+      ],
+      "featured": false,
+      "createdAt": "2026-01-10T17:48:00Z",
+      "updatedAt": "2026-01-10T17:48:00Z",
+      "rating": 0,
+      "reviewCount": 0,
+      "body": "<h2>Теневой навес</h2><p>Зона безопасности: 6400×5100 мм. Длина: 3400 мм, ширина: 2100 мм, высота: 2500 мм.</p>"
+    },
+    {
+      "id": "prod-zhku-10",
+      "name": "Теневой навес для мусорных баков",
+      "slug": "tenevoy-naves-musornye-baki",
+      "description": "Специальный теневой навес для зоны мусорных баков. Защищает от осадков и солнца.",
+      "images": [
+        {
+          "url": "/images/products/1768129390228-823380_medium.webp",
+          "alt": "Навес для мусора",
+          "width": 750,
+          "height": 500
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-new-103"
+      ],
+      "tags": [
+        "навес",
+        "мусор",
+        "благоустройство"
+      ],
+      "variants": [
+        {
+          "id": "var-zhku-10",
+          "productId": "prod-zhku-10",
+          "sku": "ZHKU-NV-M",
+          "name": "Для мусора",
+          "price": 0,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 0,
+            "trackInventory": false,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Тип",
+              "value": "Для мусорных баков"
+            }
+          ]
+        }
+      ],
+      "featured": false,
+      "createdAt": "2026-01-10T17:48:38Z",
+      "updatedAt": "2026-01-10T17:48:38Z",
+      "rating": 0,
+      "reviewCount": 0,
+      "body": "<h2>Теневой навес для мусорных баков</h2><p>Зона безопасности: 6060×4060 мм. Длина: 4060 мм, ширина: 2060 мм, высота: 2370 мм.</p>"
+    },
+    {
+      "id": "prod-zhku-11",
+      "name": "Ограждение №1",
+      "slug": "ograzhdenie-1",
+      "description": "Металлическое ограждение. Длина 2000 мм, высота 780 мм.",
+      "images": [
+        {
+          "url": "/images/products/1768129402802-414958_medium.webp",
+          "alt": "Ограждение 1",
+          "width": 1200,
+          "height": 813
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-new-103"
+      ],
+      "tags": [
+        "ограждение",
+        "металл",
+        "благоустройство"
+      ],
+      "variants": [
+        {
+          "id": "var-zhku-11",
+          "productId": "prod-zhku-11",
+          "sku": "ZHKU-OG-1",
+          "name": "Тип 1",
+          "price": 0,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 0,
+            "trackInventory": false,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Тип",
+              "value": "Ограждение №1"
+            }
+          ]
+        }
+      ],
+      "featured": false,
+      "createdAt": "2026-01-10T17:50:21Z",
+      "updatedAt": "2026-01-10T17:50:21Z",
+      "rating": 0,
+      "reviewCount": 0,
+      "body": "<h2>Ограждение металлическое №1</h2><p>Длина: 2000 мм, ширина: 30 мм, высота: 780 мм.</p>"
+    },
+    {
+      "id": "prod-zhku-12",
+      "name": "Ограждение №2",
+      "slug": "ograzhdenie-2",
+      "description": "Металлическое ограждение. Длина 2000 мм, высота 700 мм.",
+      "images": [
+        {
+          "url": "/images/products/1768129413352-603414_medium.webp",
+          "alt": "Ограждение 2",
+          "width": 1200,
+          "height": 769
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-new-103"
+      ],
+      "tags": [
+        "ограждение",
+        "металл",
+        "благоустройство"
+      ],
+      "variants": [
+        {
+          "id": "var-zhku-12",
+          "productId": "prod-zhku-12",
+          "sku": "ZHKU-OG-2",
+          "name": "Тип 2",
+          "price": 0,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 0,
+            "trackInventory": false,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Тип",
+              "value": "Ограждение №2"
+            }
+          ]
+        }
+      ],
+      "featured": false,
+      "createdAt": "2026-01-10T17:51:20Z",
+      "updatedAt": "2026-01-10T17:51:20Z",
+      "rating": 0,
+      "reviewCount": 0,
+      "body": "<h2>Ограждение металлическое №2</h2><p>Длина: 2000 мм, ширина: 25 мм, высота: 700 мм.</p>"
+    },
+    {
+      "id": "prod-zhku-13",
+      "name": "Ограждение №3",
+      "slug": "ograzhdenie-3",
+      "description": "Металлическое ограждение. Длина 2000 мм, высота 1000 мм.",
+      "images": [
+        {
+          "url": "/images/products/1768129424016-64978_medium.webp",
+          "alt": "Ограждение 3",
+          "width": 1200,
+          "height": 899
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-new-103"
+      ],
+      "tags": [
+        "ограждение",
+        "металл",
+        "благоустройство"
+      ],
+      "variants": [
+        {
+          "id": "var-zhku-13",
+          "productId": "prod-zhku-13",
+          "sku": "ZHKU-OG-3",
+          "name": "Тип 3",
+          "price": 0,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 0,
+            "trackInventory": false,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Тип",
+              "value": "Ограждение №3"
+            }
+          ]
+        }
+      ],
+      "featured": false,
+      "createdAt": "2026-01-10T17:52:51Z",
+      "updatedAt": "2026-01-10T17:52:51Z",
+      "rating": 0,
+      "reviewCount": 0,
+      "body": "<h2>Ограждение металлическое №3</h2><p>Длина: 2000 мм, ширина: 40 мм, высота: 1000 мм.</p>"
+    },
+    {
+      "id": "prod-zhku-14",
+      "name": "Урна №1",
+      "slug": "urna-1",
+      "description": "Металлическая урна компактного размера.",
+      "images": [
+        {
+          "url": "/images/products/1768129438638-251934_medium.webp",
+          "alt": "Урна 1",
+          "width": 1200,
+          "height": 950
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-new-103"
+      ],
+      "tags": [
+        "урна",
+        "металл",
+        "благоустройство"
+      ],
+      "variants": [
+        {
+          "id": "var-zhku-14",
+          "productId": "prod-zhku-14",
+          "sku": "ZHKU-URN-1",
+          "name": "Тип 1",
+          "price": 0,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 0,
+            "trackInventory": false,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Тип",
+              "value": "Урна №1"
+            }
+          ]
+        }
+      ],
+      "featured": false,
+      "createdAt": "2026-01-10T17:54:13Z",
+      "updatedAt": "2026-01-10T17:54:13Z",
+      "rating": 0,
+      "reviewCount": 0,
+      "body": "<h2>Урна №1</h2><p>Длина: 370 мм, ширина: 250 мм, высота: 650 мм.</p>"
+    },
+    {
+      "id": "prod-zhku-15",
+      "name": "Урна №2",
+      "slug": "urna-2",
+      "description": "Металлическая урна современного дизайна.",
+      "images": [
+        {
+          "url": "/images/products/1768129458066-924469_medium.webp",
+          "alt": "Урна 2",
+          "width": 750,
+          "height": 500
+        },
+        {
+          "url": "/images/products/1768129458115-410000_medium.webp",
+          "alt": "Урна 2 вид 2",
+          "width": 750,
+          "height": 500
+        },
+        {
+          "url": "/images/products/1768129458118-279207_medium.webp",
+          "alt": "Урна 2 вид 3",
+          "width": 750,
+          "height": 500
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-new-103"
+      ],
+      "tags": [
+        "урна",
+        "металл",
+        "благоустройство"
+      ],
+      "variants": [
+        {
+          "id": "var-zhku-15",
+          "productId": "prod-zhku-15",
+          "sku": "ZHKU-URN-2",
+          "name": "Тип 2",
+          "price": 0,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 0,
+            "trackInventory": false,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Тип",
+              "value": "Урна №2"
+            }
+          ]
+        }
+      ],
+      "featured": false,
+      "createdAt": "2026-01-10T17:55:03Z",
+      "updatedAt": "2026-01-10T17:55:03Z",
+      "rating": 0,
+      "reviewCount": 0,
+      "body": "<h2>Урна №2</h2><p>Длина: 360 мм, ширина: 300 мм, высота: 455 мм.</p>"
+    },
+    {
+      "id": "prod-light-1",
+      "name": "Светильник парковый одинарный",
+      "slug": "svetilnik-parkovyy-odinarnyy",
+      "description": "Парковый светильник с одним источником света. Элегантный дизайн для освещения прогулочных зон.",
+      "images": [
+        {
+          "url": "/images/products/1767892372211-18503_medium.webp",
+          "alt": "Светильник одинарный",
+          "width": 800,
+          "height": 800
+        },
+        {
+          "url": "/images/products/1767892372252-669767_medium.webp",
+          "alt": "Светильник одинарный 2",
+          "width": 800,
+          "height": 800
+        },
+        {
+          "url": "/images/products/1767892372296-327630_medium.webp",
+          "alt": "Светильник одинарный 3",
+          "width": 800,
+          "height": 800
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-new-100"
+      ],
+      "tags": [
+        "светильник",
+        "парк",
+        "освещение"
+      ],
+      "variants": [
+        {
+          "id": "var-light-1",
+          "productId": "prod-light-1",
+          "sku": "LIG-ST-OD",
+          "name": "Одинарный",
+          "price": 0,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 0,
+            "trackInventory": false,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Тип",
+              "value": "Одинарный"
+            }
+          ]
+        }
+      ],
+      "featured": false,
+      "createdAt": "2026-01-08T17:12:52Z",
+      "updatedAt": "2026-01-08T17:12:52Z",
+      "rating": 0,
+      "reviewCount": 0,
+      "body": "<h2>Светильник парковый одинарный</h2><p>Длина: 1580 мм, ширина: 200 мм, высота: 3370 мм.</p>"
+    },
+    {
+      "id": "prod-light-2",
+      "name": "Светильник парковый",
+      "slug": "svetilnik-parkovyy",
+      "description": "Стандартный парковый светильник. Компактный и эффективный.",
+      "images": [
+        {
+          "url": "/images/products/1768129469674-398494_medium.webp",
+          "alt": "Светильник парковый",
+          "width": 1200,
+          "height": 1200
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-new-100"
+      ],
+      "tags": [
+        "светильник",
+        "парк",
+        "освещение"
+      ],
+      "variants": [
+        {
+          "id": "var-light-2",
+          "productId": "prod-light-2",
+          "sku": "LIG-ST-PK",
+          "name": "Стандартный",
+          "price": 0,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 0,
+            "trackInventory": false,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Тип",
+              "value": "Парковый"
+            }
+          ]
+        }
+      ],
+      "featured": false,
+      "createdAt": "2026-01-10T17:56:12Z",
+      "updatedAt": "2026-01-10T17:56:12Z",
+      "rating": 0,
+      "reviewCount": 0,
+      "body": "<h2>Светильник парковый</h2><p>Длина: 250 мм, ширина: 250 мм, высота: 1700 мм.</p>"
+    },
+    {
+      "id": "prod-light-3",
+      "name": "Светильник парковый двойной",
+      "slug": "svetilnik-parkovyy-dvoynoy",
+      "description": "Парковый светильник с двумя источниками света. Усиленное освещение территорий.",
+      "images": [
+        {
+          "url": "/images/products/1768129489398-585083_medium.webp",
+          "alt": "Светильник двойной",
+          "width": 1200,
+          "height": 1200
+        },
+        {
+          "url": "/images/products/1768129490028-49729_medium.webp",
+          "alt": "Светильник двойной 2",
+          "width": 1200,
+          "height": 1200
+        },
+        {
+          "url": "/images/products/1768129490422-999246_medium.webp",
+          "alt": "Светильник двойной 3",
+          "width": 1200,
+          "height": 1200
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-new-100"
+      ],
+      "tags": [
+        "светильник",
+        "двойной",
+        "освещение"
+      ],
+      "variants": [
+        {
+          "id": "var-light-3",
+          "productId": "prod-light-3",
+          "sku": "LIG-ST-DV",
+          "name": "Двойной",
+          "price": 0,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 0,
+            "trackInventory": false,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Тип",
+              "value": "Двойной"
+            }
+          ]
+        }
+      ],
+      "featured": false,
+      "createdAt": "2026-01-10T17:57:04Z",
+      "updatedAt": "2026-01-10T17:57:04Z",
+      "rating": 0,
+      "reviewCount": 0,
+      "body": "<h2>Светильник парковый двойной</h2><p>Длина: 3030 мм, ширина: 200 мм, высота: 3370 мм.</p>"
+    },
+    {
+      "id": "prod-liv-1",
+      "name": "Кормушка для сельскохозяйственных животных",
+      "slug": "kormushka-selskoxozyaystvennyh",
+      "description": "Металлическая кормушка для КРС. Диаметр 200 см, высота 150 см. Надёжная конструкция для ферм.",
+      "images": [
+        {
+          "url": "/images/products/1768129506652-895153_medium.webp",
+          "alt": "Кормушка",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-new-104"
+      ],
+      "tags": [
+        "кормушка",
+        "животноводство",
+        "КРС"
+      ],
+      "variants": [
+        {
+          "id": "var-liv-1",
+          "productId": "prod-liv-1",
+          "sku": "LIV-KR-200",
+          "name": "200 см",
+          "price": 0,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 0,
+            "trackInventory": false,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Диаметр",
+              "value": "200 см"
+            }
+          ]
+        }
+      ],
+      "featured": false,
+      "createdAt": "2026-01-08T17:09:26Z",
+      "updatedAt": "2026-01-08T17:09:26Z",
+      "rating": 0,
+      "reviewCount": 0,
+      "body": "<h2>Кормушка для сельскохозяйственных животных</h2><p>Диаметр: 200 см, высота: 150 см.</p>"
+    },
+    {
+      "id": "prod-liv-2",
+      "name": "Бункерная кормушка",
+      "slug": "bunkernaya-kormushka",
+      "description": "Бункерная кормушка для КРС. Объём 450 литров. Длина 1500 мм, высота 900 мм.",
+      "images": [
+        {
+          "url": "/images/products/1768129519202-517423_medium.webp",
+          "alt": "Бункерная кормушка",
+          "width": 1536,
+          "height": 1024
+        },
+        {
+          "url": "/images/products/1768129519414-722837_medium.webp",
+          "alt": "Бункерная кормушка 2",
+          "width": 1536,
+          "height": 1024
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-new-104"
+      ],
+      "tags": [
+        "кормушка",
+        "бункер",
+        "КРС"
+      ],
+      "variants": [
+        {
+          "id": "var-liv-2",
+          "productId": "prod-liv-2",
+          "sku": "LIV-KR-B",
+          "name": "450 л",
+          "price": 0,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 0,
+            "trackInventory": false,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Объём",
+              "value": "450 литров"
+            }
+          ]
+        }
+      ],
+      "featured": false,
+      "createdAt": "2026-01-10T18:10:58Z",
+      "updatedAt": "2026-01-10T18:10:58Z",
+      "rating": 0,
+      "reviewCount": 0,
+      "body": "<h2>Бункерная кормушка</h2><p>Длина: 1500 мм, высота: 900 мм, объём: 450 литров.</p>"
+    },
+    {
+      "id": "prod-top-1",
+      "name": "Топиари Диван",
+      "slug": "topiari-divan",
+      "description": "Топиарная фигура в форме дивана. Высота 90 см, ширина 88 см, глубина 308 см. Для помещений и улицы.",
+      "images": [
+        {
+          "url": "/images/products/1768565577096-503271_medium.webp",
+          "alt": "Топиари Диван",
+          "width": 1024,
+          "height": 1024
+        },
+        {
+          "url": "/images/products/1768565577109-549227_medium.webp",
+          "alt": "Топиари Диван 2",
+          "width": 1024,
+          "height": 1024
+        },
+        {
+          "url": "/images/products/1768565577116-215311_medium.webp",
+          "alt": "Топиари Диван 3",
+          "width": 1024,
+          "height": 1024
+        },
+        {
+          "url": "/images/products/1768565577127-803669_medium.webp",
+          "alt": "Топиари Диван 4",
+          "width": 1024,
+          "height": 1024
+        },
+        {
+          "url": "/images/products/1768565577129-331093_medium.webp",
+          "alt": "Топиари Диван 5",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-new-101"
+      ],
+      "tags": [
+        "топиари",
+        "диван",
+        "мебель"
+      ],
+      "variants": [
+        {
+          "id": "var-top-1",
+          "productId": "prod-top-1",
+          "sku": "TOP-DV",
+          "name": "Диван",
+          "price": 0,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 0,
+            "trackInventory": false,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Форма",
+              "value": "Диван"
+            }
+          ]
+        }
+      ],
+      "featured": true,
+      "createdAt": "2026-01-16T12:12:59Z",
+      "updatedAt": "2026-01-16T12:12:59Z",
+      "rating": 0,
+      "reviewCount": 0,
+      "body": "<h2>Топиари Диван</h2><p>Высота: 90 см, ширина: 88 см, глубина: 308 см. Размещение: в помещении/на улице. Форма: мебель.</p>"
+    },
+    {
+      "id": "prod-top-2",
+      "name": "Топиари Рояль",
+      "slug": "topiari-royal",
+      "description": "Топиарная фигура в форме рояля. Высота 180 см, ширина 210 см. Декоративный элемент для территорий.",
+      "images": [
+        {
+          "url": "/images/products/1768565617671-476279_medium.webp",
+          "alt": "Топиари Рояль",
+          "width": 1024,
+          "height": 1024
+        },
+        {
+          "url": "/images/products/1768565617685-568348_medium.webp",
+          "alt": "Топиари Рояль 2",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-new-101"
+      ],
+      "tags": [
+        "топиари",
+        "рояль",
+        "музыка"
+      ],
+      "variants": [
+        {
+          "id": "var-top-2",
+          "productId": "prod-top-2",
+          "sku": "TOP-RL",
+          "name": "Рояль",
+          "price": 0,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 0,
+            "trackInventory": false,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Форма",
+              "value": "Рояль"
+            }
+          ]
+        }
+      ],
+      "featured": true,
+      "createdAt": "2026-01-16T12:13:39Z",
+      "updatedAt": "2026-01-16T12:13:39Z",
+      "rating": 0,
+      "reviewCount": 0,
+      "body": "<h2>Топиари Рояль</h2><p>Высота: 180 см, ширина: 210 см. Размещение: в помещении/на улице.</p>"
+    },
+    {
+      "id": "prod-top-3",
+      "name": "Топиари Сердце",
+      "slug": "topiari-serdce",
+      "description": "Топиарная фигура в форме сердца. Высота 166 см, ширина 170 см, глубина 65 см.",
+      "images": [
+        {
+          "url": "/images/products/1768565737723-653852_medium.webp",
+          "alt": "Топиари Сердце",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-new-101"
+      ],
+      "tags": [
+        "топиари",
+        "сердце",
+        "декор"
+      ],
+      "variants": [
+        {
+          "id": "var-top-3",
+          "productId": "prod-top-3",
+          "sku": "TOP-SR",
+          "name": "Сердце",
+          "price": 0,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 0,
+            "trackInventory": false,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Форма",
+              "value": "Сердце"
+            }
+          ]
+        }
+      ],
+      "featured": true,
+      "createdAt": "2026-01-16T12:15:38Z",
+      "updatedAt": "2026-01-16T12:15:38Z",
+      "rating": 0,
+      "reviewCount": 0,
+      "body": "<h2>Топиари Сердце</h2><p>Высота: 166 см, ширина: 170 см, глубина: 65 см.</p>"
+    },
+    {
+      "id": "prod-top-4",
+      "name": "Топиари Лавочка",
+      "slug": "topiari-lavochka",
+      "description": "Топиарная фигура в форме лавочки. Высота 50 см, ширина 175 см, глубина 50 см. Парковая мебель.",
+      "images": [
+        {
+          "url": "/images/products/1768565892138-179039_medium.webp",
+          "alt": "Топиари Лавочка",
+          "width": 800,
+          "height": 533
+        },
+        {
+          "url": "/images/products/1768565892176-516668_medium.webp",
+          "alt": "Топиари Лавочка 2",
+          "width": 800,
+          "height": 533
+        },
+        {
+          "url": "/images/products/1768565892189-334621_medium.webp",
+          "alt": "Топиари Лавочка 3",
+          "width": 800,
+          "height": 533
+        },
+        {
+          "url": "/images/products/1768565892226-554987_medium.webp",
+          "alt": "Топиари Лавочка 4",
+          "width": 800,
+          "height": 533
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-new-101"
+      ],
+      "tags": [
+        "топиари",
+        "лавочка",
+        "мебель"
+      ],
+      "variants": [
+        {
+          "id": "var-top-4",
+          "productId": "prod-top-4",
+          "sku": "TOP-LV",
+          "name": "Лавочка",
+          "price": 0,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 0,
+            "trackInventory": false,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Форма",
+              "value": "Лавочка"
+            }
+          ]
+        }
+      ],
+      "featured": false,
+      "createdAt": "2026-01-16T12:18:16Z",
+      "updatedAt": "2026-01-16T12:18:16Z",
+      "rating": 0,
+      "reviewCount": 0,
+      "body": "<h2>Топиари Лавочка</h2><p>Высота: 50 см, ширина: 175 см, глубина: 50 см. Тип: парковые. Размещение: в помещении/на улице.</p>"
+    },
+    {
+      "id": "prod-top-5",
+      "name": "Топиари Контрабасист",
+      "slug": "topiari-kontrabasist",
+      "description": "Топиарная фигура музыканта с контрабасом. Размеры: 2,85×1,6×1,1 м.",
+      "images": [
+        {
+          "url": "/images/products/1768565959461-951171_medium.webp",
+          "alt": "Топиари Контрабасист",
+          "width": 680,
+          "height": 600
+        },
+        {
+          "url": "/images/products/1768565959468-816773_medium.webp",
+          "alt": "Топиари Контрабасист 2",
+          "width": 680,
+          "height": 600
+        },
+        {
+          "url": "/images/products/1768565959484-5833_medium.webp",
+          "alt": "Топиари Контрабасист 3",
+          "width": 680,
+          "height": 600
+        },
+        {
+          "url": "/images/products/1768565959492-544293_medium.webp",
+          "alt": "Топиари Контрабасист 4",
+          "width": 680,
+          "height": 600
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-new-101"
+      ],
+      "tags": [
+        "топиари",
+        "музыкант",
+        "декор"
+      ],
+      "variants": [
+        {
+          "id": "var-top-5",
+          "productId": "prod-top-5",
+          "sku": "TOP-KB",
+          "name": "Контрабасист",
+          "price": 0,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 0,
+            "trackInventory": false,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Форма",
+              "value": "Контрабасист"
+            }
+          ]
+        }
+      ],
+      "featured": true,
+      "createdAt": "2026-01-16T12:19:22Z",
+      "updatedAt": "2026-01-16T12:19:22Z",
+      "rating": 0,
+      "reviewCount": 0,
+      "body": "<h2>Топиари Контрабасист</h2><p>Размеры: 2,85×1,6×1,1 м.</p>"
+    },
+    {
+      "id": "prod-top-6",
+      "name": "Топиари ежик",
+      "slug": "topiari-ezhik",
+      "description": "Топиарная фигура ёжика. Высота 160 см, ширина 110 см, глубина 105 см. Форма: животные.",
+      "images": [
+        {
+          "url": "/images/products/1768566017477-715571_medium.webp",
+          "alt": "Топиари ежик",
+          "width": 771,
+          "height": 600
+        },
+        {
+          "url": "/images/products/1768566017493-273116_medium.webp",
+          "alt": "Топиари ежик 2",
+          "width": 771,
+          "height": 600
+        },
+        {
+          "url": "/images/products/1768566017515-438681_medium.webp",
+          "alt": "Топиари ежик 3",
+          "width": 771,
+          "height": 600
+        },
+        {
+          "url": "/images/products/1768566017517-548264_medium.webp",
+          "alt": "Топиари ежик 4",
+          "width": 771,
+          "height": 600
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-new-101"
+      ],
+      "tags": [
+        "топиари",
+        "животные",
+        "ёж"
+      ],
+      "variants": [
+        {
+          "id": "var-top-6",
+          "productId": "prod-top-6",
+          "sku": "TOP-EZ",
+          "name": "Ежик",
+          "price": 0,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 0,
+            "trackInventory": false,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Форма",
+              "value": "Ёжик"
+            }
+          ]
+        }
+      ],
+      "featured": true,
+      "createdAt": "2026-01-16T12:20:20Z",
+      "updatedAt": "2026-01-16T12:20:20Z",
+      "rating": 0,
+      "reviewCount": 0,
+      "body": "<h2>Топиари Ежик</h2><p>Высота: 160 см, ширина: 110 см, глубина: 105 см. Форма: животные. Размещение: в помещении/на улице.</p>"
+    },
+    {
+      "id": "prod-out-1",
+      "name": "Качели парковые",
+      "slug": "kaceli-parkovye",
+      "description": "Парковые качели из металла. Длина: 2500 мм, ширина: 710 мм, высота: 2500 мм. Вес: 167 кг.",
+      "images": [
+        {
+          "url": "/images/products/1768664047738-683414_medium.webp",
+          "alt": "Качели парковые",
+          "width": 758,
+          "height": 600
+        },
+        {
+          "url": "/images/products/1768664047776-952279_medium.webp",
+          "alt": "Качели парковые 2",
+          "width": 758,
+          "height": 600
+        },
+        {
+          "url": "/images/products/1768664047817-542157_medium.webp",
+          "alt": "Качели парковые 3",
+          "width": 758,
+          "height": 600
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-new-102"
+      ],
+      "tags": [
+        "качели",
+        "парк",
+        "мебель"
+      ],
+      "variants": [
+        {
+          "id": "var-out-1",
+          "productId": "prod-out-1",
+          "sku": "OUT-KC",
+          "name": "Парковые",
+          "price": 0,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 0,
+            "trackInventory": false,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Тип",
+              "value": "Парковые качели"
+            }
+          ]
+        }
+      ],
+      "featured": true,
+      "createdAt": "2026-01-17T15:34:08Z",
+      "updatedAt": "2026-01-17T15:34:08Z",
+      "rating": 0,
+      "reviewCount": 0,
+      "body": "<h2>Качели парковые</h2><p>Длина: 2500 мм, ширина: 710 мм, высота: 2500 мм. Вес: 167 кг. Объём для транспортировки: 1,3 м³. Длина сиденья: 1500 мм, ширина сиденья: 510 мм, высота сиденья: 550 мм. Зона безопасности: 7,2×2,55 м.</p>"
+    },
+    {
+      "id": "prod-out-2",
+      "name": "Навес Атриум",
+      "slug": "naves-atrium",
+      "description": "Металлический навес Атриум. Габариты: 3000×3000×5000 мм.",
+      "images": [
+        {
+          "url": "/images/products/1768664144623-897267_medium.webp",
+          "alt": "Навес Атриум",
+          "width": 800,
+          "height": 450
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-new-102"
+      ],
+      "tags": [
+        "навес",
+        "atrium",
+        "металл"
+      ],
+      "variants": [
+        {
+          "id": "var-out-2",
+          "productId": "prod-out-2",
+          "sku": "OUT-NV-A",
+          "name": "Атриум",
+          "price": 0,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 0,
+            "trackInventory": false,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Модель",
+              "value": "Атриум"
+            }
+          ]
+        }
+      ],
+      "featured": false,
+      "createdAt": "2026-01-17T15:35:45Z",
+      "updatedAt": "2026-01-17T15:35:45Z",
+      "rating": 0,
+      "reviewCount": 0,
+      "body": "<h2>Навес Атриум</h2><p>Габариты Д×В×Ш: 3000×3000×5000 мм.</p>"
+    },
+    {
+      "id": "prod-out-3",
+      "name": "Беседка Купол",
+      "slug": "besedka-kupol",
+      "description": "Беседка в форме купола. Габариты: 2600×2500×2500 мм. Высота сиденья: 450 мм.",
+      "images": [
+        {
+          "url": "/images/products/1768664168696-929379_medium.webp",
+          "alt": "Беседка Купол",
+          "width": 800,
+          "height": 450
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-new-102"
+      ],
+      "tags": [
+        "беседка",
+        "купол",
+        "металл"
+      ],
+      "variants": [
+        {
+          "id": "var-out-3",
+          "productId": "prod-out-3",
+          "sku": "OUT-BG-K",
+          "name": "Купол",
+          "price": 0,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 0,
+            "trackInventory": false,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Модель",
+              "value": "Купол"
+            }
+          ]
+        }
+      ],
+      "featured": false,
+      "createdAt": "2026-01-17T15:36:09Z",
+      "updatedAt": "2026-01-17T15:36:09Z",
+      "rating": 0,
+      "reviewCount": 0,
+      "body": "<h2>Беседка Купол</h2><p>Высота сиденья: 450 мм. Габариты Д×В×Ш: 2600×2500×2500 мм.</p>"
+    },
+    {
+      "id": "prod-out-4",
+      "name": "Беседка Звезда",
+      "slug": "besedka-zvezda",
+      "description": "Беседка Звезда. Габариты: 3000×2500×2500 мм. Высота сиденья: 450 мм.",
+      "images": [
+        {
+          "url": "/images/products/1768664192927-970690_medium.webp",
+          "alt": "Беседка Звезда",
+          "width": 800,
+          "height": 450
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-new-102"
+      ],
+      "tags": [
+        "беседка",
+        "звезда",
+        "металл"
+      ],
+      "variants": [
+        {
+          "id": "var-out-4",
+          "productId": "prod-out-4",
+          "sku": "OUT-BG-Z",
+          "name": "Звезда",
+          "price": 0,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 0,
+            "trackInventory": false,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Модель",
+              "value": "Звезда"
+            }
+          ]
+        }
+      ],
+      "featured": false,
+      "createdAt": "2026-01-17T15:36:33Z",
+      "updatedAt": "2026-01-17T15:36:33Z",
+      "rating": 0,
+      "reviewCount": 0,
+      "body": "<h2>Беседка Звезда</h2><p>Высота сиденья: 450 мм. Габариты Д×В×Ш: 3000×2500×2500 мм.</p>"
+    },
+    {
+      "id": "prod-out-5",
+      "name": "Беседка Башня",
+      "slug": "besedka-bashnya",
+      "description": "Беседка Башня. Габариты: 3500×3200×3500 мм. Высота сиденья: 450 мм.",
+      "images": [
+        {
+          "url": "/images/products/1768664220106-412112_medium.webp",
+          "alt": "Беседка Башня",
+          "width": 800,
+          "height": 450
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-new-102"
+      ],
+      "tags": [
+        "беседка",
+        "башня",
+        "металл"
+      ],
+      "variants": [
+        {
+          "id": "var-out-5",
+          "productId": "prod-out-5",
+          "sku": "OUT-BG-B",
+          "name": "Башня",
+          "price": 0,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 0,
+            "trackInventory": false,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Модель",
+              "value": "Башня"
+            }
+          ]
+        }
+      ],
+      "featured": false,
+      "createdAt": "2026-01-17T15:37:00Z",
+      "updatedAt": "2026-01-17T15:37:00Z",
+      "rating": 0,
+      "reviewCount": 0,
+      "body": "<h2>Беседка Башня</h2><p>Высота сиденья: 450 мм. Габариты Д×В×Ш: 3500×3200×3500 мм.</p>"
+    },
+    {
+      "id": "prod-out-6",
+      "name": "Беседка Арка",
+      "slug": "besedka-arka",
+      "description": "Беседка Арка. Габариты: 2500×2500×2500 мм. Высота сиденья: 450 мм.",
+      "images": [
+        {
+          "url": "/images/products/1768664240971-224477_medium.webp",
+          "alt": "Беседка Арка",
+          "width": 800,
+          "height": 450
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-new-102"
+      ],
+      "tags": [
+        "беседка",
+        "арка",
+        "металл"
+      ],
+      "variants": [
+        {
+          "id": "var-out-6",
+          "productId": "prod-out-6",
+          "sku": "OUT-BG-A",
+          "name": "Арка",
+          "price": 0,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 0,
+            "trackInventory": false,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Модель",
+              "value": "Арка"
+            }
+          ]
+        }
+      ],
+      "featured": false,
+      "createdAt": "2026-01-17T15:37:21Z",
+      "updatedAt": "2026-01-17T15:37:21Z",
+      "rating": 0,
+      "reviewCount": 0,
+      "body": "<h2>Беседка Арка</h2><p>Высота сиденья: 450 мм. Габариты Д×В×Ш: 2500×2500×2500 мм.</p>"
+    },
+    {
+      "id": "prod-out-7",
+      "name": "Пергола с качелями",
+      "slug": "pergola-s-kacelyami",
+      "description": "Пергола, совмещённая с качелями. Длина: 2430 мм, ширина: 1530 мм, высота: 2700 мм.",
+      "images": [
+        {
+          "url": "/images/products/1768664309164-708204_medium.webp",
+          "alt": "Пергола с качелями",
+          "width": 645,
+          "height": 600
+        },
+        {
+          "url": "/images/products/1768664309387-510894_medium.webp",
+          "alt": "Пергола с качелями 2",
+          "width": 645,
+          "height": 600
+        },
+        {
+          "url": "/images/products/1768664309625-40538_medium.webp",
+          "alt": "Пергола с качелями 3",
+          "width": 645,
+          "height": 600
+        },
+        {
+          "url": "/images/products/1768664309820-299881_medium.webp",
+          "alt": "Пергола с качелями 4",
+          "width": 645,
+          "height": 600
+        },
+        {
+          "url": "/images/products/1768664309964-494604_medium.webp",
+          "alt": "Пергола с качелями 5",
+          "width": 645,
+          "height": 600
+        },
+        {
+          "url": "/images/products/1768664310120-642526_medium.webp",
+          "alt": "Пергола с качелями 6",
+          "width": 645,
+          "height": 600
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-new-102"
+      ],
+      "tags": [
+        "пергола",
+        "качели",
+        "металл"
+      ],
+      "variants": [
+        {
+          "id": "var-out-7",
+          "productId": "prod-out-7",
+          "sku": "OUT-PR-KC",
+          "name": "С качелями",
+          "price": 0,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 0,
+            "trackInventory": false,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Тип",
+              "value": "Пергола с качелями"
+            }
+          ]
+        }
+      ],
+      "featured": true,
+      "createdAt": "2026-01-17T15:38:31Z",
+      "updatedAt": "2026-01-17T15:38:31Z",
+      "rating": 0,
+      "reviewCount": 0,
+      "body": "<h2>Пергола с качелями</h2><p>Длина: 2430 мм, ширина: 1530 мм, высота: 2700 мм.</p>"
+    },
+    {
+      "id": "prod-out-8",
+      "name": "Пергола",
+      "slug": "pergola",
+      "description": "Металлическая пергола для тени и зонирования территории. Зона безопасности: 7680×5000 мм.",
+      "images": [
+        {
+          "url": "/images/products/1768664339642-957559_medium.webp",
+          "alt": "Пергола",
+          "width": 720,
+          "height": 600
+        }
+      ],
+      "status": "active",
+      "categoryIds": [
+        "cat-new-102"
+      ],
+      "tags": [
+        "пергола",
+        "металл",
+        "тень"
+      ],
+      "variants": [
+        {
+          "id": "var-out-8",
+          "productId": "prod-out-8",
+          "sku": "OUT-PR",
+          "name": "Стандартная",
+          "price": 0,
+          "currency": "RUB",
+          "inventory": {
+            "quantity": 0,
+            "trackInventory": false,
+            "allowBackorder": true
+          },
+          "options": [
+            {
+              "name": "Тип",
+              "value": "Пергола"
+            }
+          ]
+        }
+      ],
+      "featured": false,
+      "createdAt": "2026-01-17T15:39:00Z",
+      "updatedAt": "2026-01-17T15:39:00Z",
+      "rating": 0,
+      "reviewCount": 0,
+      "body": "<h2>Пергола</h2><p>Зона безопасности: 7680×5000 мм. Длина: 5680 мм, ширина: 3000 мм, высота: 2850 мм.</p>"
     }
   ],
   "brands": [
     {
       "id": "brand-1",
-      "name": "Volt Audio",
-      "slug": "volt-audio",
-      "description": "Premium audio equipment designed for audiophiles and everyday listeners alike. Volt Audio combines cutting-edge technology with timeless design."
+      "name": "СИБ-ТРЕЙД Металл",
+      "slug": "sib-trade-metall",
+      "description": "Собственное производство металлоконструкций. Лестницы, ворота, заборы, навесы, козырьки — любой размер и сложность."
     },
     {
       "id": "brand-2",
-      "name": "Luma Home",
-      "slug": "luma-home",
-      "description": "Modern home goods that blend form and function. Luma Home creates pieces that elevate your space without overwhelming it."
+      "name": "СИБ-ТРЕЙД Сантехника",
+      "slug": "sib-trade-santehnika",
+      "description": "Широкий ассортимент сантехнического оборудования от ведущих российских и зарубежных производителей."
     },
     {
       "id": "brand-3",
-      "name": "Everlane Basics",
-      "slug": "everlane-basics",
-      "description": "Radically transparent clothing made from premium organic materials. Simple, well-made basics you can feel good about wearing."
+      "name": "СИБ-ТРЕЙД Строй",
+      "slug": "sib-trade-stroy",
+      "description": "Строительные материалы высокого качества: цемент, кирпич, пиломатериалы, профнастил, утеплители."
     },
     {
       "id": "brand-4",
-      "name": "Nomad Goods",
-      "slug": "nomad-goods",
-      "description": "Travel-ready accessories built from full-grain leather and waxed canvas. Designed to age beautifully and go everywhere you do."
-    },
-    {
-      "id": "brand-5",
-      "name": "Ritual Roasters",
-      "slug": "ritual-roasters",
-      "description": "Small-batch, ethically sourced coffee and tea from independent farms. Every cup tells a story of craftsmanship and care."
-    },
-    {
-      "id": "brand-6",
-      "name": "Appointed Co.",
-      "slug": "appointed-co",
-      "description": "Thoughtfully designed stationery and desk accessories. Made in small batches with quality materials that inspire creativity."
+      "name": "СИБ-ТРЕЙД Инструмент",
+      "slug": "sib-trade-instrument",
+      "description": "Профессиональный и бытовой инструмент от проверенных брендов. Bosch, DeWALT, Makita и другие."
     }
   ]
 }

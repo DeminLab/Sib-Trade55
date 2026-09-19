@@ -23,16 +23,16 @@ export default function OrdersPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
       <PageHeader
-        title="Order History"
-        description={userOrders.length > 0 ? `${userOrders.length} ${userOrders.length === 1 ? "order" : "orders"}` : undefined}
+title="История заказов"
+        description={userOrders.length > 0 ? `${userOrders.length} ${userOrders.length === 1 ? "заказ" : "заказов"}` : undefined}
       />
 
       {userOrders.length === 0 ? (
         <EmptyState
           icon={Package}
-          title="No orders yet"
-          description="When you place an order, it will appear here."
-          actionLabel="Start Shopping"
+title="Заказов пока нет"
+          description="Ваши заказы появятся здесь после оформления."
+          actionLabel="Начать покупки"
           actionHref="/shop"
         />
       ) : (

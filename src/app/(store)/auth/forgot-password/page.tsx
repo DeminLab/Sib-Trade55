@@ -12,15 +12,15 @@ export default function ForgotPasswordPage() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    toast.success("Reset link sent (demo)")
+    toast.success("Ссылка для сброса отправлена (демо)")
   }
 
   return (
     <AuthCardLayout
-      title="Reset your password"
-      subtitle="Enter your email and we'll send you a reset link"
-      footerText="Remember your password?"
-      footerLinkText="Sign in"
+title="Сброс пароля"
+      subtitle="Введите email, и мы отправим вам ссылку для сброса"
+      footerText="Помните пароль?"
+      footerLinkText="Войти"
       footerLinkHref="/auth/login"
     >
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -28,7 +28,7 @@ export default function ForgotPasswordPage() {
           <Label htmlFor="email">Email</Label>
           <Input id="email" type="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
         </div>
-        <Button type="submit" className="w-full">Send Reset Link</Button>
+        <Button type="submit" className="w-full">Отправить ссылку для сброса</Button>
       </form>
     </AuthCardLayout>
   )

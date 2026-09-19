@@ -21,6 +21,62 @@ import { useCartStore } from "@/store/cart"
 import { useAuthStore } from "@/store/auth"
 import { useRouter } from "next/navigation"
 
+function CartBadge() {
+  const openCart = useCartStore((s) => s.openCart)
+  const getItemCount = useCartStore((s) => s.getItemCount)
+  const [mounted, setMounted] = useState(false)
+  const [pop, setPop] = useState(false)
+  const prevCount = useState(0)
+
+  useEffect(() => setMounted(true), [])
+
+  const count = mounted ? getItemCount() : 0
+
+  useEffect(() => {
+    if (count > prevCount[0]) {
+      setPop(true)
+      const t = setTimeout(() => setPop(false), 320)
+      return () => clearTimeout(t)
+    }
+    prevCount[0] = count
+  }, [count])
+
+  return (
+    <button
+      onClick={openCart}
+      className="relative inline-flex h-10 w-10 items-center justify-center rounded-md hover:bg-accent"
+      aria-label={`${count} ${count === 1 ? "товар" : "товаров"} в корзине`}
+    >
+      <ShoppingBag className="h-5 w-5" />
+      {count > 0 && (
+        <span className={cn("icon-badge", pop && "pop")}>
+          {count > 9 ? "9+" : count}
+        </span>
+      )}
+    </button>
+  )
+}
+
+function WishlistBadge() {
+  const [pop, setPop] = useState(false)
+
+  function handleClick() {
+    setPop(true)
+    setTimeout(() => setPop(false), 320)
+  }
+
+  return (
+    <Link
+      href="/wishlist"
+      onClick={handleClick}
+      className="hidden h-10 w-10 items-center justify-center rounded-md hover:bg-accent lg:inline-flex"
+      aria-label="Избранное"
+    >
+      <Heart className={cn("h-5 w-5", pop && "heart-pop")} />
+    </Link>
+  )
+}
+
 interface HeaderProps {
   /** All categories (top-level + subcategories) from the repository layer */
   categories?: Category[]
@@ -33,8 +89,6 @@ export function Header({ categories = [] }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [expandedCategory, setExpandedCategory] = useState<string | null>(null)
-  const openCart = useCartStore((s) => s.openCart)
-  const getItemCount = useCartStore((s) => s.getItemCount)
   const user = useAuthStore((s) => s.user)
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated)
   const logout = useAuthStore((s) => s.logout)
@@ -42,7 +96,6 @@ export function Header({ categories = [] }: HeaderProps) {
 
   const [mounted, setMounted] = useState(false)
   useEffect(() => setMounted(true), [])
-  const itemCount = mounted ? getItemCount() : 0
 
   // Cmd+K / Ctrl+K to open search
   useEffect(() => {
@@ -110,7 +163,7 @@ export function Header({ categories = [] }: HeaderProps) {
                             <button
                               onClick={() => setExpandedCategory(isExpanded ? null : item.name)}
                               className="p-2 text-muted-foreground hover:text-foreground"
-                              aria-label={`${isExpanded ? "Collapse" : "Expand"} ${item.name}`}
+                              aria-label={`${isExpanded ? "Свернуть" : "Развернуть"} ${item.name}`}
                               aria-expanded={isExpanded}
                             >
                               <ChevronDown className={cn("h-4 w-4 transition-transform", isExpanded && "rotate-180")} />
@@ -169,13 +222,7 @@ export function Header({ categories = [] }: HeaderProps) {
             <Search className="h-5 w-5" />
           </button>
 
-          <Link
-            href="/wishlist"
-            className="hidden h-10 w-10 items-center justify-center rounded-md hover:bg-accent lg:inline-flex"
-            aria-label={t("wishlist")}
-          >
-            <Heart className="h-5 w-5" />
-          </Link>
+          <WishlistBadge />
 
           {/* User menu — desktop only */}
           {mounted && isAuthenticated ? (
@@ -194,14 +241,14 @@ export function Header({ categories = [] }: HeaderProps) {
                   <p className="text-xs text-muted-foreground">{user?.email}</p>
                 </div>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => router.push("/account")}>
-                  {tCommon("signIn")}
+<DropdownMenuItem onClick={() => router.push("/account")}>
+                  Мой аккаунт
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => router.push("/account/orders")}>
                   {tCommon("orders")}
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => router.push("/account/settings")}>
-                  Settings
+                  Настройки
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={() => { logout(); router.push("/") }}>
@@ -221,23 +268,7 @@ export function Header({ categories = [] }: HeaderProps) {
           )}
 
           {/* Cart */}
-          <button
-            onClick={openCart}
-            className="relative inline-flex h-10 w-10 items-center justify-center rounded-md hover:bg-accent"
-            aria-label={t("openCart")}
-          >
-            <ShoppingBag className="h-5 w-5" />
-            {itemCount > 0 && (
-              <span
-                className="absolute -top-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-foreground text-[10px] font-medium text-background"
-                aria-live="polite"
-                aria-atomic="true"
-                aria-label={`${itemCount} ${itemCount === 1 ? "item" : "items"} in cart`}
-              >
-                {itemCount > 9 ? "9+" : itemCount}
-              </span>
-            )}
-          </button>
+          <CartBadge />
         </div>
       </div>
     </header>

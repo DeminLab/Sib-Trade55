@@ -6,8 +6,8 @@ import { pageRepository } from "@/lib/repositories"
 import { formatDate } from "@/lib/utils"
 
 export const metadata: Metadata = {
-  title: "Pages",
-  description: "Browse helpful pages and resources.",
+  title: "Страницы",
+  description: "Полезные страницы и информация о компании.",
 }
 
 export default async function PagesIndex() {
@@ -15,7 +15,7 @@ export default async function PagesIndex() {
 
   return (
     <div className="mx-auto max-w-[1440px] px-4 py-16 sm:px-6 lg:px-8">
-      <PageHeader title="Pages" description={`${pages.length} pages`} />
+      <PageHeader title="Страницы" description={`${pages.length} ${pages.length === 1 ? "страница" : "страниц"}`} />
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {pages.map((page) => (
@@ -29,7 +29,7 @@ export default async function PagesIndex() {
                   </p>
                 )}
                 <p className="mt-4 text-xs text-muted-foreground">
-                  Updated {formatDate(page.updatedAt ?? page.publishedAt)}
+                  Обновлено {formatDate(page.updatedAt ?? page.publishedAt)}
                 </p>
               </CardContent>
             </Card>

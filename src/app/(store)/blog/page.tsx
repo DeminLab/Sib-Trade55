@@ -20,9 +20,9 @@ export async function generateMetadata({
   const canonical =
     page > 1 ? `${siteConfig.url}/blog?page=${page}` : `${siteConfig.url}/blog`
   return {
-    title: "Blog",
+    title: "Блог",
     description:
-      "Guides, stories, and notes from the team — sustainability, product care, and behind the scenes.",
+      "Статьи и советы по металлоконструкциям, сантехнике и строительным материалам.",
     alternates: { canonical },
   }
 }
@@ -39,8 +39,8 @@ export default async function BlogIndex({ searchParams }: BlogIndexProps) {
   return (
     <div className="mx-auto max-w-[1440px] px-4 py-16 sm:px-6 lg:px-8">
       <PageHeader
-        title="Blog"
-        description={`${pagination.total} ${pagination.total === 1 ? "post" : "posts"}`}
+        title="Блог"
+        description={`${pagination.total} ${pagination.total === 1 ? "статья" : "статей"}`}
       />
 
       <div className="mt-10 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">

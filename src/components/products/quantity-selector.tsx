@@ -21,7 +21,7 @@ export function QuantitySelector({
       <button
         onClick={() => onQuantityChange(Math.max(min, quantity - 1))}
         disabled={quantity <= min}
-        aria-label="Decrease quantity"
+        aria-label="Уменьшить количество"
         className="flex h-10 w-10 items-center justify-center rounded-l-md border text-sm transition-colors hover:bg-accent disabled:opacity-50"
       >
         <Minus className="h-3 w-3" />
@@ -32,7 +32,7 @@ export function QuantitySelector({
       <button
         onClick={() => onQuantityChange(Math.min(max, quantity + 1))}
         disabled={quantity >= max}
-        aria-label="Increase quantity"
+        aria-label="Увеличить количество"
         className="flex h-10 w-10 items-center justify-center rounded-r-md border text-sm transition-colors hover:bg-accent disabled:opacity-50"
       >
         <Plus className="h-3 w-3" />

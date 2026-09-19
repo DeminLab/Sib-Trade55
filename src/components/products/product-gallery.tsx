@@ -42,7 +42,7 @@ export function ProductGallery({ images, productName = "Product" }: ProductGalle
                   ? "border-foreground"
                   : "border-transparent hover:border-neutral-300"
               )}
-              aria-label={`View image ${index + 1}`}
+              aria-label={`Просмотр изображения ${index + 1}`}
             >
               <Image
                 src={image.url ?? PLACEHOLDER_IMAGE}

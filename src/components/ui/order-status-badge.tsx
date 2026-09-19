@@ -10,6 +10,15 @@ const statusStyles: Record<OrderStatus, string> = {
   refunded: "bg-status-refunded-bg text-status-refunded-text",
 }
 
+const statusLabels: Record<OrderStatus, string> = {
+  pending: "Ожидание",
+  processing: "В обработке",
+  shipped: "Отправлен",
+  delivered: "Доставлен",
+  cancelled: "Отменён",
+  refunded: "Возвращён",
+}
+
 interface OrderStatusBadgeProps {
   status: OrderStatus
 }
@@ -17,7 +26,7 @@ interface OrderStatusBadgeProps {
 export function OrderStatusBadge({ status }: OrderStatusBadgeProps) {
   return (
     <Badge className={statusStyles[status] ?? ""} variant="secondary">
-      {status.charAt(0).toUpperCase() + status.slice(1)}
+      {statusLabels[status] ?? status}
     </Badge>
   )
 }

@@ -90,7 +90,7 @@ export async function generateMetadata({
     }
   }
 
-  return { title: "Not Found" }
+  return { title: "Не найдено" }
 }
 
 export default async function SlugPage({ params }: SlugPageProps) {

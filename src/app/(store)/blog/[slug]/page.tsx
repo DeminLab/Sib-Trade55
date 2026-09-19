@@ -31,7 +31,7 @@ export async function generateMetadata({
 }: PostProps): Promise<Metadata> {
   const { slug } = await params
   const post = await blogRepository.getBySlug(slug)
-  if (!post) return { title: "Not Found" }
+  if (!post) return { title: "Не найдено" }
 
   return {
     title: post.title,
@@ -81,7 +81,7 @@ export default async function BlogPostPage({ params }: PostProps) {
           __html: JSON.stringify([
             articleJsonLd,
             breadcrumbJsonLd([
-              { name: "Blog", href: "/blog" },
+              { name: "Блог", href: "/blog" },
               { name: post.title, href: `/blog/${post.slug}` },
             ]),
           ]),
@@ -91,7 +91,7 @@ export default async function BlogPostPage({ params }: PostProps) {
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
-            <BreadcrumbLink render={<Link href="/blog" />}>Blog</BreadcrumbLink>
+            <BreadcrumbLink render={<Link href="/blog" />}>Блог</BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
@@ -135,7 +135,7 @@ export default async function BlogPostPage({ params }: PostProps) {
         {post.tags.length > 0 && (
           <footer className="mt-12 border-t pt-6">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="text-sm font-medium">Tags:</span>
+              <span className="text-sm font-medium">Теги:</span>
               {post.tags.map((tag) => (
                 <Badge key={tag} variant="secondary" className="text-xs">
                   {tag}

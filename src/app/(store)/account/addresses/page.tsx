@@ -20,7 +20,7 @@ export default function AddressesPage() {
   const [showForm, setShowForm] = useState(false)
   const [form, setForm] = useState({
     firstName: "", lastName: "", line1: "", line2: "",
-    city: "", state: "", postalCode: "", country: "US",
+    city: "", state: "", postalCode: "", country: "RU",
   })
 
   if (!isReady) return null
@@ -43,7 +43,7 @@ export default function AddressesPage() {
       country: form.country,
       isDefault: (user?.addresses.length ?? 0) === 0,
     })
-    toast.success("Address added")
+    toast.success("Адрес добавлен")
     setShowForm(false)
     setForm({ firstName: "", lastName: "", line1: "", line2: "", city: "", state: "", postalCode: "", country: "US" })
   }
@@ -52,10 +52,10 @@ export default function AddressesPage() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
-      <PageHeader title="Addresses">
+<PageHeader title="Адреса">
         <Button onClick={() => setShowForm(!showForm)}>
           <Plus className="mr-2 h-4 w-4" />
-          Add Address
+          Добавить адрес
         </Button>
       </PageHeader>
 
@@ -65,30 +65,30 @@ export default function AddressesPage() {
             <form onSubmit={handleAdd} className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label>First name</Label>
+<Label>Имя</Label>
                   <Input name="firstName" value={form.firstName} onChange={handleChange} required />
                 </div>
                 <div className="space-y-2">
-                  <Label>Last name</Label>
+                  <Label>Фамилия</Label>
                   <Input name="lastName" value={form.lastName} onChange={handleChange} required />
                 </div>
               </div>
               <div className="space-y-2">
-                <Label>Address</Label>
+                <Label>Адрес</Label>
                 <Input name="line1" value={form.line1} onChange={handleChange} required />
               </div>
               <div className="space-y-2">
-                <Label>Apt, suite (optional)</Label>
+                <Label>Кв., офис (необязательно)</Label>
                 <Input name="line2" value={form.line2} onChange={handleChange} />
               </div>
               <div className="grid grid-cols-3 gap-4">
-                <div className="space-y-2"><Label>City</Label><Input name="city" value={form.city} onChange={handleChange} required /></div>
-                <div className="space-y-2"><Label>State</Label><Input name="state" value={form.state} onChange={handleChange} required /></div>
-                <div className="space-y-2"><Label>ZIP</Label><Input name="postalCode" value={form.postalCode} onChange={handleChange} required /></div>
+<div className="space-y-2"><Label>Город</Label><Input name="city" value={form.city} onChange={handleChange} required /></div>
+                <div className="space-y-2"><Label>Область</Label><Input name="state" value={form.state} onChange={handleChange} required /></div>
+                <div className="space-y-2"><Label>Индекс</Label><Input name="postalCode" value={form.postalCode} onChange={handleChange} required /></div>
               </div>
               <div className="flex gap-2">
-                <Button type="submit">Save Address</Button>
-                <Button type="button" variant="outline" onClick={() => setShowForm(false)}>Cancel</Button>
+<Button type="submit">Сохранить адрес</Button>
+                <Button type="button" variant="outline" onClick={() => setShowForm(false)}>Отмена</Button>
               </div>
             </form>
           </CardContent>
@@ -98,8 +98,8 @@ export default function AddressesPage() {
       {addresses.length === 0 && !showForm && (
         <EmptyState
           icon={MapPin}
-          title="No saved addresses"
-          description="Add an address to speed up checkout."
+title="Адреса не сохранены"
+          description="Добавьте адрес для быстрого оформления."
         />
       )}
 
@@ -111,7 +111,7 @@ export default function AddressesPage() {
                 <div>
                   <div className="flex items-center gap-2">
                     <p className="text-sm font-medium">{addr.firstName} {addr.lastName}</p>
-                    {addr.isDefault && <Badge variant="secondary" className="text-xs">Default</Badge>}
+                    {addr.isDefault && <Badge variant="secondary" className="text-xs">Основной</Badge>}
                   </div>
                   <p className="mt-1 text-sm text-muted-foreground">
                     {addr.line1}{addr.line2 ? `, ${addr.line2}` : ""}<br />
@@ -121,8 +121,8 @@ export default function AddressesPage() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  onClick={() => { removeAddress(addr.id); toast("Address removed") }}
-                  aria-label="Remove address"
+onClick={() => { removeAddress(addr.id); toast("Адрес удалён") }}
+                  aria-label="Удалить адрес"
                 >
                   <Trash2 className="h-4 w-4" />
                 </Button>
