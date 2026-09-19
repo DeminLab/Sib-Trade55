@@ -27,9 +27,9 @@ export default function RegisterPage() {
     const validation = registerSchema.safeParse(form)
     if (!validation.success) { toast.error(validation.error.issues[0].message); return }
     setLoading(true)
-    const success = register({ firstName: form.firstName, lastName: form.lastName, email: form.email, password: form.password })
+    const success = await register({ firstName: form.firstName, lastName: form.lastName, email: form.email, password: form.password })
 if (success) { toast.success("Аккаунт создан!"); router.push("/account") }
-    else { toast.error("Аккаунт с таким email уже существует") }
+    else { toast.error("Регистрация недоступна. Подключите сервис авторизации и повторите попытку.") }
     setLoading(false)
   }
 

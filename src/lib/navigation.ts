@@ -10,6 +10,16 @@ export interface NavSection {
 
 // Единственный источник навигации для хедера, мобильного меню и т.д.
 
+export const primaryNav: NavItem[] = [
+  { name: "Как купить", href: "/how-we-work" },
+  { name: "Материалы", href: "/materials" },
+      { name: "Подбор и поставка", href: "/custom" },
+  { name: "Портфолио", href: "/cases" },
+  { name: "О компании", href: "/about" },
+  { name: "Доставка", href: "/policies/shipping" },
+  { name: "Контакты", href: "/contact" },
+]
+
 export const shopLinks: NavItem[] = [
   { name: "Металлоконструкции", href: "/metallokonstruktsii" },
   { name: "Сантехника", href: "/santehnika" },
@@ -31,7 +41,7 @@ export const infoLinks: NavItem[] = [
 ]
 
 export const mobileMenuSections: NavSection[] = [
-  { label: "Каталог", items: shopLinks },
+  { label: "Компания", items: primaryNav },
   { label: "Аккаунт", items: accountLinks },
-  { label: "Информация", items: infoLinks },
+  { label: "Дополнительно", items: [{ name: "FAQ", href: "/faq" }] },
 ]

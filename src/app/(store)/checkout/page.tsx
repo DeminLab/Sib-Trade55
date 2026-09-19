@@ -9,19 +9,17 @@ import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { useCartStore } from "@/store/cart"
-import { useOrdersStore } from "@/store/orders"
 import { CartSummary } from "@/components/cart/cart-summary"
 import { formatPrice } from "@/lib/utils"
 import { toast } from "sonner"
 import { siteConfig } from "@/lib/config"
-import type { Order } from "@/types"
+import { orderService } from "@/lib/services"
 
 export default function CheckoutPage() {
   const router = useRouter()
   const items = useCartStore((s) => s.items)
   const getSubtotal = useCartStore((s) => s.getSubtotal)
   const clearCart = useCartStore((s) => s.clearCart)
-  const addOrder = useOrdersStore((s) => s.addOrder)
   const [mounted, setMounted] = useState(false)
   const [loading, setLoading] = useState(false)
 
@@ -79,15 +77,11 @@ export default function CheckoutPage() {
 
     setLoading(true)
 
-    // Create order using demo checkout
     const shipping = subtotal >= siteConfig.freeShippingThreshold ? 0 : 599
     const tax = Math.round(subtotal * siteConfig.taxRate)
     const total = subtotal + shipping + tax
-    const orderId = `ORD-${Date.now().toString(36).toUpperCase()}`
-
-    const order: Order = {
-      id: orderId,
-      orderNumber: orderId,
+    try {
+      const order = await orderService.create({
       items: items.map((item) => ({
         id: item.id,
         productId: item.productId,
@@ -100,13 +94,11 @@ export default function CheckoutPage() {
         quantity: item.quantity,
         total: item.lineTotal,
       })),
-      status: "processing",
-      paymentStatus: "captured",
       subtotal,
       tax,
       shipping,
       total,
-      currency: "USD",
+      currency: "RUB",
       shippingAddress: {
         id: "addr-1",
         type: "shipping",
@@ -122,14 +114,15 @@ export default function CheckoutPage() {
       },
       customerEmail: form.email,
       customerName: `${form.firstName} ${form.lastName}`,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
+      })
+      clearCart()
+      toast.success("Заказ принят")
+      router.push(`/checkout/success?order_id=${order.id}`)
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Оформление заказа временно недоступно")
+    } finally {
+      setLoading(false)
     }
-
-    addOrder(order)
-    clearCart()
-    toast.success("Заказ успешно оформлен!")
-    router.push(`/checkout/success?order_id=${orderId}`)
   }
 
   return (
@@ -201,15 +194,14 @@ export default function CheckoutPage() {
             </CardContent>
           </Card>
 
-          {/* Payment note */}
+          {/* Payment boundary */}
           <Card>
             <CardHeader>
 <CardTitle className="text-lg">Оплата</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground">
-                Это демо-магазин. Реальная оплата не производится.
-                В рабочей версии этот раздел подключается к платёжной системе.
+                Оплата будет доступна после подключения платёжного backend-сервиса. До этого заказ не создаётся и деньги не списываются.
               </p>
             </CardContent>
           </Card>
@@ -233,7 +225,7 @@ export default function CheckoutPage() {
               <Separator />
               <CartSummary subtotal={subtotal} />
               <Button type="submit" size="lg" className="w-full" disabled={loading}>
-                {loading ? "Обработка..." : "Оформить заказ"}
+                {loading ? "Отправляем..." : "Оформить заказ"}
               </Button>
             </CardContent>
           </Card>

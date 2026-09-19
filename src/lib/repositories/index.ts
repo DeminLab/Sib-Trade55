@@ -7,3 +7,21 @@ export { jsonCategoryRepository as categoryRepository } from "./json-category-re
 export { jsonBrandRepository as brandRepository } from "./json-brand-repository"
 export { jsonPageRepository as pageRepository } from "./json-page-repository"
 export { jsonBlogRepository as blogRepository } from "./json-blog-repository"
+export { jsonCaseRepository as caseRepository } from "./json-case-repository"
+export { jsonMaterialRepository as materialRepository } from "./json-material-repository"
+export { mockAdminRepository } from "./mock-admin-repository"
+export { apiAdminRepository as adminRepository } from "./api-admin-repository"
+export {
+  apiCaseRepository,
+  apiCategoryRepository,
+  apiCompanyRepository,
+  apiContactRequestRepository,
+  apiCustomerRepository,
+  apiFileRepository,
+  apiOrderRepository,
+  apiProductRepository,
+  apiQuoteRepository,
+  apiQuoteRequestRepository,
+  apiRepositoryRegistry,
+  apiReviewRepository,
+} from "./api-repositories"

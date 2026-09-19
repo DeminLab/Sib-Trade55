@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server"
-import type { NextRequest } from "next/server"
 
-export function proxy(request: NextRequest) {
+export function proxy() {
   const response = NextResponse.next()
 
   // Security headers
@@ -27,6 +26,7 @@ export function proxy(request: NextRequest) {
     "img-src 'self' data: blob: https:",
     "font-src 'self' https://fonts.gstatic.com",
     "connect-src 'self' https:",
+    "frame-src 'self' https://www.openstreetmap.org",
     "frame-ancestors 'none'",
   ].join("; ")
 

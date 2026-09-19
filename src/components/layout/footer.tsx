@@ -6,9 +6,9 @@ const footerLinks = {
   shop: [
     { name: "Все товары", href: "/shop" },
     { name: "Металлоконструкции", href: "/metallokonstruktsii" },
-    { name: "Сантехника", href: "/santehnika" },
-    { name: "Стройматериалы", href: "/stroymaterialy" },
-    { name: "Инструменты", href: "/instrumenty" },
+    { name: "Уличная мебель", href: "/ulichnaya-mebel" },
+    { name: "Благоустройство", href: "/zhkh-i-blagoustroystvo" },
+    { name: "Световое оформление", href: "/svetovoe-oformlenie" },
   ],
   company: [
     { name: "О компании", href: "/about" },

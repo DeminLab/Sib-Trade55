@@ -18,7 +18,7 @@ export function ProductGallery({ images, productName = "Product" }: ProductGalle
   return (
     <div className="flex flex-col gap-4">
       {/* Main image */}
-      <div className="relative aspect-square overflow-hidden rounded-lg bg-neutral-100">
+      <div className="relative aspect-square overflow-hidden border border-border/70 bg-surface-subtle">
         <Image
           src={currentImage?.url ?? PLACEHOLDER_IMAGE}
           alt={currentImage?.alt ?? productName}
@@ -37,7 +37,7 @@ export function ProductGallery({ images, productName = "Product" }: ProductGalle
               key={index}
               onClick={() => setSelectedIndex(index)}
               className={cn(
-                "relative h-16 w-16 overflow-hidden rounded-md border-2 bg-neutral-100 transition-colors",
+                "relative h-16 w-16 overflow-hidden rounded-sm border-2 bg-surface-subtle transition-colors",
                 selectedIndex === index
                   ? "border-foreground"
                   : "border-transparent hover:border-neutral-300"

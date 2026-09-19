@@ -51,9 +51,12 @@ export const checkoutFormSchema = z.object({
 
 export const contactFormSchema = z.object({
   name: z.string().min(1, "Имя обязательно"),
+  company: z.string().optional(),
+  phone: z.string().optional(),
   email: z.string().email("Неверный email"),
   subject: z.string().min(1, "Тема обязательна"),
   message: z.string().min(10, "Сообщение должно содержать минимум 10 символов"),
+  preferredContact: z.enum(["phone", "email", "whatsapp", "telegram"]),
 })
 
 // --- Newsletter ---

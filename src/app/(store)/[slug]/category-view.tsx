@@ -98,7 +98,7 @@ export function CategoryView({
             <Link
               key={sub.id}
               href={`/${sub.slug}`}
-              className="rounded-full border border-border px-3 py-1 text-xs font-medium transition-colors hover:border-foreground"
+              className="rounded-sm border border-border px-3 py-1 text-xs font-medium transition-colors hover:border-foreground"
             >
               {stripParentPrefix(sub.name, category.name)}
             </Link>

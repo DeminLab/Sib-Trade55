@@ -29,9 +29,9 @@ export default function AddressesPage() {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }))
   }
 
-  function handleAdd(e: React.FormEvent) {
+  async function handleAdd(e: React.FormEvent) {
     e.preventDefault()
-    addAddress({
+    const saved = await addAddress({
       type: "shipping",
       firstName: form.firstName,
       lastName: form.lastName,
@@ -43,9 +43,11 @@ export default function AddressesPage() {
       country: form.country,
       isDefault: (user?.addresses.length ?? 0) === 0,
     })
-    toast.success("Адрес добавлен")
-    setShowForm(false)
-    setForm({ firstName: "", lastName: "", line1: "", line2: "", city: "", state: "", postalCode: "", country: "US" })
+    if (saved) {
+      toast.success("Адрес добавлен")
+      setShowForm(false)
+      setForm({ firstName: "", lastName: "", line1: "", line2: "", city: "", state: "", postalCode: "", country: "US" })
+    } else toast.error("Не удалось сохранить адрес: backend-сервис не подключён")
   }
 
   const addresses = user?.addresses ?? []
@@ -121,7 +123,7 @@ title="Адреса не сохранены"
                 <Button
                   variant="ghost"
                   size="icon"
-onClick={() => { removeAddress(addr.id); toast("Адрес удалён") }}
+                  onClick={async () => { if (await removeAddress(addr.id)) toast("Адрес удалён"); else toast.error("Не удалось удалить адрес: backend-сервис не подключён") }}
                   aria-label="Удалить адрес"
                 >
                   <Trash2 className="h-4 w-4" />

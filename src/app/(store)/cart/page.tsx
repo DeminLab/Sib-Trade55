@@ -7,15 +7,20 @@ import { ShoppingBag } from "lucide-react"
 import { PageHeader } from "@/components/ui/page-header"
 import { EmptyState } from "@/components/ui/empty-state"
 import { useCartStore } from "@/store/cart"
+import { useQuoteStore } from "@/store/quote"
 import { CartItem } from "@/components/cart/cart-item"
 import { CartSummary } from "@/components/cart/cart-summary"
-import { useEffect, useState } from "react"
+import { useSyncExternalStore } from "react"
 
 export default function CartPage() {
   const items = useCartStore((s) => s.items)
   const getSubtotal = useCartStore((s) => s.getSubtotal)
-  const [mounted, setMounted] = useState(false)
-  useEffect(() => setMounted(true), [])
+  const mounted = useSyncExternalStore(
+    () => () => undefined,
+    () => true,
+    () => false,
+  )
+  const addQuoteItems = useQuoteStore((s) => s.addItems)
 
   if (!mounted) {
     return (
@@ -42,6 +47,10 @@ export default function CartPage() {
 
   const subtotal = getSubtotal()
 
+  function handleQuoteRequest() {
+    addQuoteItems(items)
+  }
+
   return (
     <div className="mx-auto max-w-3xl px-4 py-8 pb-16 sm:px-6 sm:py-16 lg:px-8">
       <PageHeader title="Корзина" />
@@ -56,6 +65,9 @@ export default function CartPage() {
         <div className="mt-8 flex flex-col gap-3">
           <Button size="lg" asChild>
             <Link href="/checkout">Перейти к оформлению</Link>
+          </Button>
+          <Button size="lg" variant="outline" asChild>
+            <Link href="/quote" onClick={handleQuoteRequest}>Запросить КП</Link>
           </Button>
           <Button variant="outline" asChild>
             <Link href="/shop">Продолжить покупки</Link>

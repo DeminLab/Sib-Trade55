@@ -1,18 +1,23 @@
 "use client"
 
-import Link from "next/link"
 import { Card, CardContent } from "@/components/ui/card"
 import { Package } from "lucide-react"
 import { PageHeader } from "@/components/ui/page-header"
 import { EmptyState } from "@/components/ui/empty-state"
 import { OrderStatusBadge } from "@/components/ui/order-status-badge"
 import { useAuthGuard } from "@/hooks/use-auth-guard"
+import { useEffect } from "react"
 import { useOrdersStore } from "@/store/orders"
 import { formatPrice, formatDate } from "@/lib/utils"
 
 export default function OrdersPage() {
   const { user, isReady } = useAuthGuard()
   const orders = useOrdersStore((s) => s.orders)
+  const loadOrders = useOrdersStore((s) => s.loadOrders)
+  const loading = useOrdersStore((s) => s.loading)
+  const error = useOrdersStore((s) => s.error)
+
+  useEffect(() => { if (isReady) void loadOrders() }, [isReady, loadOrders])
 
   if (!isReady) return null
 
@@ -27,7 +32,7 @@ title="История заказов"
         description={userOrders.length > 0 ? `${userOrders.length} ${userOrders.length === 1 ? "заказ" : "заказов"}` : undefined}
       />
 
-      {userOrders.length === 0 ? (
+      {error ? <EmptyState icon={Package} title="История заказов недоступна" description={error} /> : loading ? <p className="mt-8 text-sm text-muted-foreground">Загружаем заказы…</p> : userOrders.length === 0 ? (
         <EmptyState
           icon={Package}
 title="Заказов пока нет"

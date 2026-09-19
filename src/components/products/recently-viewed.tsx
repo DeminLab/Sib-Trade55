@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useSyncExternalStore } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { useRecentlyViewedStore } from "@/store/recently-viewed"
@@ -13,8 +13,11 @@ interface RecentlyViewedProps {
 
 export function RecentlyViewed({ excludeProductId }: RecentlyViewedProps) {
   const getItems = useRecentlyViewedStore((s) => s.getItems)
-  const [mounted, setMounted] = useState(false)
-  useEffect(() => setMounted(true), [])
+  const mounted = useSyncExternalStore(
+    () => () => undefined,
+    () => true,
+    () => false,
+  )
 
   if (!mounted) return null
 

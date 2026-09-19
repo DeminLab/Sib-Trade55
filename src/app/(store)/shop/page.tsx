@@ -92,7 +92,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
       <div className="mt-6 flex flex-wrap gap-2">
         <Link
           href="/shop"
-          className={`rounded-full border px-3 py-1 text-xs font-medium transition-colors ${
+          className={`rounded-sm border px-3 py-1 text-xs font-medium transition-colors ${
             !categorySlug
               ? "border-foreground bg-foreground text-background"
               : "border-border hover:border-foreground"
@@ -105,7 +105,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
             <Link
               key={cat.id}
               href={`/${cat.slug}`}
-              className={`rounded-full border px-3 py-1 text-xs font-medium transition-colors ${
+              className={`rounded-sm border px-3 py-1 text-xs font-medium transition-colors ${
                 categorySlug === cat.slug
                   ? "border-foreground bg-foreground text-background"
                   : "border-border hover:border-foreground"

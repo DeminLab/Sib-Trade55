@@ -4,7 +4,6 @@ import { productRepository, categoryRepository, brandRepository } from "@/lib/re
 import { ProductDetailView } from "./product-detail-view"
 import { CategoryView } from "./category-view"
 import { BrandView } from "./brand-view"
-import { formatPrice } from "@/lib/utils"
 import { siteConfig } from "@/lib/config"
 import data from "@/data/products.json"
 
@@ -37,7 +36,6 @@ export async function generateMetadata({
   const product = await productRepository.getBySlug(slug)
   if (product) {
     const variant = product.variants[0]
-    const price = variant ? formatPrice(variant.price, variant.currency) : ""
     return {
       title: product.name,
       description: product.description,

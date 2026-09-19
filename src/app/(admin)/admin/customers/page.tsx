@@ -1,16 +1,6 @@
 import { Users } from "lucide-react"
-import { PageHeader } from "@/components/ui/page-header"
-import { EmptyState } from "@/components/ui/empty-state"
+import { AdminSectionPage } from "@/components/admin/admin-section-page"
 
-export default function AdminCustomersPage() {
-  return (
-    <div>
-      <PageHeader title="Клиенты" description="Просмотр и управление базой клиентов." />
-      <EmptyState
-        icon={Users}
-title="Клиентов пока нет"
-        description="Данные появятся после регистрации пользователей."
-      />
-    </div>
-  )
+export default async function AdminCustomersPage() {
+  return <AdminSectionPage eyebrow="Продажи / клиенты" title="Клиенты" description="B2B-клиенты, история заказов и дальнейшая работа менеджеров. Контракт можно заменить на API или CRM без изменения интерфейса." icon={Users} rows={[]} emptyMessage="Клиенты появятся после подключения customer API." />
 }

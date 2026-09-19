@@ -1,6 +1,6 @@
 "use client"
 
-import { Suspense, useEffect, useState } from "react"
+import { Suspense, useEffect, useSyncExternalStore } from "react"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
@@ -22,9 +22,11 @@ function CheckoutSuccessContent() {
   const searchParams = useSearchParams()
   const orderId = searchParams.get("order_id")
   const getOrderById = useOrdersStore((s) => s.getOrderById)
+  const loadOrders = useOrdersStore((s) => s.loadOrders)
+  const error = useOrdersStore((s) => s.error)
 
-  const [mounted, setMounted] = useState(false)
-  useEffect(() => setMounted(true), [])
+  const mounted = useSyncExternalStore(() => () => undefined, () => true, () => false)
+  useEffect(() => { void loadOrders() }, [loadOrders])
 
   if (!mounted) {
     return (
@@ -43,11 +45,13 @@ function CheckoutSuccessContent() {
       <div className="flex flex-col items-center text-center">
         <CheckCircle className="h-16 w-16 text-success" />
 <h1 className="mt-6 text-3xl font-bold tracking-tight">
-          Спасибо за заказ!
+          Заказ создан
         </h1>
         <p className="mt-4 text-muted-foreground">
-          Ваш заказ подтверждён. Мы отправим вам email с трекингом после отправки.
+          Заказ подтверждается backend-сервисом. Детали появятся здесь после загрузки заказа.
         </p>
+
+        {error && <p className="mt-4 max-w-lg text-sm text-destructive">{error}</p>}
 
         {order && (
           <Card className="mt-8 w-full text-left">

@@ -3,21 +3,26 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
+import { newsletterService } from "@/lib/services"
 
 export function NewsletterForm() {
   const [email, setEmail] = useState("")
   const [loading, setLoading] = useState(false)
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     if (!email) return
 
     setLoading(true)
-    setTimeout(() => {
+    try {
+      await newsletterService.subscribe(email)
       toast.success("Спасибо за подписку!")
       setEmail("")
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Не удалось оформить подписку")
+    } finally {
       setLoading(false)
-    }, 500)
+    }
   }
 
   return (

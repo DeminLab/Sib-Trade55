@@ -1,41 +1,31 @@
 "use client"
 
 import { create } from "zustand"
-import { persist } from "zustand/middleware"
 import type { Order } from "@/types"
+import { orderService } from "@/lib/services"
 
 interface OrdersState {
   orders: Order[]
-  addOrder: (order: Order) => void
+  loading: boolean
+  error: string | null
+  loadOrders: () => Promise<void>
   getOrderById: (id: string) => Order | undefined
-  getOrdersByEmail: (email: string) => Order[]
-  updateOrderStatus: (id: string, status: Order["status"]) => void
 }
 
-export const useOrdersStore = create<OrdersState>()(
-  persist(
-    (set, get) => ({
-      orders: [],
+/** Orders are read from the order API; nothing is persisted in browser storage. */
+export const useOrdersStore = create<OrdersState>()((set, get) => ({
+  orders: [],
+  loading: false,
+  error: null,
 
-      addOrder: (order) => {
-        set((state) => ({
-          orders: [order, ...state.orders],
-        }))
-      },
+  loadOrders: async () => {
+    set({ loading: true, error: null })
+    try {
+      set({ orders: await orderService.list(), loading: false })
+    } catch (error) {
+      set({ loading: false, error: error instanceof Error ? error.message : "Не удалось загрузить заказы" })
+    }
+  },
 
-      getOrderById: (id) => get().orders.find((o) => o.id === id),
-
-      getOrdersByEmail: (email) =>
-        get().orders.filter((o) => o.customerEmail === email),
-
-      updateOrderStatus: (id, status) => {
-        set((state) => ({
-          orders: state.orders.map((o) =>
-            o.id === id ? { ...o, status, updatedAt: new Date().toISOString() } : o
-          ),
-        }))
-      },
-    }),
-    { name: "orders-storage" }
-  )
-)
+  getOrderById: (id) => get().orders.find((order) => order.id === id),
+}))

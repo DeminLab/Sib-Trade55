@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 import {
   Accordion,
   AccordionContent,
@@ -35,7 +36,7 @@ const faqs = [
   {
     question: "Можно ли заказать металлоконструкцию по индивидуальным размерам?",
     answer:
-      "Конечно! Мы изготавливаем лестницы, ворота, заборы, навесы и другие конструкции по вашим размерам. Выезд замерщика бесплатный по Новосибирску.",
+      "Конечно! Мы подбираем и поставляем лестницы, ворота, заборы, навесы и другие конструкции по вашим размерам. Выезд замерщика бесплатный по Новосибирску.",
   },
   {
     question: "Работаете ли вы с юридическими лицами?",
@@ -82,12 +83,12 @@ export default function FAQPage() {
         <p className="mt-2 text-sm text-muted-foreground">
           Не нашли ответ? Наши специалисты готовы помочь.
         </p>
-        <a
+        <Link
           href="/contact"
           className="mt-4 inline-block text-sm font-medium underline hover:text-foreground"
         >
           Связаться с нами
-        </a>
+        </Link>
       </div>
     </div>
   )

@@ -1,18 +1,33 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useEffect, useState, useSyncExternalStore, type ReactNode } from "react"
 import Link from "next/link"
-import { ShoppingBag, Heart } from "lucide-react"
+import {
+  ArrowRight,
+  ChevronDown,
+  CircleHelp,
+  Clock3,
+  FileText,
+  Heart,
+  PackageCheck,
+  Ruler,
+  ShieldCheck,
+  ShoppingBag,
+  Truck,
+  Wrench,
+} from "lucide-react"
 import { toast } from "sonner"
+
 import { useCartStore } from "@/store/cart"
 import { useWishlistStore } from "@/store/wishlist"
 import { useRecentlyViewedStore } from "@/store/recently-viewed"
+import { useQuoteStore } from "@/store/quote"
 import { RecentlyViewed } from "@/components/products/recently-viewed"
-import { StarRating } from "@/components/products/star-rating"
-import { TrustSignals } from "@/components/products/trust-signals"
+import { ProductGallery } from "@/components/products/product-gallery"
+import { VariantSelector } from "@/components/products/variant-selector"
+import { QuantitySelector } from "@/components/products/quantity-selector"
+import { ProductGrid } from "@/components/products/product-grid"
 import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
-import { Badge } from "@/components/ui/badge"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -21,10 +36,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-import { ProductGallery } from "@/components/products/product-gallery"
-import { VariantSelector } from "@/components/products/variant-selector"
-import { QuantitySelector } from "@/components/products/quantity-selector"
-import { ProductGrid } from "@/components/products/product-grid"
 import { formatPrice } from "@/lib/utils"
 import { breadcrumbJsonLd } from "@/lib/structured-data"
 import type { Product, Brand, Category } from "@/types"
@@ -36,30 +47,79 @@ interface ProductDetailViewProps {
   categoryAncestors?: Category[]
 }
 
+const materialKeywords = [
+  "нержавеющая сталь",
+  "оцинкованная сталь",
+  "сталь",
+  "алюминий",
+  "профнастил",
+  "поликарбонат",
+  "акрил",
+  "хром",
+] as const
+
+function getMaterial(product: Product) {
+  const text = `${product.name} ${product.description} ${product.tags.join(" ")}`.toLowerCase()
+  return materialKeywords.find((material) => text.includes(material)) ?? product.tags[0] ?? "По согласованию"
+}
+
+function getFinish(product: Product) {
+  const text = `${product.name} ${product.description} ${product.tags.join(" ")}`.toLowerCase()
+  if (text.includes("порошков")) return "Порошковая окраска"
+  if (text.includes("оцинков")) return "Оцинкованное покрытие"
+  if (text.includes("хром")) return "Хромированное покрытие"
+  if (text.includes("патин")) return "Патинирование"
+  return "По согласованию"
+}
+
+function isMadeToOrder(product: Product) {
+  const text = `${product.name} ${product.description} ${product.tags.join(" ")}`.toLowerCase()
+  return /изготов|индивиду|заказ|конструкц|лестниц|ворот|навес|каркас|арт-объект/.test(text)
+}
+
+function SectionTitle({ number, title, children }: { number: string; title: string; children?: ReactNode }) {
+  return (
+    <div className="flex flex-col gap-3 border-b border-border pb-5 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <p className="industrial-label">{number}</p>
+        <h2 className="mt-2 text-2xl font-semibold tracking-[-0.04em] sm:text-3xl">{title}</h2>
+      </div>
+      {children}
+    </div>
+  )
+}
+
+function SpecRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="grid grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] gap-6 border-b border-border py-4 text-sm last:border-b-0 sm:grid-cols-2">
+      <dt className="text-muted-foreground">{label}</dt>
+      <dd className="font-medium text-foreground">{value}</dd>
+    </div>
+  )
+}
+
 export function ProductDetailView({
   product,
   relatedProducts,
   brand,
   categoryAncestors = [],
 }: ProductDetailViewProps) {
-  const [selectedVariantId, setSelectedVariantId] = useState(
-    product.variants[0]?.id ?? ""
-  )
+  const [selectedVariantId, setSelectedVariantId] = useState(product.variants[0]?.id ?? "")
   const [quantity, setQuantity] = useState(1)
+  const mounted = useSyncExternalStore(
+    () => () => undefined,
+    () => true,
+    () => false,
+  )
 
-  const addToCart = useCartStore((s) => s.addItem)
-  const openCart = useCartStore((s) => s.openCart)
-  const wishlistItems = useWishlistStore((s) => s.items)
-  const addToWishlist = useWishlistStore((s) => s.addItem)
-  const removeFromWishlist = useWishlistStore((s) => s.removeItem)
+  const addToCart = useCartStore((state) => state.addItem)
+  const openCart = useCartStore((state) => state.openCart)
+  const wishlistItems = useWishlistStore((state) => state.items)
+  const addToWishlist = useWishlistStore((state) => state.addItem)
+  const removeFromWishlist = useWishlistStore((state) => state.removeItem)
+  const addRecentlyViewed = useRecentlyViewedStore((state) => state.addItem)
+  const addQuoteItem = useQuoteStore((state) => state.addItem)
 
-  const addRecentlyViewed = useRecentlyViewedStore((s) => s.addItem)
-
-  const [mounted, setMounted] = useState(false)
-  useEffect(() => setMounted(true), [])
-  const isWishlisted = mounted && wishlistItems.some((i) => i.productId === product.id)
-
-  // Track recently viewed
   useEffect(() => {
     addRecentlyViewed({
       productId: product.id,
@@ -69,53 +129,77 @@ export function ProductDetailView({
       imageUrl: product.images[0]?.url ?? "",
       imageAlt: product.images[0]?.alt ?? product.name,
     })
-  }, [product.id])
+  }, [addRecentlyViewed, product.id, product.images, product.name, product.slug, product.variants])
 
-  const selectedVariant = product.variants.find(
-    (v) => v.id === selectedVariantId
-  )
+  const selectedVariant = product.variants.find((variant) => variant.id === selectedVariantId)
   if (!selectedVariant) return null
 
-  const isOnSale =
-    selectedVariant.compareAtPrice &&
-    selectedVariant.compareAtPrice > selectedVariant.price
-  const inStock =
-    selectedVariant.inventory.quantity > 0 ||
-    selectedVariant.inventory.allowBackorder
+  const customProduct = isMadeToOrder(product)
+  const stockQuantity = selectedVariant.inventory.quantity
+  const available = stockQuantity > 0 || selectedVariant.inventory.allowBackorder
+  const stockLabel = stockQuantity > 0 ? "В наличии" : selectedVariant.inventory.allowBackorder ? "Под заказ" : "Нет в наличии"
+  const leadTime = customProduct || stockLabel === "Под заказ" ? "По запросу" : stockQuantity > 0 ? "Готовое изделие" : "Уточнить срок"
+  const isWishlisted = mounted && wishlistItems.some((item) => item.productId === product.id)
+  const selectedOption = selectedVariant.options[0]
+  const dimensions = selectedVariant.dimensions
+    ? `${selectedVariant.dimensions.length} × ${selectedVariant.dimensions.width} × ${selectedVariant.dimensions.height}`
+    : selectedOption?.name === "Размер" ? selectedOption.value : "По согласованию"
 
   function handleAddToCart() {
+    if (!selectedVariant) return
+
     addToCart({
-      variantId: selectedVariant!.id,
+      variantId: selectedVariant.id,
       productId: product.id,
       name: product.name,
-      variantName: selectedVariant!.name,
+      variantName: selectedVariant.name,
       image: product.images[0] ?? { url: "", alt: product.name },
       slug: product.slug,
-      price: selectedVariant!.price,
+      price: selectedVariant.price,
       quantity,
     })
     openCart()
   }
 
   function handleToggleWishlist() {
+    if (!selectedVariant) return
+
     if (isWishlisted) {
       removeFromWishlist(product.id)
       toast("Удалено из избранного")
-    } else {
-      addToWishlist({
-        productId: product.id,
-        name: product.name,
-        slug: product.slug,
-        price: selectedVariant!.price,
-        image: product.images[0] ?? { url: "", alt: product.name },
-      })
-      toast.success("Добавлено в избранное")
+      return
     }
+
+    addToWishlist({
+      productId: product.id,
+      name: product.name,
+      slug: product.slug,
+      price: selectedVariant.price,
+      image: product.images[0] ?? { url: "", alt: product.name },
+    })
+    toast.success("Добавлено в избранное")
+  }
+
+  function handleQuoteRequest() {
+    if (!selectedVariant) return
+    addQuoteItem({
+      id: selectedVariant.id,
+      productId: product.id,
+      variantId: selectedVariant.id,
+      name: product.name,
+      variantName: selectedVariant.name,
+      image: product.images[0] ?? { url: "", alt: product.name },
+      slug: product.slug,
+      price: selectedVariant.price,
+      quantity,
+      lineTotal: selectedVariant.price * quantity,
+      currency: selectedVariant.currency,
+    })
   }
 
   const breadcrumbLd = breadcrumbJsonLd([
     { name: "Каталог", href: "/shop" },
-    ...categoryAncestors.map((c) => ({ name: c.name, href: `/${c.slug}` })),
+    ...categoryAncestors.map((category) => ({ name: category.name, href: `/${category.slug}` })),
     { name: product.name, href: `/${product.slug}` },
   ])
 
@@ -124,184 +208,64 @@ export function ProductDetailView({
     "@type": "Product",
     name: product.name,
     description: product.description,
-    image: product.images.map((img) => img.url),
+    image: product.images.map((image) => image.url),
     sku: selectedVariant.sku,
     brand: brand ? { "@type": "Brand", name: brand.name } : undefined,
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: product.rating,
-      reviewCount: product.reviewCount,
-    },
+    aggregateRating: { "@type": "AggregateRating", ratingValue: product.rating, reviewCount: product.reviewCount },
     offers: {
       "@type": "Offer",
       price: (selectedVariant.price / 100).toFixed(2),
       priceCurrency: selectedVariant.currency,
-      availability: inStock
-        ? "https://schema.org/InStock"
-        : "https://schema.org/OutOfStock",
+      availability: available ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
     },
   }
 
   return (
-    <div className="mx-auto max-w-[1440px] px-4 py-8 sm:px-6 lg:px-8">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([jsonLd, breadcrumbLd]) }}
-      />
-      {/* Breadcrumb — shows category ancestry; product name is in the H1 below */}
+    <div className="mx-auto max-w-[1440px] px-5 py-8 sm:px-8 lg:px-12 lg:py-10">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([jsonLd, breadcrumbLd]) }} />
+
       <Breadcrumb>
         <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink render={<Link href="/shop" />}>Каталог</BreadcrumbLink>
-          </BreadcrumbItem>
-          {categoryAncestors.map((cat, idx) => {
-            const isLast = idx === categoryAncestors.length - 1
-            return (
-              <div key={cat.id} className="contents">
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  {isLast ? (
-                    <BreadcrumbPage>{cat.name}</BreadcrumbPage>
-                  ) : (
-                    <BreadcrumbLink render={<Link href={`/${cat.slug}`} />}>
-                      {cat.name}
-                    </BreadcrumbLink>
-                  )}
-                </BreadcrumbItem>
-              </div>
-            )
-          })}
+          <BreadcrumbItem><BreadcrumbLink render={<Link href="/shop" />}>Каталог</BreadcrumbLink></BreadcrumbItem>
+          {categoryAncestors.map((category, index) => <div key={category.id} className="contents"><BreadcrumbSeparator /><BreadcrumbItem>{index === categoryAncestors.length - 1 ? <BreadcrumbPage>{category.name}</BreadcrumbPage> : <BreadcrumbLink render={<Link href={`/${category.slug}`} />}>{category.name}</BreadcrumbLink>}</BreadcrumbItem></div>)}
+          <BreadcrumbSeparator /><BreadcrumbItem><BreadcrumbPage>{product.name}</BreadcrumbPage></BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
 
-      {/* Product */}
-      <div className="mt-2 grid gap-8 lg:grid-cols-2 lg:gap-16">
-        {/* Gallery */}
-        <ProductGallery images={product.images} productName={product.name} />
+      <section className="mt-8 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+        <div className="lg:sticky lg:top-28 lg:self-start"><ProductGallery images={product.images} productName={product.name} /></div>
 
-        {/* Info */}
         <div className="flex flex-col">
-          <div>
-            <StarRating rating={product.rating} reviewCount={product.reviewCount} />
+          <div className="flex items-start justify-between gap-5 border-b border-border pb-6">
+            <div><p className="industrial-label">Каталог / {customProduct ? "поставка по согласованным параметрам" : "товар из каталога"}</p><h1 className="mt-3 text-4xl font-semibold leading-[1.05] tracking-[-0.05em] sm:text-5xl">{product.name}</h1>{brand ? <Link href={`/${brand.slug}`} className="mt-4 inline-block text-sm text-muted-foreground hover:text-foreground hover:underline">{brand.name}</Link> : null}</div>
+            <button type="button" onClick={handleToggleWishlist} className="flex size-11 shrink-0 items-center justify-center border border-border transition-colors hover:border-primary hover:bg-accent" aria-label={isWishlisted ? "Удалить из избранного" : "Добавить в избранное"}><Heart className={`size-5 ${isWishlisted ? "fill-current text-wishlist" : "text-muted-foreground"}`} /></button>
           </div>
 
-          <h1 className="mt-2 text-2xl font-bold tracking-tight sm:text-3xl">
-            {product.name}
-          </h1>
+          <div className="mt-6 flex flex-wrap items-end justify-between gap-4"><div><p className="text-3xl font-semibold tracking-[-0.04em]">{customProduct ? "от " : ""}{formatPrice(selectedVariant.price, selectedVariant.currency)}</p><p className="mt-2 text-sm text-muted-foreground">Цена зависит от размера, материала и состава работ</p></div><div className="text-right text-sm"><p className="flex items-center justify-end gap-2 font-medium"><span className={`size-2 ${stockQuantity > 0 ? "bg-emerald-600" : "bg-primary"}`} />{stockLabel}</p><p className="mt-1 text-muted-foreground">Срок: {leadTime}</p></div></div>
+          <p className="mt-6 max-w-xl text-base leading-7 text-muted-foreground">{product.description}</p>
 
-          {brand && (
-            <Link
-              href={`/${brand.slug}`}
-              className="mt-1 text-sm text-muted-foreground hover:text-foreground hover:underline"
-            >
-              {brand.name}
-            </Link>
-          )}
+          <div className="mt-8 grid grid-cols-2 gap-3 border-y border-border py-5 text-sm sm:grid-cols-3"><div><p className="text-muted-foreground">Артикул</p><p className="mt-1 font-mono font-medium">{selectedVariant.sku}</p></div><div><p className="text-muted-foreground">Материал</p><p className="mt-1 font-medium capitalize">{getMaterial(product)}</p></div><div><p className="text-muted-foreground">Покрытие</p><p className="mt-1 font-medium">{getFinish(product)}</p></div></div>
 
-          <div className="mt-4 flex items-center gap-3">
-            <span className="text-2xl font-semibold">
-              {formatPrice(selectedVariant.price, selectedVariant.currency)}
-            </span>
-            {isOnSale && (
-              <>
-                <span className="text-lg text-muted-foreground line-through">
-                  {formatPrice(
-                    selectedVariant.compareAtPrice!,
-                    selectedVariant.currency
-                  )}
-                </span>
-                <Badge variant="secondary">
-                  {Math.round(
-                    (1 -
-                      selectedVariant.price /
-                        selectedVariant.compareAtPrice!) *
-                      100
-                  )}
-                  % скидка
-                </Badge>
-              </>
-            )}
-          </div>
+          {product.variants.length > 1 ? <div className="mt-7"><VariantSelector variants={product.variants} selectedVariantId={selectedVariantId} onSelect={setSelectedVariantId} /></div> : null}
 
-          <p className="mt-4 text-muted-foreground">{product.description}</p>
-
-          {/* Variants */}
-          {product.variants.length > 1 && (
-            <div className="mt-6 mb-6">
-              <VariantSelector
-                variants={product.variants}
-                selectedVariantId={selectedVariantId}
-                onSelect={setSelectedVariantId}
-              />
-            </div>
-          )}
-
-          {/* Quantity + Add to Cart */}
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
-            <div className="flex items-center gap-4">
-              <QuantitySelector
-                quantity={quantity}
-                onQuantityChange={setQuantity}
-                max={selectedVariant.inventory.quantity || 99}
-              />
-              <Button
-                variant="outline"
-                size="icon"
-                aria-label={isWishlisted ? "Удалить из избранного" : "Добавить в избранное"}
-                onClick={handleToggleWishlist}
-              >
-                <Heart className={`h-4 w-4 ${isWishlisted ? "fill-wishlist text-wishlist" : ""}`} />
-              </Button>
-            </div>
-            <Button
-              size="lg"
-              className="w-full sm:flex-1"
-              disabled={!inStock}
-              onClick={handleAddToCart}
-            >
-              <ShoppingBag className="mr-2 h-4 w-4" />
-              {inStock ? "В корзину" : "Нет в наличии"}
-            </Button>
-          </div>
-
-          {!inStock && (
-            <p className="mt-2 text-sm text-destructive">
-              Этого товара сейчас нет в наличии.
-            </p>
-          )}
-
-          <Separator className="my-6" />
-
-          <TrustSignals />
+          <div className={`mt-8 border p-5 ${customProduct ? "border-primary/50 bg-accent/35" : "border-border bg-surface-subtle"}`}><div className="flex items-start gap-3"><PackageCheck className="mt-0.5 size-5 shrink-0 text-primary" /><div><p className="font-semibold">{customProduct ? "Нужен точный расчёт?" : "Готовы оформить заказ?"}</p><p className="mt-1 text-sm leading-6 text-muted-foreground">{customProduct ? "Пришлите чертёж, фото или ТЗ — уточним параметры и подготовим предложение." : "Выберите количество и добавьте изделие в корзину."}</p></div></div><div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center"><QuantitySelector quantity={quantity} onQuantityChange={setQuantity} max={stockQuantity || 99} />{customProduct ? <><Button className="h-12 sm:flex-1" asChild><Link href="/quote" onClick={handleQuoteRequest}><FileText className="mr-2 size-4" />Запросить КП</Link></Button><Button variant="outline" className="sm:flex-1" onClick={handleAddToCart} disabled={!available}><ShoppingBag className="mr-2 size-4" />В корзину</Button></> : <><Button className="sm:flex-1" onClick={handleAddToCart} disabled={!available}><ShoppingBag className="mr-2 size-4" />{available ? "Добавить в корзину" : "Нет в наличии"}</Button><Button variant="outline" className="sm:flex-1" asChild><Link href="/quote" onClick={handleQuoteRequest}>Запросить КП</Link></Button></>}</div></div>
         </div>
-      </div>
+      </section>
 
-      {/* Full HTML description (below gallery/add-to-cart) */}
-      {product.body && (
-        <section className="mt-16 border-t pt-12">
-          <div className="mx-auto max-w-3xl">
-            <div
-              className="blog-body"
-              dangerouslySetInnerHTML={{ __html: product.body }}
-            />
-          </div>
-        </section>
-      )}
+      <section className="mt-24 grid gap-16 lg:grid-cols-[1.15fr_0.85fr]">
+        <div><SectionTitle number="01 / спецификация" title="Технические характеристики"><span className="font-mono text-xs text-muted-foreground">SKU {selectedVariant.sku}</span></SectionTitle><dl className="mt-2 border-y border-border"><SpecRow label="Артикул" value={selectedVariant.sku} /><SpecRow label="Вариант исполнения" value={selectedVariant.name} /><SpecRow label="Размеры" value={dimensions} /><SpecRow label="Материал" value={getMaterial(product)} /><SpecRow label="Покрытие" value={getFinish(product)} /><SpecRow label="Ключевая характеристика" value={selectedOption ? `${selectedOption.name}: ${selectedOption.value}` : "По согласованию"} /><SpecRow label="Комплектация" value={product.description.split(".")[0] || "По согласованию"} /><SpecRow label="Условия заказа" value={customProduct ? "По чертежу, фотографии или ТЗ" : "Готовое изделие со склада"} /></dl></div>
+        <div className="space-y-5"><div className="border border-border bg-surface-subtle p-6"><Ruler className="size-6 text-primary" /><h3 className="mt-6 text-lg font-semibold">Размеры и варианты</h3><p className="mt-2 text-sm leading-6 text-muted-foreground">Проверим габариты и адаптируем исполнение под место установки. Для серийных позиций доступны варианты из каталога.</p></div><div className="border border-border p-6"><Wrench className="size-6 text-primary" /><h3 className="mt-6 text-lg font-semibold">Комплектация под задачу</h3><p className="mt-2 text-sm leading-6 text-muted-foreground">Для нестандартного проекта достаточно прислать исходные материалы — инженер уточнит узлы, покрытие и комплектность.</p><Link href="/contact" className="mt-5 inline-flex items-center gap-2 text-sm font-semibold">Обсудить проект <ArrowRight className="size-4" /></Link></div></div>
+      </section>
 
-      {/* Related products */}
-      {relatedProducts.length > 0 && (
-        <section className="mt-16">
-          <h2 className="text-xl font-bold tracking-tight">
-            Вам может понравиться
-          </h2>
-          <div className="mt-6">
-            <ProductGrid products={relatedProducts} />
-          </div>
-        </section>
-      )}
+      {product.body ? <section className="mt-24 border-t border-border pt-16"><div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]"><div><SectionTitle number="02 / описание" title="О продукте" /></div><div className="blog-body max-w-3xl" dangerouslySetInnerHTML={{ __html: product.body }} /></div></section> : null}
 
-      {/* Recently viewed */}
+      <section className="mt-24 grid gap-4 md:grid-cols-3"><div className="border border-border p-6"><ShieldCheck className="size-6 text-primary" /><h3 className="mt-6 font-semibold">Гарантия</h3><p className="mt-2 text-sm leading-6 text-muted-foreground">Гарантийные условия фиксируем в документах к заказу с учётом материала, покрытия и назначения изделия.</p></div><div className="border border-border p-6"><Truck className="size-6 text-primary" /><h3 className="mt-6 font-semibold">Доставка</h3><p className="mt-2 text-sm leading-6 text-muted-foreground">Рассчитаем доставку до объекта, согласуем транспорт и удобное время получения.</p></div><div className="border border-border p-6"><Clock3 className="size-6 text-primary" /><h3 className="mt-6 font-semibold">Сроки</h3><p className="mt-2 text-sm leading-6 text-muted-foreground">Точный срок поставки зависит от сложности, размеров и выбранного покрытия.</p></div></section>
+
+      <section className="mt-24"><SectionTitle number="03 / помощь" title="Часто задаваемые вопросы" /><div className="mt-5 grid gap-x-12 md:grid-cols-2">{[["Можно ли изменить размеры изделия?", "Да. Для продукции под заказ согласуем размеры и конструктивные особенности до подтверждения заказа."], ["Как подобрать материал и покрытие?", "Ориентируемся на условия эксплуатации, нагрузку, внешний вид и бюджет проекта."], ["Что нужно прислать для расчёта?", "Чертёж, фото, эскиз или краткое описание задачи с примерными размерами."], ["Можно ли заказать монтаж?", "Для подходящих проектов организуем доставку и монтаж на объекте." ]].map(([question, answer]) => <details key={question} className="group border-b border-border"><summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-sm font-semibold marker:hidden">{question}<ChevronDown className="size-4 shrink-0 text-muted-foreground transition-transform group-open:rotate-180" /></summary><p className="pb-5 text-sm leading-6 text-muted-foreground">{answer}</p></details>)}</div></section>
+
+      <section className="mt-24"><SectionTitle number="04 / подборка" title="Похожие изделия"><Link href="/shop" className="inline-flex items-center gap-2 text-sm font-semibold">Смотреть каталог <ArrowRight className="size-4" /></Link></SectionTitle>{relatedProducts.length > 0 ? <div className="mt-8"><ProductGrid products={relatedProducts} /></div> : <div className="mt-8 border border-border bg-surface-subtle p-8 text-sm text-muted-foreground">Подберём совместимые изделия и варианты исполнения под вашу задачу. <Link href="/contact" className="font-semibold text-foreground underline underline-offset-4">Запросить подбор</Link></div>}</section>
       <RecentlyViewed excludeProductId={product.id} />
+      <div className="mt-24 border-t border-border pt-10 text-center"><CircleHelp className="mx-auto size-7 text-primary" /><h2 className="mt-4 text-2xl font-semibold tracking-[-0.04em]">Нужна консультация по изделию?</h2><p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-muted-foreground">Отправьте задачу — поможем подобрать исполнение, рассчитать стоимость и подготовить заказ.</p><Button className="mt-6" asChild><Link href="/contact">Получить расчёт <ArrowRight className="ml-2 size-4" /></Link></Button></div>
     </div>
   )
 }

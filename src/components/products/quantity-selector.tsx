@@ -1,7 +1,6 @@
 "use client"
 
 import { Minus, Plus } from "lucide-react"
-import { Button } from "@/components/ui/button"
 
 interface QuantitySelectorProps {
   quantity: number

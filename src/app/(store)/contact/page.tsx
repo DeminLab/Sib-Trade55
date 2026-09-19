@@ -1,173 +1,39 @@
-"use client"
+import type { Metadata } from "next"
+import Link from "next/link"
+import { ArrowRight, Clock3, FileText, Mail, MapPin, MessageCircle, Phone, ShieldCheck } from "lucide-react"
 
-import { useState } from "react"
+import { ContactForm } from "@/components/contact/contact-form"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { PageHeader } from "@/components/ui/page-header"
-import { Mail, Phone, MapPin } from "lucide-react"
-import { toast } from "sonner"
-import { contactFormSchema } from "@/lib/validators"
 import { siteConfig } from "@/lib/config"
 
+export const metadata: Metadata = {
+  title: "Контакты",
+  description: "Контакты СИБ-ТРЕЙД: телефон, email, адрес офиса, режим работы и форма обращения.",
+  alternates: { canonical: "/contact" },
+  openGraph: {
+    title: "Контакты — СИБ-ТРЕЙД",
+    description: "Свяжитесь с СИБ-ТРЕЙД по вопросу каталога, подбора и поставки металлоизделий.",
+    type: "website",
+    url: `${siteConfig.url}/contact`,
+  },
+}
+
+const phoneHref = `tel:${siteConfig.contact.phone.replace(/[^\d+]/g, "")}`
+const address = siteConfig.contact.address
+const requisites = siteConfig.contact.requisites
+
 export default function ContactPage() {
-  const [loading, setLoading] = useState(false)
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  })
-
-  function handleChange(
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) {
-    setForm((f) => ({ ...f, [e.target.name]: e.target.value }))
-  }
-
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault()
-
-    const result = contactFormSchema.safeParse(form)
-    if (!result.success) {
-      toast.error(result.error.issues[0].message)
-      return
-    }
-
-    setLoading(true)
-    setTimeout(() => {
-      toast.success("Сообщение отправлено! Мы скоро ответим.")
-      setForm({ name: "", email: "", subject: "", message: "" })
-      setLoading(false)
-    }, 500)
-  }
-
   return (
-    <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
-      <PageHeader
-        title="Свяжитесь с нами"
-        description="Есть вопросы по товарам, нужна консультация или хотите оформить заказ? Мы на связи!"
-      />
+    <div className="overflow-hidden bg-background">
+      <section className="mx-auto max-w-[1440px] px-5 pb-14 pt-12 sm:px-8 lg:px-12 lg:pb-20 lg:pt-16"><div className="grid gap-10 lg:grid-cols-[1fr_0.75fr] lg:items-end"><div><p className="industrial-label">СИБ-ТРЕЙД / связь с компанией</p><h1 className="mt-4 max-w-4xl text-5xl font-semibold leading-[0.98] tracking-[-0.065em] sm:text-7xl">Обсудим задачу и найдём рабочее решение</h1></div><div><p className="text-base leading-7 text-muted-foreground">Продажа и поставка металлоизделий, материалов и техническая консультация. Напишите или позвоните — ответим в рабочее время.</p><div className="mt-7 flex flex-col gap-3 sm:flex-row"><Button asChild><Link href="/custom">Получить расчёт <ArrowRight className="ml-2 size-4" /></Link></Button><Button variant="outline" asChild><a href={phoneHref}>Заказать звонок <Phone className="ml-2 size-4" /></a></Button></div></div></div></section>
 
-      <div className="mt-12 grid gap-8 lg:grid-cols-3">
-        {/* Contact info cards */}
-        <div className="space-y-4 lg:col-span-1">
-          <Card>
-            <CardHeader className="pb-3">
-              <CardTitle className="flex items-center gap-2 text-sm">
-                <Phone className="h-4 w-4" />
-                Телефон
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <a
-                href="tel:+73831234567"
-                className="text-sm text-muted-foreground hover:text-foreground hover:underline"
-              >
-                {siteConfig.contact.phone}
-              </a>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="pb-3">
-              <CardTitle className="flex items-center gap-2 text-sm">
-                <Mail className="h-4 w-4" />
-                Email
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <a
-                href={`mailto:${siteConfig.contact.email}`}
-                className="text-sm text-muted-foreground hover:text-foreground hover:underline"
-              >
-                {siteConfig.contact.email}
-              </a>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="pb-3">
-              <CardTitle className="flex items-center gap-2 text-sm">
-                <MapPin className="h-4 w-4" />
-                Адрес
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">
-                {siteConfig.contact.address.street}, {siteConfig.contact.address.suite}
-                <br />
-                {siteConfig.contact.address.city}, {siteConfig.contact.address.state}
-                <br />
-                {siteConfig.contact.address.zip}
-              </p>
-            </CardContent>
-          </Card>
-        </div>
+      <section className="section-rule bg-surface-subtle"><div className="mx-auto grid max-w-[1440px] gap-px border-x border-border bg-border sm:grid-cols-2 lg:grid-cols-4"><a href={phoneHref} className="group bg-background p-6 transition-colors hover:bg-accent/30"><Phone className="size-5 text-primary" /><p className="mt-8 text-xs uppercase tracking-[0.14em] text-muted-foreground">Телефон</p><p className="mt-2 font-semibold group-hover:text-primary">{siteConfig.contact.phone}</p></a><a href={`mailto:${siteConfig.contact.email}`} className="group bg-background p-6 transition-colors hover:bg-accent/30"><Mail className="size-5 text-primary" /><p className="mt-8 text-xs uppercase tracking-[0.14em] text-muted-foreground">Email</p><p className="mt-2 font-semibold group-hover:text-primary">{siteConfig.contact.email}</p></a><div className="bg-background p-6"><Clock3 className="size-5 text-primary" /><p className="mt-8 text-xs uppercase tracking-[0.14em] text-muted-foreground">Режим работы</p><p className="mt-2 font-semibold">{siteConfig.contact.workingHours}</p></div><div className="bg-background p-6"><MapPin className="size-5 text-primary" /><p className="mt-8 text-xs uppercase tracking-[0.14em] text-muted-foreground">Адрес</p><p className="mt-2 font-semibold">{address.city}, {address.street}, {address.suite}</p></div></div></section>
 
-        {/* Contact form */}
-        <Card className="lg:col-span-2">
-          <CardContent className="pt-6">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div className="space-y-2">
-                  <Label htmlFor="name">Имя</Label>
-                  <Input
-                    id="name"
-                    name="name"
-                    placeholder="Ваше имя"
-                    value={form.name}
-                    onChange={handleChange}
-                    required
-                    aria-required="true"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    placeholder="you@example.com"
-                    value={form.email}
-                    onChange={handleChange}
-                    required
-                    aria-required="true"
-                  />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="subject">Тема</Label>
-                <Input
-                  id="subject"
-                  name="subject"
-                  placeholder="Вопрос по товару, расчёт заказа, сотрудничество..."
-                  value={form.subject}
-                  onChange={handleChange}
-                  required
-                  aria-required="true"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="message">Сообщение</Label>
-                <Textarea
-                  id="message"
-                  name="message"
-                  placeholder="Опишите ваш вопрос или задачу..."
-                  rows={5}
-                  value={form.message}
-                  onChange={handleChange}
-                  required
-                  aria-required="true"
-                />
-              </div>
-              <Button type="submit" className="w-full sm:w-auto" disabled={loading}>
-                {loading ? "Отправка..." : "Отправить сообщение"}
-              </Button>
-            </form>
-          </CardContent>
-        </Card>
-      </div>
+      <section className="mx-auto grid max-w-[1440px] gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20 lg:px-12 lg:py-28"><div><p className="industrial-label">01 / где мы находимся</p><h2 className="mt-3 text-4xl font-semibold tracking-[-0.05em] sm:text-5xl">Офис и пункт выдачи</h2><p className="mt-5 text-base leading-7 text-muted-foreground">{address.city}, {address.state}, {address.street}, {address.suite}, {address.zip}</p><div className="mt-8 border-t border-border pt-6 text-sm"><p className="font-semibold">Режим работы</p><p className="mt-2 text-muted-foreground">{siteConfig.contact.workingHours}</p><p className="mt-1 text-muted-foreground">Сб–Вс — по предварительной договорённости</p></div><div className="mt-8 border-t border-border pt-6"><p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">Мессенджеры</p><div className="mt-4 flex flex-wrap gap-3"><a href={siteConfig.contact.messengers.whatsapp} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 border border-border px-4 py-2 text-sm font-semibold transition-colors hover:border-primary hover:text-primary"><MessageCircle className="size-4" />WhatsApp</a><a href={siteConfig.contact.messengers.telegram} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 border border-border px-4 py-2 text-sm font-semibold transition-colors hover:border-primary hover:text-primary"><MessageCircle className="size-4" />Telegram</a></div></div></div><div className="min-h-[360px] overflow-hidden border border-border bg-surface-subtle"><iframe title={`Карта: ${address.city}, ${address.street}, ${address.suite}`} src={siteConfig.contact.mapEmbedUrl} className="h-full min-h-[360px] w-full border-0 grayscale" loading="lazy" /></div></section>
+
+      <section className="section-rule bg-surface-subtle"><div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-20 lg:px-12 lg:py-28"><div><div className="mb-8"><p className="industrial-label">02 / обращение</p><h2 className="mt-3 text-4xl font-semibold tracking-[-0.05em] sm:text-5xl">Напишите нам</h2><p className="mt-5 max-w-xl text-base leading-7 text-muted-foreground">Форма отправляется в API-слой сайта. После приёма обращения вы получите подтверждение, а специалист свяжется выбранным способом.</p></div><ContactForm /></div><div className="lg:pt-16"><div className="border border-primary/30 bg-accent/30 p-7"><FileText className="size-6 text-primary" /><h3 className="mt-6 text-xl font-semibold">Для расчёта проекта</h3><p className="mt-3 text-sm leading-6 text-muted-foreground">Приложите чертёж, фото, эскиз или ТЗ — так мы быстрее поймём задачу и вернёмся с предметным предложением.</p><Button className="mt-6" variant="outline" asChild><Link href="/custom">Перейти к форме расчёта <ArrowRight className="ml-2 size-4" /></Link></Button></div><div className="mt-5 border border-border bg-background p-7"><ShieldCheck className="size-6 text-primary" /><h3 className="mt-6 text-xl font-semibold">Реквизиты компании</h3><dl className="mt-5 divide-y divide-border text-sm"><div className="grid grid-cols-[110px_1fr] gap-4 py-3"><dt className="text-muted-foreground">Наименование</dt><dd className="font-medium">{requisites.legalName}</dd></div><div className="grid grid-cols-[110px_1fr] gap-4 py-3"><dt className="text-muted-foreground">ИНН / КПП</dt><dd className="font-mono text-xs">{requisites.inn} / {requisites.kpp}</dd></div><div className="grid grid-cols-[110px_1fr] gap-4 py-3"><dt className="text-muted-foreground">ОГРН</dt><dd className="font-mono text-xs">{requisites.ogrn}</dd></div><div className="grid grid-cols-[110px_1fr] gap-4 py-3"><dt className="text-muted-foreground">Банк</dt><dd className="font-medium">{requisites.bank}</dd></div><div className="grid grid-cols-[110px_1fr] gap-4 py-3"><dt className="text-muted-foreground">Р/с</dt><dd className="break-all font-mono text-xs">{requisites.checkingAccount}</dd></div><div className="grid grid-cols-[110px_1fr] gap-4 py-3"><dt className="text-muted-foreground">Корр. счёт</dt><dd className="break-all font-mono text-xs">{requisites.correspondentAccount}</dd></div><div className="grid grid-cols-[110px_1fr] gap-4 py-3"><dt className="text-muted-foreground">БИК</dt><dd className="font-mono text-xs">{requisites.bik}</dd></div></dl><p className="mt-5 text-xs leading-5 text-muted-foreground">Полный комплект документов предоставим по запросу.</p></div></div></div></section>
+
+      <section className="bg-neutral-950 text-white"><div className="mx-auto flex max-w-[1440px] flex-col gap-7 px-5 py-16 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-12 lg:py-20"><div><p className="industrial-label text-white/55">03 / следующий шаг</p><h2 className="mt-3 text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">Готовы обсудить проект?</h2><p className="mt-3 max-w-xl text-sm leading-6 text-white/60">Отправьте задачу — поможем выбрать материал, покрытие и формат поставки.</p></div><div className="flex flex-col gap-3 sm:flex-row"><Button size="lg" asChild><Link href="/custom">Получить расчёт <ArrowRight className="ml-2 size-4" /></Link></Button><Button size="lg" variant="outline" asChild className="border-white/40 bg-transparent text-white hover:bg-white hover:text-foreground"><a href={phoneHref}>Заказать звонок <Phone className="ml-2 size-4" /></a></Button></div></div></section>
     </div>
   )
 }

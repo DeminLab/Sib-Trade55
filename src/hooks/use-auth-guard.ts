@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useSyncExternalStore } from "react"
 import { useRouter } from "next/navigation"
 import { useAuthStore } from "@/store/auth"
 
@@ -8,9 +8,11 @@ export function useAuthGuard() {
   const user = useAuthStore((s) => s.user)
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated)
   const router = useRouter()
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => setMounted(true), [])
+  const mounted = useSyncExternalStore(
+    () => () => undefined,
+    () => true,
+    () => false,
+  )
 
   useEffect(() => {
     if (mounted && !isAuthenticated) {

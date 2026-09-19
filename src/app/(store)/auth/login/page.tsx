@@ -26,12 +26,12 @@ export default function LoginPage() {
       return
     }
     setLoading(true)
-    const success = login(email, password)
+    const success = await login(email, password)
     if (success) {
       toast.success("С возвращением!")
       router.push("/account")
     } else {
-      toast.error("Неверный email или пароль")
+      toast.error("Не удалось выполнить вход. Проверьте подключение сервиса авторизации.")
     }
     setLoading(false)
   }
@@ -62,13 +62,6 @@ title="С возвращением"
           {loading ? "Вход..." : "Войти"}
         </Button>
       </form>
-      <div className="mt-4 rounded-md bg-neutral-50 p-3">
-        <p className="text-xs text-muted-foreground">
-          <strong>Демо-аккаунты:</strong><br />
-          admin@example.com / password123<br />
-          demo@example.com / password123
-        </p>
-      </div>
     </AuthCardLayout>
   )
 }

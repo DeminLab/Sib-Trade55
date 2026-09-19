@@ -4,6 +4,7 @@ import {
   productRepository,
   categoryRepository,
   brandRepository,
+  caseRepository,
 } from "@/lib/repositories"
 
 // Static public routes. Admin, account, auth, and checkout are excluded
@@ -15,6 +16,11 @@ const STATIC_PATHS = [
   { path: "/blog", priority: 0.7, changeFrequency: "weekly" as const },
   { path: "/pages", priority: 0.5, changeFrequency: "monthly" as const },
   { path: "/about", priority: 0.6, changeFrequency: "monthly" as const },
+  { path: "/custom", priority: 0.9, changeFrequency: "monthly" as const },
+  { path: "/quote", priority: 0.8, changeFrequency: "monthly" as const },
+  { path: "/cases", priority: 0.8, changeFrequency: "monthly" as const },
+  { path: "/materials", priority: 0.8, changeFrequency: "monthly" as const },
+  { path: "/how-we-work", priority: 0.8, changeFrequency: "monthly" as const },
   { path: "/contact", priority: 0.6, changeFrequency: "monthly" as const },
   { path: "/faq", priority: 0.5, changeFrequency: "monthly" as const },
   { path: "/policies/shipping", priority: 0.3, changeFrequency: "yearly" as const },
@@ -26,10 +32,11 @@ const STATIC_PATHS = [
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Fetch all dynamic content from the repository layer so swapping
   // backends (CMS, DB, API) doesn't break the sitemap.
-  const [productsResult, categories, brands] = await Promise.all([
+  const [productsResult, categories, brands, casesResult] = await Promise.all([
     productRepository.list(undefined, undefined, { page: 1, limit: 10_000 }),
     categoryRepository.list(),
     brandRepository.list(),
+    caseRepository.list(undefined, { page: 1, limit: 10_000 }),
   ])
 
   const now = new Date()
@@ -62,10 +69,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }))
 
+  const caseEntries: MetadataRoute.Sitemap = casesResult.items.map((project) => ({
+    url: `${siteConfig.url}/cases/${project.slug}`,
+    lastModified: project.updatedAt ? new Date(project.updatedAt) : new Date(project.publishedAt),
+    changeFrequency: "yearly",
+    priority: 0.7,
+  }))
+
   return [
     ...staticEntries,
     ...productEntries,
     ...categoryEntries,
     ...brandEntries,
+    ...caseEntries,
   ]
 }

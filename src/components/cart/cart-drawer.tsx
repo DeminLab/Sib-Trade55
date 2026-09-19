@@ -10,10 +10,9 @@ import {
   SheetTitle,
   SheetFooter,
 } from "@/components/ui/sheet"
-import { Separator } from "@/components/ui/separator"
 import { CartItem } from "./cart-item"
-import { CartSummary } from "./cart-summary"
 import { useCartStore } from "@/store/cart"
+import { useQuoteStore } from "@/store/quote"
 import { formatPrice } from "@/lib/utils"
 
 export function CartDrawer() {
@@ -21,8 +20,14 @@ export function CartDrawer() {
   const isOpen = useCartStore((s) => s.isOpen)
   const closeCart = useCartStore((s) => s.closeCart)
   const getSubtotal = useCartStore((s) => s.getSubtotal)
+  const addQuoteItems = useQuoteStore((s) => s.addItems)
 
   const subtotal = getSubtotal()
+
+  function handleQuoteRequest() {
+    addQuoteItems(items)
+    closeCart()
+  }
 
   return (
     <Sheet open={isOpen} onOpenChange={(open) => !open && closeCart()}>
@@ -80,6 +85,9 @@ export function CartDrawer() {
                 </p>
                 <Button className="w-full" size="lg" asChild onClick={closeCart}>
                   <Link href="/checkout">Оформить заказ</Link>
+                </Button>
+                <Button className="w-full" variant="outline" size="lg" asChild onClick={handleQuoteRequest}>
+                  <Link href="/quote">Запросить КП</Link>
                 </Button>
                 <button
                   className="mb-4 w-full py-2 text-center text-sm text-muted-foreground underline hover:text-foreground sm:mb-0 sm:hidden"

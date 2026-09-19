@@ -1,16 +1,6 @@
 import { Package } from "lucide-react"
-import { PageHeader } from "@/components/ui/page-header"
-import { EmptyState } from "@/components/ui/empty-state"
+import { AdminSectionPage } from "@/components/admin/admin-section-page"
 
-export default function AdminOrdersPage() {
-  return (
-    <div>
-      <PageHeader title="Заказы" description="Управление заказами клиентов." />
-      <EmptyState
-        icon={Package}
-title="Заказов пока нет"
-        description="Они появятся здесь после первых покупок."
-      />
-    </div>
-  )
+export default async function AdminOrdersPage() {
+  return <AdminSectionPage eyebrow="Продажи / заказы" title="Заказы" description="Заказы клиентов, статусы исполнения и контроль менеджеров. Источник данных изолирован repository-слоем для подключения API." icon={Package} rows={[]} emptyMessage="Заказы появятся после подключения order API." />
 }

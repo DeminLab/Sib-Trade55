@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -15,24 +15,16 @@ export default function SettingsPage() {
   const { user, isReady } = useAuthGuard()
   const updateProfile = useAuthStore((s) => s.updateProfile)
 
-  const [firstName, setFirstName] = useState("")
-  const [lastName, setLastName] = useState("")
-  const [email, setEmail] = useState("")
-
-  useEffect(() => {
-    if (user) {
-      setFirstName(user.firstName)
-      setLastName(user.lastName)
-      setEmail(user.email)
-    }
-  }, [user])
+  const [firstName, setFirstName] = useState(() => user?.firstName ?? "")
+  const [lastName, setLastName] = useState(() => user?.lastName ?? "")
+  const [email, setEmail] = useState(() => user?.email ?? "")
 
   if (!isReady) return null
 
-  function handleSave(e: React.FormEvent) {
+  async function handleSave(e: React.FormEvent) {
     e.preventDefault()
-    updateProfile({ firstName, lastName, email })
-    toast.success("Профиль обновлён")
+    if (await updateProfile({ firstName, lastName, email })) toast.success("Профиль обновлён")
+    else toast.error("Не удалось обновить профиль: backend-сервис не подключён")
   }
 
   return (
@@ -71,7 +63,7 @@ export default function SettingsPage() {
           <CardTitle>Изменить пароль</CardTitle>
         </CardHeader>
         <CardContent>
-          <form onSubmit={(e) => { e.preventDefault(); toast.success("Пароль обновлён (демо)") }} className="space-y-4">
+          <form onSubmit={(e) => { e.preventDefault(); toast.error("Смена пароля будет доступна после подключения backend-сервиса") }} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="currentPassword">Текущий пароль</Label>
               <Input id="currentPassword" type="password" />
