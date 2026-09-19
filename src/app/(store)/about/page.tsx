@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import Image from "next/image"
 
 export const metadata: Metadata = {
   title: "О компании",
@@ -9,8 +10,17 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
-      <h1 className="text-3xl font-bold tracking-tight">О компании СИБ-ТРЕЙД</h1>
+    <div className="mx-auto max-w-[1440px] px-5 py-10 sm:px-8 lg:px-12 lg:py-16">
+      <div className="relative mb-12 min-h-[360px] overflow-hidden bg-neutral-950 sm:min-h-[460px]">
+        <Image src="/images/generated/supplier-yard.png" alt="Склад и зона комплектации СИБ-ТРЕЙД" fill priority className="object-cover" sizes="(max-width: 1024px) 100vw, 1440px" />
+        <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/85 via-neutral-950/35 to-transparent" />
+        <div className="relative flex min-h-[360px] max-w-2xl flex-col justify-end p-7 text-white sm:min-h-[460px] sm:p-12">
+          <p className="industrial-label text-white/65">СИБ-ТРЕЙД / о компании</p>
+          <h1 className="mt-4 text-4xl font-semibold tracking-[-0.05em] sm:text-6xl">Надёжный поставщик для стройки и дома</h1>
+        </div>
+      </div>
+      <div className="mx-auto max-w-3xl">
+      <h2 className="text-3xl font-bold tracking-tight">О компании СИБ-ТРЕЙД</h2>
       <div className="mt-8 space-y-6 text-muted-foreground">
         <p>
           СИБ-ТРЕЙД — это компания, которая начала работу с небольшого торгового направления
@@ -59,6 +69,7 @@ export default function AboutPage() {
           </Link>{" "}
           — ответим на любые вопросы.
         </p>
+      </div>
       </div>
     </div>
   )

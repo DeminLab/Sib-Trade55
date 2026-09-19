@@ -13,7 +13,7 @@
       "year": 2025,
       "category": "Благоустройство",
       "categorySlug": "blagoustroystvo",
-      "coverImage": { "url": "/images/hero.png", "alt": "Площадка комплектации и металлоконструкции" },
+      "coverImage": { "url": "/images/generated/supplier-hero.png", "alt": "Склад и зона комплектации металлоконструкций" },
       "gallery": [
         { "url": "/images/products/1768129390228-823380_medium.webp", "alt": "Металлическая конструкция для благоустройства" },
         { "url": "/images/products/1768129402802-414958_medium.webp", "alt": "Ограждение территории" },
@@ -118,7 +118,7 @@
       "year": 2023,
       "category": "Арт-объекты",
       "categorySlug": "art-obekty",
-      "coverImage": { "url": "/images/hero.png", "alt": "Поставка металлоконструкций для арт-объекта" },
+      "coverImage": { "url": "/images/generated/metal-structures.png", "alt": "Металлоконструкции на объекте" },
       "gallery": [
         { "url": "/images/products/1768129489398-585083_medium.webp", "alt": "Фрагмент арт-объекта" },
         { "url": "/images/products/1768129490028-49729_medium.webp", "alt": "Поставка секций арт-объекта" },

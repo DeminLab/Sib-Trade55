@@ -135,12 +135,12 @@ export default async function HomePage() {
     ...direction,
     category: categoryBySlug.get(direction.slug),
   }))
-  const productionImage = directions.find((item) => item.category)?.category?.image?.url ?? "/images/hero.png"
+  const productionImage = "/images/generated/metal-structures.png"
 
   return (
     <div className="flex flex-col overflow-hidden bg-background">
       <section className="relative min-h-[680px] border-b border-white/15 bg-neutral-950 text-white">
-        <Image src="/images/hero.png" alt="Продажа и поставка металлоизделий СИБ-ТРЕЙД" fill priority className="object-cover" sizes="100vw" />
+        <Image src="/images/generated/supplier-hero.png" alt="Склад и зона поставки металлоизделий СИБ-ТРЕЙД" fill priority className="object-cover" sizes="100vw" />
         <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/90 via-neutral-950/55 to-neutral-950/10" />
         <div className="relative mx-auto flex min-h-[680px] max-w-[1440px] flex-col justify-end px-5 pb-10 pt-28 sm:px-8 sm:pb-14 lg:px-12 lg:pb-16">
           <div className="max-w-3xl">
@@ -173,7 +173,7 @@ export default async function HomePage() {
 
       <section className="bg-surface-subtle section-rule">
         <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[1fr_0.9fr] lg:gap-20 lg:px-12 lg:py-28">
-          <div className="relative min-h-[500px] overflow-hidden bg-neutral-200"><Image src={productionImage} alt="Торговый процесс СИБ-ТРЕЙД" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" /><div className="absolute bottom-5 left-5 bg-background px-4 py-3 text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground">Склад и пункт выдачи / Сибирь</div></div>
+          <div className="relative min-h-[500px] overflow-hidden bg-neutral-200"><Image src={productionImage} alt="Комплектация и поставка металлоизделий СИБ-ТРЕЙД" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" /><div className="absolute bottom-5 left-5 bg-background px-4 py-3 text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground">Склад и пункт выдачи / Сибирь</div></div>
           <div className="flex flex-col justify-center"><SectionHeading eyebrow="02 / поставка" title="Контролируем результат на каждом этапе" text="Совмещаем инженерный подход, проверенные поставщики и ручную работу специалистов, чтобы сложные изделия служили годами." /><div className="mt-8 divide-y divide-border">{[["01", "Подбор и комплектация", "Точно готовим детали по проекту"], ["02", "Проверка комплектации", "Собираем конструкцию с контролем геометрии"], ["03", "Проверка товара перед отгрузкой", "Защищаем поверхность и проверяем результат"]].map(([number, title, text]) => <div key={number} className="grid grid-cols-[48px_1fr] gap-4 py-5"><span className="font-mono text-sm text-muted-foreground">{number}</span><div><h3 className="font-semibold">{title}</h3><p className="mt-1 text-sm text-muted-foreground">{text}</p></div></div>)}</div></div>
         </div>
       </section>

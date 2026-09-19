@@ -45,24 +45,24 @@ title="Создать аккаунт"
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-2">
 <Label htmlFor="firstName">Имя</Label>
-            <Input id="firstName" name="firstName" value={form.firstName} onChange={handleChange} required />
+            <Input id="firstName" name="firstName" autoComplete="given-name" value={form.firstName} onChange={handleChange} required />
           </div>
           <div className="space-y-2">
             <Label htmlFor="lastName">Фамилия</Label>
-            <Input id="lastName" name="lastName" value={form.lastName} onChange={handleChange} required />
+            <Input id="lastName" name="lastName" autoComplete="family-name" value={form.lastName} onChange={handleChange} required />
           </div>
         </div>
         <div className="space-y-2">
           <Label htmlFor="email">Email</Label>
-          <Input id="email" name="email" type="email" placeholder="you@example.com" value={form.email} onChange={handleChange} required />
+          <Input id="email" name="email" autoComplete="email" type="email" placeholder="you@example.com" value={form.email} onChange={handleChange} required />
         </div>
         <div className="space-y-2">
           <Label htmlFor="password">Пароль</Label>
-          <Input id="password" name="password" type="password" value={form.password} onChange={handleChange} required />
+          <Input id="password" name="password" autoComplete="new-password" type="password" value={form.password} onChange={handleChange} required />
         </div>
         <div className="space-y-2">
           <Label htmlFor="confirmPassword">Подтвердите пароль</Label>
-          <Input id="confirmPassword" name="confirmPassword" type="password" value={form.confirmPassword} onChange={handleChange} required />
+          <Input id="confirmPassword" name="confirmPassword" autoComplete="new-password" type="password" value={form.confirmPassword} onChange={handleChange} required />
         </div>
         <Button type="submit" className="w-full" disabled={loading}>
           {loading ? "Создание..." : "Создать аккаунт"}

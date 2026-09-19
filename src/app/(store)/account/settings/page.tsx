@@ -66,15 +66,15 @@ export default function SettingsPage() {
           <form onSubmit={(e) => { e.preventDefault(); toast.error("Смена пароля будет доступна после подключения backend-сервиса") }} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="currentPassword">Текущий пароль</Label>
-              <Input id="currentPassword" type="password" />
+              <Input id="currentPassword" autoComplete="current-password" type="password" />
             </div>
             <div className="space-y-2">
               <Label htmlFor="newPassword">Новый пароль</Label>
-              <Input id="newPassword" type="password" />
+              <Input id="newPassword" autoComplete="new-password" type="password" />
             </div>
             <div className="space-y-2">
               <Label htmlFor="confirmPassword">Подтвердите новый пароль</Label>
-              <Input id="confirmPassword" type="password" />
+              <Input id="confirmPassword" autoComplete="new-password" type="password" />
             </div>
             <Button type="submit">Обновить пароль</Button>
           </form>

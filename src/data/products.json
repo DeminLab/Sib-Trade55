@@ -6,7 +6,7 @@
       "slug": "metallokonstruktsii",
       "description": "Комплектация металлоконструкций любой сложности: лестницы, козырьки, ворота, заборы, каркасы зданий и сооружений.",
       "image": {
-        "url": "/images/products/placeholder.svg",
+        "url": "/images/generated/metal-structures.png",
         "alt": "Металлоконструкции"
       },
       "order": 1
@@ -17,7 +17,7 @@
       "slug": "santehnika",
       "description": "Сантехническое оборудование: ванны, душевые кабины, унитазы, раковины, смесители, трубы и фитинги от ведущих производителей.",
       "image": {
-        "url": "/images/products/placeholder.svg",
+        "url": "/images/generated/showroom.png",
         "alt": "Сантехника"
       },
       "order": 2
@@ -28,7 +28,7 @@
       "slug": "stroymaterialy",
       "description": "Широкий ассортимент строительных материалов: цемент, кирпич, пиломатериалы, утеплители, кровля, отделочные материалы.",
       "image": {
-        "url": "/images/products/placeholder.svg",
+        "url": "/images/generated/supplier-yard.png",
         "alt": "Стройматериалы"
       },
       "order": 3
@@ -39,7 +39,7 @@
       "slug": "instrumenty",
       "description": "Профессиональный и бытовой инструмент для строительства и ремонта. Электроинструмент, ручной инструмент, расходные материалы.",
       "image": {
-        "url": "/images/products/placeholder.svg",
+        "url": "/images/generated/supplier-hero.png",
         "alt": "Инструменты"
       },
       "order": 4
@@ -90,7 +90,7 @@
       "slug": "svetovoe-oformlenie",
       "description": "Световое оформление территорий: парковые светильники, фонари, декоративное освещение. Создаём уют и безопасность на улицах, в парках и дворовых территориях.",
       "image": {
-        "url": "/images/products/placeholder.svg",
+        "url": "/images/generated/metal-structures.png",
         "alt": "Световое оформление"
       },
       "order": 4
@@ -101,7 +101,7 @@
       "slug": "topiarnye-figury",
       "description": "Фигуры из искусственной травы: мебель, животные, музыкальные инструменты. Почти не требуют ухода и круглый год создают летнее настроение.",
       "image": {
-        "url": "/images/products/placeholder.svg",
+        "url": "/images/generated/urban-furniture.png",
         "alt": "Топиарные фигуры"
       },
       "order": 5
@@ -112,7 +112,7 @@
       "slug": "ulichnaya-mebel",
       "description": "Перголы, беседки, качели, навесы из дерева и металла. Минималистичный, но освежающий и комфортный дизайн для общественных и частных территорий.",
       "image": {
-        "url": "/images/products/placeholder.svg",
+        "url": "/images/generated/urban-furniture.png",
         "alt": "Уличная мебель"
       },
       "order": 6
@@ -123,7 +123,7 @@
       "slug": "zhkh-i-blagoustroystvo",
       "description": "Металлические конструкции для коммунальных служб: скамьи, урны, ограждения, теневые навесы, остановки. Элементы благоустройства дворовых территорий и городских пространств.",
       "image": {
-        "url": "/images/products/placeholder.svg",
+        "url": "/images/generated/urban-furniture.png",
         "alt": "ЖКХ и благоустройство"
       },
       "order": 7
@@ -134,7 +134,7 @@
       "slug": "produktsiya-dlya-zhivotnovodstva",
       "description": "Металлические конструкции для ферм и животноводческих комплексов: кормушки, поилки, загоны, бункерные кормушки для КРС. Надежные и долговечные решения для сельского хозяйства.",
       "image": {
-        "url": "/images/products/placeholder.svg",
+        "url": "/images/generated/supplier-yard.png",
         "alt": "Продукция для животноводства"
       },
       "order": 8
@@ -145,7 +145,7 @@
       "slug": "figury-iz-metalla",
       "description": "Декоративные металлические фигуры для сада и парка. Материал — не только конструктивный вопрос, но и важный декоративный аспект. Простые вырезы в листе металла создают уникальное впечатление.",
       "image": {
-        "url": "/images/products/placeholder.svg",
+        "url": "/images/generated/metal-structures.png",
         "alt": "Фигуры из металла"
       },
       "order": 9
