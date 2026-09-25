@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     description: "От задачи до готового металлоизделия: шесть этапов работы СИБ-ТРЕЙД.",
     type: "website",
     url: `${siteConfig.url}/how-we-work`,
-    images: [{ url: "/images/hero.png", alt: "Продажа и поставка металлоизделий СИБ-ТРЕЙД" }],
+    images: [{ url: "/images/products/1768664309964-494604_medium.webp", alt: "Продажа и поставка металлоизделий СИБ-ТРЕЙД" }],
   },
 }
 
@@ -41,7 +41,7 @@ export default function HowWeWorkPage() {
   return (
     <div className="overflow-hidden bg-background">
       <section className="relative min-h-[560px] bg-neutral-950 text-white">
-        <Image src="/images/generated/supplier-hero.png" alt="Склад и зона поставки металлоизделий СИБ-ТРЕЙД" fill priority className="object-cover" sizes="100vw" />
+        <Image src="/images/products/1768664309164-708204_medium.webp" alt="Металлоизделия для благоустройства" fill priority className="object-cover" sizes="100vw" />
         <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/90 via-neutral-950/65 to-neutral-950/20" />
         <div className="relative mx-auto flex min-h-[560px] max-w-[1440px] flex-col justify-end px-5 pb-16 pt-32 sm:px-8 lg:px-12 lg:pb-20">
           <div className="max-w-4xl"><p className="industrial-label text-white/60">СИБ-ТРЕЙД / процесс работы</p><h1 className="mt-5 text-5xl font-semibold leading-[0.98] tracking-[-0.06em] sm:text-7xl">От задачи до готового объекта</h1><p className="mt-7 max-w-2xl text-base leading-7 text-white/75 sm:text-lg">Понятный торговый процесс без лишних этапов: фиксируем задачу, предлагаем решение, согласовываем расчёт и доводим заказ до доставки.</p><Button size="lg" className="mt-8" asChild><Link href="#request">Получить расчёт <ArrowRight className="ml-2 size-4" /></Link></Button></div>

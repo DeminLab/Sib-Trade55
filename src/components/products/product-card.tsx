@@ -161,7 +161,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
         <div className="mt-auto pt-5">
           <p className="text-xl font-semibold tracking-[-0.03em]">{madeToOrder ? "от " : ""}{formatPrice(price, defaultVariant.currency)}</p>
-          <div className="mt-5 flex flex-col gap-2 sm:flex-row">
+          <div className="mt-5 flex flex-col gap-2">
             <Button variant="outline" className="w-full sm:flex-1" asChild><Link href={`/${product.slug}`}>Подробнее <ArrowRight className="ml-2 size-4" /></Link></Button>
             {madeToOrder ? <Button className="w-full sm:flex-1" asChild><Link href="/quote" onClick={handleQuoteRequest}><PackageCheck className="mr-2 size-4" />Запросить КП</Link></Button> : null}
           </div>

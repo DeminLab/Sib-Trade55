@@ -11,16 +11,15 @@ export default function ShippingPolicyPage() {
       <h1 className="text-3xl font-bold tracking-tight">Доставка</h1>
       <div className="mt-8 space-y-6 text-muted-foreground">
         <h2 className="text-xl font-semibold text-foreground">
-          Доставка по Новосибирску
+          Доставка по Омску
         </h2>
         <ul className="list-inside list-disc space-y-2">
-          <li>Стандартная доставка (1-3 рабочих дня): 500 ₽</li>
-          <li>Бесплатная доставка при заказе от 50 000 ₽</li>
-          <li>Срочная доставка (в день заказа): 1 500 ₽</li>
+          <li>Доставка до объекта: рассчитывает менеджер</li>
+          <li>Срок — 1-3 рабочих дня с момента готовности заказа</li>
         </ul>
 
         <h2 className="text-xl font-semibold text-foreground">
-          Доставка по Новосибирской области
+          Доставка по Омской области
         </h2>
         <p>
           Стоимость доставки рассчитывается индивидуально в зависимости от
@@ -39,8 +38,9 @@ export default function ShippingPolicyPage() {
           Самовывоз
         </h2>
         <p>
-          Бесплатно. Пн-пт, 9:00–18:00. Адрес: г. Новосибирск, ул. Промышленная, 15.
-          Предварительно согласуйте забор заказа с менеджером.
+          Самовывоз — по предварительному согласованию с менеджером.
+          По умолчанию доставляем заказ транспортной компанией до вашего
+          города или объекта.
         </p>
 
         <h2 className="text-xl font-semibold text-foreground">

@@ -174,7 +174,7 @@ export default function CheckoutPage() {
                 <Input id="line1" name="line1" value={form.line1} onChange={handleChange} required />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="line2">Квартира, офис (необязательно)</Label>
+                <Label htmlFor="line2">Квартира (необязательно)</Label>
                 <Input id="line2" name="line2" value={form.line2} onChange={handleChange} />
               </div>
               <div className="grid grid-cols-3 gap-4">

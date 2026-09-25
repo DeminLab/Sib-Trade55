@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 705 600" role="img" aria-label="Велопарковка: металлические дуги-стойки для велосипедов">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0f0f0f"/>
+      <stop offset="1" stop-color="#1c1c1c"/>
+    </linearGradient>
+    <linearGradient id="steel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e5e5e5"/>
+      <stop offset="0.5" stop-color="#a3a3a3"/>
+      <stop offset="1" stop-color="#737373"/>
+    </linearGradient>
+    <radialGradient id="shadow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#000" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="705" height="600" fill="url(#bg)"/>
+  <ellipse cx="352" cy="512" rx="300" ry="34" fill="url(#shadow)"/>
+
+  <!-- два велосипеда силуэтами у стоек -->
+  <g stroke="#8f8f8f" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.55">
+    <g transform="translate(150,0)">
+      <circle cx="72" cy="440" r="58"/>
+      <circle cx="222" cy="440" r="58"/>
+      <path d="M72 440 L128 352 L206 352 L222 440"/>
+      <path d="M72 440 L142 440 L118 352"/>
+      <path d="M128 352 L114 322 L92 322 M128 352 L150 322"/>
+      <path d="M196 330 a16 16 0 0 1 16 16"/>
+    </g>
+    <g transform="translate(430,0)">
+      <circle cx="72" cy="440" r="58"/>
+      <circle cx="222" cy="440" r="58"/>
+      <path d="M72 440 L128 352 L206 352 L222 440"/>
+      <path d="M72 440 L142 440 L118 352"/>
+      <path d="M128 352 L114 322 L92 322 M128 352 L150 322"/>
+      <path d="M196 330 a16 16 0 0 1 16 16"/>
+    </g>
+  </g>
+
+  <!-- дуги-стойки велопарковки на переднем плане -->
+  <g>
+    <g transform="translate(120,0)">
+      <path d="M0 500 L0 400 C0 340 92 340 92 400 L92 500" fill="none" stroke="url(#steel)" stroke-width="17" stroke-linecap="round"/>
+      <ellipse cx="0" cy="504" rx="17" ry="6" fill="#4d4d4d"/>
+      <ellipse cx="92" cy="504" rx="17" ry="6" fill="#4d4d4d"/>
+    </g>
+    <g transform="translate(306,0)">
+      <path d="M0 500 L0 400 C0 340 92 340 92 400 L92 500" fill="none" stroke="url(#steel)" stroke-width="17" stroke-linecap="round"/>
+      <ellipse cx="0" cy="504" rx="17" ry="6" fill="#4d4d4d"/>
+      <ellipse cx="92" cy="504" rx="17" ry="6" fill="#4d4d4d"/>
+    </g>
+    <g transform="translate(492,0)">
+      <path d="M0 500 L0 400 C0 340 92 340 92 400 L92 500" fill="none" stroke="url(#steel)" stroke-width="17" stroke-linecap="round"/>
+      <ellipse cx="0" cy="504" rx="17" ry="6" fill="#4d4d4d"/>
+      <ellipse cx="92" cy="504" rx="17" ry="6" fill="#4d4d4d"/>
+    </g>
+  </g>
+</svg>

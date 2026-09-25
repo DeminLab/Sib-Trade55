@@ -80,7 +80,7 @@ export default function AddressesPage() {
                 <Input name="line1" value={form.line1} onChange={handleChange} required />
               </div>
               <div className="space-y-2">
-                <Label>Кв., офис (необязательно)</Label>
+                <Label>Квартира (необязательно)</Label>
                 <Input name="line2" value={form.line2} onChange={handleChange} />
               </div>
               <div className="grid grid-cols-3 gap-4">

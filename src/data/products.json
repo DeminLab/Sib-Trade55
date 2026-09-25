@@ -6,43 +6,10 @@
       "slug": "metallokonstruktsii",
       "description": "Комплектация металлоконструкций любой сложности: лестницы, козырьки, ворота, заборы, каркасы зданий и сооружений.",
       "image": {
-        "url": "/images/generated/metal-structures.png",
-        "alt": "Металлоконструкции"
+        "url": "/images/products/1768129378765-780527_medium.webp",
+        "alt": "Теневой навес из металла"
       },
       "order": 1
-    },
-    {
-      "id": "cat-2",
-      "name": "Сантехника",
-      "slug": "santehnika",
-      "description": "Сантехническое оборудование: ванны, душевые кабины, унитазы, раковины, смесители, трубы и фитинги от ведущих производителей.",
-      "image": {
-        "url": "/images/generated/showroom.png",
-        "alt": "Сантехника"
-      },
-      "order": 2
-    },
-    {
-      "id": "cat-3",
-      "name": "Стройматериалы",
-      "slug": "stroymaterialy",
-      "description": "Широкий ассортимент строительных материалов: цемент, кирпич, пиломатериалы, утеплители, кровля, отделочные материалы.",
-      "image": {
-        "url": "/images/generated/supplier-yard.png",
-        "alt": "Стройматериалы"
-      },
-      "order": 3
-    },
-    {
-      "id": "cat-4",
-      "name": "Инструменты",
-      "slug": "instrumenty",
-      "description": "Профессиональный и бытовой инструмент для строительства и ремонта. Электроинструмент, ручной инструмент, расходные материалы.",
-      "image": {
-        "url": "/images/generated/supplier-hero.png",
-        "alt": "Инструменты"
-      },
-      "order": 4
     },
     {
       "id": "cat-1-1",
@@ -50,7 +17,8 @@
       "slug": "lestnitsy",
       "description": "Металлические лестницы: винтовые, маршевые, пожарные, на косоурах. Комплектация по индивидуальным размерам.",
       "parentId": "cat-1",
-      "order": 1
+      "order": 1,
+      "image": null
     },
     {
       "id": "cat-1-2",
@@ -58,7 +26,11 @@
       "slug": "vorota-zabory",
       "description": "Въездные ворота, откатные и распашные, заборы из профнастила, решётки, калитки. Установка и обслуживание.",
       "parentId": "cat-1",
-      "order": 2
+      "order": 2,
+      "image": {
+        "url": "/images/products/fence-forged-01.webp",
+        "alt": "Кованое ограждение из металла"
+      }
     },
     {
       "id": "cat-1-3",
@@ -66,23 +38,11 @@
       "slug": "kozyrki-navesy",
       "description": "Козырьки над входом, навесы для автомобиля, беседки и перголы из металла. Любой размер и дизайн.",
       "parentId": "cat-1",
-      "order": 3
-    },
-    {
-      "id": "cat-2-1",
-      "name": "Ванны и душевые",
-      "slug": "vanny-dushevye",
-      "description": "Акриловые, стальные и чугунные ванны. Душевые кабины и ограждения. Всё для комфортной ванной комнаты.",
-      "parentId": "cat-2",
-      "order": 1
-    },
-    {
-      "id": "cat-2-2",
-      "name": "Смесители и фурнитура",
-      "slug": "smesiteli-furnitura",
-      "description": "Смесители для кухни и ванной, душевые системы, полотенцесушители. Надёжные бренды по доступным ценам.",
-      "parentId": "cat-2",
-      "order": 2
+      "order": 3,
+      "image": {
+        "url": "/images/products/1768129378833-62411_medium.webp",
+        "alt": "Металлический навес"
+      }
     },
     {
       "id": "cat-new-100",
@@ -90,8 +50,8 @@
       "slug": "svetovoe-oformlenie",
       "description": "Световое оформление территорий: парковые светильники, фонари, декоративное освещение. Создаём уют и безопасность на улицах, в парках и дворовых территориях.",
       "image": {
-        "url": "/images/generated/metal-structures.png",
-        "alt": "Световое оформление"
+        "url": "/images/products/1768129469674-398494_medium.webp",
+        "alt": "Опора паркового светильника"
       },
       "order": 4
     },
@@ -101,8 +61,8 @@
       "slug": "topiarnye-figury",
       "description": "Фигуры из искусственной травы: мебель, животные, музыкальные инструменты. Почти не требуют ухода и круглый год создают летнее настроение.",
       "image": {
-        "url": "/images/generated/urban-furniture.png",
-        "alt": "Топиарные фигуры"
+        "url": "/images/products/1768565737723-653852_medium.webp",
+        "alt": "Топиарная фигура из металла"
       },
       "order": 5
     },
@@ -112,8 +72,8 @@
       "slug": "ulichnaya-mebel",
       "description": "Перголы, беседки, качели, навесы из дерева и металла. Минималистичный, но освежающий и комфортный дизайн для общественных и частных территорий.",
       "image": {
-        "url": "/images/generated/urban-furniture.png",
-        "alt": "Уличная мебель"
+        "url": "/images/products/1768664047738-683414_medium.webp",
+        "alt": "Качели парковые из металла"
       },
       "order": 6
     },
@@ -123,8 +83,8 @@
       "slug": "zhkh-i-blagoustroystvo",
       "description": "Металлические конструкции для коммунальных служб: скамьи, урны, ограждения, теневые навесы, остановки. Элементы благоустройства дворовых территорий и городских пространств.",
       "image": {
-        "url": "/images/generated/urban-furniture.png",
-        "alt": "ЖКХ и благоустройство"
+        "url": "/images/products/1768129390228-823380_medium.webp",
+        "alt": "Навес для мусорных контейнеров"
       },
       "order": 7
     },
@@ -134,8 +94,8 @@
       "slug": "produktsiya-dlya-zhivotnovodstva",
       "description": "Металлические конструкции для ферм и животноводческих комплексов: кормушки, поилки, загоны, бункерные кормушки для КРС. Надежные и долговечные решения для сельского хозяйства.",
       "image": {
-        "url": "/images/generated/supplier-yard.png",
-        "alt": "Продукция для животноводства"
+        "url": "/images/products/1768129506652-895153_medium.webp",
+        "alt": "Кормушка для сельскохозяйственных животных"
       },
       "order": 8
     },
@@ -145,1019 +105,13 @@
       "slug": "figury-iz-metalla",
       "description": "Декоративные металлические фигуры для сада и парка. Материал — не только конструктивный вопрос, но и важный декоративный аспект. Простые вырезы в листе металла создают уникальное впечатление.",
       "image": {
-        "url": "/images/generated/metal-structures.png",
-        "alt": "Фигуры из металла"
+        "url": "/images/products/1768565959461-951171_medium.webp",
+        "alt": "Фигура из металла"
       },
       "order": 9
     }
   ],
   "products": [
-    {
-      "id": "prod-1",
-      "name": "Маршевая лестница из нержавеющей стали",
-      "slug": "marshlevaya-lestnitsa-nerzhaveyushchaya",
-      "description": "Маршевая лестница из нержавеющей стали AISI 304. Ступени с противоскользящим покрытием. Подходит для внутреннего и наружного монтажа.",
-      "images": [
-        {
-          "url": "/images/products/placeholder.svg",
-          "alt": "Маршевая лестница",
-          "width": 800,
-          "height": 800
-        }
-      ],
-      "status": "active",
-      "categoryIds": [
-        "cat-1",
-        "cat-1-1"
-      ],
-      "tags": [
-        "лестница",
-        "нержавеющая сталь",
-        "маршевая"
-      ],
-      "variants": [
-        {
-          "id": "var-1-1",
-          "productId": "prod-1",
-          "sku": "LST-SS-001",
-          "name": "3 ступени",
-          "price": 45000,
-          "currency": "RUB",
-          "inventory": {
-            "quantity": 10,
-            "trackInventory": true,
-            "allowBackorder": false
-          },
-          "options": [
-            {
-              "name": "Размер",
-              "value": "3 ступени"
-            }
-          ],
-          "images": []
-        },
-        {
-          "id": "var-1-2",
-          "productId": "prod-1",
-          "sku": "LST-SS-002",
-          "name": "5 ступеней",
-          "price": 72000,
-          "currency": "RUB",
-          "inventory": {
-            "quantity": 7,
-            "trackInventory": true,
-            "allowBackorder": false
-          },
-          "options": [
-            {
-              "name": "Размер",
-              "value": "5 ступеней"
-            }
-          ],
-          "images": []
-        }
-      ],
-      "featured": true,
-      "createdAt": "2025-01-15T10:00:00Z",
-      "updatedAt": "2025-01-15T10:00:00Z",
-      "rating": 4.8,
-      "reviewCount": 34,
-      "brandId": "brand-1",
-      "body": "<h2>Надёжная лестница на долгие годы</h2><p>Маршевые лестницы из нержавеющей стали — это классическое решение для частных домов, коттеджей и коммерческих объектов. Нержавеющая сталь AISI 304 обеспечивает коррозионную стойкость и долговечность даже в условиях повышенной влажности.</p><h3>Преимущества</h3><ul><li><strong>Противоскользящие ступени</strong> — безопасный подъём в любую погоду</li><li><strong>Нержавеющая сталь AISI 304</strong> — устойчивость к коррозии</li><li><strong>Индивидуальные размеры</strong> — поставка по вашим замерам</li><li><strong>Порошковое покрытие</strong> — защита и эстетичный вид</li></ul><h3>Технические характеристики</h3><ul><li>Материал: нержавеющая сталь AISI 304</li><li>Толщина ступеней: 2 мм</li><li>Несущая нагрузка: до 300 кг</li><li>Гарантия: 5 лет</li></ul>"
-    },
-    {
-      "id": "prod-2",
-      "name": "Откатные ворота с автоматикой",
-      "slug": "otkatnye-vorota-avtomatika",
-      "description": "Откатные ворота с автоматическим приводом. Полотно из профнастила, каркас из прямоугольной трубы. Комплект: полотно, направляющая, привод, пульт.",
-      "images": [
-        {
-          "url": "/images/products/placeholder.svg",
-          "alt": "Откатные ворота",
-          "width": 800,
-          "height": 800
-        }
-      ],
-      "status": "active",
-      "categoryIds": [
-        "cat-1",
-        "cat-1-2"
-      ],
-      "tags": [
-        "ворота",
-        "откатные",
-        "автоматика"
-      ],
-      "variants": [
-        {
-          "id": "var-2-1",
-          "productId": "prod-2",
-          "sku": "VG-SL-400",
-          "name": "4 м",
-          "price": 68000,
-          "currency": "RUB",
-          "inventory": {
-            "quantity": 5,
-            "trackInventory": true,
-            "allowBackorder": false
-          },
-          "options": [
-            {
-              "name": "Ширина проёма",
-              "value": "4 м"
-            }
-          ],
-          "images": []
-        },
-        {
-          "id": "var-2-2",
-          "productId": "prod-2",
-          "sku": "VG-SL-600",
-          "name": "6 м",
-          "price": 95000,
-          "currency": "RUB",
-          "inventory": {
-            "quantity": 3,
-            "trackInventory": true,
-            "allowBackorder": false
-          },
-          "options": [
-            {
-              "name": "Ширина проёма",
-              "value": "6 м"
-            }
-          ],
-          "images": []
-        }
-      ],
-      "featured": true,
-      "createdAt": "2025-01-20T10:00:00Z",
-      "updatedAt": "2025-01-20T10:00:00Z",
-      "rating": 4.9,
-      "reviewCount": 21,
-      "brandId": "brand-1",
-      "body": "<h2>Автоматические откатные ворота</h2><p>Откатные ворота — популярное решение для частных домов и промышленных территорий. Бесшумный ход, плавный разгон и торможение. Комплект включает всё необходимое для установки.</p><h3>Комплектация</h3><ul><li>Воротное полотно из профнастила</li><li>Направляющая балка</li><li>Электропривод с пультом управления</li><li>Фундаментные столбы</li><li>Направляющие ролики</li></ul><h3>Преимущества</h3><ul><li>Экономия пространства — не требуют площади для открывания</li><li>Автоматика — удобное управление с пульта</li><li>Долговечность — срок службы более 20 лет</li><li>Гарантия: 3 года</li></ul>"
-    },
-    {
-      "id": "prod-3",
-      "name": "Акриловая ванна Lux 170",
-      "slug": "akrilovaya-vanna-lux-170",
-      "description": "Акриловая ванна размером 170×75 см. Глубина 46 см. Эргономичная форма, укреплённое дно, системы гидромассажа и аэромассажа.",
-      "images": [
-        {
-          "url": "/images/products/placeholder.svg",
-          "alt": "Акриловая ванна",
-          "width": 800,
-          "height": 800
-        }
-      ],
-      "status": "active",
-      "categoryIds": [
-        "cat-2",
-        "cat-2-1"
-      ],
-      "tags": [
-        "ванна",
-        "акрил",
-        "гидромассаж"
-      ],
-      "variants": [
-        {
-          "id": "var-3-1",
-          "productId": "prod-3",
-          "sku": "VAN-LUX-170",
-          "name": "Без поддона",
-          "price": 35000,
-          "currency": "RUB",
-          "inventory": {
-            "quantity": 15,
-            "trackInventory": true,
-            "allowBackorder": false
-          },
-          "options": [
-            {
-              "name": "Комплектация",
-              "value": "Без поддона"
-            }
-          ],
-          "images": []
-        },
-        {
-          "id": "var-3-2",
-          "productId": "prod-3",
-          "sku": "VAN-LUX-170-P",
-          "name": "С поддоном",
-          "price": 42000,
-          "currency": "RUB",
-          "inventory": {
-            "quantity": 10,
-            "trackInventory": true,
-            "allowBackorder": false
-          },
-          "options": [
-            {
-              "name": "Комплектация",
-              "value": "С поддоном"
-            }
-          ],
-          "images": []
-        }
-      ],
-      "featured": true,
-      "createdAt": "2025-02-01T10:00:00Z",
-      "updatedAt": "2025-02-01T10:00:00Z",
-      "rating": 4.7,
-      "reviewCount": 48,
-      "brandId": "brand-2",
-      "body": "<h2>Комфорт каждый день</h2><p>Акриловая ванна Lux 170 — это сочетание элегантного дизайна и практичности. Высококачественный акрил сохраняет тепло, легко чистится и не желтеет со временем.</p><h3>Характеристики</h3><ul><li>Размер: 170×75 см</li><li>Глубина: 46 см</li><li>Материал: литой акрил 4 мм</li><li>Укреплённое дно с армированием</li><li>Слив-перелив: хром</li></ul><h3>Гарантия</h3><p>Гарантия на ванну — 10 лет. Гарантия на акриловое покрытие — 7 лет.</p>"
-    },
-    {
-      "id": "prod-4",
-      "name": "Смеситель для кухни с выдвижным изливом",
-      "slug": "smesitel-kuhnya-vydvizhnoy-izliv",
-      "description": "Кухонный смеситель с выдвижным распылителем. Два режима подачи воды. Керамический картридж. Хромированное покрытие.",
-      "images": [
-        {
-          "url": "/images/products/placeholder.svg",
-          "alt": "Смеситель для кухни",
-          "width": 800,
-          "height": 800
-        }
-      ],
-      "status": "active",
-      "categoryIds": [
-        "cat-2",
-        "cat-2-2"
-      ],
-      "tags": [
-        "смеситель",
-        "кухня",
-        "хром"
-      ],
-      "variants": [
-        {
-          "id": "var-4-1",
-          "productId": "prod-4",
-          "sku": "SM-KH-EXT",
-          "name": "Хром",
-          "price": 8500,
-          "currency": "RUB",
-          "inventory": {
-            "quantity": 30,
-            "trackInventory": true,
-            "allowBackorder": false
-          },
-          "options": [
-            {
-              "name": "Цвет",
-              "value": "Хром"
-            }
-          ],
-          "images": []
-        },
-        {
-          "id": "var-4-2",
-          "productId": "prod-4",
-          "sku": "SM-BL-EXT",
-          "name": "Матовый чёрный",
-          "price": 9800,
-          "currency": "RUB",
-          "inventory": {
-            "quantity": 20,
-            "trackInventory": true,
-            "allowBackorder": false
-          },
-          "options": [
-            {
-              "name": "Цвет",
-              "value": "Матовый чёрный"
-            }
-          ],
-          "images": []
-        }
-      ],
-      "featured": true,
-      "createdAt": "2025-02-10T10:00:00Z",
-      "updatedAt": "2025-02-10T10:00:00Z",
-      "rating": 4.6,
-      "reviewCount": 67,
-      "brandId": "brand-2"
-    },
-    {
-      "id": "prod-5",
-      "name": "Профнастил стеновой С-8",
-      "slug": "profil-list-stenovoy-s8",
-      "description": "Профнастил стеновой марки С-8. Высота волны 8 мм, ширина полезная 1150 мм. Покрытие полиэстер. Толщина 0,4–0,7 мм.",
-      "images": [
-        {
-          "url": "/images/products/placeholder.svg",
-          "alt": "Профнастил С-8",
-          "width": 800,
-          "height": 800
-        }
-      ],
-      "status": "active",
-      "categoryIds": [
-        "cat-3"
-      ],
-      "tags": [
-        "профнастил",
-        "кровля",
-        "стены"
-      ],
-      "variants": [
-        {
-          "id": "var-5-1",
-          "productId": "prod-5",
-          "sku": "PRF-S8-04",
-          "name": "0,4 мм",
-          "price": 350,
-          "currency": "RUB",
-          "inventory": {
-            "quantity": 500,
-            "trackInventory": true,
-            "allowBackorder": true
-          },
-          "options": [
-            {
-              "name": "Толщина",
-              "value": "0,4 мм"
-            }
-          ],
-          "images": []
-        },
-        {
-          "id": "var-5-2",
-          "productId": "prod-5",
-          "sku": "PRF-S8-05",
-          "name": "0,5 мм",
-          "price": 420,
-          "currency": "RUB",
-          "inventory": {
-            "quantity": 400,
-            "trackInventory": true,
-            "allowBackorder": true
-          },
-          "options": [
-            {
-              "name": "Толщина",
-              "value": "0,5 мм"
-            }
-          ],
-          "images": []
-        },
-        {
-          "id": "var-5-3",
-          "productId": "prod-5",
-          "sku": "PRF-S8-07",
-          "name": "0,7 мм",
-          "price": 580,
-          "currency": "RUB",
-          "inventory": {
-            "quantity": 300,
-            "trackInventory": true,
-            "allowBackorder": true
-          },
-          "options": [
-            {
-              "name": "Толщина",
-              "value": "0,7 мм"
-            }
-          ],
-          "images": []
-        }
-      ],
-      "featured": false,
-      "createdAt": "2025-02-15T10:00:00Z",
-      "updatedAt": "2025-02-15T10:00:00Z",
-      "rating": 4.5,
-      "reviewCount": 112,
-      "brandId": "brand-3",
-      "body": "<h2>Профнастил для стен и заборов</h2><p>Профнастил С-8 — универсальный стеновой материал. Подходит для облицовки зданий, устройства заборов и внутренней отделки.</p><h3>Характеристики</h3><ul><li>Марка: С-8</li><li>Высота профиля: 8 мм</li><li>Полезная ширина: 1150 мм</li><li>Покрытие: полиэстер 25 мкм</li><li>Цвета:RAL по каталогу</li></ul><p>Цена указана за 1 погонный метр. Минимальный заказ — 1 лист.</p>"
-    },
-    {
-      "id": "prod-6",
-      "name": "Перфоратор Bosch GBH 2-26 DRE",
-      "slug": "perforator-bosch-gbh-2-26-dre",
-      "description": "Профессиональный перфоратор Bosch. Мощность 800 Вт, энергия удара 2,7 Дж. Три режима: сверление, удар, сверление с ударом.",
-      "images": [
-        {
-          "url": "/images/products/placeholder.svg",
-          "alt": "Перфоратор Bosch",
-          "width": 800,
-          "height": 800
-        }
-      ],
-      "status": "active",
-      "categoryIds": [
-        "cat-4"
-      ],
-      "tags": [
-        "перфоратор",
-        "Bosch",
-        "электроинструмент"
-      ],
-      "variants": [
-        {
-          "id": "var-6-1",
-          "productId": "prod-6",
-          "sku": "PRF-BSH-226",
-          "name": "Без кейса",
-          "price": 12500,
-          "currency": "RUB",
-          "inventory": {
-            "quantity": 25,
-            "trackInventory": true,
-            "allowBackorder": false
-          },
-          "options": [
-            {
-              "name": "Комплектация",
-              "value": "Без кейса"
-            }
-          ],
-          "images": []
-        },
-        {
-          "id": "var-6-2",
-          "productId": "prod-6",
-          "sku": "PRF-BSH-226-K",
-          "name": "С кейсом и бурами",
-          "price": 15800,
-          "currency": "RUB",
-          "inventory": {
-            "quantity": 15,
-            "trackInventory": true,
-            "allowBackorder": false
-          },
-          "options": [
-            {
-              "name": "Комплектация",
-              "value": "С кейсом и бурами"
-            }
-          ],
-          "images": []
-        }
-      ],
-      "featured": false,
-      "createdAt": "2025-03-01T10:00:00Z",
-      "updatedAt": "2025-03-01T10:00:00Z",
-      "rating": 4.8,
-      "reviewCount": 89,
-      "brandId": "brand-4"
-    },
-    {
-      "id": "prod-7",
-      "name": "Навес для автомобиля 6×4 м",
-      "slug": "naves-avtomobil-6x4",
-      "description": "Навес для автомобиля из профильной трубы с поликарбонатным покрытием. Размер 6×4 м. Устойчив к снеговым нагрузкам.",
-      "images": [
-        {
-          "url": "/images/products/placeholder.svg",
-          "alt": "Навес для автомобиля",
-          "width": 800,
-          "height": 800
-        }
-      ],
-      "status": "active",
-      "categoryIds": [
-        "cat-1",
-        "cat-1-3"
-      ],
-      "tags": [
-        "навес",
-        "автомобиль",
-        "поликарбонат"
-      ],
-      "variants": [
-        {
-          "id": "var-7-1",
-          "productId": "prod-7",
-          "sku": "NV-AUTO-64",
-          "name": "6×4 м, прозрачный",
-          "price": 85000,
-          "currency": "RUB",
-          "inventory": {
-            "quantity": 8,
-            "trackInventory": true,
-            "allowBackorder": false
-          },
-          "options": [
-            {
-              "name": "Цвет поликарбоната",
-              "value": "Прозрачный"
-            }
-          ],
-          "images": []
-        },
-        {
-          "id": "var-7-2",
-          "productId": "prod-7",
-          "sku": "NV-AUTO-64B",
-          "name": "6×4 м, бронза",
-          "price": 89000,
-          "currency": "RUB",
-          "inventory": {
-            "quantity": 5,
-            "trackInventory": true,
-            "allowBackorder": false
-          },
-          "options": [
-            {
-              "name": "Цвет поликарбоната",
-              "value": "Бронза"
-            }
-          ],
-          "images": []
-        }
-      ],
-      "featured": false,
-      "createdAt": "2025-03-05T10:00:00Z",
-      "updatedAt": "2025-03-05T10:00:00Z",
-      "rating": 4.7,
-      "reviewCount": 19,
-      "brandId": "brand-1"
-    },
-    {
-      "id": "prod-8",
-      "name": "Цемент М500 50 кг",
-      "slug": "tsement-m500-50kg",
-      "description": "ЦементPortland М500 Д0. Мешок 50 кг. Высокая прочность, морозостойкость. Подходит для фундаментов, стяжек и кладки.",
-      "images": [
-        {
-          "url": "/images/products/placeholder.svg",
-          "alt": "Цемент М500",
-          "width": 800,
-          "height": 800
-        }
-      ],
-      "status": "active",
-      "categoryIds": [
-        "cat-3"
-      ],
-      "tags": [
-        "цемент",
-        "бетон",
-        "кладка"
-      ],
-      "variants": [
-        {
-          "id": "var-8-1",
-          "productId": "prod-8",
-          "sku": "CEM-500-50",
-          "name": "50 кг",
-          "price": 520,
-          "currency": "RUB",
-          "inventory": {
-            "quantity": 1000,
-            "trackInventory": true,
-            "allowBackorder": true
-          },
-          "options": [
-            {
-              "name": "Упаковка",
-              "value": "50 кг"
-            }
-          ],
-          "images": []
-        }
-      ],
-      "featured": false,
-      "createdAt": "2025-03-10T10:00:00Z",
-      "updatedAt": "2025-03-10T10:00:00Z",
-      "rating": 4.4,
-      "reviewCount": 203,
-      "brandId": "brand-3"
-    },
-    {
-      "id": "prod-9",
-      "name": "Шуруповёрт DeWALT DCD791",
-      "slug": "shurupovert-dewalt-dcd791",
-      "description": "Аккумуляторный шуруповёрт DeWALT. Напряжение 18 В, крутящийщий момент 70 Нм. Два аккумулятора 2 Ач в комплекте.",
-      "images": [
-        {
-          "url": "/images/products/placeholder.svg",
-          "alt": "Шуруповёрт DeWALT",
-          "width": 800,
-          "height": 800
-        }
-      ],
-      "status": "active",
-      "categoryIds": [
-        "cat-4"
-      ],
-      "tags": [
-        "шуруповёрт",
-        "DeWALT",
-        "аккумуляторный"
-      ],
-      "variants": [
-        {
-          "id": "var-9-1",
-          "productId": "prod-9",
-          "sku": "SH-DWT-791",
-          "name": "2×2 Ач + зарядка",
-          "price": 14900,
-          "currency": "RUB",
-          "inventory": {
-            "quantity": 12,
-            "trackInventory": true,
-            "allowBackorder": false
-          },
-          "options": [
-            {
-              "name": "Комплектация",
-              "value": "2×2 Ач + зарядка"
-            }
-          ],
-          "images": []
-        }
-      ],
-      "featured": false,
-      "createdAt": "2025-03-15T10:00:00Z",
-      "updatedAt": "2025-03-15T10:00:00Z",
-      "rating": 4.9,
-      "reviewCount": 56,
-      "brandId": "brand-4"
-    },
-    {
-      "id": "prod-10",
-      "name": "Радиатор алюминиевый Global 500",
-      "slug": "radiator-alyuminiyevyy-global-500",
-      "description": "Алюминиевый радиатор отопления Global. Высота 500 мм, межосевое расстояние 500 мм. Теплоотдача 135 Вт/секция.",
-      "images": [
-        {
-          "url": "/images/products/placeholder.svg",
-          "alt": "Радиатор алюминиевый",
-          "width": 800,
-          "height": 800
-        }
-      ],
-      "status": "active",
-      "categoryIds": [
-        "cat-2",
-        "cat-2-2"
-      ],
-      "tags": [
-        "радиатор",
-        "отопление",
-        "алюминий"
-      ],
-      "variants": [
-        {
-          "id": "var-10-1",
-          "productId": "prod-10",
-          "sku": "RAD-GL-4",
-          "name": "4 секции",
-          "price": 6800,
-          "currency": "RUB",
-          "inventory": {
-            "quantity": 40,
-            "trackInventory": true,
-            "allowBackorder": true
-          },
-          "options": [
-            {
-              "name": "Секции",
-              "value": "4 секции"
-            }
-          ],
-          "images": []
-        },
-        {
-          "id": "var-10-2",
-          "productId": "prod-10",
-          "sku": "RAD-GL-8",
-          "name": "8 секций",
-          "price": 12500,
-          "currency": "RUB",
-          "inventory": {
-            "quantity": 25,
-            "trackInventory": true,
-            "allowBackorder": true
-          },
-          "options": [
-            {
-              "name": "Секции",
-              "value": "8 секций"
-            }
-          ],
-          "images": []
-        },
-        {
-          "id": "var-10-3",
-          "productId": "prod-10",
-          "sku": "RAD-GL-12",
-          "name": "12 секций",
-          "price": 18200,
-          "currency": "RUB",
-          "inventory": {
-            "quantity": 15,
-            "trackInventory": true,
-            "allowBackorder": true
-          },
-          "options": [
-            {
-              "name": "Секции",
-              "value": "12 секций"
-            }
-          ],
-          "images": []
-        }
-      ],
-      "featured": false,
-      "createdAt": "2025-03-20T10:00:00Z",
-      "updatedAt": "2025-03-20T10:00:00Z",
-      "rating": 4.6,
-      "reviewCount": 78,
-      "brandId": "brand-2"
-    },
-    {
-      "id": "prod-11",
-      "name": "Забор из профнастила под ключ",
-      "slug": "zabor-profnastil-pod-klyuch",
-      "description": "Забор из профнастила с установкой. Столбы из профильной трубы 60×60, рёбра жёсткости, полотно из профнастила С-8.",
-      "images": [
-        {
-          "url": "/images/products/placeholder.svg",
-          "alt": "Забор из профнастила",
-          "width": 800,
-          "height": 800
-        }
-      ],
-      "status": "active",
-      "categoryIds": [
-        "cat-1",
-        "cat-1-2"
-      ],
-      "tags": [
-        "забор",
-        "профнастил",
-        "установка"
-      ],
-      "variants": [
-        {
-          "id": "var-11-1",
-          "productId": "prod-11",
-          "sku": "ZAB-18-PR",
-          "name": "1,8 м, прямой",
-          "price": 3200,
-          "currency": "RUB",
-          "inventory": {
-            "quantity": 100,
-            "trackInventory": true,
-            "allowBackorder": true
-          },
-          "options": [
-            {
-              "name": "Высота",
-              "value": "1,8 м"
-            }
-          ],
-          "images": []
-        },
-        {
-          "id": "var-11-2",
-          "productId": "prod-11",
-          "sku": "ZAB-22-PR",
-          "name": "2,2 м, прямой",
-          "price": 3800,
-          "currency": "RUB",
-          "inventory": {
-            "quantity": 80,
-            "trackInventory": true,
-            "allowBackorder": true
-          },
-          "options": [
-            {
-              "name": "Высота",
-              "value": "2,2 м"
-            }
-          ],
-          "images": []
-        }
-      ],
-      "featured": false,
-      "createdAt": "2025-04-01T10:00:00Z",
-      "updatedAt": "2025-04-01T10:00:00Z",
-      "rating": 4.5,
-      "reviewCount": 64,
-      "brandId": "brand-1"
-    },
-    {
-      "id": "prod-12",
-      "name": "Душевая кабина RODA Compact 80",
-      "slug": "dushevaya-kabina-roda-compact-80",
-      "description": "Душевая кабина 80×80 см. Закалённое стекло 6 мм. Хромированный профиль. Поддон из акрила. Двери раздвижные.",
-      "images": [
-        {
-          "url": "/images/products/placeholder.svg",
-          "alt": "Душевая кабина",
-          "width": 800,
-          "height": 800
-        }
-      ],
-      "status": "active",
-      "categoryIds": [
-        "cat-2",
-        "cat-2-1"
-      ],
-      "tags": [
-        "душевая кабина",
-        "стекло",
-        "акрил"
-      ],
-      "variants": [
-        {
-          "id": "var-12-1",
-          "productId": "prod-12",
-          "sku": "DK-RODA-80",
-          "name": "80×80 см",
-          "price": 48000,
-          "currency": "RUB",
-          "inventory": {
-            "quantity": 6,
-            "trackInventory": true,
-            "allowBackorder": false
-          },
-          "options": [
-            {
-              "name": "Размер",
-              "value": "80×80 см"
-            }
-          ],
-          "images": []
-        },
-        {
-          "id": "var-12-2",
-          "productId": "prod-12",
-          "sku": "DK-RODA-90",
-          "name": "90×90 см",
-          "price": 55000,
-          "currency": "RUB",
-          "inventory": {
-            "quantity": 4,
-            "trackInventory": true,
-            "allowBackorder": false
-          },
-          "options": [
-            {
-              "name": "Размер",
-              "value": "90×90 см"
-            }
-          ],
-          "images": []
-        }
-      ],
-      "featured": false,
-      "createdAt": "2025-04-05T10:00:00Z",
-      "updatedAt": "2025-04-05T10:00:00Z",
-      "rating": 4.3,
-      "reviewCount": 31,
-      "brandId": "brand-2"
-    },
-    {
-      "id": "prod-13",
-      "name": "Кирпич красный М150",
-      "slug": "kirpich-krasnyy-m150",
-      "description": "Кирпич керамический полнотелый М150. Размер стандартный 250×120×65 мм. Подходит для кладки стен, фундаментов и облицовки.",
-      "images": [
-        {
-          "url": "/images/products/placeholder.svg",
-          "alt": "Кирпич красный",
-          "width": 800,
-          "height": 800
-        }
-      ],
-      "status": "active",
-      "categoryIds": [
-        "cat-3"
-      ],
-      "tags": [
-        "кирпич",
-        "кладка",
-        "стены"
-      ],
-      "variants": [
-        {
-          "id": "var-13-1",
-          "productId": "prod-13",
-          "sku": "KRP-M150-1",
-          "name": "1 штука",
-          "price": 18,
-          "currency": "RUB",
-          "inventory": {
-            "quantity": 50000,
-            "trackInventory": true,
-            "allowBackorder": true
-          },
-          "options": [
-            {
-              "name": "Количество",
-              "value": "1 штука"
-            }
-          ],
-          "images": []
-        },
-        {
-          "id": "var-13-2",
-          "productId": "prod-13",
-          "sku": "KRP-M150-PAL",
-          "name": "Паллета (420 шт)",
-          "price": 7200,
-          "currency": "RUB",
-          "inventory": {
-            "quantity": 50,
-            "trackInventory": true,
-            "allowBackorder": true
-          },
-          "options": [
-            {
-              "name": "Количество",
-              "value": "Паллета (420 шт)"
-            }
-          ],
-          "images": []
-        }
-      ],
-      "featured": false,
-      "createdAt": "2025-04-08T10:00:00Z",
-      "updatedAt": "2025-04-08T10:00:00Z",
-      "rating": 4.4,
-      "reviewCount": 156,
-      "brandId": "brand-3"
-    },
-    {
-      "id": "prod-14",
-      "name": "Сварочный инвертор Ресанта САИ-220",
-      "slug": "svarka-resanta-sai-220",
-      "description": "Сварочный инвертор Ресанта САИ-220. Ток до 220 А. Работает от сети 220 В. Жидкостное охлаждение. Плавная регулировка тока.",
-      "images": [
-        {
-          "url": "/images/products/placeholder.svg",
-          "alt": "Сварочный инвертор",
-          "width": 800,
-          "height": 800
-        }
-      ],
-      "status": "active",
-      "categoryIds": [
-        "cat-4"
-      ],
-      "tags": [
-        "сварка",
-        "инвертор",
-        "Ресанта"
-      ],
-      "variants": [
-        {
-          "id": "var-14-1",
-          "productId": "prod-14",
-          "sku": "SVR-RES-220",
-          "name": "Базовый",
-          "price": 11500,
-          "currency": "RUB",
-          "inventory": {
-            "quantity": 18,
-            "trackInventory": true,
-            "allowBackorder": false
-          },
-          "options": [
-            {
-              "name": "Комплектация",
-              "value": "Базовый"
-            }
-          ],
-          "images": []
-        },
-        {
-          "id": "var-14-2",
-          "productId": "prod-14",
-          "sku": "SVR-RES-220-P",
-          "name": "С маской и кабелями",
-          "price": 13800,
-          "currency": "RUB",
-          "inventory": {
-            "quantity": 10,
-            "trackInventory": true,
-            "allowBackorder": false
-          },
-          "options": [
-            {
-              "name": "Комплектация",
-              "value": "С маской и кабелями"
-            }
-          ],
-          "images": []
-        }
-      ],
-      "featured": false,
-      "createdAt": "2025-04-10T10:00:00Z",
-      "updatedAt": "2025-04-10T10:00:00Z",
-      "rating": 4.5,
-      "reviewCount": 94,
-      "brandId": "brand-4"
-    },
     {
       "id": "prod-zhku-1",
       "name": "Скамья 1500",
@@ -1281,7 +235,7 @@
           ]
         }
       ],
-      "featured": false,
+      "featured": true,
       "createdAt": "2026-01-08T15:41:00Z",
       "updatedAt": "2026-01-08T15:41:00Z",
       "rating": 0,
@@ -1753,7 +707,7 @@
           ]
         }
       ],
-      "featured": false,
+      "featured": true,
       "createdAt": "2026-01-10T17:48:38Z",
       "updatedAt": "2026-01-10T17:48:38Z",
       "rating": 0,
@@ -2127,7 +1081,7 @@
           ]
         }
       ],
-      "featured": false,
+      "featured": true,
       "createdAt": "2026-01-10T17:56:12Z",
       "updatedAt": "2026-01-10T17:56:12Z",
       "rating": 0,
@@ -2369,7 +1323,7 @@
           ]
         }
       ],
-      "featured": true,
+      "featured": false,
       "createdAt": "2026-01-16T12:12:59Z",
       "updatedAt": "2026-01-16T12:12:59Z",
       "rating": 0,
@@ -2425,7 +1379,7 @@
           ]
         }
       ],
-      "featured": true,
+      "featured": false,
       "createdAt": "2026-01-16T12:13:39Z",
       "updatedAt": "2026-01-16T12:13:39Z",
       "rating": 0,
@@ -2611,7 +1565,7 @@
           ]
         }
       ],
-      "featured": true,
+      "featured": false,
       "createdAt": "2026-01-16T12:19:22Z",
       "updatedAt": "2026-01-16T12:19:22Z",
       "rating": 0,
@@ -2679,7 +1633,7 @@
           ]
         }
       ],
-      "featured": true,
+      "featured": false,
       "createdAt": "2026-01-16T12:20:20Z",
       "updatedAt": "2026-01-16T12:20:20Z",
       "rating": 0,
@@ -3071,7 +2025,7 @@
           ]
         }
       ],
-      "featured": true,
+      "featured": false,
       "createdAt": "2026-01-17T15:38:31Z",
       "updatedAt": "2026-01-17T15:38:31Z",
       "rating": 0,
@@ -3135,24 +2089,6 @@
       "name": "СИБ-ТРЕЙД Металл",
       "slug": "sib-trade-metall",
       "description": "Проверенные поставщики металлоконструкций. Лестницы, ворота, заборы, навесы, козырьки — любой размер и сложность."
-    },
-    {
-      "id": "brand-2",
-      "name": "СИБ-ТРЕЙД Сантехника",
-      "slug": "sib-trade-santehnika",
-      "description": "Широкий ассортимент сантехнического оборудования от ведущих российских и зарубежных производителей."
-    },
-    {
-      "id": "brand-3",
-      "name": "СИБ-ТРЕЙД Строй",
-      "slug": "sib-trade-stroy",
-      "description": "Строительные материалы высокого качества: цемент, кирпич, пиломатериалы, профнастил, утеплители."
-    },
-    {
-      "id": "brand-4",
-      "name": "СИБ-ТРЕЙД Инструмент",
-      "slug": "sib-trade-instrument",
-      "description": "Профессиональный и бытовой инструмент от проверенных брендов. Bosch, DeWALT, Makita и другие."
     }
   ]
 }

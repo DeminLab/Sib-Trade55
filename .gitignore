@@ -42,6 +42,9 @@ next-env.d.ts
 
 # claude code
 .claude/
+# agent tooling / local IDE configs
+.agents/
+.zcodeignore
 
 # audit artifacts
 audit-screenshots/

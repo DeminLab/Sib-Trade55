@@ -19,30 +19,26 @@ export const siteConfig = {
   // Контакты
   contact: {
     email: "info@sib-trade.ru",
-    phone: "+7 (383) 123-45-67",
+    phone: "+7 (381) 207-45-67",
     workingHours: "Пн–Пт, 09:00–18:00",
     messengers: {
-      whatsapp: "https://wa.me/73831234567",
+      whatsapp: "https://wa.me/73812074567",
       telegram: "https://t.me/sib_trade",
     },
+    // Офиса нет — работаем дистанционно из Омска, доставляем по всей России
     address: {
-      street: "ул. Промышленная",
-      suite: "15",
-      city: "Новосибирск",
-      state: "Новосибирская область",
-      zip: "630099",
+      city: "Омск",
     },
     requisites: {
       legalName: "ООО «СИБ-ТРЕЙД»",
-      inn: "5400000000",
-      kpp: "540001001",
-      ogrn: "1205400000000",
-      bank: "ПАО «Сибирский банк»",
+      inn: "5500000000",
+      kpp: "550001001",
+      ogrn: "1205500000000",
+      bank: "Омское отделение ПАО «Сбербанк»",
       checkingAccount: "40702810000000000001",
-      correspondentAccount: "30101810000000000001",
-      bik: "045004000",
+      correspondentAccount: "30101810300000000673",
+      bik: "045209673",
     },
-    mapEmbedUrl: "https://www.openstreetmap.org/export/embed.html?bbox=82.870%2C55.015%2C82.940%2C55.055&layer=mapnik&marker=55.035%2C82.905",
   },
 
   // Соцсети (установите "" для скрытия)

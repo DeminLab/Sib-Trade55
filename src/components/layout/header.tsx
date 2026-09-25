@@ -261,7 +261,7 @@ export function Header({ categories = [] }: HeaderProps) {
             {siteConfig.name}
           </Link>
 
-          <nav className="hidden min-w-0 flex-1 items-center justify-center gap-2 overflow-hidden xl:flex 2xl:gap-5">
+          <nav className="hidden min-w-0 flex-1 items-center justify-center gap-2 xl:flex 2xl:gap-5">
             <div
               className="relative"
               onMouseEnter={() => setCatalogOpen(true)}

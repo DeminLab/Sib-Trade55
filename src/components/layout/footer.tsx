@@ -41,7 +41,7 @@ export function Footer() {
               {siteConfig.contact.phone}
             </p>
             <p className="text-sm text-muted-foreground">
-              {siteConfig.contact.address.city}, {siteConfig.contact.address.street}, {siteConfig.contact.address.suite}
+              г. {siteConfig.contact.address.city} · работаем по всей России
             </p>
           </div>
 
