@@ -77,6 +77,7 @@ node --env-file=.env .next/standalone/server.js
 ## Docker production
 
 В `.env` заполните параметры администратора, секрет сессии, пароль PostgreSQL и канонический URL до сборки.
+Перед первым публичным запуском укажите DNS на сервер и получите TLS-сертификат по инструкции ниже; Nginx не стартует без смонтированных файлов сертификата.
 
 ```powershell
 docker compose up --build -d
@@ -88,13 +89,36 @@ Invoke-WebRequest http://localhost/
 docker compose down
 ```
 
-`docker-compose.yml` запускает PostgreSQL, standalone-приложение и Nginx. Приложение слушает внутренний порт 3000, наружу опубликован порт 80. SQLite находится в `/app/data/catalog.sqlite` в томе `sib_trade_data`. Production Compose не передаёт `SQLITE_DATABASE_PATH` из `.env`; изменение пути требует правки окружения сервиса и соответствующего volume.
+`docker-compose.yml` запускает PostgreSQL, standalone-приложение и Nginx. Приложение слушает внутренний порт 3000, Nginx публикует порты 80 и 443. До запуска Nginx на хосте должны существовать сертификаты `/etc/letsencrypt/live/sib-trade55.ru/fullchain.pem` и `privkey.pem`; Compose монтирует `/etc/letsencrypt` в контейнер только для чтения. SQLite находится в `/app/data/catalog.sqlite` в томе `sib_trade_data`. Production Compose не передаёт `SQLITE_DATABASE_PATH` из `.env`; изменение пути требует правки окружения сервиса и соответствующего volume.
 
 `.dockerignore` исключает локальные `data/` и `.env*` из контекста сборки. Хостовая база не переносится в production автоматически. PostgreSQL остаётся зависимостью приложения в Compose, хотя после переноса рабочие данные читаются и записываются в SQLite.
 
-Nginx обслуживает `sib-trade55.ru`, `www.sib-trade55.ru` и `dev.sib-trade55.ru` (корень последнего перенаправляется в `/admin`, индексирование запрещено). Админский домен проксирует то же приложение; отдельного backend нет. Ограничение тела — 20 МБ, для `/api/custom-requests` — 52 МБ.
+На сервере укажите A-записи `sib-trade55.ru` и `www.sib-trade55.ru` на его IPv4 и откройте входящие TCP-порты 80 и 443. До первого запуска Compose получите сертификат Certbot в standalone-режиме, когда порт 80 свободен:
 
-В текущем конфиге нет TLS и порта 443. Для публичного HTTPS нужны сертификат и HTTPS reverse proxy или изменение Nginx. Запись URL `https://sib-trade55.ru` в окружении не настраивает TLS. DNS, HTTPS, авторизацию, отправку формы, приватные файлы и реальную доставку Telegram проверяйте отдельно после развёртывания.
+```bash
+sudo certbot certonly --standalone --preferred-challenges http \
+  --agree-tos --no-eff-email --email you@example.com \
+  -d sib-trade55.ru -d www.sib-trade55.ru
+```
+
+Если Nginx Compose уже работает, перед Certbot остановите только его (`docker compose stop nginx`), затем запустите снова (`docker compose start nginx`). Nginx перенаправляет HTTP на HTTPS для основного домена; `dev.sib-trade55.ru` перенаправляет в защищённый `/admin` на основном домене. Для production установите `AUTH_COOKIE_SECURE=true` в `.env`.
+
+Сертификат был выдан standalone-проверкой, поэтому порт 80 потребуется освободить и при автоматическом продлении. Certbot создаёт системный таймер при установке через Snap; добавьте хуки, чтобы при необходимости продления остановить и затем запустить Nginx:
+
+```bash
+sudo install -d /etc/letsencrypt/renewal-hooks/pre /etc/letsencrypt/renewal-hooks/post
+sudo tee /etc/letsencrypt/renewal-hooks/pre/10-sib-trade-nginx >/dev/null <<'EOF'
+#!/bin/sh
+/usr/bin/docker compose -f /opt/sib-trade/docker-compose.yml stop nginx
+EOF
+sudo tee /etc/letsencrypt/renewal-hooks/post/10-sib-trade-nginx >/dev/null <<'EOF'
+#!/bin/sh
+/usr/bin/docker compose -f /opt/sib-trade/docker-compose.yml start nginx
+EOF
+sudo chmod 755 /etc/letsencrypt/renewal-hooks/pre/10-sib-trade-nginx /etc/letsencrypt/renewal-hooks/post/10-sib-trade-nginx
+```
+
+Проверяйте HTTPS и автоматическое продление отдельно после развёртывания. DNS, авторизацию, отправку формы, приватные файлы и реальную доставку Telegram также проверяйте отдельно.
 
 ## Резервное копирование и восстановление
 
