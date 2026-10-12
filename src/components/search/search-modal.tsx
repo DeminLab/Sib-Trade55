@@ -5,12 +5,10 @@ import Link from "next/link"
 import Image from "next/image"
 import { Search, X, ArrowRight } from "lucide-react"
 import { StarRating } from "@/components/products/star-rating"
+import { isPriceOnRequest } from "@/lib/product-presentation"
 import { formatPrice } from "@/lib/utils"
 import { PLACEHOLDER_IMAGE } from "@/lib/constants"
 import type { Product } from "@/types"
-import data from "@/data/products.json"
-
-const allProducts = data.products as Product[]
 
 const popularSearches = [
   "Металлоконструкции",
@@ -28,23 +26,27 @@ interface SearchModalProps {
 
 export function SearchModal({ isOpen, onClose }: SearchModalProps) {
   const [query, setQuery] = useState("")
+  const [resultState, setResultState] = useState<{ query: string; items: Product[]; error?: string }>({ query: "", items: [] })
   const inputRef = useRef<HTMLInputElement>(null)
   const modalRef = useRef<HTMLDivElement>(null)
-
-  const results = query.trim().length > 0
-    ? allProducts.filter(
-        (p) =>
-          p.status === "active" &&
-          (p.name.toLowerCase().includes(query.toLowerCase()) ||
-            p.description.toLowerCase().includes(query.toLowerCase()) ||
-            p.tags.some((t) => t.toLowerCase().includes(query.toLowerCase())))
-      ).slice(0, 6)
-    : []
 
   const handleClose = useCallback(() => {
     setQuery("")
     onClose()
   }, [onClose])
+
+  useEffect(() => {
+    const normalized = query.trim()
+    if (!normalized) return
+    const controller = new AbortController()
+    const timeout = window.setTimeout(() => {
+      fetch(`/api/catalog/search?q=${encodeURIComponent(normalized)}`, { signal: controller.signal })
+        .then((response) => response.ok ? response.json() as Promise<{ items: Product[] }> : Promise.reject(new Error("Search failed")))
+        .then((result) => setResultState({ query: normalized, items: result.items }))
+        .catch(() => { if (!controller.signal.aborted) setResultState({ query: normalized, items: [], error: 'Не удалось выполнить поиск. Попробуйте ещё раз.' }) })
+    }, 180)
+    return () => { window.clearTimeout(timeout); controller.abort() }
+  }, [query])
 
   useEffect(() => {
     if (isOpen) {
@@ -86,6 +88,8 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
   if (!isOpen) return null
 
   const hasQuery = query.trim().length > 0
+  const searching = hasQuery && resultState.query !== query.trim()
+  const results = resultState.query === query.trim() ? resultState.items : []
 
   return (
     <div className="fixed inset-0 z-[100]">
@@ -126,7 +130,7 @@ placeholder="Поиск товаров..."
           </div>
 
           {/* Results */}
-          <div className="max-h-[60vh] overflow-y-auto">
+          <div className="max-h-[60dvh] overflow-y-auto overscroll-contain">
             {hasQuery && results.length > 0 && (
               <div className="p-2">
                 {results.map((product) => {
@@ -143,7 +147,7 @@ placeholder="Поиск товаров..."
                           src={product.images[0]?.url ?? PLACEHOLDER_IMAGE}
                           alt={product.images[0]?.alt ?? product.name}
                           fill
-                          className="object-cover"
+                          className="object-contain"
                           sizes="56px"
                         />
                       </div>
@@ -158,13 +162,13 @@ placeholder="Поиск товаров..."
                         />
                       </div>
                       <span className="shrink-0 text-sm font-medium">
-                        {variant && formatPrice(variant.price, variant.currency)}
+                        {variant && (isPriceOnRequest(variant) ? "Цена по запросу" : formatPrice(variant.price, variant.currency))}
                       </span>
                     </Link>
                   )
                 })}
                 <Link
-                  href={`/search?q=${encodeURIComponent(query)}`}
+                  href={`/shop?q=${encodeURIComponent(query)}`}
                   onClick={handleClose}
                   className="mt-1 flex items-center justify-center gap-2 rounded-lg p-3 text-sm text-muted-foreground transition-colors hover:bg-neutral-50 hover:text-foreground"
                 >
@@ -174,7 +178,9 @@ placeholder="Поиск товаров..."
               </div>
             )}
 
-            {hasQuery && results.length === 0 && (
+            {searching ? <p role="status" className="px-4 py-8 text-center text-sm text-muted-foreground">Ищем товары…</p> : null}
+            {hasQuery && !searching && resultState.error && <p role="alert" className="px-4 py-8 text-center text-sm text-destructive">{resultState.error}</p>}
+            {hasQuery && !searching && !resultState.error && results.length === 0 && (
               <div className="px-4 py-12 text-center">
                 <p className="text-sm text-muted-foreground">
                   Нет результатов по запросу &quot;{query}&quot;

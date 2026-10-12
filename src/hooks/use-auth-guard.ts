@@ -7,6 +7,7 @@ import { useAuthStore } from "@/store/auth"
 export function useAuthGuard() {
   const user = useAuthStore((s) => s.user)
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated)
+  const sessionReady = useAuthStore((s) => s.sessionReady)
   const router = useRouter()
   const mounted = useSyncExternalStore(
     () => () => undefined,
@@ -15,15 +16,15 @@ export function useAuthGuard() {
   )
 
   useEffect(() => {
-    if (mounted && !isAuthenticated) {
+    if (mounted && sessionReady && !isAuthenticated) {
       router.push("/auth/login")
     }
-  }, [mounted, isAuthenticated, router])
+  }, [mounted, sessionReady, isAuthenticated, router])
 
   return {
     user,
     isAuthenticated,
-    isLoading: !mounted,
-    isReady: mounted && isAuthenticated,
+    isLoading: !mounted || !sessionReady,
+    isReady: mounted && sessionReady && isAuthenticated,
   }
 }

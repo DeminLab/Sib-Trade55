@@ -1,3 +1,4 @@
+import { managedPage } from '@/components/content/managed-page'
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
     description: "От задачи до готового металлоизделия: шесть этапов работы СИБ-ТРЕЙД.",
     type: "website",
     url: `${siteConfig.url}/how-we-work`,
-    images: [{ url: "/images/products/1768664309964-494604_medium.webp", alt: "Продажа и поставка металлоизделий СИБ-ТРЕЙД" }],
+    images: [{ url: "/api/catalog/media/images/products/1768664309964-494604_medium.webp", alt: "Продажа и поставка металлоизделий СИБ-ТРЕЙД" }],
   },
 }
 
@@ -37,11 +38,13 @@ const inputItems = [
 
 const fileTypes = ["PDF", "JPG", "PNG", "DWG", "DXF"]
 
-export default function HowWeWorkPage() {
+export default async function HowWeWorkPage() {
+  const override = await managedPage('how-we-work')
+  if (override) return override
   return (
     <div className="overflow-hidden bg-background">
       <section className="relative min-h-[560px] bg-neutral-950 text-white">
-        <Image src="/images/products/1768664309164-708204_medium.webp" alt="Металлоизделия для благоустройства" fill priority className="object-cover" sizes="100vw" />
+        <Image src="/images/hero-park-composite.png" alt="Городской парк с металлической мебелью и навесом" fill priority className="object-cover" sizes="100vw" />
         <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/90 via-neutral-950/65 to-neutral-950/20" />
         <div className="relative mx-auto flex min-h-[560px] max-w-[1440px] flex-col justify-end px-5 pb-16 pt-32 sm:px-8 lg:px-12 lg:pb-20">
           <div className="max-w-4xl"><p className="industrial-label text-white/60">СИБ-ТРЕЙД / процесс работы</p><h1 className="mt-5 text-5xl font-semibold leading-[0.98] tracking-[-0.06em] sm:text-7xl">От задачи до готового объекта</h1><p className="mt-7 max-w-2xl text-base leading-7 text-white/75 sm:text-lg">Понятный торговый процесс без лишних этапов: фиксируем задачу, предлагаем решение, согласовываем расчёт и доводим заказ до доставки.</p><Button size="lg" className="mt-8" asChild><Link href="#request">Получить расчёт <ArrowRight className="ml-2 size-4" /></Link></Button></div>
@@ -56,7 +59,7 @@ export default function HowWeWorkPage() {
 
       <section className="section-rule bg-surface-subtle"><div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-12 lg:py-28"><div className="grid gap-px border border-border bg-border md:grid-cols-3"><div className="bg-background p-7"><Clock3 className="size-6 text-primary" /><h3 className="mt-10 text-xl font-semibold">Когда появляется точная стоимость</h3><p className="mt-4 text-sm leading-6 text-muted-foreground">Ориентир даём после первичного изучения задачи. Финальная стоимость появляется после согласования размеров, материала, покрытия, комплектности и логистики.</p></div><div className="bg-background p-7"><ShieldCheck className="size-6 text-primary" /><h3 className="mt-10 text-xl font-semibold">Что влияет на срок</h3><p className="mt-4 text-sm leading-6 text-muted-foreground">Сложность конструкции, объём партии, наличие материалов, технология покрытия, согласования и готовность площадки к монтажу.</p></div><div className="bg-background p-7"><Truck className="size-6 text-primary" /><h3 className="mt-10 text-xl font-semibold">Что входит в финал</h3><p className="mt-4 text-sm leading-6 text-muted-foreground">Фиксируем состав изделия, этапы, срок поставки, условия доставки и дополнительные работы в одном согласованном предложении.</p></div></div></div></section>
 
-      <section id="request" className="bg-neutral-950 text-white"><div className="mx-auto flex max-w-[1440px] flex-col gap-8 px-5 py-16 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-12 lg:py-20"><div><p className="industrial-label text-white/55">04 / следующий шаг</p><h2 className="mt-3 text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">Есть задача — начнём с расчёта</h2><p className="mt-3 max-w-2xl text-sm leading-6 text-white/60">Отправьте исходные материалы или просто опишите идею. Вернёмся с уточнениями, ориентиром по стоимости и сроком.</p></div><Button size="lg" asChild><Link href="/custom">Получить расчёт <ArrowRight className="ml-2 size-4" /></Link></Button></div></section>
+      <section id="request" className="relative isolate overflow-hidden bg-neutral-950 text-white"><Image src="/images/hero-park-composite.png" alt="" fill className="object-cover" sizes="100vw" /><div className="absolute inset-0 bg-neutral-950/70" /><div className="relative mx-auto flex min-h-[300px] max-w-[1440px] flex-col gap-8 px-5 py-16 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-12 lg:py-20"><div><p className="industrial-label text-white/70">04 / следующий шаг</p><h2 className="mt-3 text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">Есть задача — начнём с расчёта</h2><p className="mt-3 max-w-2xl text-sm leading-6 text-white/85">Отправьте исходные материалы или просто опишите идею. Вернёмся с уточнениями, ориентиром по стоимости и сроком.</p></div><Button size="lg" asChild><Link href="/custom">Получить расчёт <ArrowRight className="ml-2 size-4" /></Link></Button></div></section>
     </div>
   )
 }

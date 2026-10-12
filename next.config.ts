@@ -1,16 +1,13 @@
 import type { NextConfig } from "next";
-import createNextIntlPlugin from "next-intl/plugin";
+import path from "node:path";
 import { redirects as redirectRules } from "./src/lib/redirects";
 
-const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 const nextConfig: NextConfig = {
-  images: {
-    // Add remote image domains here when using real product images
-    // remotePatterns: [
-    //   { protocol: "https", hostname: "cdn.example.com" },
-    // ],
-  },
+  output: "standalone",
+  // Runtime databases, backups and secrets must never be part of a deployment bundle.
+  outputFileTracingExcludes: { '/**': ['./data/**', './.env*', './.git/**', './.agents/**', './brag-output-*/**', './tests/**'] },
+  allowedDevOrigins: ["192.168.0.110"],
 
   // Redirects are defined in src/lib/redirects.ts — edit there.
   async redirects() {
@@ -18,4 +15,9 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withNextIntl(nextConfig);
+export default async function config() {
+  // Keep native payload validation in a project-local cache on Windows.
+  if (process.platform === 'win32' && process.env.SWC_NATIVE_BINDING_CACHE === undefined) process.env.SWC_NATIVE_BINDING_CACHE = path.resolve('data/runtime-cache/swc')
+  const { default: createNextIntlPlugin } = await import('next-intl/plugin')
+  return createNextIntlPlugin('./src/i18n/request.ts')(nextConfig)
+}

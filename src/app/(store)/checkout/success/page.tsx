@@ -1,14 +1,10 @@
 "use client"
 
-import { Suspense, useEffect, useSyncExternalStore } from "react"
+import { Suspense, useSyncExternalStore } from "react"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Separator } from "@/components/ui/separator"
 import { CheckCircle } from "lucide-react"
-import { useOrdersStore } from "@/store/orders"
-import { formatPrice, formatDate } from "@/lib/utils"
 
 export default function CheckoutSuccessPage() {
   return (
@@ -20,84 +16,25 @@ export default function CheckoutSuccessPage() {
 
 function CheckoutSuccessContent() {
   const searchParams = useSearchParams()
-  const orderId = searchParams.get("order_id")
-  const getOrderById = useOrdersStore((s) => s.getOrderById)
-  const loadOrders = useOrdersStore((s) => s.loadOrders)
-  const error = useOrdersStore((s) => s.error)
-
-  const mounted = useSyncExternalStore(() => () => undefined, () => true, () => false)
-  useEffect(() => { void loadOrders() }, [loadOrders])
-
-  if (!mounted) {
-    return (
-      <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold tracking-tight">Загрузка...</h1>
-        </div>
-      </div>
-    )
-  }
-
-  const order = orderId ? getOrderById(orderId) : undefined
+  const orderNumber = searchParams.get("order_number")
+  const savedNumber = useSyncExternalStore(() => () => undefined, () => sessionStorage.getItem('last-order-receipt'), () => null)
+  const confirmed = Boolean(orderNumber && savedNumber === orderNumber)
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
       <div className="flex flex-col items-center text-center">
         <CheckCircle className="h-16 w-16 text-success" />
-<h1 className="mt-6 text-3xl font-bold tracking-tight">
-          Заказ создан
+        <h1 className="mt-6 text-3xl font-bold tracking-tight">
+          {confirmed ? 'Заявка принята' : 'Оформление заявки'}
         </h1>
         <p className="mt-4 text-muted-foreground">
-          Заказ подтверждается backend-сервисом. Детали появятся здесь после загрузки заказа.
+          {orderNumber ? <>Номер заявки: <span className="font-semibold text-foreground">{orderNumber}</span>. </> : null}
+          {confirmed ? 'Мы получили ваш запрос и свяжемся с вами для подтверждения заказа и доставки. Оплата не списывалась.' : 'В этом браузере нет подтверждения отправки. Если вы ещё не оформили заявку, перейдите в корзину. Для уточнения уже отправленного заказа свяжитесь с менеджером.'}
         </p>
-
-        {error && <p className="mt-4 max-w-lg text-sm text-destructive">{error}</p>}
-
-        {order && (
-          <Card className="mt-8 w-full text-left">
-            <CardContent className="pt-6 space-y-4">
-              <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Номер заказа</span>
-                <span className="font-medium">{order.orderNumber}</span>
-              </div>
-              <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Дата</span>
-                <span>{formatDate(order.createdAt)}</span>
-              </div>
-              <Separator />
-              {order.items.map((item) => (
-                <div key={item.id} className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">
-                    {item.name} &times; {item.quantity}
-                  </span>
-                  <span>{formatPrice(item.total)}</span>
-                </div>
-              ))}
-              <Separator />
-              <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Подытог</span>
-                <span>{formatPrice(order.subtotal)}</span>
-              </div>
-              <div className="flex justify-between text-sm">
-<span className="text-muted-foreground">Доставка</span>
-                <span>{order.shipping === 0 ? "Бесплатно" : formatPrice(order.shipping)}</span>
-              </div>
-              <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Налог</span>
-                <span>{formatPrice(order.tax)}</span>
-              </div>
-              <Separator />
-              <div className="flex justify-between font-medium">
-                <span>Итого</span>
-                <span>{formatPrice(order.total)}</span>
-              </div>
-            </CardContent>
-          </Card>
-        )}
 
         <div className="mt-8 flex gap-4">
           <Button asChild>
-            <Link href="/account/orders">Мои заказы</Link>
+            <Link href="/">На главную</Link>
           </Button>
           <Button variant="outline" asChild>
             <Link href="/shop">Продолжить покупки</Link>

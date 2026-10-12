@@ -6,23 +6,25 @@
 export const siteConfig = {
   // Бренд
   name: "СИБ-ТРЕЙД",
-  tagline: "Металлоконструкции, сантехника и стройматериалы",
+  tagline: "Оборудование для благоустройства и металлоизделия",
   description:
     "Продажа и поставка металлоконструкций, сантехники, строительных материалов и оборудования. Качество, надёжность, индивидуальный подход.",
 
   // Баннер (установите "" для скрытия)
-  announcement: "Бесплатная доставка от 50 000 ₽ — Закажите сейчас!",
+  announcement: "Подбор оборудования · Доставка по России",
 
   // URLs
-  url: process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:2000",
+  url: process.env.NEXT_PUBLIC_BASE_URL ?? "https://sib-trade55.ru",
 
   // Контакты
   contact: {
-    email: "info@sib-trade.ru",
-    phone: "+7 (381) 207-45-67",
+    email: "sib-trade55@yandex.ru",
+    phone: "+79514226376",
+    phoneDisplay: "+7 (951) 422-63-76",
+    phoneSecondary: "34-01-83",
     workingHours: "Пн–Пт, 09:00–18:00",
     messengers: {
-      whatsapp: "https://wa.me/73812074567",
+        whatsapp: "https://wa.me/79514226376",
       telegram: "https://t.me/sib_trade",
     },
     // Офиса нет — работаем дистанционно из Омска, доставляем по всей России
@@ -30,13 +32,15 @@ export const siteConfig = {
       city: "Омск",
     },
     requisites: {
-      legalName: "ООО «СИБ-ТРЕЙД»",
-      inn: "5500000000",
-      kpp: "550001001",
-      ogrn: "1205500000000",
-      bank: "Омское отделение ПАО «Сбербанк»",
-      checkingAccount: "40702810000000000001",
-      correspondentAccount: "30101810300000000673",
+      legalName: "Общество с ограниченной ответственностью «СИБ-ТРЕЙД»",
+      shortName: "ООО «СИБ-ТРЕЙД»",
+      inn: "5501163100",
+      kpp: "550101001",
+      ogrn: "1165543050683",
+      ogrnRegisteredAt: "12.01.2016 г., ИФНС по Советскому административному округу г. Омска",
+      bank: "Омское отделение №8634 ПАО Сбербанк, г. Омск",
+      checkingAccount: "4070 2810 7450 0000 5289",
+      correspondentAccount: "3010 1810 9000 0000 0673",
       bik: "045209673",
     },
   },

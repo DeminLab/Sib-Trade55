@@ -1,0 +1,10 @@
+{
+  "name": "sib-trade-cinematic-brand-film",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "preview": "npx --yes hyperframes@0.8.80 preview",
+    "check": "npx --yes hyperframes@0.8.80 check",
+    "render": "npx --yes hyperframes@0.8.80 render"
+  }
+}

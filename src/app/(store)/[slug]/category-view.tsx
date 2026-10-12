@@ -1,3 +1,4 @@
+import { serializeJsonLd } from '@/lib/structured-data'
 import Link from "next/link"
 import { breadcrumbJsonLd } from "@/lib/structured-data"
 import {
@@ -12,7 +13,12 @@ import { ProductGrid } from "@/components/products/product-grid"
 import { Pagination } from "@/components/products/pagination"
 import type { Category, Product, PaginationMeta } from "@/types"
 
+import { CatalogControls } from "@/components/products/catalog-controls"
+import { catalogSearchParams, type CatalogQuery } from "@/lib/catalog-query"
+import { productCountLabel } from "@/lib/product-presentation"
+
 interface CategoryViewProps {
+  query?: CatalogQuery
   category: Category
   products: Product[]
   pagination: PaginationMeta
@@ -20,19 +26,8 @@ interface CategoryViewProps {
   ancestors?: Category[]
 }
 
-/** Strip parent name prefix from a subcategory display name */
-function stripParentPrefix(name: string, parentName: string): string {
-  const patterns = [
-    new RegExp(`^${parentName}\\s*[-–—:|]\\s*`, "i"),
-    new RegExp(`^${parentName}\\s+`, "i"),
-  ]
-  for (const pattern of patterns) {
-    if (pattern.test(name)) return name.replace(pattern, "")
-  }
-  return name
-}
-
 export function CategoryView({
+  query = {},
   category,
   products,
   pagination,
@@ -50,7 +45,7 @@ export function CategoryView({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbJsonLd(trail)),
+          __html: serializeJsonLd(breadcrumbJsonLd(trail)),
         }}
       />
       {/* Breadcrumb — full ancestor trail */}
@@ -86,25 +81,11 @@ export function CategoryView({
           <p className="mt-2 text-muted-foreground">{category.description}</p>
         )}
         <p className="mt-1 text-sm text-muted-foreground">
-          {pagination.total}{" "}
-          {pagination.total === 1 ? "товар" : "товаров"}
+          {productCountLabel(pagination.total)}
         </p>
       </div>
 
-      {/* Subcategories — parent prefix stripped, no "All" pill */}
-      {subcategories.length > 0 && (
-        <div className="mt-6 flex flex-wrap gap-2">
-          {subcategories.map((sub) => (
-            <Link
-              key={sub.id}
-              href={`/${sub.slug}`}
-              className="rounded-sm border border-border px-3 py-1 text-xs font-medium transition-colors hover:border-foreground"
-            >
-              {stripParentPrefix(sub.name, category.name)}
-            </Link>
-          ))}
-        </div>
-      )}
+      <CatalogControls query={{ ...query, category: query.category ?? category.slug }} categories={[category, ...subcategories]} />
 
       {/* Products */}
       <div className="mt-6">
@@ -116,6 +97,7 @@ export function CategoryView({
         <Pagination
           pagination={pagination}
           basePath={`/${category.slug}`}
+          searchParams={catalogSearchParams(query)}
         />
       </div>
     </div>

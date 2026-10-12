@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, height=1080">
+  <title>СИБ-ТРЕЙД — бренд-фильм</title>
+  <script src="assets/gsap.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #141515; }
+    body { color: #f4f1ea; font-family: "Segoe UI", system-ui, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+    #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #141515; }
+    .scene { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; }
+    .scene-content { position: absolute; inset: 0; width: 100%; height: 100%; visibility: hidden; opacity: 0; }
+    .scene-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; will-change: transform; }
+    .shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgb(11 13 13 / .94) 0%, rgb(11 13 13 / .72) 48%, rgb(11 13 13 / .20) 100%), linear-gradient(0deg, rgb(11 13 13 / .78), transparent 45%); }
+    .shade-full { position: absolute; inset: 0; background: linear-gradient(180deg, rgb(8 10 10 / .30), rgb(8 10 10 / .32) 48%, rgb(8 10 10 / .82)); }
+    .grain { position: absolute; inset: 0; pointer-events: none; opacity: .055; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.33'/%3E%3C/svg%3E"); mix-blend-mode: soft-light; }
+    .frame { position: absolute; inset: 44px; border: 1px solid rgb(244 241 234 / .16); pointer-events: none; }
+    .brand { display: flex; align-items: center; gap: 15px; font-size: 24px; font-weight: 700; letter-spacing: .04em; }
+    .brand-mark { display: flex; gap: 4px; height: 30px; align-items: stretch; }
+    .brand-mark i { width: 4px; display: block; background: #a58a60; transform: skew(-20deg); }
+    .brand-mark i:nth-child(2) { opacity: .66; }
+    .brand-mark i:nth-child(3) { opacity: .38; }
+    .micro { font-size: 14px; letter-spacing: .20em; text-transform: uppercase; color: rgb(244 241 234 / .68); font-weight: 650; }
+    .scene-index { position: absolute; top: 76px; right: 98px; color: rgb(244 241 234 / .68); font-size: 15px; letter-spacing: .18em; font-variant-numeric: tabular-nums; }
+    .hero-brand { position: absolute; left: 105px; top: 82px; }
+    .hero-copy { position: absolute; left: 105px; top: 300px; width: 1110px; }
+    .hero-copy h1 { margin: 24px 0 0; font-size: 88px; line-height: 1.24; letter-spacing: -.065em; font-weight: 650; }
+    .hero-copy h1 span { display: block; overflow: hidden; padding-bottom: 2px; }
+    .hero-copy h1 em { color: #d2bd95; font-style: normal; }
+    .hero-bottom { position: absolute; left: 107px; bottom: 110px; display: flex; align-items: center; gap: 18px; color: #c7beaf; font-size: 16px; letter-spacing: .09em; text-transform: uppercase; padding: 13px 16px; background: rgb(10 12 12 / .72); }
+    .hero-bottom b { display: block; width: 76px; height: 1px; background: #a58a60; }
+    .light-sweep { position: absolute; top: -15%; bottom: -15%; left: -16%; width: 16%; background: linear-gradient(90deg, transparent, rgb(227 196 141 / .55), rgb(255 250 236 / .80), transparent); filter: blur(8px); transform: skewX(-16deg); opacity: 0; pointer-events: none; }
+    .brand-scene { background: #151716; }
+    .brand-scene .scene-bg { opacity: .58; }
+    .brand-scene .shade { background: linear-gradient(0deg, rgb(11 13 13 / .88), rgb(11 13 13 / .35)); }
+    .brand-lockup { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding-top: 8px; }
+    .brand-lockup .brand { font-size: 32px; letter-spacing: .06em; }
+    .brand-lockup h2 { margin: 42px 0 20px; max-width: 1400px; font-size: 86px; line-height: 1.06; letter-spacing: -.06em; font-weight: 620; }
+    .brand-lockup h2 span { color: #d2bd95; }
+    .brand-lockup p { margin: 0; font-size: 23px; color: rgb(244 241 234 / .77); letter-spacing: .01em; }
+    .brass-rule { width: 128px; height: 2px; margin: 8px auto 27px; background: #a58a60; transform-origin: left; }
+    .product-scene { color: #191a19; background: #efede7; }
+    .scene-index span { color: #e6d5ad !important; }
+    .product-scene .scene-index span { color: #514024 !important; }
+    .product-top { position: absolute; top: 89px; left: 112px; right: 112px; display: flex; justify-content: space-between; align-items: end; }
+    .product-top .micro { color: #73654f; }
+    .product-top h2 { margin: 16px 0 0; font-size: 59px; line-height: 1.04; letter-spacing: -.055em; font-weight: 640; }
+    .product-top p { margin: 0 0 6px; color: #55554f; font-size: 17px; letter-spacing: .02em; }
+    .product-track { position: absolute; top: 316px; left: 112px; right: 112px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; perspective: 1400px; }
+    .product-card { height: 600px; position: relative; overflow: hidden; background: #fbfaf7; border: 1px solid rgb(36 35 30 / .10); box-shadow: 0 28px 68px rgb(31 29 23 / .13); transform-style: preserve-3d; }
+    .product-card::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 52% 42%, #fff 0%, #f4f1ea 61%, #ebe8e0 100%); }
+    .product-card::after { content: ""; position: absolute; left: 30px; right: 30px; bottom: 132px; height: 1px; background: rgb(37 38 34 / .14); }
+    .product-number { position: absolute; top: 28px; left: 30px; z-index: 2; color: #74674f; font-size: 13px; letter-spacing: .18em; }
+    .product-photo { position: absolute; top: 47px; left: 24px; width: calc(100% - 48px); height: 390px; object-fit: contain; z-index: 1; filter: drop-shadow(0 24px 22px rgb(33 32 28 / .12)); }
+    .product-label { position: absolute; left: 31px; right: 30px; bottom: 35px; z-index: 2; }
+    .product-label small { display: block; font-size: 13px; text-transform: uppercase; color: #645a45; letter-spacing: .17em; font-weight: 700; }
+    .product-label h3 { margin: 11px 0 0; font-size: 30px; line-height: 1.12; letter-spacing: -.04em; font-weight: 650; }
+    .product-label p { margin: 9px 0 0; color: #5e5d58; font-size: 15px; }
+    .product-line { position: absolute; left: 113px; right: 113px; bottom: 88px; height: 1px; background: rgb(27 29 26 / .22); transform: scaleX(0); transform-origin: left; }
+    .process-scene { background: #161918; }
+    .process-scene .scene-bg { opacity: .41; object-position: 72% center; }
+    .process-scene .shade { background: linear-gradient(90deg, rgb(12 14 14 / .97) 0%, rgb(12 14 14 / .87) 46%, rgb(12 14 14 / .28) 100%); }
+    .process-heading { position: absolute; top: 92px; left: 112px; right: 112px; display: flex; align-items: end; justify-content: space-between; }
+    .process-heading .micro { color: #c3ad84; }
+    .process-heading h2 { margin: 15px 0 0; font-size: 61px; line-height: 1; letter-spacing: -.06em; font-weight: 620; }
+    .process-heading p { width: 450px; margin: 0 0 4px; font-size: 18px; line-height: 1.5; color: rgb(244 241 234 / .68); }
+    .quote-window { position: absolute; top: 273px; left: 112px; width: 540px; padding: 29px 32px 30px; border: 1px solid rgb(245 241 231 / .22); background: rgb(18 21 20 / .78); box-shadow: 0 26px 70px rgb(0 0 0 / .25); backdrop-filter: blur(14px); }
+    .quote-top { display: flex; justify-content: space-between; align-items: center; padding-bottom: 21px; border-bottom: 1px solid rgb(244 241 234 / .14); }
+    .quote-top strong { font-size: 20px; font-weight: 620; }
+    .quote-top span { color: #cbb58b; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+    .quote-kicker { margin-top: 20px; color: rgb(244 241 234 / .56); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; }
+    .quote-item { display: flex; align-items: center; gap: 15px; min-height: 86px; border-bottom: 1px solid rgb(244 241 234 / .12); }
+    .quote-item img { width: 74px; height: 58px; object-fit: contain; background: #f0eee9; }
+    .quote-item strong { font-size: 16px; font-weight: 560; }
+    .quote-item small { display: block; margin-top: 6px; color: rgb(244 241 234 / .53); font-size: 12px; }
+    .quote-button { display: inline-flex; align-items: center; gap: 13px; margin-top: 22px; padding: 13px 17px; color: #f8f5ef; border: 1px solid rgb(210 189 149 / .52); font-size: 14px; letter-spacing: .02em; }
+    .quote-button b { width: 23px; height: 1px; background: #d2bd95; }
+    .process-note { position: absolute; top: 719px; left: 112px; width: 540px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; }
+    .process-note div { min-height: 99px; padding: 15px 13px; border: 1px solid rgb(244 241 234 / .20); background: rgb(18 21 20 / .62); }
+    .process-note b, .process-note span { display: block; }
+    .process-note b { margin-bottom: 8px; color: #d2bd95; font-size: 12px; line-height: 1.3; letter-spacing: .04em; }
+    .process-note span { color: rgb(244 241 234 / .86); font-size: 12px; line-height: 1.4; }
+    .demo-note { position: absolute; right: 31px; bottom: 27px; color: #c4c1b8; font-size: 10px; letter-spacing: .08em; }
+    .steps { position: absolute; top: 407px; left: 726px; right: 112px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+    .step { position: relative; min-height: 158px; padding-top: 29px; border-top: 1px solid rgb(244 241 234 / .22); opacity: .32; }
+    .step::before { content: ""; position: absolute; top: -5px; left: 0; width: 9px; height: 9px; border-radius: 50%; background: #d2bd95; box-shadow: 0 0 0 5px rgb(210 189 149 / .10); }
+    .step span { display: block; color: #cbb58b; font-size: 12px; letter-spacing: .16em; }
+    .step strong { display: block; margin-top: 15px; font-size: 16px; line-height: 1.2; font-weight: 560; white-space: nowrap; }
+    .step small { display: block; max-width: 154px; margin-top: 9px; color: rgb(244 241 234 / .76); font-size: 12px; line-height: 1.42; }
+    .path-draw { position: absolute; top: 407px; left: 726px; width: calc(100% - 838px); height: 1px; transform: scaleX(0); transform-origin: left; background: linear-gradient(90deg, #a58a60, #e1d0ae); }
+    .proof-scene { background: #171918; }
+    .proof-scene .scene-bg { opacity: .59; object-position: center 56%; }
+    .proof-scene .shade-full { background: linear-gradient(90deg, rgb(12 14 14 / .91) 0%, rgb(12 14 14 / .56) 58%, rgb(12 14 14 / .25) 100%), linear-gradient(0deg, rgb(12 14 14 / .63), transparent 58%); }
+    .proof-head { position: absolute; left: 112px; top: 126px; }
+    .proof-head .micro { color: #d2bd95; }
+    .proof-head h2 { margin: 19px 0 0; font-size: 64px; line-height: 1.02; letter-spacing: -.06em; font-weight: 620; }
+    .proof-grid { position: absolute; left: 112px; right: 112px; bottom: 148px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid rgb(244 241 234 / .32); }
+    .proof-item { position: relative; padding: 27px 30px 0 0; min-height: 142px; border-right: 1px solid rgb(244 241 234 / .24); }
+    .proof-item:not(:first-child) { padding-left: 29px; }
+    .proof-item:last-child { border-right: 0; }
+    .proof-item small { display: block; color: #d2bd95; font-size: 13px; letter-spacing: .15em; }
+    .proof-item strong { display: block; margin-top: 13px; font-size: 22px; font-weight: 540; letter-spacing: -.02em; }
+    .proof-item p { max-width: 390px; margin: 10px 0 0; color: rgb(244 241 234 / .82); font-size: 15px; line-height: 1.45; }
+    .close-scene { background: #141716; }
+    .close-scene .scene-bg { opacity: .35; object-position: center 52%; }
+    .close-scene .shade { background: radial-gradient(ellipse at 50% 43%, rgb(33 37 32 / .18), rgb(9 11 11 / .88) 76%); }
+    .close-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding-bottom: 9px; }
+    .close-center .brand { font-size: 31px; letter-spacing: .065em; }
+    .close-center h2 { margin: 30px 0 0; font-size: 58px; letter-spacing: -.055em; font-weight: 580; }
+    .close-center p { margin: 16px 0 0; font-size: 20px; color: rgb(244 241 234 / .72); letter-spacing: .01em; }
+    .cta { display: inline-flex; align-items: center; gap: 17px; margin-top: 34px; padding: 15px 21px; border: 1px solid #b59b71; color: #f6f2e8; font-size: 16px; letter-spacing: .02em; }
+    .cta i { display: block; width: 28px; height: 1px; background: #d2bd95; }
+    .close-footer { position: absolute; left: 108px; right: 108px; bottom: 75px; display: flex; justify-content: space-between; align-items: center; color: rgb(244 241 234 / .44); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+    .corner-line { position: absolute; width: 70px; height: 70px; border-color: rgb(210 189 149 / .64); border-style: solid; }
+    .corner-line.top-left { left: 68px; top: 68px; border-width: 1px 0 0 1px; }
+    .corner-line.bottom-right { right: 68px; bottom: 68px; border-width: 0 1px 1px 0; }
+    @media (prefers-reduced-motion: reduce) { .light-sweep { display: none !important; } .scene-bg { will-change: auto; } }
+    .product-foot { position: absolute; left: 113px; right: 113px; bottom: 38px; display: flex; justify-content: center; align-items: center; gap: 18px; color: #535149; font-size: 14px; letter-spacing: .035em; }
+    .product-foot i { width: 4px; height: 4px; border-radius: 50%; background: #a58a60; }
+
+    /* Slightly larger typography for comfortable viewing at 1080p. */
+    .micro { font-size: 16px; }
+    .scene-index { font-size: 17px; }
+    .hero-copy h1 { font-size: 94px; }
+    .hero-bottom { font-size: 18px; }
+    .brand-lockup h2 { font-size: 92px; }
+    .brand-lockup p { font-size: 25px; }
+    .product-top h2 { font-size: 64px; }
+    .product-top p { font-size: 19px; }
+    .product-number, .product-label small { font-size: 15px; }
+    .product-label h3 { font-size: 33px; }
+    .product-label p { font-size: 17px; }
+    .product-foot { font-size: 16px; }
+    .process-heading h2 { font-size: 65px; }
+    .process-heading p { font-size: 20px; }
+    .quote-top strong { font-size: 22px; }
+    .quote-top span, .quote-kicker { font-size: 14px; }
+    .quote-item strong { font-size: 18px; }
+    .quote-item small { font-size: 14px; }
+    .quote-button { font-size: 16px; }
+    .process-note b, .process-note span { font-size: 14px; }
+    .step span, .step small { font-size: 14px; }
+    .step strong { font-size: 18px; }
+    .proof-item small { font-size: 15px; }
+    .proof-item strong { font-size: 25px; }
+    .proof-item p { font-size: 17px; }
+    .close-center h2 { font-size: 64px; }
+    .close-center p { font-size: 22px; }
+    .cta { font-size: 18px; }
+    .close-footer { font-size: 14px; }
+  </style>
+</head>
+<body>
+  <div id="root" data-hf-id="root-sib" data-composition-id="main" data-start="0" data-duration="25" data-width="1920" data-height="1080">
+    <section id="scene-hook" data-hf-id="scene-hook" class="scene clip" data-layout-allow-overlap="true" data-layout-allow-occlusion="true" data-start="0" data-duration="5.1"><div data-hf-id="hf-cn5c" class="scene-content">
+      <img data-hf-id="hf-er6k" class="scene-bg" id="hero-bg" data-start="0" data-duration="5.1" data-layout-allow-overflow="true" src="assets/park-hero.jpg" alt="">
+      <div data-hf-id="hf-q0n7" class="shade"></div><div data-hf-id="hf-h60x" class="grain"></div><div data-hf-id="hf-d9wv" class="frame"></div>
+      <div data-hf-id="hf-2m5v" class="brand hero-brand" id="hero-brand"><span data-hf-id="hf-lcsu" class="brand-mark"><i data-hf-id="hf-wt6k"></i><i data-hf-id="hf-zeb8"></i><i data-hf-id="hf-y7e5"></i></span><span data-hf-id="hf-ocoy">СИБ-ТРЕЙД</span></div>
+      <div data-hf-id="hf-srye" class="scene-index">01 <span data-hf-id="hf-0vei" style="color:#a58a60">/</span> 06</div>
+      <div data-hf-id="hf-jloi" class="hero-copy"><div data-hf-id="hf-xnqt" class="micro" id="hero-eyebrow">Городская среда · металлоизделия</div><h1 data-hf-id="hf-m3fm"><span data-hf-id="hf-nh7t" id="hero-line-one">Город начинается</span><span data-hf-id="hf-3t03" id="hero-line-two">с деталей.</span></h1></div>
+      <div data-hf-id="hf-pxm6" class="hero-bottom" id="hero-bottom"><b data-hf-id="hf-xujp"></b><span data-hf-id="hf-kau6">От задачи — к готовому объекту</span></div><div data-hf-id="hf-ntyh" class="light-sweep" id="sweep-1"></div>
+    </div></section>
+
+    <section id="scene-brand" data-hf-id="scene-brand" class="scene clip brand-scene" data-layout-allow-overlap="true" data-layout-allow-occlusion="true" data-start="4.2" data-duration="4.9"><div data-hf-id="hf-o0eg" class="scene-content">
+      <img data-hf-id="hf-d28n" class="scene-bg" id="brand-bg" data-start="4.2" data-duration="4.9" data-layout-allow-overflow="true" src="assets/park-hero.jpg" alt=""><div data-hf-id="hf-iber" class="shade"></div><div data-hf-id="hf-3l5h" class="grain"></div><div data-hf-id="hf-w9zj" class="frame"></div>
+      <div data-hf-id="hf-oew3" class="scene-index">02 <span data-hf-id="hf-qhsu" style="color:#a58a60">/</span> 06</div>
+      <div data-hf-id="hf-umee" class="brand-lockup"><div data-hf-id="hf-u69v" class="brand" id="brand-lockup"><span data-hf-id="hf-vok2" class="brand-mark"><i data-hf-id="hf-ylp6"></i><i data-hf-id="hf-0l8b"></i><i data-hf-id="hf-0zjc"></i></span><span data-hf-id="hf-rjc6">СИБ-ТРЕЙД</span></div><div data-hf-id="hf-3p0i" class="brass-rule" id="brand-rule"></div><h2 data-hf-id="hf-1ekq" id="brand-title">Продаём и поставляем<br data-hf-id="hf-x5px"><span data-hf-id="hf-u4om">металлоизделия</span> на заказ</h2><p data-hf-id="hf-jqrf" id="brand-caption">Мебель · конструкции · арт-объекты · благоустройство</p></div>
+      <div data-hf-id="hf-tzoa" class="light-sweep" id="sweep-2"></div>
+    </div></section>
+
+    <section id="scene-products" data-hf-id="scene-products" class="scene clip product-scene" data-layout-allow-overlap="true" data-layout-allow-occlusion="true" data-start="8.2" data-duration="6.0"><div data-hf-id="hf-mthd" class="scene-content">
+      <div data-hf-id="hf-27i9" class="frame" style="border-color:rgb(23 24 23 / .12)"></div><div data-hf-id="hf-lk8j" class="scene-index" style="color:#5f5c55">03 <span data-hf-id="hf-qw3v" style="color:#a58a60">/</span> 06</div>
+      <div data-hf-id="hf-fk1k" class="product-top" id="product-top"><div data-hf-id="hf-yeow"><div data-hf-id="hf-21zx" class="micro">Выверенный подбор</div><h2 data-hf-id="hf-avid">Решения для пространства</h2></div><p data-hf-id="hf-h8z2">Каталог и решения по чертежу, фото или ТЗ</p></div>
+      <div data-hf-id="hf-eg4f" class="product-track">
+        <article data-hf-id="hf-limd" class="product-card" id="product-card-1"><span data-hf-id="hf-6tau" class="product-number">01 / URBAN</span><img id="product-swing-photo" data-hf-id="hf-h3se" class="product-photo" data-start="8.2" data-duration="6.0" src="assets/products/park-swing.webp" alt="Парковая качель из металла"><div data-hf-id="hf-8c10" class="product-label"><small data-hf-id="hf-7g3j">Уличная мебель</small><h3 data-hf-id="hf-mfv5">Парковая качель</h3><p data-hf-id="hf-arpa">Для дворов и общественных пространств</p></div></article>
+        <article data-hf-id="hf-roc6" class="product-card" id="product-card-2"><span data-hf-id="hf-pkz6" class="product-number">02 / STRUCTURE</span><img id="product-shelter-photo" data-hf-id="hf-k1db" class="product-photo" data-start="8.2" data-duration="6.0" src="assets/products/metal-shelter.webp" alt="Металлический навес"><div data-hf-id="hf-2avw" class="product-label"><small data-hf-id="hf-dahs">Металлоконструкции</small><h3 data-hf-id="hf-jryx">Навес для объекта</h3><p data-hf-id="hf-m1e9">Подбор по параметрам и ТЗ</p></div></article>
+        <article data-hf-id="hf-vmg7" class="product-card" id="product-card-3"><span data-hf-id="hf-95pg" class="product-number">03 / LIGHT</span><img id="product-light-photo" data-hf-id="hf-lzpe" class="product-photo" data-start="8.2" data-duration="6.0" src="assets/products/park-light.webp" alt="Опора паркового светильника"><div data-hf-id="hf-13yt" class="product-label"><small data-hf-id="hf-lt03">Световое оформление</small><h3 data-hf-id="hf-pdr7">Парковый свет</h3><p data-hf-id="hf-x41g">Функция и характер в одной детали</p></div></article>
+      </div><div data-hf-id="hf-sib-product-foot" class="product-foot"><span>Уличная мебель</span><i></i><span>Металлоконструкции</span><i></i><span>Арт-объекты и благоустройство</span><i></i><span>Световое оформление</span></div><div data-hf-id="hf-vm1a" class="product-line" id="product-line"></div><div data-hf-id="hf-xxsb" class="light-sweep" id="sweep-3"></div>
+    </div></section>
+
+    <section id="scene-process" data-hf-id="scene-process" class="scene clip process-scene" data-layout-allow-overlap="true" data-layout-allow-occlusion="true" data-start="12.5" data-duration="6.0"><div data-hf-id="hf-n7se" class="scene-content">
+      <img data-hf-id="hf-ohgv" class="scene-bg" id="process-bg" data-start="12.5" data-duration="6.0" data-layout-allow-overflow="true" src="assets/park-hero.jpg" alt=""><div data-hf-id="hf-hx3q" class="shade"></div><div data-hf-id="hf-4s2k" class="grain"></div><div data-hf-id="hf-vvoi" class="frame"></div><div data-hf-id="hf-lh2t" class="scene-index">04 <span data-hf-id="hf-raew" style="color:#a58a60">/</span> 06</div>
+      <div data-hf-id="hf-231e" class="process-heading" id="process-heading"><div data-hf-id="hf-y7yw"><div data-hf-id="hf-fb3w" class="micro">Прозрачный процесс</div><h2 data-hf-id="hf-7pun">От запроса — к поставке</h2></div><p data-hf-id="hf-p15u">Подберём изделие по каталогу или вашему чертежу; согласуем параметры, стоимость и сроки.</p></div>
+      <div data-hf-id="hf-dfq2" class="quote-window" id="quote-window"><div data-hf-id="hf-cdc6" class="quote-top"><strong data-hf-id="hf-p79u">Запрос коммерческого предложения</strong><span data-hf-id="hf-0vm0">Демонстрационный пример</span></div><div data-hf-id="hf-zoem" class="quote-kicker">Товары для расчёта</div><div data-hf-id="hf-fbik" class="quote-item"><img id="quote-bench-photo" data-start="12.5" data-duration="6.0" data-hf-id="hf-clr4" src="assets/products/bench-quadro.webp" alt=""><div data-hf-id="hf-x11t"><strong data-hf-id="hf-eyqm">Скамья Квадро</strong><small data-hf-id="hf-nxv9">Изделие из каталога</small></div></div><div data-hf-id="hf-9o9w" class="quote-item"><img id="quote-swing-photo" data-start="12.5" data-duration="6.0" data-hf-id="hf-warm" src="assets/products/park-swing.webp" alt=""><div data-hf-id="hf-xfcu"><strong data-hf-id="hf-bnw3">Парковая качель</strong><small data-hf-id="hf-1d9l">Изделие из каталога</small></div></div><div data-hf-id="hf-x3u1" class="quote-button"><span data-hf-id="hf-ue58">Передать на расчёт</span><b data-hf-id="hf-ey49"></b></div></div>
+      <div data-hf-id="hf-sib-process-details" class="process-note"><div><b>Что прислать</b><span>Чертёж · фото · эскиз · ТЗ</span></div><div><b>Что учесть</b><span>Материал · покрытие · сроки · доставка</span></div><div><b>Перед отгрузкой</b><span>Проверяем состав и комплектность заказа</span></div></div><div data-hf-id="hf-okpu" class="path-draw" id="path-draw"></div>
+      <div data-hf-id="hf-vk00" class="steps" id="steps"><div data-hf-id="hf-sib-step-01" class="step"><span>01</span><strong>Получение ТЗ</strong><small>Чертёж, фото, эскиз или описание</small></div><div data-hf-id="hf-sib-step-02" class="step"><span>02</span><strong>Проработка</strong><small>Размеры, материал, покрытие</small></div><div data-hf-id="hf-sib-step-03" class="step"><span>03</span><strong>Расчёт</strong><small>Состав заказа, сроки, логистика</small></div><div data-hf-id="hf-sib-step-04" class="step"><span>04</span><strong>Согласование</strong><small>Фиксируем спецификацию</small></div><div data-hf-id="hf-sib-step-05" class="step"><span>05</span><strong>Поставка</strong><small>Проверка комплектации</small></div><div data-hf-id="hf-sib-step-06" class="step"><span>06</span><strong>Доставка</strong><small>До объекта или терминала ТК</small></div></div>
+      <div data-hf-id="hf-kxlf" class="demo-note">Макет интерфейса · без реальных данных</div><div data-hf-id="hf-agas" class="light-sweep" id="sweep-4"></div>
+    </div></section>
+
+    <section id="scene-proof" data-hf-id="scene-proof" class="scene clip proof-scene" data-layout-allow-overlap="true" data-layout-allow-occlusion="true" data-start="17.1" data-duration="3.8"><div data-hf-id="hf-m0vb" class="scene-content">
+      <img data-hf-id="hf-ovht" class="scene-bg" id="proof-bg" data-start="17.1" data-duration="3.8" data-layout-allow-overflow="true" src="assets/park-hero.jpg" alt=""><div data-hf-id="hf-rf3v" class="shade-full"></div><div data-hf-id="hf-4drj" class="grain"></div><div data-hf-id="hf-vhdh" class="frame"></div><div data-hf-id="hf-ymc2" class="scene-index">05 <span data-hf-id="hf-oi9p" style="color:#a58a60">/</span> 06</div>
+      <div data-hf-id="hf-9ywy" class="proof-head" id="proof-head"><div data-hf-id="hf-qo1k" class="micro">СИБ-ТРЕЙД / подход</div><h2 data-hf-id="hf-q7zw">Важны не только изделия.<br data-hf-id="hf-rsrt"><span data-hf-id="hf-ha9g" style="color:#d2bd95">Важен результат.</span></h2></div>
+      <div data-hf-id="hf-e5py" class="proof-grid" id="proof-grid"><div data-hf-id="hf-3mn2" class="proof-item"><small data-hf-id="hf-79w7">01</small><strong data-hf-id="hf-phjk">Проверенные поставщики</strong><p data-hf-id="hf-sib-proof-01">Подбираем изделия под задачу и проект.</p></div><div data-hf-id="hf-rn0i" class="proof-item"><small data-hf-id="hf-6vl6">02</small><strong data-hf-id="hf-lvb0">Работа по чертежам и ТЗ</strong><p data-hf-id="hf-sib-proof-02">Начать можно с фото, эскиза или описания.</p></div><div data-hf-id="hf-s1bj" class="proof-item"><small data-hf-id="hf-6ha5">03</small><strong data-hf-id="hf-dfbc">Доставка по России</strong><p data-hf-id="hf-sib-proof-03">До объекта или терминала транспортной компании.</p></div></div><div data-hf-id="hf-b7yl" class="light-sweep" id="sweep-5"></div>
+    </div></section>
+
+    <section id="scene-close" data-hf-id="scene-close" class="scene clip close-scene" data-layout-allow-overlap="true" data-layout-allow-occlusion="true" data-start="20" data-duration="5"><div data-hf-id="hf-mf6c" class="scene-content">
+      <img data-hf-id="hf-9mz4" class="scene-bg" id="close-bg" data-start="20" data-duration="5" data-layout-allow-overflow="true" src="assets/park-hero.jpg" alt=""><div data-hf-id="hf-hisp" class="shade"></div><div data-hf-id="hf-5kom" class="grain"></div><div data-hf-id="hf-5btr" class="corner-line top-left"></div><div data-hf-id="hf-17ae" class="corner-line bottom-right"></div><div data-hf-id="hf-68mn" class="scene-index">06 <span data-hf-id="hf-owkq" style="color:#a58a60">/</span> 06</div>
+      <div data-hf-id="hf-puyq" class="close-center"><div data-hf-id="hf-ej2b" class="brand" id="close-brand"><span data-hf-id="hf-w2v3" class="brand-mark"><i data-hf-id="hf-zsm9"></i><i data-hf-id="hf-06xa"></i><i data-hf-id="hf-26gf"></i></span><span data-hf-id="hf-rxn7">СИБ-ТРЕЙД</span></div><h2 data-hf-id="hf-gc5e" id="close-title">Металлоизделия<br data-hf-id="hf-szow">для городской среды</h2><p data-hf-id="hf-mzrj" id="close-caption">Подбираем и поставляем от задачи до объекта</p><div data-hf-id="hf-xg69" class="cta" id="close-cta"><span data-hf-id="hf-emyq">Получить расчёт</span><i data-hf-id="hf-2krg"></i></div></div>
+      <div data-hf-id="hf-ml0o" class="close-footer"><span data-hf-id="hf-1y70">Продажа и поставка</span><span data-hf-id="hf-a7cr">sib-trade55.ru</span></div>
+    </div></section>
+
+    <audio data-hf-id="hf-phpg" id="sfx-reveal" data-start="4.62" data-duration="0.18" data-track-index="2" data-volume="0.48" src="assets/sfx/impact/impactSoft_medium_001.ogg"></audio>
+    <audio data-hf-id="hf-81zs" id="sfx-product" data-start="9.32" data-duration="0.11" data-track-index="3" data-volume="0.40" src="assets/sfx/interface/drop_001.ogg"></audio>
+    <audio data-hf-id="hf-5c2w" id="sfx-close" data-start="24.12" data-duration="0.12" data-track-index="4" data-volume="0.38" src="assets/sfx/interface/bong_001.ogg"></audio>
+    <audio data-hf-id="hf-qmaj" id="bgm" data-start="0" data-duration="25" data-track-index="10" data-volume="0.32" data-automation="{&quot;version&quot;:1,&quot;lanes&quot;:[{&quot;target&quot;:&quot;volume&quot;,&quot;points&quot;:[{&quot;t&quot;:0,&quot;v&quot;:0},{&quot;t&quot;:0.9,&quot;v&quot;:1,&quot;curve&quot;:0.45},{&quot;t&quot;:23.9,&quot;v&quot;:1},{&quot;t&quot;:25,&quot;v&quot;:0}]}]}" src="assets/music/happy-beats-business-moves-vol-12-by-ende-dot-app.mp3"></audio>
+  </div>
+  <script>
+    var tl = gsap.timeline({ paused: true });
+    var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (reduceMotion) {
+      // Preserve the six timed scenes while removing decorative motion for reduced-motion viewers.
+      tl.set(".scene-content", { autoAlpha: 1 }, 0);
+    } else {
+      tl.set(".scene-content", { autoAlpha: 0 }, 0);
+      tl.to("#scene-hook .scene-content", { autoAlpha: 1, duration: 0.82, ease: "power2.out" }, 0);
+      tl.to("#hero-bg", { scale: 1.06, x: -12, duration: 5.1, ease: "none" }, 0);
+      tl.fromTo("#hero-brand", { y: -14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.72, ease: "power3.out" }, 0.22);
+      tl.fromTo("#hero-eyebrow", { y: 12, opacity: 0, clipPath: "inset(0 0 100% 0)" }, { y: 0, opacity: 1, clipPath: "inset(0 0 0% 0)", duration: 0.78, ease: "power3.out" }, 0.62);
+      tl.fromTo("#hero-line-one", { yPercent: 105 }, { yPercent: 0, duration: 1.02, ease: "power3.out" }, 0.92);
+      tl.fromTo("#hero-line-two", { yPercent: 105 }, { yPercent: 0, duration: 1.02, ease: "power3.out" }, 1.32);
+      tl.fromTo("#hero-bottom", { x: -14, opacity: 0 }, { x: 0, opacity: 1, duration: 0.72, ease: "power3.out" }, 2.52);
+      tl.to("#sweep-1", { x: 2380, opacity: 0.5, duration: 1.08, ease: "power2.inOut" }, 3.30);
+      tl.to("#sweep-1", { opacity: 0, duration: 0.22 }, 4.42);
+
+      tl.to("#scene-brand .scene-content", { autoAlpha: 1, duration: 0.96, ease: "power2.inOut" }, 4.20);
+      tl.to("#scene-hook .scene-content", { autoAlpha: 0, duration: 0.96, ease: "power2.inOut" }, 4.22);
+      tl.to("#brand-bg", { scale: 1.05, x: 8, duration: 4.9, ease: "none" }, 4.20);
+      tl.fromTo("#brand-lockup", { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.86, ease: "power3.out" }, 4.76);
+      tl.fromTo("#brand-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.82, ease: "power2.inOut" }, 5.18);
+      tl.fromTo("#brand-title", { y: 22, opacity: 0, clipPath: "inset(0 0 100% 0)" }, { y: 0, opacity: 1, clipPath: "inset(0 0 0% 0)", duration: 1.04, ease: "power3.out" }, 5.45);
+      tl.fromTo("#brand-caption", { y: 12, opacity: 0 }, { y: 0, opacity: 1, duration: 0.72, ease: "power2.out" }, 6.72);
+      tl.to("#sweep-2", { x: 2380, opacity: 0.46, duration: 1.08, ease: "power2.inOut" }, 7.34);
+
+      tl.to("#scene-products .scene-content", { autoAlpha: 1, duration: 0.96, ease: "power2.inOut" }, 8.20);
+      tl.to("#scene-brand .scene-content", { autoAlpha: 0, duration: 0.96, ease: "power2.inOut" }, 8.22);
+      tl.fromTo("#product-top", { y: 12, opacity: 0 }, { y: 0, opacity: 1, duration: 0.74, ease: "power3.out" }, 8.62);
+      tl.fromTo(".product-card", { y: 40, rotateY: 3, scale: 0.985, opacity: 0 }, { y: 0, rotateY: 0, scale: 1, opacity: 1, duration: 0.98, stagger: 0.48, ease: "power3.out" }, 9.02);
+      tl.to("#product-line", { scaleX: 1, duration: 0.96, ease: "power2.inOut" }, 9.86);
+      tl.fromTo(".product-foot", { y: 8, opacity: 0 }, { y: 0, opacity: 1, duration: 0.62, ease: "power2.out" }, 10.62);
+      tl.to("#sweep-3", { x: 2380, opacity: 0.4, duration: 1.0, ease: "power2.inOut" }, 12.34);
+
+      tl.to("#scene-process .scene-content", { autoAlpha: 1, duration: 0.96, ease: "power2.inOut" }, 12.50);
+      tl.to("#scene-products .scene-content", { autoAlpha: 0, duration: 0.96, ease: "power2.inOut" }, 12.52);
+      tl.to("#process-bg", { scale: 1.04, x: -8, duration: 6.0, ease: "none" }, 12.50);
+      tl.fromTo("#process-heading", { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.78, ease: "power3.out" }, 13.08);
+      tl.fromTo("#quote-window", { x: -20, opacity: 0, rotateY: 1.5 }, { x: 0, opacity: 1, rotateY: 0, duration: 0.9, ease: "power3.out" }, 13.48);
+      tl.fromTo(".quote-item", { x: -8, opacity: 0 }, { x: 0, opacity: 1, duration: 0.64, stagger: 0.27, ease: "power2.out" }, 14.30);
+      tl.to("#path-draw", { scaleX: 1, duration: 1.55, ease: "power2.inOut" }, 14.14);
+      tl.to(".step", { opacity: 1, duration: 0.56, stagger: 0.34, ease: "power2.out" }, 14.38);
+      tl.fromTo(".process-note", { y: 10, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "power2.out" }, 15.42);
+      tl.fromTo(".quote-button", { y: 7, opacity: 0 }, { y: 0, opacity: 1, duration: 0.58, ease: "power2.out" }, 15.54);
+      tl.to("#sweep-4", { x: 2380, opacity: 0.46, duration: 1.04, ease: "power2.inOut" }, 17.62);
+
+      tl.to("#scene-proof .scene-content", { autoAlpha: 1, duration: 0.96, ease: "power2.inOut" }, 17.10);
+      tl.to("#scene-process .scene-content", { autoAlpha: 0, duration: 0.96, ease: "power2.inOut" }, 17.12);
+      tl.to("#proof-bg", { scale: 1.04, x: 6, duration: 3.8, ease: "none" }, 17.10);
+      tl.fromTo("#proof-head", { x: -12, opacity: 0 }, { x: 0, opacity: 1, duration: 0.78, ease: "power3.out" }, 17.68);
+      tl.fromTo(".proof-item", { y: 12, opacity: 0 }, { y: 0, opacity: 1, duration: 0.68, stagger: 0.36, ease: "power3.out" }, 18.24);
+      tl.to("#sweep-5", { x: 2380, opacity: 0.38, duration: 0.98, ease: "power2.inOut" }, 19.46);
+
+      tl.to("#scene-close .scene-content", { autoAlpha: 1, duration: 0.96, ease: "power2.inOut" }, 20.00);
+      tl.to("#scene-proof .scene-content", { autoAlpha: 0, duration: 0.96, ease: "power2.inOut" }, 20.02);
+      tl.to("#close-bg", { scale: 1.03, duration: 5.0, ease: "none" }, 20.00);
+      tl.fromTo("#close-brand", { y: -12, opacity: 0 }, { y: 0, opacity: 1, duration: 0.72, ease: "power3.out" }, 20.70);
+      tl.fromTo("#close-title", { y: 16, opacity: 0, clipPath: "inset(0 0 100% 0)" }, { y: 0, opacity: 1, clipPath: "inset(0 0 0% 0)", duration: 1.05, ease: "power3.out" }, 21.35);
+      tl.fromTo("#close-caption", { y: 8, opacity: 0 }, { y: 0, opacity: 1, duration: 0.80, ease: "power2.out" }, 22.55);
+      tl.fromTo("#close-cta", { y: 8, opacity: 0 }, { y: 0, opacity: 1, duration: 0.80, ease: "power3.out" }, 23.35);
+      tl.fromTo(".close-footer", { opacity: 0 }, { opacity: 1, duration: 0.64 }, 22.75);
+    }
+
+    window.__timelines["main"] = tl;
+    tl.seek(0);
+  </script>
+</body>
+</html>

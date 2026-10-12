@@ -42,7 +42,7 @@ title="Создать аккаунт"
       footerLinkHref="/auth/login"
     >
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid gap-4 min-[480px]:grid-cols-2">
           <div className="space-y-2">
 <Label htmlFor="firstName">Имя</Label>
             <Input id="firstName" name="firstName" autoComplete="given-name" value={form.firstName} onChange={handleChange} required />

@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-10",
+  "next": "16.4.0",
+  "routes": 29,
+  "widths": [
+    320,
+    768,
+    1024,
+    1440
+  ],
+  "checks": 116,
+  "horizontalOverflowFailures": [],
+  "headingFailures": [],
+  "consoleErrors": [],
+  "method": "Codex in-app browser via cua_repl; DOM layout checks and targeted UI interactions"
+}

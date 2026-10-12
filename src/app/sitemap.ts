@@ -5,7 +5,11 @@ import {
   categoryRepository,
   brandRepository,
   caseRepository,
+  blogRepository,
+  pageRepository,
 } from "@/lib/repositories"
+
+export const dynamic = "force-dynamic"
 
 // Static public routes. Admin, account, auth, and checkout are excluded
 // (covered by robots.txt disallow rules).
@@ -32,11 +36,13 @@ const STATIC_PATHS = [
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Fetch all dynamic content from the repository layer so swapping
   // backends (CMS, DB, API) doesn't break the sitemap.
-  const [productsResult, categories, brands, casesResult] = await Promise.all([
+  const [productsResult, categories, brands, casesResult, blog, pages] = await Promise.all([
     productRepository.list(undefined, undefined, { page: 1, limit: 10_000 }),
     categoryRepository.list(),
     brandRepository.list(),
     caseRepository.list(undefined, { page: 1, limit: 10_000 }),
+    blogRepository.list({ page: 1, limit: 10_000 }),
+    pageRepository.list(),
   ])
 
   const now = new Date()
@@ -82,5 +88,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...categoryEntries,
     ...brandEntries,
     ...caseEntries,
+    ...blog.items.map(post => ({ url: `${siteConfig.url}/blog/${post.slug}`, lastModified: new Date(post.updatedAt ?? post.publishedAt), changeFrequency: 'monthly' as const, priority: 0.6 })),
+    ...pages.map(page => ({ url: `${siteConfig.url}/pages/${page.slug}`, lastModified: new Date(page.updatedAt ?? page.publishedAt), changeFrequency: 'monthly' as const, priority: 0.5 })),
   ]
 }

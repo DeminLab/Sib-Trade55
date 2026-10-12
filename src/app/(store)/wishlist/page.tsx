@@ -1,23 +1,34 @@
 "use client"
 
-import { useSyncExternalStore } from "react"
+import { useEffect, useState, useSyncExternalStore } from "react"
 import { Heart } from "lucide-react"
 import { PageHeader } from "@/components/ui/page-header"
 import { EmptyState } from "@/components/ui/empty-state"
 import { ProductCard } from "@/components/products/product-card"
 import { useWishlistStore } from "@/store/wishlist"
 import type { Product } from "@/types"
-import data from "@/data/products.json"
-
-const allProducts = data.products as Product[]
 
 export default function WishlistPage() {
   const wishlistItems = useWishlistStore((s) => s.items)
+  const [productState, setProductState] = useState<{ key: string; items: Product[] }>({ key: "", items: [] })
+  const wishlistKey = wishlistItems.map((item) => item.productId).sort().join(",")
   const mounted = useSyncExternalStore(
     () => () => undefined,
     () => true,
     () => false,
   )
+
+  useEffect(() => {
+    if (!mounted || !wishlistKey) return
+    const params = new URLSearchParams()
+    wishlistKey.split(",").forEach((id) => params.append("id", id))
+    const controller = new AbortController()
+    fetch(`/api/catalog/products?${params}`, { signal: controller.signal })
+      .then((response) => response.ok ? response.json() as Promise<{ items: Product[] }> : Promise.reject(new Error("Could not load products")))
+      .then((result) => setProductState({ key: wishlistKey, items: result.items }))
+      .catch((error: unknown) => { if (!(error instanceof DOMException && error.name === "AbortError")) setProductState({ key: wishlistKey, items: [] }) })
+    return () => controller.abort()
+  }, [mounted, wishlistKey])
 
   if (!mounted) {
     return (
@@ -27,9 +38,7 @@ export default function WishlistPage() {
     )
   }
 
-  const wishlistedProducts = allProducts.filter((p) =>
-    wishlistItems.some((w) => w.productId === p.id)
-  )
+  const wishlistedProducts = productState.key === wishlistKey ? productState.items : []
 
   if (wishlistedProducts.length === 0) {
     return (
@@ -52,7 +61,7 @@ title="Ваш список избранного пуст"
         title="Избранное"
         description={`${wishlistedProducts.length} ${wishlistedProducts.length === 1 ? "товар" : "товаров"}`}
       />
-      <div className="mt-8 grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 lg:grid-cols-4">
+      <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-5 md:grid-cols-3 lg:grid-cols-4">
         {wishlistedProducts.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}

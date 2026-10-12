@@ -1,135 +1,40 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { Suspense } from "react"
 import { productRepository, categoryRepository } from "@/lib/repositories"
 import { ProductGrid } from "@/components/products/product-grid"
 import { Pagination } from "@/components/products/pagination"
-import { SortDropdown } from "@/components/products/sort-dropdown"
-import type { SortOption } from "@/types"
-import { siteConfig } from "@/lib/config"
+import { CatalogControls } from "@/components/products/catalog-controls"
+import { parseCatalogQuery, catalogSearchParams, normalizeCatalogQuery, type CatalogQuery } from "@/lib/catalog-query"
+import { productCountLabel } from "@/lib/product-presentation"
 
-interface ShopPageProps {
-  searchParams: Promise<{
-    page?: string
-    sort?: string
-    category?: string
-    q?: string
-  }>
+export const metadata: Metadata = {
+  title: "Каталог",
+  description: "Уличная мебель, оборудование для благоустройства и металлоконструкции. Подбор и поставка по России.",
+  alternates: { canonical: "/shop" },
 }
 
-export async function generateMetadata({
-  searchParams,
-}: ShopPageProps): Promise<Metadata> {
-  const params = await searchParams
-  const page = Number(params.page) || 1
-  const canonical = page > 1 ? `${siteConfig.url}/shop?page=${page}` : `${siteConfig.url}/shop`
-
-  return {
-    title: "Каталог",
-    description: "Полный каталог товаров: металлоконструкции, сантехника, стройматериалы, инструменты.",
-    alternates: { canonical },
-  }
-}
-
-const SORT_OPTIONS: Record<string, SortOption> = {
-  newest: { field: "createdAt", order: "desc" },
-  "price-asc": { field: "price", order: "asc" },
-  "price-desc": { field: "price", order: "desc" },
-  name: { field: "name", order: "asc" },
-}
-
-export default async function ShopPage({ searchParams }: ShopPageProps) {
-  const params = await searchParams
-  const page = Number(params.page) || 1
-  const sortKey = params.sort || "newest"
-  const categorySlug = params.category
-  const searchQuery = params.q
-
-  const sort = SORT_OPTIONS[sortKey] ?? SORT_OPTIONS.newest
-
-  const { items: products, pagination } = await productRepository.list(
-    {
-      category: categorySlug,
-      search: searchQuery,
-    },
-    sort,
-    { page, limit: 40 }
-  )
-
-  const allCategories = await categoryRepository.list()
-  const categories = allCategories.filter((c) => !c.parentId)
-
-  // Build current search params for pagination links
-  const currentParams: Record<string, string> = {}
-  if (sortKey !== "newest") currentParams.sort = sortKey
-  if (categorySlug) currentParams.category = categorySlug
-  if (searchQuery) currentParams.q = searchQuery
-
+export default async function ShopPage({ searchParams }: { searchParams: Promise<CatalogQuery> }) {
+  const query = normalizeCatalogQuery(await searchParams)
+  const options = parseCatalogQuery(query)
+  const [result, allCategories] = await Promise.all([
+    productRepository.list(options.filters, options.sort, options.pagination),
+    categoryRepository.list(),
+  ])
+  const root = allCategories.find((category) => !category.parentId)
+  const selected = allCategories.find((category) => category.slug === query.category)
+  const categories = allCategories.filter((category) => category.id !== root?.id || category.id === selected?.id).sort((a, b) => a.order - b.order)
   return (
-    <div className="mx-auto max-w-[1440px] px-4 py-8 sm:px-6 lg:px-8">
-      {/* Header */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">
-            {categorySlug
-              ? categories.find((c) => c.slug === categorySlug)?.name ??
-                "Каталог"
-              : searchQuery
-                ? `Результаты по «${searchQuery}»`
-                : "Все товары"}
-          </h1>
-          <p className="mt-1 text-sm text-muted-foreground">
-            {pagination.total} {pagination.total === 1 ? "товар" : "товаров"}
-          </p>
-        </div>
-
-        <Suspense>
-          <SortDropdown currentSort={sortKey} />
-        </Suspense>
-      </div>
-
-      {/* Category filter pills */}
-      <div className="mt-6 flex flex-wrap gap-2">
-        <Link
-          href="/shop"
-          className={`rounded-sm border px-3 py-1 text-xs font-medium transition-colors ${
-            !categorySlug
-              ? "border-foreground bg-foreground text-background"
-              : "border-border hover:border-foreground"
-          }`}
-        >
-          Все товары
-        </Link>
-        {categories.map((cat) => {
-          return (
-            <Link
-              key={cat.id}
-              href={`/${cat.slug}`}
-              className={`rounded-sm border px-3 py-1 text-xs font-medium transition-colors ${
-                categorySlug === cat.slug
-                  ? "border-foreground bg-foreground text-background"
-                  : "border-border hover:border-foreground"
-              }`}
-            >
-              {cat.name}
-            </Link>
-          )
-        })}
-      </div>
-
-      {/* Product Grid */}
-      <div className="mt-8">
-        <ProductGrid products={products} />
-      </div>
-
-      {/* Pagination */}
-      <div className="mt-12">
-        <Pagination
-          pagination={pagination}
-          basePath="/shop"
-          searchParams={currentParams}
-        />
-      </div>
+    <div className="mx-auto max-w-[1440px] px-4 py-6 sm:px-6 lg:px-8 lg:py-10">
+      <p className="industrial-label">Подбор и поставка оборудования</p>
+      <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">Каталог товаров</h1>
+      <p className="mt-2 text-sm text-muted-foreground">{productCountLabel(result.pagination.total)} · Добавляйте изделия в общий расчёт</p>
+      <nav aria-label="Направления каталога" className="mt-5 flex flex-wrap gap-2">
+        {categories.filter(c => c.parentId === root?.id || !c.parentId && c.id !== root?.id).map(c => <Link key={c.id} href={`/${c.slug}`} className="border border-border bg-background px-3 py-2 text-sm hover:border-primary focus-visible:outline-2">{c.name}</Link>)}
+      </nav>
+      <CatalogControls query={query} categories={categories} />
+      <div className="mt-6"><ProductGrid products={result.items} /></div>
+      <div className="mt-8"><Pagination pagination={result.pagination} basePath="/shop" searchParams={catalogSearchParams(query)} /></div>
+      <aside className="mt-8 flex flex-col gap-3 border border-border bg-surface-subtle p-5 sm:flex-row sm:items-center sm:justify-between"><p className="text-sm">Не нашли нужное изделие? Подберём оборудование по списку или чертежам.</p><Link href="/custom" className="shrink-0 font-medium text-primary underline underline-offset-4">Отправить задачу на подбор</Link></aside>
     </div>
   )
 }

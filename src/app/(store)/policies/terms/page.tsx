@@ -1,3 +1,4 @@
+import { managedPage } from '@/components/content/managed-page'
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -5,7 +6,9 @@ export const metadata: Metadata = {
   description: "Условия и положения использования сайта и услуг.",
 }
 
-export default function TermsPage() {
+export default async function TermsPage() {
+  const override = await managedPage('policies-terms')
+  if (override) return override
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
       <h1 className="text-3xl font-bold tracking-tight">Условия использования</h1>
@@ -56,7 +59,7 @@ export default function TermsPage() {
 
         <h2 className="text-xl font-semibold text-foreground">Контакты</h2>
         <p>
-          По вопросам использования сайта обращайтесь: info@sib-trade.ru
+          По вопросам использования сайта обращайтесь: sib-trade55@yandex.ru
         </p>
       </div>
     </div>

@@ -1,60 +1,93 @@
-# Backend API migration boundary
+# Архитектура и API СИБ-ТРЕЙД
 
-Sib-Trade55 keeps the current JSON repositories as the local content source and exposes a second, typed adapter layer for the future backend.
+[README](../../README.md) · [Эксплуатация](../DEPLOYMENT.md) · [Заявки](../requests.md)
 
-## Runtime flow
+Документация сверена с кодом 9 октября 2026 года.
+
+## Рабочий поток
 
 ```text
-React UI / Server Component
-        ↓
-domain repository or service interface
-        ↓
-typed API adapter (`src/lib/repositories/api-*`)
-        ↓
-Next API route or external backend API
-        ↓
-backend application services
-        ↓
-PostgreSQL / object storage / payment provider
+Server Component → доменный репозиторий → sqlite-store.ts → SQLite
+Client Component → клиентский сервис → /api/* → хранилище → SQLite
 ```
 
-React components must not import database clients, SQL, or storage SDKs. They should receive domain data from repository/service functions only.
+Backend находится внутри Next.js: Route Handlers в `src/app/api`. Хранилище использует Node.js `node:sqlite` и требует Node.js >= 22.13.0. Компоненты обращаются к доменным репозиториям и сервисам; SQL и секреты остаются на сервере.
 
-## Repository selection
+## Хранилище
 
-- Existing JSON implementations remain the default for public catalog and CMS pages.
-- API implementations are available from `src/lib/repositories/api-repositories.ts`.
-- `apiRepositoryRegistry` is the single typed registry for the API adapters.
-- Switching a surface from JSON to API means changing the composition/export boundary, not rewriting the UI.
-- `api-client.ts` supports a configurable `NEXT_PUBLIC_API_BASE_URL`, injected `fetcher`, credentials, pagination, filters, search, and multi-field sorting.
+| Таблица | Данные |
+| --- | --- |
+| `app_state` | JSON каталога (`catalog`), контент (`content:blog`, `content:cases`, `content:materials`, `content:pages`), маркеры инициализации |
+| `orders` | Заявки из корзины: id, дата и JSON заказа |
+| `catalog_media` | Изображения: путь, MIME-тип, BLOB |
+| `customer_requests` | Обращения, КП и ТЗ: id, тип, дата, JSON заявки |
+| `request_attachments` | Приватные файлы с привязкой к заявке |
 
-## Domain contracts
+Путь определяется в `src/lib/database/sqlite-store.ts`: `SQLITE_DATABASE_PATH`, иначе `catalog.sqlite` в первом заданном каталоге `SQLITE_DATA_DIR`, `CATALOG_DATA_DIR`, `ORDERS_DATA_DIR`, иначе `<cwd>/data`. Используются WAL, foreign keys и `busy_timeout=10000`. Записи выполняются транзакционно; очередь записи действует внутри процесса.
 
-`src/types/index.ts` contains contracts for Product, Category, ProductVariant, Customer, Company, Order, OrderItem, QuoteRequest, Quote, Case, CaseImage, Review, ContactRequest, and File. Existing names such as `OrderLineItem` and `CaseProjectImage` remain as aliases for current UI compatibility.
+При отсутствии каталога приложение пытается перенести каталог и заказы из настроенного PostgreSQL. Для каталога следующие источники — `CATALOG_SEED_FILE`/`catalog.json`, затем `src/data/products.json`. Для заказов PostgreSQL возвращает массив, в том числе пустой; только при отсутствии такого результата используется `orders.json`. Подключение PostgreSQL также вызывает создание legacy-схемы при необходимости.
 
-## Query contract
+Отсутствующие записи контента импортируются из `src/data/*.json`. Начальные изображения из `public/images/products/` и legacy `catalog-media/` импортируются в SQLite, локальные URL товаров переписываются на `/api/catalog/media/...`. Уже существующие записи не синхронизируются с JSON при каждом запуске. После переноса текущие чтение и запись работают через SQLite.
 
-Repositories use `RepositoryQuery<TFilters>` with:
+## Доменные границы и будущий API
 
-- `pagination`: page and limit;
-- `filters`: resource-specific typed filters;
-- `search`: full-text query passed to the backend;
-- `sort`: one or more `{ field, order }` values.
+`src/lib/repositories/index.ts` выбирает SQLite-репозитории товаров, категорий, брендов, страниц, блога, кейсов и материалов, а также `catalogAdminRepository`. Контракты находятся в `src/types/index.ts`.
 
-The API adapter serializes these values into URL parameters. The backend owns validation, authorization, filtering, sorting, and pagination totals.
+`src/lib/repositories/api-repositories.ts` экспортирует `apiRepositoryRegistry` и типизированные адаптеры внешних ресурсов. API-клиент поддерживает базовый URL `NEXT_PUBLIC_API_BASE_URL`, injected fetcher, credentials, pagination, filters, search и sort. Адаптеры — подготовленная граница интеграции, а не подтверждение существования всех соответствующих серверных API.
 
-## Authentication and RBAC
+`RepositoryQuery<TFilters>` содержит pagination (`page`, `limit`), типизированные filters, search и sort (`field`, `order`). Внешний backend должен повторно проверять входные данные, права и итоговую пагинацию. `AuthContext` и `authorizationService` служат доменной границей, но не заменяют серверную проверку сессии.
 
-`AuthContext` carries user, customer/company, roles, permissions, and session expiry. `authorizationService` provides a small policy boundary for UI hints and service-level checks. Backend endpoints remain the source of truth and must repeat authorization checks server-side.
+## Действующие маршруты
 
-## Files
+| API | Методы и поведение |
+| --- | --- |
+| `/api/catalog/products`, `/api/catalog/search` | `GET`: публичный каталог и поиск |
+| `/api/catalog/media/[...path]` | `GET`: публичные изображения каталога |
+| `/api/admin/products` | `GET`, `POST`, `PATCH`: список, создание и массовая смена статуса |
+| `/api/admin/products/[id]` | `GET`, `PUT`, `DELETE`: товар, изменение, архивирование |
+| `/api/admin/categories` | `GET`, `POST`: список и создание категории |
+| `/api/admin/categories/[id]` | `GET`, `PUT`, `DELETE`: категория, изменение и удаление |
+| `/api/admin/dashboard`, `/api/admin/search` | `GET`: показатели и административный поиск |
+| `/api/orders` | Публичный `POST` заявки на заказ; `GET` списка требует администратора |
+| `/api/contact`, `/api/quotes` | `POST`: JSON-заявки в SQLite |
+| `/api/custom-requests` | `POST`: multipart ТЗ с приватными вложениями |
+| `/api/admin/requests` | `GET`: список по типу с пагинацией |
+| `/api/admin/requests/[id]` | `PATCH`: статус или `retry_notification` |
+| `/api/admin/requests/[id]/files/[fileId]` | `GET`: скачивание файла после проверки сессии и принадлежности заявке |
+| `/api/auth/login`, `/api/auth/logout`, `/api/auth/register` | `POST`: вход, выход и демонстрационная регистрация |
 
-`FileRepository` models a two-step upload: request an upload through `createUpload`, upload/complete through the backend or object storage flow, then call `completeUpload`. The UI only handles `File`/`Blob` and never receives database or storage credentials.
+Административные API проверяют подписанную cookie; данные заявок и файлов возвращаются с `private, no-store`. Подробности в [инструкции по заявкам](../requests.md).
 
-## Orders and quotes
+## Сессия и ограничения аккаунта
 
-`ApiOrderRepository` owns order listing, creation, and status changes. `QuoteRequestRepository` owns B2B request lifecycle; `QuoteRepository` owns the generated commercial proposal lifecycle. Admin actions should call these repositories rather than mutating Zustand or browser storage.
+В production вход администратора использует `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `AUTH_SESSION_SECRET`. Cookie `sib_trade_session` подписана HMAC-SHA256, имеет HttpOnly, SameSite=Lax и срок 7 дней. Secure управляется `AUTH_COOKIE_SECURE`, иначе включён в production. Клиентский expiresAt и серверная cookie рассчитаны на 7 дней. GET /api/auth/session восстанавливает состояние интерфейса после перезагрузки; права административных API по-прежнему проверяются на сервере.
 
-## PostgreSQL mapping direction
+Демо-вход и регистрация разрешены только вне production. `/api/auth/login` отвечает 400 на некорректные данные, 401 на неверные данные при настроенной авторизации, 503 при недоступной конфигурации входа.
 
-The backend can map these contracts to separate aggregates/tables such as products, product_variants, categories, customers, companies, orders, order_items, quote_requests, quotes, cases, case_images, reviews, contact_requests, and files. This repository layer intentionally contains no SQL or database assumptions.
+`GET /api/orders/[id]`, API профиля и адресов, подписка на рассылку остаются заглушками с 503. Production-регистрация также возвращает 503. Это не готовый backend личного кабинета. Контракт `FileRepository` для внешнего двухэтапного upload не используется вместо текущего хранения вложений заявок в SQLite.
+
+## Заказы и КП
+
+Checkout создаёт заявку в `orders` без платёжной сессии. Маршрут проверяет активный товар, вариант и доступное количество, берёт название, артикул и цену из каталога и пересчитывает суммы на сервере. Доставка согласуется отдельно, в предварительной сумме заказа она не начисляется. Эти суммы не являются оплаченной выручкой. Заявки КП хранятся отдельно как `customer_requests.kind=quote`; готовая генерация коммерческого предложения и CRM не подключены.
+
+Уведомления Telegram сейчас относятся к обращениям, КП и ТЗ. `POST /api/orders` сохраняет заказ без вызова Telegram.
+
+## Эксплуатация и проверка
+
+Команды запуска, окружение Compose, ограничения HTTP/TLS и резервное копирование описаны в [DEPLOYMENT.md](../DEPLOYMENT.md). После изменения схемы или данных перезапустите Next.js. Локальные тесты не подтверждают публичный DNS/TLS, работу production Docker/Nginx или реальную доставку Telegram.
+
+
+## Дополнения 10 октября 2026 года
+
+| API | Поведение |
+| --- | --- |
+| GET `/api/auth/session` | Текущий подписанный пользователь или null; private, no-store |
+| GET, POST `/api/admin/content/[collection]` | pages, blog, cases, materials, coatings, ralColors; save/archive/restore с ревизией |
+| GET, PUT `/api/admin/settings` | Настройки в `app_state.key=site:settings`, optimistic concurrency |
+| POST `/api/admin/media` | Загрузка изображения до 10 МБ, преобразование в WebP, `catalog_media` |
+| PATCH `/api/admin/orders/[id]` | Проверенная смена статуса, повторное чтение из SQLite |
+| GET `/api/admin/overview?from=YYYY-MM-DD&to=YYYY-MM-DD` | Бизнес-показатели и здоровье процесса/ОС/хранилища, только администратору |
+
+Архив CMS отмечается `archived` в записи и исключается публичными репозиториями. Данные физически не удаляются. Схема таблиц для этой доработки не менялась; добавлена запись настроек. Все SQL-записи идут через существующую транзакционную очередь. Сравнение ревизий и запись выполняются с проверкой актуального документа внутри транзакции. При холодном старте блокировки SQLite повторяются ограниченно; прочие ошибки миграции не обходятся.
+
+Мониторинг использует Node.js/os/fs и SQLite, не выполняет произвольные команды. Метрики здоровья кэшируются 30 секунд; интерфейс опрашивает их раз в минуту в видимой вкладке. CPU процесса — доля одного ядра за интервал между замерами. RSS/heap относятся к процессу, total/free memory и uptime — к видимой ОС, место на диске — к файловой системе базы. В контейнере видимая ОС не обязательно совпадает с лимитами; память cgroup v2 читается отдельно, если доступна. Docker API и остальные контейнеры не подключены. Счётчик `onRequestError` содержит только необработанные ошибки Next.js с запуска текущего процесса; обработанные API-ошибки и прошлые логи туда не входят. Запросы, секреты и персональные данные не сохраняются в метриках.

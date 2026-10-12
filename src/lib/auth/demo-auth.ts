@@ -31,16 +31,28 @@ function createUser(
 
 export function authenticateDemoUser(email: string, password: string): AuthSession | null {
   const normalizedEmail = email.trim().toLowerCase()
+  const adminEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase()
+  const adminPassword = process.env.ADMIN_PASSWORD
+
+  if (adminEmail && adminPassword && normalizedEmail === adminEmail && password === adminPassword) {
+    const name = process.env.ADMIN_NAME?.trim() || "Администратор"
+    return {
+      user: createUser({ email: adminEmail, firstName: name, lastName: "", role: "admin" }),
+      expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+    }
+  }
+
   const account = DEMO_ACCOUNTS.find((item) => item.email === normalizedEmail)
 
-  if (!isDemoAuthEnabled() || !account || password !== DEMO_PASSWORD) {
-    return null
+  if (isDemoAuthEnabled()) {
+    if (!account || password !== DEMO_PASSWORD) return null
+    return {
+      user: createUser(account),
+      expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+    }
   }
 
-  return {
-    user: createUser(account),
-    expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
-  }
+  return null
 }
 
 export function registerDemoUser(data: { firstName: string; lastName: string; email: string }): AuthSession | null {
@@ -48,6 +60,6 @@ export function registerDemoUser(data: { firstName: string; lastName: string; em
 
   return {
     user: createUser(data),
-    expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+    expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
   }
 }

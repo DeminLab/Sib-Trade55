@@ -1,3 +1,4 @@
+import { serializeJsonLd } from '@/lib/structured-data'
 import type { Metadata } from "next"
 import Link from "next/link"
 import Image from "next/image"
@@ -78,7 +79,7 @@ export default async function BlogPostPage({ params }: PostProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify([
+          __html: serializeJsonLd([
             articleJsonLd,
             breadcrumbJsonLd([
               { name: "Блог", href: "/blog" },

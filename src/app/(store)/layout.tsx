@@ -4,6 +4,10 @@ import { AnnouncementBar } from "@/components/layout/announcement-bar"
 import { CartDrawer } from "@/components/cart/cart-drawer"
 import { BackToTop } from "@/components/layout/back-to-top"
 import { categoryRepository } from "@/lib/repositories"
+import { getSiteSettings } from '@/lib/content/site-settings'
+import { SiteSettingsProvider } from '@/components/layout/site-settings-provider'
+
+export const dynamic = "force-dynamic"
 
 export default async function StoreLayout({
   children,
@@ -12,10 +16,10 @@ export default async function StoreLayout({
 }) {
   // Fetch category tree server-side so the Header doesn't depend on
   // a specific data source — the repository layer handles that.
-  const categories = await categoryRepository.list()
+  const [categories, settings] = await Promise.all([categoryRepository.list(), getSiteSettings()])
 
   return (
-    <>
+    <SiteSettingsProvider value={settings}>
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-md focus:bg-background focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-ring"
@@ -27,9 +31,9 @@ export default async function StoreLayout({
       <main id="main-content" className="flex-1">
         {children}
       </main>
-      <Footer />
+      <Footer categories={categories} settings={settings} />
       <CartDrawer />
       <BackToTop />
-    </>
+    </SiteSettingsProvider>
   )
 }

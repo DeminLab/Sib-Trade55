@@ -81,7 +81,7 @@ export function CartDrawer() {
                   <span>{formatPrice(subtotal)}</span>
                 </div>
                 <p className="text-xs text-muted-foreground">
-                  Стоимость доставки и налоги рассчитываются при оформлении.
+                  Итоговую стоимость и доставку согласуем с менеджером после отправки заявки.
                 </p>
                 <Button className="w-full" size="lg" asChild onClick={closeCart}>
                   <Link href="/checkout">Оформить заказ</Link>

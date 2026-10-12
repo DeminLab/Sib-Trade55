@@ -1,0 +1,12 @@
+node_modules
+.next
+.git
+.agents
+/data/
+audit-screenshots
+*.log
+.env*
+README.md
+docs
+tests
+tsconfig.tsbuildinfo

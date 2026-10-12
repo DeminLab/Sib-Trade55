@@ -65,7 +65,7 @@ export default function AddressesPage() {
         <Card className="mt-6">
           <CardContent className="pt-6">
             <form onSubmit={handleAdd} className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid gap-4 min-[480px]:grid-cols-2">
                 <div className="space-y-2">
 <Label>Имя</Label>
                   <Input name="firstName" value={form.firstName} onChange={handleChange} required />

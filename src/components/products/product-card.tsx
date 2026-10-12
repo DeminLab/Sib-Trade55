@@ -2,8 +2,9 @@
 
 import { useSyncExternalStore, type MouseEvent } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import Image from "next/image"
-import { ArrowRight, Heart, PackageCheck } from "lucide-react"
+import { Heart, Plus, Check } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { formatPrice } from "@/lib/utils"
@@ -12,61 +13,21 @@ import { useWishlistStore } from "@/store/wishlist"
 import { useQuoteStore } from "@/store/quote"
 import { toast } from "sonner"
 import type { Product } from "@/types"
+import { getAvailability, getProductMaterial, isPriceOnRequest } from "@/lib/product-presentation"
+import { getProductImageSurface } from "@/lib/product-image-surface"
 
 interface ProductCardProps {
   product: Product
 }
 
-const materialKeywords = [
-  "нержавеющая сталь",
-  "оцинкованная сталь",
-  "сталь",
-  "алюминий",
-  "профнастил",
-  "поликарбонат",
-  "акрил",
-  "хром",
-] as const
-
-function getProductMaterial(product: Product) {
-  const searchableText = `${product.name} ${product.description} ${product.tags.join(" ")}`.toLowerCase()
-  return materialKeywords.find((material) => searchableText.includes(material)) ?? product.tags[0] ?? "Металл"
-}
-
-function getKeyCharacteristic(product: Product) {
-  const option = product.variants[0]?.options[0]
-  if (option) return `${option.name}: ${option.value}`
-
-  return product.description.split(".")[0] || "Параметры по запросу"
-}
-
-function isMadeToOrder(product: Product) {
-  const searchableText = `${product.name} ${product.description} ${product.tags.join(" ")}`.toLowerCase()
-  return /изготов|индивиду|заказ|конструкц|лестниц|ворот|навес|каркас|арт-объект/.test(searchableText)
-}
-
-function getAvailability(product: Product, madeToOrder: boolean) {
-  if (madeToOrder) return "Под заказ"
-
-  const inventory = product.variants[0]?.inventory
-  if (!inventory) return "Уточнить наличие"
-  if (inventory.quantity > 0) return "В наличии"
-  if (inventory.allowBackorder) return "Под заказ"
-  return "Уточнить наличие"
-}
-
-function getLeadTime(availability: string, madeToOrder: boolean) {
-  if (madeToOrder || availability === "Под заказ") return "По запросу"
-  if (availability === "В наличии") return "Готовое изделие"
-  return "Уточнить срок"
-}
-
 export function ProductCard({ product }: ProductCardProps) {
+  const router = useRouter()
   const defaultVariant = product.variants[0]
   const wishlistItems = useWishlistStore((state) => state.items)
   const addItem = useWishlistStore((state) => state.addItem)
   const removeItem = useWishlistStore((state) => state.removeItem)
   const addQuoteItem = useQuoteStore((state) => state.addItem)
+  const quoteItems = useQuoteStore((state) => state.items)
   const mounted = useSyncExternalStore(
     () => () => undefined,
     () => true,
@@ -77,9 +38,11 @@ export function ProductCard({ product }: ProductCardProps) {
 
   const price = defaultVariant.price
   const image = product.images[0]
-  const madeToOrder = isMadeToOrder(product)
-  const availability = getAvailability(product, madeToOrder)
-  const leadTime = getLeadTime(availability, madeToOrder)
+  const priceOnRequest = isPriceOnRequest(defaultVariant)
+  const availability = getAvailability(defaultVariant)
+  const material = getProductMaterial(product)
+  const option = defaultVariant.options.find((item) => /размер|длина|версия/i.test(item.name))
+  const inQuote = mounted && quoteItems.some((item) => item.variantId === defaultVariant.id)
 
   const isWishlisted = mounted && wishlistItems.some((item) => item.productId === product.id)
 
@@ -94,10 +57,12 @@ export function ProductCard({ product }: ProductCardProps) {
       image: image ?? { url: PLACEHOLDER_IMAGE, alt: product.name },
       slug: product.slug,
       price,
+      priceOnRequest,
       quantity: 1,
       lineTotal: price,
       currency: defaultVariant.currency,
     })
+    toast.success("Товар добавлен в расчёт", { action: { label: "Открыть", onClick: () => { router.push("/quote") } } })
   }
 
   function handleWishlist(event: MouseEvent<HTMLButtonElement>) {
@@ -121,50 +86,29 @@ export function ProductCard({ product }: ProductCardProps) {
   }
 
   return (
-    <article className="group flex h-full flex-col border border-border bg-background transition-colors duration-300 hover:border-line-strong">
-      <div className="relative aspect-[1.12] overflow-hidden bg-surface-subtle">
-        <Link href={`/${product.slug}`} aria-label={`Подробнее: ${product.name}`} className="block h-full">
-          <Image
-            src={image?.url ?? PLACEHOLDER_IMAGE}
-            alt={image?.alt ?? product.name}
-            fill
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+    <article className="group grid h-full min-w-0 grid-cols-[6rem_minmax(0,1fr)] gap-3 border border-border bg-background p-3 transition-colors hover:border-line-strong min-[380px]:grid-cols-[7rem_minmax(0,1fr)] sm:flex sm:flex-col sm:gap-0 sm:p-0">
+      <div className={`catalog-image-surface ${getProductImageSurface(product.name)} relative aspect-square self-start w-full overflow-hidden sm:aspect-[4/3]`}>
+        <Link href={`/${product.slug}`} aria-label={`Подробнее: ${product.name}`} className="relative block h-full">
+          <Image src={image?.url ?? PLACEHOLDER_IMAGE} alt={image?.alt ?? product.name} fill
+            className="object-contain p-2 transition-transform duration-300 motion-safe:group-hover:scale-[1.03] sm:p-5"
+            sizes="(max-width: 640px) 112px, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw" />
         </Link>
-        <button
-          type="button"
-          onClick={handleWishlist}
-          className="absolute right-3 top-3 z-10 flex size-10 items-center justify-center border border-white/70 bg-white/90 text-foreground shadow-sm backdrop-blur transition-all hover:border-primary hover:bg-white"
-          aria-label={isWishlisted ? "Удалить из избранного" : "Добавить в избранное"}
-        >
-          <Heart className={`size-[17px] transition-transform duration-300 ${isWishlisted ? "fill-current text-wishlist" : "text-foreground/65 group-hover:text-foreground"}`} />
+        <button type="button" onClick={handleWishlist} aria-pressed={isWishlisted}
+          className="absolute right-0 top-0 grid size-11 place-items-center bg-white/90 text-foreground transition-colors hover:bg-accent sm:right-2 sm:top-2"
+          aria-label={isWishlisted ? "Удалить из избранного" : "Добавить в избранное"}>
+          <Heart className={isWishlisted ? "size-4 fill-current text-wishlist" : "size-4"} aria-hidden="true" />
         </button>
       </div>
-
-      <div className="flex flex-1 flex-col p-5 sm:p-6">
-        <div className="flex items-start justify-between gap-4">
-          <Link href={`/${product.slug}`} className="min-w-0">
-            <h3 className="line-clamp-2 text-lg font-semibold leading-tight tracking-[-0.025em] transition-colors group-hover:text-primary">{product.name}</h3>
-          </Link>
-          {product.rating > 0 ? <span className="shrink-0 font-mono text-[0.65rem] text-muted-foreground" title={`${product.rating} из 5`}>★ {product.rating.toFixed(1)}</span> : null}
-        </div>
-        <p className="mt-3 line-clamp-2 text-sm leading-6 text-muted-foreground">{product.description}</p>
-
-        <dl className="mt-5 grid grid-cols-2 gap-x-4 gap-y-3 border-y border-border py-4 text-xs">
-          <div><dt className="text-muted-foreground">Наличие</dt><dd className="mt-1 flex items-center gap-1.5 font-medium text-foreground"><span className={`size-1.5 ${availability === "В наличии" ? "bg-emerald-600" : "bg-primary"}`} />{availability}</dd></div>
-          <div><dt className="text-muted-foreground">Срок поставки</dt><dd className="mt-1 font-medium text-foreground">{leadTime}</dd></div>
-          <div><dt className="text-muted-foreground">Материал</dt><dd className="mt-1 truncate font-medium capitalize text-foreground">{getProductMaterial(product)}</dd></div>
-          <div><dt className="text-muted-foreground">Характеристика</dt><dd className="mt-1 truncate font-medium text-foreground" title={getKeyCharacteristic(product)}>{getKeyCharacteristic(product)}</dd></div>
-        </dl>
-
-        <div className="mt-auto pt-5">
-          <p className="text-xl font-semibold tracking-[-0.03em]">{madeToOrder ? "от " : ""}{formatPrice(price, defaultVariant.currency)}</p>
-          <div className="mt-5 flex flex-col gap-2">
-            <Button variant="outline" className="w-full sm:flex-1" asChild><Link href={`/${product.slug}`}>Подробнее <ArrowRight className="ml-2 size-4" /></Link></Button>
-            {madeToOrder ? <Button className="w-full sm:flex-1" asChild><Link href="/quote" onClick={handleQuoteRequest}><PackageCheck className="mr-2 size-4" />Запросить КП</Link></Button> : null}
-          </div>
+      <div className="flex min-w-0 flex-1 flex-col sm:p-4">
+        <p className="mb-2 text-xs text-muted-foreground">{availability}</p>
+        <Link href={`/${product.slug}`} className="hover:text-primary">
+          <h3 className="line-clamp-3 text-sm font-semibold leading-5 sm:line-clamp-2 sm:min-h-10 sm:text-base" title={product.name}>{product.name}</h3>
+        </Link>
+        {(material || option) ? <p className="mt-2 line-clamp-2 text-xs leading-5 text-muted-foreground">{[material, option?.value].filter(Boolean).join(" · ")}</p> : null}
+        <div className="mt-auto pt-3 sm:pt-4">
+          <p className="text-base font-semibold tracking-tight sm:text-lg">{priceOnRequest ? "Цена по запросу" : formatPrice(price, defaultVariant.currency)}</p>
+          {inQuote ? <Button variant="outline" className="mt-3 min-h-11 w-full px-2 text-xs sm:text-sm" asChild><Link href="/quote"><Check className="size-4" />В расчёте</Link></Button> :
+            <Button onClick={handleQuoteRequest} className="mt-3 min-h-11 w-full px-2 text-xs sm:text-sm"><Plus className="size-4" />В расчёт</Button>}
         </div>
       </div>
     </article>

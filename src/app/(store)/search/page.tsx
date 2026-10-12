@@ -4,6 +4,7 @@ import { Search } from "lucide-react"
 import { productRepository } from "@/lib/repositories"
 import { ProductGrid } from "@/components/products/product-grid"
 import { Pagination } from "@/components/products/pagination"
+import { normalizeCatalogQuery, parseCatalogQuery } from '@/lib/catalog-query'
 
 export const metadata: Metadata = {
 title: "Поиск",
@@ -15,9 +16,9 @@ interface SearchPageProps {
 }
 
 export default async function SearchPage({ searchParams }: SearchPageProps) {
-  const params = await searchParams
+  const params = normalizeCatalogQuery(await searchParams)
   const query = params.q ?? ""
-  const page = Number(params.page) || 1
+  const page = parseCatalogQuery(params).pagination.page
 
   const hasQuery = query.trim().length > 0
   const results = hasQuery

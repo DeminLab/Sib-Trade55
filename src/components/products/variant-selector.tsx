@@ -25,7 +25,7 @@ export function VariantSelector({
     }
   }
 
-  if (optionGroups.size === 0) return null
+  if (optionGroups.size === 0) return variants.length > 1 ? <label className="block space-y-2 text-sm">Исполнение<select className="min-h-11 w-full border border-input bg-background px-3" value={selectedVariantId} onChange={e => onSelect(e.target.value)}>{variants.map(v => <option key={v.id} value={v.id}>{v.name}</option>)}</select></label> : null
 
   const selectedVariant = variants.find((v) => v.id === selectedVariantId)
 
@@ -44,17 +44,15 @@ export function VariantSelector({
           </label>
           <div className="mt-2 flex flex-wrap gap-2">
             {Array.from(values).map((value) => {
-              const matchingVariant = variants.find((v) =>
-                v.options.some(
-                  (o) => o.name === optionName && o.value === value
-                )
-              )
+              const matchingVariant = variants.find((v) => v.options.some(o => o.name === optionName && o.value === value) &&
+                (selectedVariant?.options ?? []).filter(o => o.name !== optionName).every(other => v.options.some(o => o.name === other.name && o.value === other.value))) ??
+                variants.find(v => v.options.some(o => o.name === optionName && o.value === value))
               const isSelected = selectedVariant?.options.some(
                 (o) => o.name === optionName && o.value === value
               )
               const isAvailable =
                 matchingVariant &&
-                (matchingVariant.inventory.quantity > 0 ||
+                (!matchingVariant.inventory.trackInventory || matchingVariant.inventory.quantity > 0 ||
                   matchingVariant.inventory.allowBackorder)
 
               return (

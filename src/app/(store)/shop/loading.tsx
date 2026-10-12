@@ -10,7 +10,7 @@ export default function ShopLoading() {
           <Skeleton key={i} className="h-8 w-24 rounded-full" />
         ))}
       </div>
-      <div className="mt-8 grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 lg:grid-cols-4">
+      <div className="mt-8 grid grid-cols-1 gap-x-4 gap-y-8 min-[420px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {Array.from({ length: 8 }).map((_, i) => (
           <div key={i}>
             <Skeleton className="aspect-square w-full rounded-lg" />

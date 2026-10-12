@@ -29,9 +29,14 @@ export default function LoginPage() {
     const success = await login(email, password)
     if (success) {
       toast.success("С возвращением!")
-      router.push("/account")
+      const next = new URLSearchParams(window.location.search).get("next")
+      let destination: URL | null = null
+      try { destination = next ? new URL(next, window.location.origin) : null } catch { /* ignore malformed redirect */ }
+      router.push(destination?.origin === window.location.origin
+        ? `${destination.pathname}${destination.search}${destination.hash}`
+        : useAuthStore.getState().user?.role === 'admin' ? '/admin' : '/account')
     } else {
-      toast.error("Не удалось выполнить вход. Проверьте подключение сервиса авторизации.")
+      toast.error(useAuthStore.getState().authError || 'Не удалось выполнить вход. Повторите попытку.')
     }
     setLoading(false)
   }

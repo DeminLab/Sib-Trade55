@@ -39,7 +39,7 @@ export function RecentlyViewed({ excludeProductId }: RecentlyViewedProps) {
                 src={item.imageUrl || PLACEHOLDER_IMAGE}
                 alt={item.imageAlt || item.name}
                 fill
-                className="object-cover transition-transform duration-300 group-hover:scale-105"
+                className="object-contain p-2 transition-transform duration-300 group-hover:scale-105"
                 sizes="128px"
               />
             </div>
@@ -47,7 +47,7 @@ export function RecentlyViewed({ excludeProductId }: RecentlyViewedProps) {
               {item.name}
             </p>
             <p className="text-xs text-muted-foreground">
-              {formatPrice(item.price)}
+              {item.price > 0 ? formatPrice(item.price) : "Цена по запросу"}
             </p>
           </Link>
         ))}

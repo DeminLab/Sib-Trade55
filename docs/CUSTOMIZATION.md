@@ -1,171 +1,71 @@
-# Customization Guide
+# Настройка СИБ-ТРЕЙД
 
-This guide covers how to customize the ecommerce starter for your store.
+[Главная документация](../README.md) · [Архитектура](architecture/backend-api.md) · [Запуск и данные](DEPLOYMENT.md)
 
-## Quick Start Checklist
+Документация сверена с кодом 9 октября 2026 года.
 
-1. Update `src/lib/config.ts` with your store name, contact info, and social links
-2. Replace placeholder images in `public/images/products/`
-3. Update product data in `src/data/products.json`
-4. Edit theme colors in `src/app/globals.css`
-5. Connect your payment provider (see below)
+## Бренд, контакты и условия
 
-## Store Configuration
+`src/lib/config.ts` задаёт название, описание, контакты, реквизиты, мессенджеры, баннер, валюту `RUB` и формат `ru-RU`. Основной URL берётся из `NEXT_PUBLIC_BASE_URL`, который для production задают до сборки.
 
-All store-wide settings live in one file: `src/lib/config.ts`
+Тексты должны описывать продажу, подбор, комплектацию и поставку. Компания не заявляет собственное производство. Условия доставки и окончательная стоимость согласовываются с менеджером; наличие полей доставки в конфигурации не означает автоматического расчёта логистики.
 
-```typescript
-export const siteConfig = {
-  name: "Your Store Name",
-  tagline: "Your tagline here.",
-  contact: { email: "you@yourstore.com", ... },
-  social: { instagram: "https://instagram.com/yourstore", ... },
-  freeShippingThreshold: 5000, // $50.00 in cents
-  taxRate: 0.07,
-  currency: "USD",
-  locale: "en-US",
-}
-```
+Контакты, реквизиты, объявление и основное меню редактируются в `/admin/settings`. Файлы `src/lib/config.ts` и `src/lib/navigation.ts` остаются значениями по умолчанию; сохранённые настройки имеют приоритет. Перенаправления — в `src/lib/redirects.ts`. Ссылки должны соответствовать реальным slug каталога или страниц.
 
-This config is referenced by the header, footer, metadata, cart summary, trust signals, and more. Change it once, it updates everywhere.
+## Каталог и контент
 
-## Theme & Colors
+**Рабочий источник данных — SQLite.** Изменение `src/data/products.json` не обновляет уже инициализированную базу.
 
-Edit CSS variables in `src/app/globals.css` under `:root`:
+- Товары редактируются через `/admin/products`, включая карточку `/admin/products/[id]`.
+- Категории управляются через `/admin/categories`.
+- Удаление товара переводит его в архив; восстановление возвращает в рабочий каталог. Изображения при архивировании сохраняются.
+- Публичные репозитории исключают архивные товары из витрины.
+- Блог, страницы, кейсы и материалы хранятся в `app_state` под ключами `content:*`. Разделы контента и портфолио позволяют создавать, редактировать, архивировать и восстанавливать записи. Редактор текста поддерживает HTML с серверной очисткой; визуальный редактор блоков не подключён.
 
-```css
-/* Base colors (shadcn/ui) */
---primary: oklch(0.205 0 0);        /* buttons, active states */
---secondary: oklch(0.97 0 0);       /* secondary buttons */
---destructive: oklch(0.577 0.245 27.325); /* errors, delete */
+JSON-файлы в `src/data/` используются для начального наполнения отсутствующих записей базы. Не удаляйте рабочую базу ради повторного импорта: в ней также находятся заказы, обращения и вложения. Перед переносом данных сделайте резервную копию по [инструкции](DEPLOYMENT.md).
 
-/* Store accent colors */
---rating: oklch(0.795 0.184 86.047);    /* star rating color */
---wishlist: oklch(0.637 0.237 25.331);  /* wishlist heart color */
---success: oklch(0.627 0.194 149.214);  /* checkmarks, success */
+## Изображения и оформление
 
-/* Order status badge colors */
---status-pending-bg: ...
---status-processing-bg: ...
-```
+Начальные изображения товаров находятся в `public/images/products/`, включая `catalog/`. При инициализации они импортируются в `catalog_media`, а локальные URL каталога переписываются на `/api/catalog/media/...`. Административные загрузки также сохраняются в SQLite. Замена файла в `public/` не заменяет ранее импортированные байты в базе.
 
-Use them in Tailwind: `text-rating`, `fill-wishlist`, `bg-status-delivered-bg`, etc.
+Дизайн и CSS-переменные находятся в `src/app/globals.css`, карточки и галерея — в `src/components/products/`. Фон товара выбирается через `src/lib/product-image-surface.ts`, подписи и представление — через `src/lib/product-presentation.ts`. Для прозрачных изображений сохраняйте полную видимость товара с `object-contain` и проверяйте карточку и галерею на разных размерах экрана.
 
-## Font
+## Скрипты каталога
 
-The store uses Inter via `next/font`. To change it, edit `src/app/layout.tsx`:
+| Скрипт | Назначение и ограничения |
+| --- | --- |
+| `scripts/import-supplier-catalog.mjs` | Импорт через `SUPPLIER_CATALOG_API_ROOT`, запись JSON и локальных изображений; есть режим `--download-only`. Не обновляет рабочую SQLite базу автоматически |
+| `scripts/reclassify-catalog-products.mjs` | Переклассификация файлов каталога; запись через `--apply` |
+| `scripts/simplify-catalog-categories.mjs` | Упрощение категорий в файлах каталога; запись через `--apply` |
+| `scripts/organize-catalog-taxonomy.mjs` | Перестройка таксономии файлов каталога; перед запуском проверьте в коде пути и операции записи |
+| `scripts/prepare-original-catalog-copy.mjs` | Обработка описаний в `data/catalog.sqlite`; предварительный просмотр по умолчанию, запись через `--apply`, копия каталога в `data/catalog-backups/` |
 
-```typescript
-import { Poppins } from "next/font/google"
-const font = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700"] })
-```
+Скрипт описаний использует фиксированный путь `data/catalog.sqlite`, а не `SQLITE_DATABASE_PATH`. Для повторной генерации из чистого JSON-источника укажите `--source=<путь>`. Копия каталога не заменяет резервную копию всей базы. После изменения базы перезапустите Next.js.
 
-And update `--font-sans` in `globals.css`.
+## Язык
 
-## Navigation
+`src/i18n/config.ts` содержит локали `ru` и `en`, но `src/i18n/request.ts` всегда выбирает `defaultLocale` (`ru`). Переводы лежат в `messages/`. Переключение языка и URL с префиксом локали не подключены. Часть текста задана непосредственно в компонентах: изменение только словаря не переводит весь сайт.
 
-All menus (desktop nav, mobile menu) are configured in `src/lib/navigation.ts`:
+## Заявки и интеграции
 
-```typescript
-export const shopLinks = [
-  { name: "Electronics", href: "/electronics" },
-  // add/remove categories here
-]
+Заказ из корзины отправляется в `/api/orders` без оплаты. Обращения, КП и ТЗ используют отдельное хранилище, описанное в [инструкции по заявкам](requests.md). Telegram настраивается серверными переменными окружения.
 
-export const mobileMenuSections = [
-  { label: "Shop", items: shopLinks },
-  { label: "Account", items: accountLinks },
-  { label: "Info", items: infoLinks },
-]
-```
+В `src/lib/repositories/api-repositories.ts` есть адаптеры будущего backend; рабочие реализации выбираются в `src/lib/repositories/index.ts`. Клиентские сервисы находятся в `src/lib/services/client-services.ts`. Подключение внешнего сервиса требует реализации серверных маршрутов, авторизации и проверки полного сценария.
 
-## Products & Categories
+`src/lib/analytics.ts` остаётся точкой расширения аналитики. Демо-провайдер в `src/lib/checkout/` не означает подключённую оплату. Текущий процесс заявок не требует платёжных ключей.
 
-Product data lives in `src/data/products.json`. To add a product:
+Защитные HTTP-заголовки и CSP находятся в `src/proxy.ts`: CSP включён в production и работает в режиме report-only при разработке. При подключении внешних скриптов проверяйте необходимые разрешения в этом файле.
 
-1. Add the product object to the `products` array
-2. Reference existing `categoryIds` or create new categories
-3. Assign a `brandId` from the `brands` array
-4. Set image URLs (or use `/images/products/placeholder.svg`)
+## Проверка после изменений
 
-To swap to a CMS or database, implement the `ProductRepository` and `CategoryRepository` interfaces from `src/types/index.ts` and update `src/lib/repositories/index.ts`.
+Для изменений кода выполните lint, генерацию типов и TypeScript-проверку из README, затем сборку и подходящие тесты. Для изменений каталога проверьте категорию, поиск, карточку, галерею и отсутствие архивных товаров на витрине. Для форм используйте [тесты заявок](requests.md). Проверка сборки не заменяет браузерную проверку.
 
-## Connecting a Payment Provider
 
-The checkout uses a pluggable `CheckoutProvider` interface:
+## Редакторы, добавленные 10 октября 2026 года
 
-```typescript
-interface CheckoutProvider {
-  createSession(cart, customer?): Promise<CheckoutSession>
-  getSession(sessionId): Promise<CheckoutSession>
-  handleWebhook(payload, signature): Promise<WebhookResult>
-}
-```
-
-### Steps:
-
-1. Create `src/lib/checkout/your-provider.ts` (e.g. `stripe-provider.ts`)
-2. Implement the `CheckoutProvider` interface
-3. Export it from `src/lib/checkout/index.ts`:
-   ```typescript
-   export { yourProvider as checkoutProvider } from "./your-provider"
-   ```
-4. Add API routes for webhooks in `src/app/api/`
-5. Add your API keys to `.env.local` and uncomment validation in `src/lib/env.ts`
-
-## Internationalization (i18n)
-
-The starter uses `next-intl` with translation files in `messages/`:
-
-- `messages/en.json` — English (default)
-- `messages/es.json` — Spanish (example)
-
-### Using translations in components:
-
-```tsx
-// Client components
-import { useTranslations } from "next-intl"
-
-function MyComponent() {
-  const t = useTranslations("cart")
-  return <h1>{t("title")}</h1>
-}
-
-// Server components
-import { getTranslations } from "next-intl/server"
-
-async function MyPage() {
-  const t = await getTranslations("shop")
-  return <h1>{t("allProducts")}</h1>
-}
-```
-
-### Adding a new language:
-
-1. Copy `messages/en.json` to `messages/fr.json`
-2. Translate the values
-3. Add `"fr"` to `locales` in `src/i18n/config.ts`
-4. To enable locale routing (`/en/`, `/fr/`), add `next-intl` middleware
-
-## Analytics
-
-Edit `src/lib/analytics.ts` to connect your analytics provider:
-
-```typescript
-export function trackEvent(name, properties) {
-  // Replace with your provider:
-  window.gtag?.("event", name, properties)
-  // or: window.analytics?.track(name, properties)
-  // or: posthog?.capture(name, properties)
-}
-```
-
-Pre-defined ecommerce events: `addToCart`, `purchase`, `search`, `viewProduct`, `signUp`, `login`.
-
-## Security Headers
-
-Security headers are configured in `src/middleware.ts`. The Content Security Policy (CSP) uses `report-only` in development and enforces in production. Update the CSP directives when adding external scripts (analytics, payment SDKs, etc.).
-
-## Environment Variables
-
-Required and optional env vars are validated in `src/lib/env.ts` using Zod. Uncomment validation rules as you integrate real services. See `.env.example` for the full list.
+- `/admin/content`: страницы, блог, кейсы, материалы, покрытия и цвета RAL. Поиск по названию/адресу, архив и восстановление. Для основных текстовых страниц создавайте запись с адресом `home`, `about`, `how-we-work`, `faq`, `policies-shipping`, `policies-returns`, `policies-privacy` или `policies-terms`. Она заменяет основное содержимое соответствующей страницы; архивирование возвращает исходный шаблон. Это замена содержимого, не визуальное редактирование отдельных блоков лендинга. Формы контактов и ТЗ сохраняют свои сценарии.
+- `/admin/portfolio`: тот же редактор, открытый на кейсах. Изображения можно загрузить с компьютера; они преобразуются в WebP и хранятся в SQLite. Можно редактировать галерею, характеристики и этапы.
+- `/admin/settings`: бренд, контакты, реквизиты, часы работы, мессенджеры, объявление и основное меню. URL сайта, секреты, авторизация и внешние сервисы остаются серверной конфигурацией. Изменения видны при новом открытии витрины. Metadata корневого layout использует текущие название/описание; отдельные страницы могут иметь собственные SEO-тексты.
+- Сохранение контента/настроек проверяет ревизию документа. При HTTP 409 обновите список, сохранив нужные тексты вручную; чужие изменения автоматически не перезаписываются. RAL, материалы и покрытия находятся в одном документе, поэтому изменения этих разделов также могут конфликтовать.
+- `/admin/orders`: поиск, фильтр по статусу и изменение статуса заявок из корзины. Оплата не принимается. Обращения/КП/ТЗ имеют отдельные списки с поиском и фильтром.
+- `/admin`: реальные показатели бизнеса за период и серверный мониторинг. Посещаемость и конверсия не собираются. Ограничения измерений описаны в отчёте QA.

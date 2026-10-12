@@ -14,20 +14,20 @@
       "category": "Благоустройство",
       "categorySlug": "blagoustroystvo",
       "coverImage": {
-        "url": "/images/products/park-bench-photo-01.webp",
+        "url": "/api/catalog/media/images/products/park-bench-photo-01.webp",
         "alt": "Скамья с металлическим каркасом на производстве"
       },
       "gallery": [
         {
-          "url": "/images/products/1768129390228-823380_medium.webp",
+          "url": "/api/catalog/media/images/products/1768129390228-823380_medium.webp",
           "alt": "Металлическая конструкция для благоустройства"
         },
         {
-          "url": "/images/products/1768129402802-414958_medium.webp",
+          "url": "/api/catalog/media/images/products/1768129402802-414958_medium.webp",
           "alt": "Ограждение территории"
         },
         {
-          "url": "/images/products/1768129413352-603414_medium.webp",
+          "url": "/api/catalog/media/images/products/1768129413352-603414_medium.webp",
           "alt": "Элемент металлического благоустройства"
         }
       ],
@@ -89,20 +89,20 @@
       "category": "Металлоконструкции",
       "categorySlug": "metallokonstruktsii",
       "coverImage": {
-        "url": "/images/products/1768129378765-780527_medium.webp",
+        "url": "/api/catalog/media/images/products/1768129378765-780527_medium.webp",
         "alt": "Металлический навес у входа в бизнес-центр"
       },
       "gallery": [
         {
-          "url": "/images/products/1768129378833-62411_medium.webp",
+          "url": "/api/catalog/media/images/products/1768129378833-62411_medium.webp",
           "alt": "Каркас навеса"
         },
         {
-          "url": "/images/products/1768129424016-64978_medium.webp",
+          "url": "/api/catalog/media/images/products/1768129424016-64978_medium.webp",
           "alt": "Сопряжение конструкции с фасадом"
         },
         {
-          "url": "/images/products/1768129438638-251934_medium.webp",
+          "url": "/api/catalog/media/images/products/1768129438638-251934_medium.webp",
           "alt": "Готовая входная группа"
         }
       ],
@@ -164,20 +164,20 @@
       "category": "Уличная мебель",
       "categorySlug": "ulichnaya-mebel",
       "coverImage": {
-        "url": "/images/products/1768129458066-924469_medium.webp",
+        "url": "/api/catalog/media/images/products/1768129458066-924469_medium.webp",
         "alt": "Уличная мебель в парке жилого квартала"
       },
       "gallery": [
         {
-          "url": "/images/products/1768129458115-410000_medium.webp",
+          "url": "/api/catalog/media/images/products/1768129458115-410000_medium.webp",
           "alt": "Скамья в зоне отдыха"
         },
         {
-          "url": "/images/products/1768129458118-279207_medium.webp",
+          "url": "/api/catalog/media/images/products/1768129458118-279207_medium.webp",
           "alt": "Пергола в парке"
         },
         {
-          "url": "/images/products/1768129469674-398494_medium.webp",
+          "url": "/api/catalog/media/images/products/1768129469674-398494_medium.webp",
           "alt": "Световой элемент территории"
         }
       ],
@@ -239,20 +239,20 @@
       "category": "Арт-объекты",
       "categorySlug": "art-obekty",
       "coverImage": {
-        "url": "/images/products/1768565959461-951171_medium.webp",
+        "url": "/api/catalog/media/images/products/1768565959461-951171_medium.webp",
         "alt": "Металлическая фигура — арт-объект"
       },
       "gallery": [
         {
-          "url": "/images/products/1768129489398-585083_medium.webp",
+          "url": "/api/catalog/media/images/products/1768129489398-585083_medium.webp",
           "alt": "Фрагмент арт-объекта"
         },
         {
-          "url": "/images/products/1768129490028-49729_medium.webp",
+          "url": "/api/catalog/media/images/products/1768129490028-49729_medium.webp",
           "alt": "Поставка секций арт-объекта"
         },
         {
-          "url": "/images/products/1768129490422-999246_medium.webp",
+          "url": "/api/catalog/media/images/products/1768129490422-999246_medium.webp",
           "alt": "Арт-объект с вечерней подсветкой"
         }
       ],

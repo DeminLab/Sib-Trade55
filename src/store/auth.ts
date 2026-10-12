@@ -7,9 +7,11 @@ import { authService } from "@/lib/services"
 interface AuthState {
   user: User | null
   isAuthenticated: boolean
+  sessionReady: boolean
+  authError: string
   login: (email: string, password: string) => Promise<boolean>
   register: (data: { firstName: string; lastName: string; email: string; password: string }) => Promise<boolean>
-  logout: () => void
+  logout: () => Promise<void>
   updateProfile: (data: Partial<Pick<User, "firstName" | "lastName" | "email">>) => Promise<boolean>
   addAddress: (address: Omit<Address, "id">) => Promise<boolean>
   removeAddress: (id: string) => Promise<boolean>
@@ -22,13 +24,17 @@ interface AuthState {
 export const useAuthStore = create<AuthState>()((set) => ({
   user: null,
   isAuthenticated: false,
+  sessionReady: false,
+  authError: '',
 
   login: async (email, password) => {
+    set({ authError: '' })
     try {
       const session = await authService.login(email, password)
-      set({ user: session.user, isAuthenticated: true })
+      set({ user: session.user, isAuthenticated: true, sessionReady: true })
       return true
-    } catch {
+    } catch (error) {
+      set({ authError: error instanceof Error ? error.message : 'Не удалось выполнить вход' })
       return false
     }
   },
@@ -36,16 +42,16 @@ export const useAuthStore = create<AuthState>()((set) => ({
   register: async (data) => {
     try {
       const session = await authService.register(data)
-      set({ user: session.user, isAuthenticated: true })
+      set({ user: session.user, isAuthenticated: true, sessionReady: true })
       return true
     } catch {
       return false
     }
   },
 
-  logout: () => {
-    void authService.logout().catch(() => undefined)
-    set({ user: null, isAuthenticated: false })
+  logout: async () => {
+    await authService.logout()
+    set({ user: null, isAuthenticated: false, sessionReady: true })
   },
 
   updateProfile: async (data) => {

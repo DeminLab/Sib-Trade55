@@ -1,3 +1,4 @@
+import { serializeJsonLd } from '@/lib/structured-data'
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
@@ -53,7 +54,7 @@ export default async function CmsPageDetail({ params }: PageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
+          __html: serializeJsonLd(
             breadcrumbJsonLd([
               { name: "Страницы", href: "/pages" },
               { name: page.title, href: `/pages/${page.slug}` },

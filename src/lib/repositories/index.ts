@@ -1,16 +1,13 @@
-// Re-export the JSON-backed repositories as the default implementations.
-// To swap backends (database, CMS, API), implement the same interfaces
-// and change these exports.
+// Re-export the SQLite-backed domain repositories as the default implementations.
 
-export { jsonProductRepository as productRepository } from "./json-product-repository"
-export { jsonCategoryRepository as categoryRepository } from "./json-category-repository"
-export { jsonBrandRepository as brandRepository } from "./json-brand-repository"
-export { jsonPageRepository as pageRepository } from "./json-page-repository"
-export { jsonBlogRepository as blogRepository } from "./json-blog-repository"
-export { jsonCaseRepository as caseRepository } from "./json-case-repository"
-export { jsonMaterialRepository as materialRepository } from "./json-material-repository"
-export { mockAdminRepository } from "./mock-admin-repository"
-export { apiAdminRepository as adminRepository } from "./api-admin-repository"
+export { sqliteProductRepository as productRepository } from "./sqlite-product-repository"
+export { sqliteCategoryRepository as categoryRepository } from "./sqlite-category-repository"
+export { sqliteBrandRepository as brandRepository } from "./sqlite-brand-repository"
+export { sqlitePageRepository as pageRepository } from "./sqlite-page-repository"
+export { sqliteBlogRepository as blogRepository } from "./sqlite-blog-repository"
+export { sqliteCaseRepository as caseRepository } from "./sqlite-case-repository"
+export { sqliteMaterialRepository as materialRepository } from "./sqlite-material-repository"
+export { catalogAdminRepository as adminRepository } from "./catalog-admin-repository"
 export {
   apiCaseRepository,
   apiCategoryRepository,

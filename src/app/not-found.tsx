@@ -4,12 +4,16 @@ import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
 import { AnnouncementBar } from "@/components/layout/announcement-bar"
 import { categoryRepository } from "@/lib/repositories"
+import { getSiteSettings } from '@/lib/content/site-settings'
+import { SiteSettingsProvider } from '@/components/layout/site-settings-provider'
+
+export const dynamic = 'force-dynamic'
 
 export default async function NotFound() {
-  const categories = await categoryRepository.list()
+  const [categories, settings] = await Promise.all([categoryRepository.list(), getSiteSettings()])
 
   return (
-    <>
+    <SiteSettingsProvider value={settings}>
       <AnnouncementBar />
       <Header categories={categories} />
       <main className="flex-1">
@@ -31,7 +35,7 @@ export default async function NotFound() {
           </div>
         </div>
       </main>
-      <Footer />
-    </>
+      <Footer categories={categories} settings={settings} />
+    </SiteSettingsProvider>
   )
 }

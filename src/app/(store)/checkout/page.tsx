@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useSyncExternalStore } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
@@ -12,19 +12,22 @@ import { useCartStore } from "@/store/cart"
 import { CartSummary } from "@/components/cart/cart-summary"
 import { formatPrice } from "@/lib/utils"
 import { toast } from "sonner"
-import { siteConfig } from "@/lib/config"
 import { orderService } from "@/lib/services"
+import { useSiteSettings } from '@/components/layout/site-settings-provider'
+const subscribeToHydration = () => () => {}
 
 export default function CheckoutPage() {
+  const siteConfig = useSiteSettings()
   const router = useRouter()
   const items = useCartStore((s) => s.items)
   const getSubtotal = useCartStore((s) => s.getSubtotal)
   const clearCart = useCartStore((s) => s.clearCart)
-  const [mounted, setMounted] = useState(false)
+  const mounted = useSyncExternalStore(subscribeToHydration, () => true, () => false)
   const [loading, setLoading] = useState(false)
 
   const [form, setForm] = useState({
     email: "",
+    phone: "",
     firstName: "",
     lastName: "",
     line1: "",
@@ -35,7 +38,6 @@ export default function CheckoutPage() {
     country: "RU",
   })
 
-  useEffect(() => setMounted(true), [])
 
   if (!mounted) {
     return (
@@ -77,8 +79,8 @@ export default function CheckoutPage() {
 
     setLoading(true)
 
-    const shipping = subtotal >= siteConfig.freeShippingThreshold ? 0 : 599
-    const tax = Math.round(subtotal * siteConfig.taxRate)
+    const shipping = 0
+    const tax = 0
     const total = subtotal + shipping + tax
     try {
       const order = await orderService.create({
@@ -110,14 +112,17 @@ export default function CheckoutPage() {
         state: form.state,
         postalCode: form.postalCode,
         country: form.country,
+        phone: form.phone || undefined,
         isDefault: true,
       },
       customerEmail: form.email,
       customerName: `${form.firstName} ${form.lastName}`,
+      customerPhone: form.phone || undefined,
       })
       clearCart()
-      toast.success("Заказ принят")
-      router.push(`/checkout/success?order_id=${order.id}`)
+      sessionStorage.setItem('last-order-receipt', order.orderNumber)
+      toast.success("Заявка отправлена")
+      router.push(`/checkout/success?order_number=${encodeURIComponent(order.orderNumber)}`)
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "Оформление заказа временно недоступно")
     } finally {
@@ -146,9 +151,13 @@ export default function CheckoutPage() {
                   type="email"
                   value={form.email}
                   onChange={handleChange}
-                  placeholder="you@example.com"
+                  placeholder="name@example.com"
                   required
                 />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="phone">Телефон для связи</Label>
+                <Input id="phone" name="phone" type="tel" autoComplete="tel" value={form.phone} onChange={handleChange} placeholder={siteConfig.contact.phone} />
               </div>
             </CardContent>
           </Card>
@@ -159,7 +168,7 @@ export default function CheckoutPage() {
               <CardTitle className="text-lg">Адрес доставки</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid gap-4 min-[480px]:grid-cols-2">
                 <div className="space-y-2">
 <Label htmlFor="firstName">Имя</Label>
                   <Input id="firstName" name="firstName" value={form.firstName} onChange={handleChange} required />
@@ -200,8 +209,8 @@ export default function CheckoutPage() {
 <CardTitle className="text-lg">Оплата</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-muted-foreground">
-                Оплата будет доступна после подключения платёжного backend-сервиса. До этого заказ не создаётся и деньги не списываются.
+              <p className="text-sm leading-6 text-muted-foreground">
+                Это заявка на заказ: мы получим её в панели администратора и свяжемся с вами для подтверждения наличия, доставки и итоговой стоимости. Оплата на сайте не производится.
               </p>
             </CardContent>
           </Card>
@@ -209,9 +218,9 @@ export default function CheckoutPage() {
 
         {/* Order Summary */}
         <div className="lg:col-span-2">
-          <Card className="sticky top-24">
+          <Card className="lg:sticky lg:top-24">
             <CardHeader>
-              <CardTitle className="text-lg">Сводка заказа</CardTitle>
+              <CardTitle className="text-lg">Состав заявки</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               {items.map((item) => (
@@ -225,7 +234,7 @@ export default function CheckoutPage() {
               <Separator />
               <CartSummary subtotal={subtotal} />
               <Button type="submit" size="lg" className="w-full" disabled={loading}>
-                {loading ? "Отправляем..." : "Оформить заказ"}
+                {loading ? "Отправляем..." : "Отправить заявку"}
               </Button>
             </CardContent>
           </Card>

@@ -67,7 +67,8 @@ export interface ProductVariant {
   productId: string
   sku: string
   name: string
-  price: number // in cents
+  price: number // Major currency units
+  priceOnRequest?: boolean
   compareAtPrice?: number // original price for sale display
   currency: string
   inventory: VariantInventory
@@ -195,6 +196,7 @@ export interface QuoteRequestItem {
   image: ProductImage
   slug: string
   price: number
+  priceOnRequest?: boolean
   quantity: number
   lineTotal: number
   currency: string
@@ -279,6 +281,7 @@ export interface Order {
   billingAddress?: Address
   customerEmail: string
   customerName: string
+  customerPhone?: string
   createdAt: string
   updatedAt: string
 }
@@ -294,6 +297,7 @@ export interface CreateOrderRequest {
   billingAddress?: Address
   customerEmail: string
   customerName: string
+  customerPhone?: string
 }
 
 export interface AuthSession {
@@ -504,6 +508,7 @@ export interface PriceRange {
 }
 
 export interface ProductFilters {
+  brandId?: string
   category?: string
   priceRange?: PriceRange
   inStock?: boolean
@@ -750,41 +755,25 @@ export interface AdminMetric {
   id: string
   label: string
   value: string
-  change: string
-  trend: "up" | "down" | "neutral"
 }
 
-export interface AdminPopularProduct {
-  productId: string
+export interface AdminDashboardProduct {
+  id: string
   name: string
-  category: string
-  unitsSold: number
-  revenue: number
-}
-
-export interface AdminLowStockProduct {
-  productId: string
-  name: string
-  stock: number
-  minimum: number
-  status: "low" | "out"
-}
-
-export interface AdminRecentOrder {
-  orderNumber: string
-  date: string
-  customer: string
-  itemCount: number
-  total: number
-  status: OrderStatus
-  manager: string
+  status: ProductStatus
+  updatedAt: string
+  variants: number
+  price: number | null
+  priceOnRequest: boolean
 }
 
 export interface AdminDashboardSnapshot {
   metrics: AdminMetric[]
-  popularProducts: AdminPopularProduct[]
-  lowStockProducts: AdminLowStockProduct[]
-  recentOrders: AdminRecentOrder[]
+  catalog: {
+    categoryCount: number
+    outOfStockCount: number
+    recentProducts: AdminDashboardProduct[]
+  }
 }
 
 export interface AdminRepository {

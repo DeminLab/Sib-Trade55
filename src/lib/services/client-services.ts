@@ -1,5 +1,6 @@
 import type { Address, AuthService, AuthSession, ContactRequest, ContactResponse, CreateOrderRequest, Order, QuoteRequest, User } from "@/types"
 import { apiRequest } from "./api-client"
+import type { RequestReceipt } from "@/lib/requests/types"
 
 export const authService: AuthService = {
   login: (email, password) => apiRequest<AuthSession>("/api/auth/login", { method: "POST", body: JSON.stringify({ email, password }) }),
@@ -21,11 +22,11 @@ export const contactService = {
 }
 
 export const quoteRequestService = {
-  create: (request: QuoteRequest) => apiRequest<{ requestId: string }>("/api/quotes", { method: "POST", body: JSON.stringify(request) }),
+  create: (request: QuoteRequest) => apiRequest<RequestReceipt>("/api/quotes", { method: "POST", body: JSON.stringify(request) }),
 }
 
 export const customRequestService = {
-  create: (payload: FormData) => fetch("/api/custom-requests", { method: "POST", body: payload }).then(async (response) => { const body = (await response.json().catch(() => ({}))) as { message?: string }; if (!response.ok) throw new Error(body.message ?? "Сервис временно недоступен"); return body }),
+  create: (payload: FormData) => fetch("/api/custom-requests", { method: "POST", body: payload }).then(async (response) => { const body = (await response.json().catch(() => ({}))) as RequestReceipt; if (!response.ok) throw new Error(body.message ?? "Сервис временно недоступен"); return body }),
 }
 
 export const newsletterService = {

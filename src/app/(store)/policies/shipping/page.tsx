@@ -1,3 +1,4 @@
+import { managedPage } from '@/components/content/managed-page'
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -5,7 +6,9 @@ export const metadata: Metadata = {
   description: "Условия доставки, стоимость и сроки.",
 }
 
-export default function ShippingPolicyPage() {
+export default async function ShippingPolicyPage() {
+  const override = await managedPage('policies-shipping')
+  if (override) return override
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
       <h1 className="text-3xl font-bold tracking-tight">Доставка</h1>

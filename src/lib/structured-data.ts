@@ -1,4 +1,5 @@
 import { siteConfig } from "./config"
+export function serializeJsonLd(value: unknown) { return JSON.stringify(value).replaceAll('<', '\\u003c') }
 
 interface BreadcrumbItem {
   name: string

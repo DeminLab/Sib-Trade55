@@ -8,6 +8,8 @@ import { PageHeader } from "@/components/ui/page-header"
 import { Package, MapPin, Settings, Heart, LogOut } from "lucide-react"
 import { useAuthGuard } from "@/hooks/use-auth-guard"
 import { useAuthStore } from "@/store/auth"
+import { ShieldCheck } from "lucide-react"
+import { toast } from 'sonner'
 
 const accountLinks = [
   { name: "Заказы", description: "История заказов и отслеживание доставки", href: "/account/orders", icon: Package },
@@ -26,7 +28,7 @@ export default function AccountPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
 <PageHeader title="Мой аккаунт" description={`Добро пожаловать, ${user?.firstName}!`}>
-        <Button variant="outline" onClick={() => { logout(); router.push("/") }}>
+        <Button variant="outline" onClick={async () => { try { await logout(); router.push('/'); router.refresh() } catch { toast.error('Не удалось выйти. Повторите попытку.') } }}>
           <LogOut className="mr-2 h-4 w-4" />
           Выйти
         </Button>
@@ -48,6 +50,21 @@ export default function AccountPage() {
             </Card>
           </Link>
         ))}
+        {user?.role === "admin" && (
+          <Link href="/admin">
+            <Card className="h-full border-primary/30 transition-shadow hover:shadow-md">
+              <CardHeader className="pb-3">
+                <CardTitle className="flex items-center gap-2 text-base">
+                  <ShieldCheck className="h-5 w-5 text-primary" />
+                  Админ-панель
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">Управление товарами, категориями и заявками</p>
+              </CardContent>
+            </Card>
+          </Link>
+        )}
       </div>
     </div>
   )

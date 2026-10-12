@@ -1,0 +1,56 @@
+name: sib-trade-dev
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: sib_trade
+      POSTGRES_USER: sib_trade
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-sib_trade_local_dev}
+    volumes:
+      - sib_trade_dev_postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sib_trade -d sib_trade"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    init: true
+    environment:
+      NODE_ENV: development
+      NEXT_TELEMETRY_DISABLED: "1"
+      NEXT_PUBLIC_BASE_URL: http://localhost:3000
+      CATALOG_DATA_DIR: /app/data
+      ORDERS_DATA_DIR: /app/data
+      HOSTNAME: 0.0.0.0
+      PORT: 3000
+      DEMO_AUTH_PASSWORD: ${DEMO_AUTH_PASSWORD:-password123}
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-}
+      TELEGRAM_CHAT_ID: ${TELEGRAM_CHAT_ID:-}
+      PGHOST: postgres
+      PGPORT: 5432
+      PGDATABASE: sib_trade
+      PGUSER: sib_trade
+      PGPASSWORD: ${POSTGRES_PASSWORD:-sib_trade_local_dev}
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - sib_trade_dev_node_modules:/app/node_modules
+      - sib_trade_dev_next:/app/.next
+      - sib_trade_dev_data:/app/data
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  sib_trade_dev_postgres:
+  sib_trade_dev_node_modules:
+  sib_trade_dev_next:
+  sib_trade_dev_data:

@@ -37,7 +37,7 @@ export default function SettingsPage() {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSave} className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid gap-4 min-[480px]:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="firstName">Имя</Label>
                 <Input id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} />

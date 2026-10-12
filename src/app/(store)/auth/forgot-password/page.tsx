@@ -12,13 +12,13 @@ export default function ForgotPasswordPage() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    toast.success("Ссылка для сброса отправлена (демо)")
+    toast.error('Восстановление по email не подключено. Обратитесь к администратору сайта.')
   }
 
   return (
     <AuthCardLayout
 title="Сброс пароля"
-      subtitle="Введите email, и мы отправим вам ссылку для сброса"
+      subtitle="Восстановление пароля по email пока не подключено. Обратитесь к администратору сайта."
       footerText="Помните пароль?"
       footerLinkText="Войти"
       footerLinkHref="/auth/login"
@@ -28,7 +28,7 @@ title="Сброс пароля"
           <Label htmlFor="email">Email</Label>
           <Input id="email" type="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
         </div>
-        <Button type="submit" className="w-full">Отправить ссылку для сброса</Button>
+        <Button type="submit" disabled className="w-full">Восстановление пока недоступно</Button>
       </form>
     </AuthCardLayout>
   )

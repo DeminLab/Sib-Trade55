@@ -1,13 +1,15 @@
 import { NextResponse } from "next/server"
 
-import { contactFormSchema } from "@/lib/validators"
-import { contactRepository, ServiceNotConfiguredError } from "@/lib/services"
-import type { ContactResponse } from "@/types"
+import { contactRequestSchema } from "@/lib/requests/validation"
+import { createCustomerRequest } from "@/lib/requests/request-store"
+import { readRequestJson, RequestBodyTooLargeError } from "@/lib/requests/request-body"
+
+export const runtime = "nodejs"
 
 export async function POST(request: Request) {
   try {
-    const payload: unknown = await request.json()
-    const parsed = contactFormSchema.safeParse(payload)
+    const payload = await readRequestJson(request)
+    const parsed = contactRequestSchema.safeParse(payload)
 
     if (!parsed.success) {
       return NextResponse.json(
@@ -16,12 +18,10 @@ export async function POST(request: Request) {
       )
     }
 
-    const response: ContactResponse = await contactRepository.create(parsed.data)
+    const response = await createCustomerRequest({ kind: "contact", data: parsed.data })
     return NextResponse.json(response, { status: 201 })
   } catch (error) {
-    if (error instanceof ServiceNotConfiguredError) {
-      return NextResponse.json({ success: false, message: "Приём обращений будет доступен после подключения backend-сервиса" }, { status: 503 })
-    }
+    if (error instanceof RequestBodyTooLargeError) return NextResponse.json({ message: "Обращение слишком большое" }, { status: 413 })
     return NextResponse.json(
       { success: false, message: "Не удалось обработать обращение" },
       { status: 500 }

@@ -1,15 +1,18 @@
 import { NextResponse } from "next/server"
-import { quoteRequestRepository, ServiceNotConfiguredError } from "@/lib/services"
-import type { QuoteRequest } from "@/types"
+import { createCustomerRequest } from "@/lib/requests/request-store"
+import { quoteRequestSchema } from "@/lib/requests/validation"
+import { readRequestJson, RequestBodyTooLargeError } from "@/lib/requests/request-body"
+
+export const runtime = "nodejs"
 
 export async function POST(request: Request) {
-  const payload = (await request.json().catch(() => null)) as QuoteRequest | null
-  if (!payload) return NextResponse.json({ message: "Некорректное тело запроса" }, { status: 400 })
   try {
-    await quoteRequestRepository.create(payload)
-    return NextResponse.json({ success: true }, { status: 201 })
+    const parsed = quoteRequestSchema.safeParse(await readRequestJson(request))
+    if (!parsed.success) return NextResponse.json({ message: parsed.error.issues[0]?.message ?? "Проверьте данные заявки" }, { status: 400 })
+    const receipt = await createCustomerRequest({ kind: "quote", data: parsed.data })
+    return NextResponse.json(receipt, { status: 201 })
   } catch (error) {
-    const message = error instanceof ServiceNotConfiguredError ? "Приём запросов КП будет доступен после подключения backend-сервиса" : "Не удалось принять запрос КП"
-    return NextResponse.json({ message }, { status: 503 })
+    if (error instanceof RequestBodyTooLargeError) return NextResponse.json({ message: "Запрос КП слишком большой" }, { status: 413 })
+    return NextResponse.json({ message: "Не удалось сохранить запрос КП. Попробуйте ещё раз" }, { status: 500 })
   }
 }

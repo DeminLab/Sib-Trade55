@@ -1,3 +1,4 @@
+import { managedPage } from '@/components/content/managed-page'
 import type { Metadata } from "next"
 import Link from "next/link"
 import {
@@ -55,7 +56,9 @@ const faqs = [
   },
 ]
 
-export default function FAQPage() {
+export default async function FAQPage() {
+  const override = await managedPage('faq')
+  if (override) return override
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
       <h1 className="text-3xl font-bold tracking-tight">

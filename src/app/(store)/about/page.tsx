@@ -1,8 +1,9 @@
+import { managedPage } from '@/components/content/managed-page'
 import type { Metadata } from "next"
 import Link from "next/link"
 import Image from "next/image"
 
-import { siteConfig } from "@/lib/config"
+import { getSiteSettings } from '@/lib/content/site-settings'
 
 export const metadata: Metadata = {
   title: "О компании",
@@ -10,12 +11,15 @@ export const metadata: Metadata = {
     "Продажа и поставка металлоизделий: металлоконструкции, уличная мебель, благоустройство, арт-объекты. СИБ-ТРЕЙД — Омск, работаем по всей России.",
 }
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const override = await managedPage('about')
+  if (override) return override
+  const siteConfig = await getSiteSettings()
   return (
     <div className="mx-auto max-w-[1440px] px-5 py-10 sm:px-8 lg:px-12 lg:py-16">
       <div className="relative mb-12 min-h-[360px] overflow-hidden bg-neutral-950 sm:min-h-[460px]">
-        <Image src="/images/products/park-bench-photo-01.webp" alt="Металлическая скамья собственного производства" fill priority className="object-cover" sizes="(max-width: 1024px) 100vw, 1440px" />
-        <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/85 via-neutral-950/35 to-transparent" />
+        <Image src="/images/hero-park-composite.png" alt="Городская среда с металлической мебелью, навесом и велопарковками" fill priority className="object-cover" sizes="(max-width: 1024px) 100vw, 1440px" />
+        <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/85 via-neutral-950/35 to-neutral-950/10" />
         <div className="relative flex min-h-[360px] max-w-2xl flex-col justify-end p-7 text-white sm:min-h-[460px] sm:p-12">
           <p className="industrial-label text-white/65">СИБ-ТРЕЙД / о компании</p>
           <h1 className="mt-4 text-4xl font-semibold tracking-[-0.05em] sm:text-6xl">Надёжный поставщик металлоизделий</h1>
@@ -61,11 +65,12 @@ export default function AboutPage() {
         </h2>
         <p>
           Телефон: {siteConfig.contact.phone}<br />
+          Дополнительный телефон: {siteConfig.contact.phoneSecondary}<br />
           Email: {siteConfig.contact.email}<br />
           Город: г. {siteConfig.contact.address.city} · доставляем по всей России
         </p>
         <p>
-          <Link href="/contact" className="underline hover:text-foreground">
+          <Link href="/custom" className="underline hover:text-foreground">
             Свяжитесь с нами
           </Link>{" "}
           — ответим на любые вопросы.

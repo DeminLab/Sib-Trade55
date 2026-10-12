@@ -5,27 +5,12 @@ import { ProductDetailView } from "./product-detail-view"
 import { CategoryView } from "./category-view"
 import { BrandView } from "./brand-view"
 import { siteConfig } from "@/lib/config"
-import data from "@/data/products.json"
+
+import { parseCatalogQuery, normalizeCatalogQuery, type CatalogQuery } from "@/lib/catalog-query"
 
 interface SlugPageProps {
+  searchParams: Promise<CatalogQuery>
   params: Promise<{ slug: string }>
-}
-
-// Only render slugs returned by generateStaticParams — any other slug
-// automatically gets a proper 404 response. Rebuild/redeploy to pick
-// up new products, categories, or brands.
-export const dynamicParams = false
-
-export async function generateStaticParams() {
-  const productSlugs = data.products
-    .filter((p) => p.status === "active")
-    .map((p) => ({ slug: p.slug }))
-  const categorySlugs = data.categories.map((c) => ({ slug: c.slug }))
-  const brandSlugs = (data as { brands?: { slug: string }[] }).brands?.map(
-    (b) => ({ slug: b.slug })
-  ) ?? []
-
-  return [...productSlugs, ...categorySlugs, ...brandSlugs]
 }
 
 export async function generateMetadata({
@@ -51,9 +36,9 @@ export async function generateMetadata({
       },
       other: {
         "product:price:amount": variant
-          ? String(variant.price / 100)
+          ? String(variant.price)
           : "",
-        "product:price:currency": variant?.currency ?? "USD",
+        "product:price:currency": variant?.currency ?? "RUB",
       },
     }
   }
@@ -91,7 +76,7 @@ export async function generateMetadata({
   return { title: "Не найдено" }
 }
 
-export default async function SlugPage({ params }: SlugPageProps) {
+export default async function SlugPage({ params, searchParams }: SlugPageProps) {
   const { slug } = await params
 
   // Check product first
@@ -132,14 +117,26 @@ export default async function SlugPage({ params }: SlugPageProps) {
   // Check category
   const category = await categoryRepository.getBySlug(slug)
   if (category) {
+    const query = normalizeCatalogQuery(await searchParams)
+    const allCategories = await categoryRepository.list()
+    const allowed = new Set([category.id])
+    for (let changed = true; changed;) {
+      changed = false
+      for (const item of allCategories) {
+        if (item.parentId && allowed.has(item.parentId) && !allowed.has(item.id)) { allowed.add(item.id); changed = true }
+      }
+    }
+    const selected = allCategories.find(item => item.slug === query.category && allowed.has(item.id))
+    const options = parseCatalogQuery(query, selected?.slug ?? slug)
     const [{ items: products, pagination }, subcategories, ancestors] =
       await Promise.all([
-        productRepository.getByCategory(slug, { page: 1, limit: 40 }),
+        productRepository.list(options.filters, options.sort, options.pagination),
         categoryRepository.getChildren(category.id),
         categoryRepository.getAncestors(category.id),
       ])
     return (
       <CategoryView
+        query={query}
         category={category}
         products={products}
         pagination={pagination}
@@ -153,16 +150,15 @@ export default async function SlugPage({ params }: SlugPageProps) {
   const brand = await brandRepository.getBySlug(slug)
   if (brand) {
     const { items: products, pagination } = await productRepository.list(
-      { tags: [] },
+      { brandId: brand.id },
       undefined,
-      { page: 1, limit: 40 }
+      parseCatalogQuery(normalizeCatalogQuery(await searchParams)).pagination
     )
-    const brandProducts = products.filter((p) => p.brandId === brand.id)
     return (
       <BrandView
         brand={brand}
-        products={brandProducts}
-        pagination={{ ...pagination, total: brandProducts.length, totalPages: 1, hasNext: false }}
+        products={products}
+        pagination={pagination}
       />
     )
   }

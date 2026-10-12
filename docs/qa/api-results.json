@@ -1,0 +1,16 @@
+{
+  "checkedAt": "2026-10-09T19:21:40.508Z",
+  "passed": [
+    "authentication, role boundaries and private administrative endpoints",
+    "SKU search, category descendants, alternate variant prices, pagination, archived visibility, image delivery",
+    "category/product creation, reserved route rejection and active-product deletion protection",
+    "product editing, bulk archive/restore, category reparenting and cycle protection",
+    "image upload, conversion to WebP, stored media delivery and invalid image rejection",
+    "checkout canonical prices, stock validation and saved order status",
+    "Russian case-insensitive request search and callback inbox",
+    "all CMS collections: edit, sanitize, conflict detection, archive and restore",
+    "settings applied to storefront, real business totals and private server metrics",
+    "API → SQLite → reread after server restart, database integrity"
+  ],
+  "production": false
+}

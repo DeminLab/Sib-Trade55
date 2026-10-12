@@ -32,12 +32,12 @@ export function SortDropdown({ currentSort }: SortDropdownProps) {
   }
 
   return (
-    <div className="relative">
+    <div className="relative w-full sm:w-auto">
       <select
         value={currentSort}
         onChange={handleChange}
         aria-label="Сортировка товаров"
-        className="appearance-none rounded-md border border-border bg-white py-2 pl-3 pr-8 text-sm text-foreground outline-none focus:border-foreground focus:ring-1 focus:ring-foreground"
+        className="min-h-11 w-full appearance-none rounded-sm border border-border bg-white py-2 pl-3 pr-8 text-base text-foreground outline-none focus:border-foreground focus:ring-1 focus:ring-foreground"
       >
         {sortOptions.map((option) => (
           <option key={option.value} value={option.value}>

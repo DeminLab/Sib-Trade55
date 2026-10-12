@@ -33,7 +33,7 @@ export default async function CasesPage({ searchParams }: CasesPageProps) {
       <section className="grid gap-10 border-b border-border pb-14 lg:grid-cols-[1fr_0.8fr] lg:items-end">
         <div>
           <p className="industrial-label">СИБ-ТРЕЙД / портфолио</p>
-          <h1 className="mt-4 max-w-4xl text-5xl font-semibold leading-[0.98] tracking-[-0.065em] sm:text-7xl">Проекты, где поставленные решения работают на задачу</h1>
+          <h1 className="mt-4 max-w-4xl text-4xl font-semibold leading-[0.98] tracking-[-0.065em] min-[420px]:text-5xl sm:text-5xl">Проекты, где поставленные решения работают на задачу</h1>
         </div>
         <div className="lg:pb-1">
           <p className="max-w-xl text-base leading-7 text-muted-foreground">Показываем реализованные проекты и поставленные решения — от серийного благоустройства до нестандартных конструкций по чертежам и техническим заданиям.</p>

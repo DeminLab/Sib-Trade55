@@ -1,3 +1,4 @@
+import { serializeJsonLd } from '@/lib/structured-data'
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
@@ -39,7 +40,7 @@ export default async function CaseDetailPage({ params }: CaseDetailProps) {
 
   return (
     <div className="mx-auto max-w-[1440px] px-5 py-8 sm:px-8 lg:px-12 lg:py-12">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd([{ name: "Проекты", href: "/cases" }, { name: project.title, href: `/cases/${project.slug}` }])) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbJsonLd([{ name: "Проекты", href: "/cases" }, { name: project.title, href: `/cases/${project.slug}` }])) }} />
       <Link href="/cases" className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground"><ArrowLeft className="size-4" /> Все проекты</Link>
 
       <section className="mt-8 grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-end lg:gap-16">

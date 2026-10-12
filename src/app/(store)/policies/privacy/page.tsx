@@ -1,3 +1,4 @@
+import { managedPage } from '@/components/content/managed-page'
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -5,7 +6,9 @@ export const metadata: Metadata = {
   description: "Как мы собираем, используем и защищаем ваши персональные данные.",
 }
 
-export default function PrivacyPolicyPage() {
+export default async function PrivacyPolicyPage() {
+  const override = await managedPage('policies-privacy')
+  if (override) return override
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
       <h1 className="text-3xl font-bold tracking-tight">Политика конфиденциальности</h1>
@@ -44,7 +47,7 @@ export default function PrivacyPolicyPage() {
         <h2 className="text-xl font-semibold text-foreground">Ваши права</h2>
         <p>
           Вы имеете право на доступ, изменение или удаление ваших персональных
-          данных в любое время. Свяжитесь с нами по адресу info@sib-trade.ru.
+          данных в любое время. Свяжитесь с нами по адресу sib-trade55@yandex.ru.
         </p>
       </div>
     </div>
