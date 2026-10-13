@@ -1,6 +1,6 @@
 import { serializeJsonLd } from '@/lib/structured-data'
 import type { Metadata } from "next"
-import Image from "next/image"
+import Image from "@/components/ui/catalog-image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { ArrowLeft, ArrowRight, Check, MapPin } from "lucide-react"

@@ -1,10 +1,12 @@
 import type { NextConfig } from "next";
 import path from "node:path";
 import { redirects as redirectRules } from "./src/lib/redirects";
+import { imageDeviceSizes, imageThumbnailSizes } from "./src/lib/image-sizes";
 
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  images: { deviceSizes: imageDeviceSizes, imageSizes: imageThumbnailSizes },
   // Runtime databases, backups and secrets must never be part of a deployment bundle.
   outputFileTracingExcludes: { '/**': ['./data/**', './.env*', './.git/**', './.agents/**', './brag-output-*/**', './tests/**'] },
   allowedDevOrigins: ["192.168.0.110"],

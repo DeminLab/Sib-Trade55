@@ -1,7 +1,7 @@
 import { managedPage } from '@/components/content/managed-page'
 import type { Metadata } from "next"
 import Link from "next/link"
-import Image from "next/image"
+import Image from "@/components/ui/catalog-image"
 
 import { getSiteSettings } from '@/lib/content/site-settings'
 
@@ -18,7 +18,7 @@ export default async function AboutPage() {
   return (
     <div className="mx-auto max-w-[1440px] px-5 py-10 sm:px-8 lg:px-12 lg:py-16">
       <div className="relative mb-12 min-h-[360px] overflow-hidden bg-neutral-950 sm:min-h-[460px]">
-        <Image src="/images/hero-park-composite.png" alt="Городская среда с металлической мебелью, навесом и велопарковками" fill priority className="object-cover" sizes="(max-width: 1024px) 100vw, 1440px" />
+        <Image src="/images/hero-park-composite.webp" alt="Городская среда с металлической мебелью, навесом и велопарковками" fill priority className="object-cover" sizes="(max-width: 1024px) 100vw, 1440px" />
         <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/85 via-neutral-950/35 to-neutral-950/10" />
         <div className="relative flex min-h-[360px] max-w-2xl flex-col justify-end p-7 text-white sm:min-h-[460px] sm:p-12">
           <p className="industrial-label text-white/65">СИБ-ТРЕЙД / о компании</p>

@@ -3,9 +3,10 @@ import { ProductCard } from "./product-card"
 
 interface ProductGridProps {
   products: Product[]
+  eagerImages?: boolean
 }
 
-export function ProductGrid({ products }: ProductGridProps) {
+export function ProductGrid({ products, eagerImages = false }: ProductGridProps) {
   if (products.length === 0) {
     return (
       <div role="status" className="py-16 text-center">
@@ -17,8 +18,8 @@ export function ProductGrid({ products }: ProductGridProps) {
 
   return (
     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-5 md:grid-cols-3 lg:grid-cols-4">
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
+      {products.map((product, index) => (
+        <ProductCard key={product.id} product={product} eagerImage={eagerImages && index < 4} />
       ))}
     </div>
   )

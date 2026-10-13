@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import Image from "next/image"
+import Image from "@/components/ui/catalog-image"
 import { PageHeader } from "@/components/ui/page-header"
 import { Pagination } from "@/components/products/pagination"
 import { blogRepository } from "@/lib/repositories"

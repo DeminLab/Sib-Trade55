@@ -47,7 +47,9 @@ RUN addgroup --system --gid 1001 nodejs \
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-RUN mkdir -p /app/data && chown nextjs:nodejs /app/data
+COPY --from=builder /app/scripts/prepare-image-cache.mjs ./scripts/prepare-image-cache.mjs
+COPY --from=builder /app/src/lib/catalog/image-cache.mjs ./src/lib/catalog/image-cache.mjs
+RUN mkdir -p /app/data /app/.next/cache/images && chown -R nextjs:nodejs /app/data /app/.next/cache
 
 USER nextjs
 

@@ -3,7 +3,7 @@
 import { useSyncExternalStore, type MouseEvent } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import Image from "next/image"
+import Image from "@/components/ui/catalog-image"
 import { Heart, Plus, Check } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -18,9 +18,10 @@ import { getProductImageSurface } from "@/lib/product-image-surface"
 
 interface ProductCardProps {
   product: Product
+  eagerImage?: boolean
 }
 
-export function ProductCard({ product }: ProductCardProps) {
+export function ProductCard({ product, eagerImage = false }: ProductCardProps) {
   const router = useRouter()
   const defaultVariant = product.variants[0]
   const wishlistItems = useWishlistStore((state) => state.items)
@@ -91,7 +92,8 @@ export function ProductCard({ product }: ProductCardProps) {
         <Link href={`/${product.slug}`} aria-label={`Подробнее: ${product.name}`} className="relative block h-full">
           <Image src={image?.url ?? PLACEHOLDER_IMAGE} alt={image?.alt ?? product.name} fill
             className="object-contain p-2 transition-transform duration-300 motion-safe:group-hover:scale-[1.03] sm:p-5"
-            sizes="(max-width: 640px) 112px, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw" />
+            loading={eagerImage ? "eager" : "lazy"}
+            sizes="(max-width: 639px) 112px, (max-width: 767px) calc((100vw - 68px) / 2), (max-width: 1023px) calc((100vw - 88px) / 3), (max-width: 1439px) calc((100vw - 124px) / 4), 329px" />
         </Link>
         <button type="button" onClick={handleWishlist} aria-pressed={isWishlisted}
           className="absolute right-0 top-0 grid size-11 place-items-center bg-white/90 text-foreground transition-colors hover:bg-accent sm:right-2 sm:top-2"

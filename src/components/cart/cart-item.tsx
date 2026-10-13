@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import Image from "next/image"
+import Image from "@/components/ui/catalog-image"
 import { X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { QuantitySelector } from "@/components/products/quantity-selector"

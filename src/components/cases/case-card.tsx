@@ -1,4 +1,4 @@
-import Image from "next/image"
+import Image from "@/components/ui/catalog-image"
 import Link from "next/link"
 import { ArrowUpRight, MapPin } from "lucide-react"
 

@@ -47,7 +47,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
             {query}&quot;
           </p>
           <div className="mt-6">
-            <ProductGrid products={results.items} />
+            <ProductGrid products={results.items} eagerImages />
           </div>
           <div className="mt-12">
             <Pagination

@@ -1,7 +1,7 @@
 import { managedPage } from '@/components/content/managed-page'
 import type { Metadata } from "next"
 import Link from "next/link"
-import Image from "next/image"
+import Image from "@/components/ui/catalog-image"
 import {
   ArrowRight,
   ArrowUpRight,
@@ -120,7 +120,7 @@ export default async function HomePage() {
   return (
     <div className="bg-background">
       <section className="relative isolate overflow-hidden bg-neutral-950 text-white">
-        <Image src="/images/hero-park-composite.png" alt="" fill preload className="object-cover" sizes="100vw" />
+        <Image src="/images/hero-park-composite.webp" alt="" fill preload className="object-cover" sizes="100vw" />
         <div className="absolute inset-0 bg-neutral-950/60" aria-hidden="true" />
         <div className="relative mx-auto max-w-[1440px] px-5 py-10 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/75">СИБ-ТРЕЙД · продажа и поставка</p>

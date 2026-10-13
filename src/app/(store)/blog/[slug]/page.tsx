@@ -1,7 +1,7 @@
 import { serializeJsonLd } from '@/lib/structured-data'
 import type { Metadata } from "next"
 import Link from "next/link"
-import Image from "next/image"
+import Image from "@/components/ui/catalog-image"
 import { notFound } from "next/navigation"
 import {
   Breadcrumb,

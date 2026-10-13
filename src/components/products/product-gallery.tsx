@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import Image from "next/image"
+import Image from "@/components/ui/catalog-image"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import type { ProductImage } from "@/types"
 import { PLACEHOLDER_IMAGE } from "@/lib/constants"
@@ -34,8 +34,9 @@ export function ProductGallery({ images, productName = "Product" }: ProductGalle
           alt={currentImage?.alt ?? productName}
           fill
           className="object-contain p-4"
-          sizes="(max-width: 1024px) 100vw, 50vw"
-          preload
+          sizes="(max-width: 1023px) calc(100vw - 32px), (max-width: 1439px) 50vw, 720px"
+          loading="eager"
+          fetchPriority="high"
         />
         {images.length > 1 && (
           <>

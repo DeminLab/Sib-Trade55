@@ -43,7 +43,7 @@ export function BrandView({ brand, products, pagination }: BrandViewProps) {
       </div>
 
       <div className="mt-6">
-        <ProductGrid products={products} />
+        <ProductGrid products={products} eagerImages />
       </div>
 
       <div className="mt-12">

@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { fieldLabels } from '@/lib/content-models'
-import Image from 'next/image'
+import Image from "@/components/ui/catalog-image"
 const inputClass = 'min-h-11 w-full min-w-0 border border-input bg-background px-3 py-2 text-base'
 const label = (key: string) => fieldLabels[key] ?? key
 const templates: Record<string, unknown> = { gallery: { url: '', alt: '' }, characteristics: { label: '', value: '' }, technicalData: { label: '', value: '' }, productionStages: { title: '', description: '' } }

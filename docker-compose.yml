@@ -49,6 +49,7 @@ services:
         condition: service_healthy
     volumes:
       - sib_trade_data:/app/data
+      - sib_trade_image_cache:/app/.next/cache/images
     init: true
     healthcheck:
       test:
@@ -77,3 +78,4 @@ services:
 volumes:
   sib_trade_postgres:
   sib_trade_data:
+  sib_trade_image_cache:

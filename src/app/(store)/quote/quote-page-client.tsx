@@ -2,7 +2,7 @@
 
 import { useState, useSyncExternalStore } from "react"
 import Link from "next/link"
-import Image from "next/image"
+import Image from "@/components/ui/catalog-image"
 import { ArrowRight, FileText, Minus, Plus, Trash2 } from "lucide-react"
 
 import { QuoteRequestForm } from "@/components/quote/quote-request-form"

@@ -1,6 +1,6 @@
 "use client"
 
-import Image from "next/image"
+import Image from "@/components/ui/catalog-image"
 import Link from "next/link"
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { Check, FolderPlus, FolderTree, ImagePlus, LoaderCircle, Pencil, Plus, Search, Trash2, X } from "lucide-react"

@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { ArrowRight, ClipboardList, Layers3, ShieldCheck } from "lucide-react"
 import Link from "next/link"
-import Image from "next/image"
+import Image from "@/components/ui/catalog-image"
 
 import { MaterialSpecCard } from "@/components/materials/material-spec-card"
 import { RalPalette } from "@/components/materials/ral-palette"

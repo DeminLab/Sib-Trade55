@@ -2,7 +2,7 @@
 
 import { useSyncExternalStore } from "react"
 import Link from "next/link"
-import Image from "next/image"
+import Image from "@/components/ui/catalog-image"
 import { useRecentlyViewedStore } from "@/store/recently-viewed"
 import { PLACEHOLDER_IMAGE } from "@/lib/constants"
 import { formatPrice } from "@/lib/utils"

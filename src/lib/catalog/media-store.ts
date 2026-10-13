@@ -2,6 +2,7 @@ import sharp from "sharp"
 
 import { createMediaFileName, writeSqliteMedia } from "@/lib/database/sqlite-store"
 import type { ProductImage } from "@/types"
+import { prepareImageVariants } from "@/lib/catalog/image-cache.mjs"
 
 const MAX_IMAGE_SIZE = 10 * 1024 * 1024
 
@@ -18,6 +19,10 @@ export async function saveCatalogImage(file: File, alt: string): Promise<Product
     .toBuffer({ resolveWithObject: true })
 
   await writeSqliteMedia(`uploads/${filename}`, "image/webp", output.data)
+  // The original is already saved: a cache failure must not reject the upload.
+  await prepareImageVariants(`uploads/${filename}`, output.data).catch(() => {
+    console.error("Не удалось подготовить миниатюры; они будут созданы при просмотре")
+  })
 
   return {
     url: `/api/catalog/media/${filename}`,

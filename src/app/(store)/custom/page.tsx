@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import Image from "next/image"
+import Image from "@/components/ui/catalog-image"
 import Link from "next/link"
 import {
   ArrowRight,
@@ -61,7 +61,7 @@ export default function CustomPage() {
   return (
     <div className="overflow-hidden bg-background">
       <section className="relative min-h-[440px] bg-neutral-950 text-white">
-        <Image src="/images/hero-park-composite.png" alt="Городская среда с металлическими навесами, светом и мебелью" fill priority className="object-cover" sizes="100vw" />
+        <Image src="/images/hero-park-composite.webp" alt="Городская среда с металлическими навесами, светом и мебелью" fill priority className="object-cover" sizes="100vw" />
         <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/90 via-neutral-950/60 to-neutral-950/20" />
         <div className="relative mx-auto flex min-h-[440px] max-w-[1440px] flex-col justify-end px-5 pb-14 pt-32 sm:px-8 lg:px-12 lg:pb-20">
           <div className="max-w-3xl"><p className="industrial-label text-white/60">СИБ-ТРЕЙД / поставка под задачу</p><h1 className="mt-5 text-5xl font-semibold leading-[0.98] tracking-[-0.06em] sm:text-6xl lg:text-8xl">Подберём и поставим под вашу задачу</h1><p className="mt-7 max-w-2xl text-base leading-7 text-white/75 sm:text-lg">Металлоизделия по чертежу, фотографии или техническому заданию. От единичного объекта до серийной партии — с расчётом, поставкой и доставкой.</p><div className="mt-8 flex flex-col gap-3 sm:flex-row"><Button size="lg" asChild><a href="#request">Получить расчёт <ArrowRight className="ml-2 size-4" /></a></Button><Button size="lg" variant="outline" asChild className="border-white/45 bg-transparent text-white hover:bg-white hover:text-foreground"><Link href="/shop">Смотреть каталог</Link></Button></div></div>

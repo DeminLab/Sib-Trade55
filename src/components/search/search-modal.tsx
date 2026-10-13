@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react"
 import Link from "next/link"
-import Image from "next/image"
+import Image from "@/components/ui/catalog-image"
 import { Search, X, ArrowRight } from "lucide-react"
 import { StarRating } from "@/components/products/star-rating"
 import { isPriceOnRequest } from "@/lib/product-presentation"

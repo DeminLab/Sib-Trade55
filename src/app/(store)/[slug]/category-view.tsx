@@ -89,7 +89,7 @@ export function CategoryView({
 
       {/* Products */}
       <div className="mt-6">
-        <ProductGrid products={products} />
+        <ProductGrid products={products} eagerImages />
       </div>
 
       {/* Pagination */}
