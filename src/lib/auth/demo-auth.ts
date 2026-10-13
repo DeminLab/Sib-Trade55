@@ -3,7 +3,6 @@ import type { AuthSession, User } from "@/types"
 const DEMO_PASSWORD = process.env.DEMO_AUTH_PASSWORD ?? "password123"
 
 const DEMO_ACCOUNTS = [
-  { email: "admin@example.com", firstName: "Admin", lastName: "User", role: "admin" },
   { email: "demo@example.com", firstName: "Demo", lastName: "Customer", role: "customer" },
 ] as const
 
@@ -31,17 +30,6 @@ function createUser(
 
 export function authenticateDemoUser(email: string, password: string): AuthSession | null {
   const normalizedEmail = email.trim().toLowerCase()
-  const adminEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase()
-  const adminPassword = process.env.ADMIN_PASSWORD
-
-  if (adminEmail && adminPassword && normalizedEmail === adminEmail && password === adminPassword) {
-    const name = process.env.ADMIN_NAME?.trim() || "Администратор"
-    return {
-      user: createUser({ email: adminEmail, firstName: name, lastName: "", role: "admin" }),
-      expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
-    }
-  }
-
   const account = DEMO_ACCOUNTS.find((item) => item.email === normalizedEmail)
 
   if (isDemoAuthEnabled()) {

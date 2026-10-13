@@ -32,8 +32,8 @@ const secret = 'qa-site-session-secret'
 const sign = role => { const payload = Buffer.from(JSON.stringify({ role, expiresAt: Date.now() + 3600000 })).toString('base64url'); return `${payload}.${createHmac('sha256', secret).update(payload).digest('base64url')}` }
 const auth = { Cookie: `sib_trade_session=${sign('admin')}` }
 let child; let output = ''; const passed = []
-async function start() {
-  child = spawn(process.execPath, ['.next/standalone/server.js'], { cwd: process.cwd(), env: { ...process.env, NODE_ENV: 'production', HOSTNAME: '127.0.0.1', PORT: String(port), SQLITE_DATABASE_PATH: databasePath, ADMIN_EMAIL: 'qa-admin@example.com', ADMIN_PASSWORD: 'qa-testing-password', AUTH_SESSION_SECRET: secret, AUTH_COOKIE_SECURE: 'false', TELEGRAM_BOT_TOKEN: '', TELEGRAM_CHAT_ID: '', DATABASE_URL: '', PGHOST: '' }, stdio: ['ignore', 'pipe', 'pipe'] })
+async function start({ bootstrapAdmin = true } = {}) {
+  child = spawn(process.execPath, ['.next/standalone/server.js'], { cwd: process.cwd(), env: { ...process.env, NODE_ENV: 'production', HOSTNAME: '127.0.0.1', PORT: String(port), SQLITE_DATABASE_PATH: databasePath, ADMIN_EMAIL: bootstrapAdmin ? 'qa-admin@example.com' : '', ADMIN_PASSWORD: bootstrapAdmin ? 'qa-testing-password' : '', AUTH_SESSION_SECRET: secret, AUTH_COOKIE_SECURE: 'false', TELEGRAM_BOT_TOKEN: '', TELEGRAM_CHAT_ID: '', DATABASE_URL: '', PGHOST: '' }, stdio: ['ignore', 'pipe', 'pipe'] })
   child.stdout.on('data', chunk => { output += chunk }); child.stderr.on('data', chunk => { output += chunk })
   for (let i = 0; i < 100; i++) { if (child.exitCode !== null) throw new Error(output.slice(-2000)); try { if ((await fetch(`${base}/api/admin/settings`, { headers: auth })).ok) return } catch {} await new Promise(r => setTimeout(r, 200)) }
   throw new Error('QA server startup timed out')
@@ -56,6 +56,9 @@ try {
   await call('/api/auth/login', 'POST', { email: 'qa-admin@example.com', password: 'wrong-password' }, 401, {})
   const logged = await fetch(`${base}/api/auth/login`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: 'qa-admin@example.com', password: 'qa-testing-password' }) })
   assert.equal(logged.status, 200); assert.match(logged.headers.get('set-cookie'), /HttpOnly/)
+  const loginUser = (await logged.json()).user
+  assert.equal(loginUser.role, 'admin')
+  assert.equal(Object.hasOwn(loginUser, 'password_hash'), false)
   const loginCookie = logged.headers.get('set-cookie').split(';')[0]
   const currentSession = await call('/api/auth/session', 'GET', undefined, 200, { Cookie: loginCookie }); assert.equal(currentSession.user.role, 'admin')
   assert.equal((await call('/api/auth/session', 'GET', undefined, 200, {})).user, null)
@@ -129,7 +132,12 @@ try {
   pass('settings applied to storefront, real business totals and private server metrics')
   // Materials, coatings and RAL share one content document; snapshot after all edits.
   for (const collection of Object.keys(revisions)) revisions[collection] = (await call(`/api/admin/content/${collection}`)).revision
-  await stop(); await start()
+  await stop(); await start({ bootstrapAdmin: false })
+  const persistedLogin = await call('/api/auth/login', 'POST', { email: 'qa-admin@example.com', password: 'qa-testing-password' }, 200, {})
+  assert.equal(persistedLogin.user.id, loginUser.id)
+  assert.equal(persistedLogin.user.role, 'admin')
+  await call('/api/auth/login', 'POST', { email: 'qa-admin@example.com', password: 'wrong-password' }, 401, {})
+  pass('persistent admin login after real server restart without bootstrap credentials')
   assert.equal((await call('/api/orders')).find(o => o.id === order.id).status, 'processing')
   assert.equal((await call('/api/admin/settings')).settings.announcement, settings.settings.announcement)
   for (const collection of Object.keys(revisions)) assert.equal((await call(`/api/admin/content/${collection}`)).revision, revisions[collection])

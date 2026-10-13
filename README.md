@@ -53,9 +53,9 @@ npm run dev:docker:down
 
 ## Администратор
 
-Для production задайте `ADMIN_EMAIL`, `ADMIN_PASSWORD` и `AUTH_SESSION_SECRET` в серверном окружении. Вход: `/auth/login`, панель: `/admin`. Сервер проверяет подписанную HttpOnly cookie для административных API.
+Для первого создания администратора задайте `ADMIN_EMAIL`, `ADMIN_PASSWORD` и `AUTH_SESSION_SECRET` в серверном окружении. При запуске приложения аккаунт создаётся в таблице SQLite `admin_accounts`; локально его можно создать командой `npm run admin:create`. Повторный запуск сохраняет существующий аккаунт и пароль. После создания `ADMIN_EMAIL` и `ADMIN_PASSWORD` можно убрать из окружения, но `AUTH_SESSION_SECRET` нужен для подписанных HttpOnly cookie. Вход: `/auth/login`, панель: `/admin`. Данные входа, хеши и файл базы не входят в Git. Подробности: [docs/admin-account.md](docs/admin-account.md).
 
-В development доступны `admin@example.com` и `demo@example.com` с паролем из `DEMO_AUTH_PASSWORD` (по умолчанию `password123`). Эти учётные записи отключены в production.
+В development доступен тестовый покупатель `demo@example.com` с паролем из `DEMO_AUTH_PASSWORD` (по умолчанию `password123`). Он отключён в production. Администратор во всех режимах входит через постоянный аккаунт в SQLite.
 
 ## Структура
 

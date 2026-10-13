@@ -17,8 +17,8 @@ firstName: z.string().min(1, "Имя обязательно"),
 // --- Auth ---
 
 export const loginSchema = z.object({
-email: z.string().email("Неверный email"),
-  password: z.string().min(8, "Пароль должен содержать минимум 8 символов"),
+email: z.string().trim().email("Неверный email").max(320),
+  password: z.string().min(8, "Пароль должен содержать минимум 8 символов").max(1024),
 })
 
 export const registerSchema = z

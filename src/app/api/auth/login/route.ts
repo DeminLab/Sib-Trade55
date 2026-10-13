@@ -2,11 +2,18 @@ import { NextResponse } from "next/server"
 import { loginSchema } from "@/lib/validators"
 import { authenticateDemoUser, isDemoAuthEnabled } from "@/lib/auth/demo-auth"
 import { adminSessionCookie, createSessionCookieValue } from "@/lib/auth/session-cookie"
+import { authenticateAdminAccount, ensureConfiguredAdminAccount, hasAdminAccount } from "@/lib/auth/admin-accounts.mjs"
+
+export const runtime = "nodejs"
 
 export async function POST(request: Request) {
   const parsed = loginSchema.safeParse(await request.json().catch(() => null))
   if (!parsed.success) return NextResponse.json({ message: parsed.error.issues[0]?.message ?? "Проверьте данные" }, { status: 400 })
-  const session = authenticateDemoUser(parsed.data.email, parsed.data.password)
+  await ensureConfiguredAdminAccount()
+  const admin = await authenticateAdminAccount(parsed.data.email, parsed.data.password)
+  const session = admin
+    ? { user: { ...admin, role: "admin" as const, addresses: [] }, expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString() }
+    : authenticateDemoUser(parsed.data.email, parsed.data.password)
   if (session) {
     const response = NextResponse.json(session)
     const value = createSessionCookieValue(session.user)
@@ -15,7 +22,7 @@ export async function POST(request: Request) {
     response.cookies.set(adminSessionCookie.name, value, { httpOnly: true, secure: secureCookie, sameSite: "lax", path: "/", maxAge: adminSessionCookie.maxAge })
     return response
   }
-  const isAdminAuthConfigured = Boolean(process.env.ADMIN_EMAIL?.trim() && process.env.ADMIN_PASSWORD && process.env.AUTH_SESSION_SECRET)
+  const isAdminAuthConfigured = Boolean(hasAdminAccount() && process.env.AUTH_SESSION_SECRET)
   if (isDemoAuthEnabled() || isAdminAuthConfigured) {
     return NextResponse.json({ message: "Неверный email или пароль" }, { status: 401 })
   }
