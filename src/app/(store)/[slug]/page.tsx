@@ -20,7 +20,6 @@ export async function generateMetadata({
 
   const product = await productRepository.getBySlug(slug)
   if (product) {
-    const variant = product.variants[0]
     return {
       title: product.name,
       description: product.description,
@@ -33,12 +32,6 @@ export async function generateMetadata({
         images: product.images[0]
           ? [{ url: product.images[0].url, alt: product.images[0].alt }]
           : [],
-      },
-      other: {
-        "product:price:amount": variant
-          ? String(variant.price)
-          : "",
-        "product:price:currency": variant?.currency ?? "RUB",
       },
     }
   }

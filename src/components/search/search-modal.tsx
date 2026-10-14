@@ -5,8 +5,6 @@ import Link from "next/link"
 import Image from "@/components/ui/catalog-image"
 import { Search, X, ArrowRight } from "lucide-react"
 import { StarRating } from "@/components/products/star-rating"
-import { isPriceOnRequest } from "@/lib/product-presentation"
-import { formatPrice } from "@/lib/utils"
 import { PLACEHOLDER_IMAGE } from "@/lib/constants"
 import type { Product } from "@/types"
 
@@ -134,7 +132,6 @@ placeholder="Поиск товаров..."
             {hasQuery && results.length > 0 && (
               <div className="p-2">
                 {results.map((product) => {
-                  const variant = product.variants[0]
                   return (
                     <Link
                       key={product.id}
@@ -162,7 +159,7 @@ placeholder="Поиск товаров..."
                         />
                       </div>
                       <span className="shrink-0 text-sm font-medium">
-                        {variant && (isPriceOnRequest(variant) ? "Цена по запросу" : formatPrice(variant.price, variant.currency))}
+                        Цена индивидуально
                       </span>
                     </Link>
                   )

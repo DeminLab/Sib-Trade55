@@ -13,13 +13,11 @@ import {
   PackageCheck,
   Ruler,
   ShieldCheck,
-  ShoppingBag,
   Truck,
   Wrench,
 } from "lucide-react"
 import { toast } from "sonner"
 
-import { useCartStore } from "@/store/cart"
 import { useWishlistStore } from "@/store/wishlist"
 import { useRecentlyViewedStore } from "@/store/recently-viewed"
 import { useQuoteStore } from "@/store/quote"
@@ -37,8 +35,8 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-import { getProductMaterial, isPriceOnRequest } from "@/lib/product-presentation"
-import { formatPrice } from "@/lib/utils"
+import { getProductMaterial } from "@/lib/product-presentation"
+import { SalesContact } from "@/components/quote/sales-contact"
 import { siteConfig } from "@/lib/config"
 import { breadcrumbJsonLd } from "@/lib/structured-data"
 import type { Product, Brand, Category } from "@/types"
@@ -99,8 +97,6 @@ export function ProductDetailView({
     () => false,
   )
 
-  const addToCart = useCartStore((state) => state.addItem)
-  const openCart = useCartStore((state) => state.openCart)
   const wishlistItems = useWishlistStore((state) => state.items)
   const addToWishlist = useWishlistStore((state) => state.addItem)
   const removeFromWishlist = useWishlistStore((state) => state.removeItem)
@@ -121,10 +117,8 @@ export function ProductDetailView({
   const selectedVariant = product.variants.find((variant) => variant.id === selectedVariantId)
   if (!selectedVariant) return null
 
-  const priceOnRequest = isPriceOnRequest(selectedVariant)
-  const customProduct = isMadeToOrder(product) || priceOnRequest === true
+  const customProduct = isMadeToOrder(product)
   const stockQuantity = selectedVariant.inventory.quantity
-  const available = !priceOnRequest && (stockQuantity > 0 || selectedVariant.inventory.allowBackorder)
   const stockLabel = stockQuantity > 0 ? "В наличии" : selectedVariant.inventory.allowBackorder ? "Под заказ" : "Нет в наличии"
   const leadTime = customProduct || stockLabel === "Под заказ" ? "По запросу" : stockQuantity > 0 ? "Готовое изделие" : "Уточнить срок"
   const isWishlisted = mounted && wishlistItems.some((item) => item.productId === product.id)
@@ -132,22 +126,6 @@ export function ProductDetailView({
   const dimensions = selectedVariant.dimensions
     ? `${selectedVariant.dimensions.length} × ${selectedVariant.dimensions.width} × ${selectedVariant.dimensions.height}`
     : selectedOption?.name === "Размер" ? selectedOption.value : "По согласованию"
-
-  function handleAddToCart() {
-    if (!selectedVariant) return
-
-    addToCart({
-      variantId: selectedVariant.id,
-      productId: product.id,
-      name: product.name,
-      variantName: selectedVariant.name,
-      image: product.images[0] ?? { url: "", alt: product.name },
-      slug: product.slug,
-      price: selectedVariant.price,
-      quantity,
-    })
-    openCart()
-  }
 
   function handleToggleWishlist() {
     if (!selectedVariant) return
@@ -178,12 +156,13 @@ export function ProductDetailView({
       variantName: selectedVariant.name,
       image: product.images[0] ?? { url: "", alt: product.name },
       slug: product.slug,
-      price: selectedVariant.price,
-      priceOnRequest,
+      price: 0,
+      priceOnRequest: true,
       quantity,
-      lineTotal: selectedVariant.price * quantity,
+      lineTotal: 0,
       currency: selectedVariant.currency,
     })
+    toast.success("Товар добавлен в заявку")
   }
 
   const breadcrumbLd = breadcrumbJsonLd([
@@ -210,14 +189,6 @@ export function ProductDetailView({
           },
         }
       : {}),
-    offers: priceOnRequest ? undefined : {
-      "@type": "Offer",
-      price: selectedVariant.price.toFixed(2),
-      priceCurrency: selectedVariant.currency,
-      availability: available ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
-      url: new URL(`/${product.slug}`, siteConfig.url).toString(),
-      seller: { "@type": "Organization", name: siteConfig.name, url: siteConfig.url },
-    },
   }
 
   return (
@@ -241,14 +212,15 @@ export function ProductDetailView({
             <button type="button" onClick={handleToggleWishlist} className="flex size-11 shrink-0 items-center justify-center border border-border transition-colors hover:border-primary hover:bg-accent" aria-label={isWishlisted ? "Удалить из избранного" : "Добавить в избранное"}><Heart className={`size-5 ${isWishlisted ? "fill-current text-wishlist" : "text-muted-foreground"}`} /></button>
           </div>
 
-          <div className="mt-6 flex flex-wrap items-end justify-between gap-4"><div><p className="text-3xl font-semibold tracking-[-0.04em]">{priceOnRequest ? "Цена по запросу" : <>{formatPrice(selectedVariant.price, selectedVariant.currency)}</>}</p><p className="mt-2 text-sm text-muted-foreground">Цена и условия поставки подтверждаются перед заказом</p></div><div className="text-right text-sm"><p className="flex items-center justify-end gap-2 font-medium"><span className={`size-2 ${stockQuantity > 0 ? "bg-emerald-600" : "bg-primary"}`} />{stockLabel}</p><p className="mt-1 text-muted-foreground">Срок: {leadTime}</p></div></div>
+          <div className="mt-6 flex flex-wrap items-end justify-between gap-4"><div><p className="text-3xl font-semibold tracking-[-0.04em]">Цена индивидуально</p><p className="mt-2 text-sm text-muted-foreground">Рассчитаем стоимость под количество, комплектацию и доставку</p></div><div className="text-right text-sm"><p className="flex items-center justify-end gap-2 font-medium"><span className={`size-2 ${stockQuantity > 0 ? "bg-emerald-600" : "bg-primary"}`} />{stockLabel}</p><p className="mt-1 text-muted-foreground">Срок: {leadTime}</p></div></div>
           <p className="mt-6 max-w-xl text-base leading-7 text-muted-foreground">{product.description}</p>
 
           <div className="mt-8 grid grid-cols-2 gap-3 border-y border-border py-5 text-sm sm:grid-cols-3"><div><p className="text-muted-foreground">Артикул</p><p className="mt-1 font-mono font-medium">{selectedVariant.sku}</p></div><div><p className="text-muted-foreground">Материал</p><p className="mt-1 font-medium capitalize">{(getProductMaterial(product, selectedVariant) ?? "Уточняется")}</p></div><div><p className="text-muted-foreground">Покрытие</p><p className="mt-1 font-medium">{getFinish(product)}</p></div></div>
 
           {product.variants.length > 1 ? <div className="mt-7"><VariantSelector variants={product.variants} selectedVariantId={selectedVariantId} onSelect={setSelectedVariantId} /></div> : null}
 
-          <div className={`mt-8 border p-5 ${customProduct ? "border-primary/50 bg-accent/35" : "border-border bg-surface-subtle"}`}><div className="flex items-start gap-3"><PackageCheck className="mt-0.5 size-5 shrink-0 text-primary" /><div><p className="font-semibold">{customProduct ? "Нужен точный расчёт?" : "Готовы оформить заказ?"}</p><p className="mt-1 text-sm leading-6 text-muted-foreground">{customProduct ? "Пришлите чертёж, фото или ТЗ — уточним параметры и подготовим предложение." : "Выберите количество и добавьте изделие в корзину."}</p></div></div><div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center"><QuantitySelector quantity={quantity} onQuantityChange={setQuantity} max={stockQuantity || 99} />{customProduct ? <><Button className="h-12 sm:flex-1" asChild><Link href="/quote" onClick={handleQuoteRequest}><FileText className="mr-2 size-4" />Запросить КП</Link></Button><Button variant="outline" className="sm:flex-1" onClick={handleAddToCart} disabled={!available}><ShoppingBag className="mr-2 size-4" />В корзину</Button></> : <><Button className="sm:flex-1" onClick={handleAddToCart} disabled={!available}><ShoppingBag className="mr-2 size-4" />{available ? "Добавить в корзину" : "Нет в наличии"}</Button><Button variant="outline" className="sm:flex-1" asChild><Link href="/quote" onClick={handleQuoteRequest}>Запросить КП</Link></Button></>}</div></div>
+          <div className="mt-8 border border-border bg-surface-subtle p-5"><div className="flex items-start gap-3"><PackageCheck className="mt-0.5 size-5 shrink-0 text-primary" /><div><p className="font-semibold">Добавьте товар в заявку</p><p className="mt-1 text-sm leading-6 text-muted-foreground">Выберите исполнение и количество. Можно собрать несколько товаров и отправить их одним списком — цену согласуем лично.</p></div></div><div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center"><QuantitySelector quantity={quantity} onQuantityChange={setQuantity} max={10000} /><Button className="h-12 sm:flex-1" onClick={handleQuoteRequest}><FileText className="mr-2 size-4" />В заявку</Button><Button variant="outline" className="h-12 sm:flex-1" asChild><Link href="/quote" onClick={handleQuoteRequest}>Получить расчёт</Link></Button></div></div>
+          <SalesContact />
         </div>
       </section>
 
@@ -267,7 +239,7 @@ export function ProductDetailView({
       <RecentlyViewed excludeProductId={product.id} />
       <div className="mt-12 sm:mt-16 border-t border-border pt-10 text-center"><CircleHelp className="mx-auto size-7 text-primary" /><h2 className="mt-4 text-2xl font-semibold tracking-[-0.04em]">Нужна консультация по изделию?</h2><p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-muted-foreground">Отправьте задачу — поможем подобрать исполнение, рассчитать стоимость и подготовить заказ.</p><Button className="mt-6" asChild><Link href="/contact">Получить расчёт <ArrowRight className="ml-2 size-4" /></Link></Button></div>
       <div className="product-mobile-action fixed inset-x-0 bottom-0 z-40 flex items-center justify-between gap-3 border-t border-border bg-background px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] lg:hidden">
-        <p className="text-sm font-semibold">{priceOnRequest ? "Цена по запросу" : formatPrice(selectedVariant.price, selectedVariant.currency)}</p>
+        <p className="text-sm font-semibold">Цена индивидуально</p>
         <Button asChild className="min-h-11"><Link href="/quote" onClick={handleQuoteRequest}>Запросить расчёт</Link></Button>
       </div>
     </div>

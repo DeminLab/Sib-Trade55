@@ -18,6 +18,7 @@ interface QuoteState {
 function quoteItemFromCart(item: CartItem): QuoteRequestItem {
   return {
     ...item,
+    price: 0, lineTotal: 0, priceOnRequest: true,
     currency: "RUB",
   }
 }
@@ -36,14 +37,14 @@ export const useQuoteStore = create<QuoteState>()(
                 current.variantId === item.variantId
                   ? {
                       ...current,
-                      quantity: current.quantity + item.quantity,
-                      lineTotal: current.price * (current.quantity + item.quantity),
+                      quantity: Math.min(10000, current.quantity + item.quantity),
+                      price: 0, lineTotal: 0, priceOnRequest: true,
                     }
                   : current
               ),
             }
           }
-          return { items: [...state.items, item] }
+          return { items: [...state.items, { ...item, price: 0, lineTotal: 0, priceOnRequest: true, quantity: Math.min(10000, item.quantity) }] }
         })
       },
 
@@ -57,7 +58,7 @@ export const useQuoteStore = create<QuoteState>()(
           return
         }
         set((state) => ({
-          items: state.items.map((item) => item.variantId === variantId ? { ...item, quantity, lineTotal: item.price * quantity } : item),
+          items: state.items.map((item) => item.variantId === variantId ? { ...item, quantity: Math.min(10000, quantity), price: 0, lineTotal: 0, priceOnRequest: true } : item),
         }))
       },
 

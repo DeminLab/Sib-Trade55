@@ -1,7 +1,7 @@
 import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
 import { AnnouncementBar } from "@/components/layout/announcement-bar"
-import { CartDrawer } from "@/components/cart/cart-drawer"
+import { LegacyCartMigration } from "@/components/quote/legacy-cart-migration"
 import { BackToTop } from "@/components/layout/back-to-top"
 import { categoryRepository } from "@/lib/repositories"
 import { getSiteSettings } from '@/lib/content/site-settings'
@@ -32,7 +32,7 @@ export default async function StoreLayout({
         {children}
       </main>
       <Footer categories={categories} settings={settings} />
-      <CartDrawer />
+      <LegacyCartMigration />
       <BackToTop />
     </SiteSettingsProvider>
   )

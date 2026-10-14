@@ -27,7 +27,8 @@ export default async function ShopPage({ searchParams }: { searchParams: Promise
     <div className="mx-auto max-w-[1440px] px-4 py-6 sm:px-6 lg:px-8 lg:py-10">
       <p className="industrial-label">Подбор и поставка оборудования</p>
       <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">Каталог товаров</h1>
-      <p className="mt-2 text-sm text-muted-foreground">{productCountLabel(result.pagination.total)} · Добавляйте изделия в общий расчёт</p>
+      <p className="mt-2 text-sm text-muted-foreground">{productCountLabel(result.pagination.total)} · Цена обсуждается индивидуально</p>
+      <p className="mt-3 text-sm leading-6 text-muted-foreground">1. Добавьте товары в заявку · 2. Укажите количество и контакты · 3. Согласуйте стоимость с менеджером. <Link href="/quote" className="font-medium text-primary underline underline-offset-4">Открыть заявку</Link></p>
       <nav aria-label="Направления каталога" className="mt-5 flex flex-wrap gap-2">
         {categories.filter(c => c.parentId === root?.id || !c.parentId && c.id !== root?.id).map(c => <Link key={c.id} href={`/${c.slug}`} className="border border-border bg-background px-3 py-2 text-sm hover:border-primary focus-visible:outline-2">{c.name}</Link>)}
       </nav>

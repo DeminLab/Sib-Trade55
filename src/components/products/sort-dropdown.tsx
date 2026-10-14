@@ -5,8 +5,6 @@ import { ChevronDown } from "lucide-react"
 
 const sortOptions = [
   { value: "newest", label: "Сначала новые" },
-  { value: "price-asc", label: "Цена: по возрастанию" },
-  { value: "price-desc", label: "Цена: по убыванию" },
   { value: "name", label: "Название: А-Я" },
 ]
 

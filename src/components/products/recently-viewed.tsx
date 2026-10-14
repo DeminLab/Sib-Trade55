@@ -5,7 +5,6 @@ import Link from "next/link"
 import Image from "@/components/ui/catalog-image"
 import { useRecentlyViewedStore } from "@/store/recently-viewed"
 import { PLACEHOLDER_IMAGE } from "@/lib/constants"
-import { formatPrice } from "@/lib/utils"
 
 interface RecentlyViewedProps {
   excludeProductId?: string
@@ -47,7 +46,7 @@ export function RecentlyViewed({ excludeProductId }: RecentlyViewedProps) {
               {item.name}
             </p>
             <p className="text-xs text-muted-foreground">
-              {item.price > 0 ? formatPrice(item.price) : "Цена по запросу"}
+              Цена индивидуально
             </p>
           </Link>
         ))}

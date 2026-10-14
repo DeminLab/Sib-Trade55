@@ -25,7 +25,7 @@ export const quoteRequestSchema = z.object({
   inn: optionalText(12).refine((value) => !value || /^\d{10}(\d{2})?$/.test(value), "ИНН должен содержать 10 или 12 цифр"),
   contactName: requiredText("Контактное лицо"),
   phone,
-  email,
+  email: z.union([email, z.literal("")]).default(""),
   comment: optionalText(10000),
   desiredTerm: optionalText(),
   preferredContact,
@@ -43,7 +43,9 @@ export const quoteRequestSchema = z.object({
     lineTotal: z.number().finite().nonnegative(),
     currency: z.literal("RUB"),
   })).min(1, "Добавьте хотя бы один товар").max(100),
-})
+}).refine((data) => data.preferredContact !== "email" || email.safeParse(data.email).success, {
+  message: "Укажите email для ответа по почте", path: ["email"],
+}).transform((data) => ({ ...data, items: data.items.map((item) => ({ ...item, price: 0, lineTotal: 0, priceOnRequest: true })) }))
 
 export const customRequestSchema = z.object({
   name: requiredText("Имя"), phone, email,

@@ -4,7 +4,6 @@ import Link from "next/link"
 import Image from "@/components/ui/catalog-image"
 import {
   Search,
-  ShoppingBag,
   FileText,
   User,
   Menu,
@@ -31,37 +30,9 @@ import { useTranslations } from "next-intl"
 import { useEffect, useRef, useState, useSyncExternalStore } from "react"
 import type { Category } from "@/types"
 import { useQuoteStore } from "@/store/quote"
-import { useCartStore } from "@/store/cart"
 import { useAuthStore } from "@/store/auth"
 import { useRouter } from "next/navigation"
 import { toast } from 'sonner'
-
-function CartBadge() {
-  const openCart = useCartStore((s) => s.openCart)
-  const itemCount = useCartStore((s) => s.items.reduce((sum, item) => sum + item.quantity, 0))
-  const mounted = useSyncExternalStore(
-    () => () => undefined,
-    () => true,
-    () => false,
-  )
-
-  const count = mounted ? itemCount : 0
-
-  return (
-    <button
-      onClick={openCart}
-      className="relative inline-flex h-10 w-10 items-center justify-center rounded-sm hover:bg-accent"
-      aria-label={`${count} ${count === 1 ? "товар" : "товаров"} в корзине`}
-    >
-      <ShoppingBag className="h-[18px] w-[18px]" />
-      {count > 0 && (
-        <span className="icon-badge">
-          {count > 9 ? "9+" : count}
-        </span>
-      )}
-    </button>
-  )
-}
 
 function WishlistBadge() {
   const [pop, setPop] = useState(false)
@@ -307,7 +278,7 @@ export function Header({ categories = [] }: HeaderProps) {
                   </div>
                 ))}
 
-                <a className="mt-5 py-3 text-lg font-semibold" href={`tel:${siteConfig.contact.phone}`}>{siteConfig.contact.phoneDisplay}</a>
+                <a className="mt-5 py-3 text-lg font-semibold" href={`tel:${siteConfig.contact.phone}`}>{siteConfig.contact.phoneDisplay}</a><p className="text-xs text-muted-foreground">{siteConfig.contact.workingHours} · время Омска (UTC+6)</p>
                 <Button asChild className="mt-6 w-full">
                   <Link href="/custom#request" onClick={() => setMobileMenuOpen(false)}>
                     Получить расчёт
@@ -503,8 +474,7 @@ export function Header({ categories = [] }: HeaderProps) {
               </Link>
             )}
 
-            <Link href="/quote" className="relative inline-flex size-11 items-center justify-center rounded-sm hover:bg-accent" aria-label={`Товары для расчёта: ${mounted ? quoteCount : 0}`}><FileText className="size-[18px]" />{mounted && quoteCount > 0 ? <span className="icon-badge">{quoteCount}</span> : null}</Link>
-            <CartBadge />
+            <Link href="/quote" className="relative inline-flex min-h-11 min-w-11 items-center justify-center px-2 rounded-sm hover:bg-accent" aria-label={`Товары для расчёта: ${mounted ? quoteCount : 0}`}><FileText className="size-[18px]" /><span className="ml-2 hidden text-sm font-medium sm:inline">Заявка</span>{mounted && quoteCount > 0 ? <span className="icon-badge">{quoteCount}</span> : null}</Link>
 
             <Button asChild size="sm" className="ml-1 hidden min-[1400px]:inline-flex">
               <Link href="/custom#request">

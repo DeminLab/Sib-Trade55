@@ -7,13 +7,12 @@ import Image from "@/components/ui/catalog-image"
 import { Heart, Plus, Check } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { formatPrice } from "@/lib/utils"
 import { PLACEHOLDER_IMAGE } from "@/lib/constants"
 import { useWishlistStore } from "@/store/wishlist"
 import { useQuoteStore } from "@/store/quote"
 import { toast } from "sonner"
 import type { Product } from "@/types"
-import { getAvailability, getProductMaterial, isPriceOnRequest } from "@/lib/product-presentation"
+import { getAvailability, getProductMaterial } from "@/lib/product-presentation"
 import { getProductImageSurface } from "@/lib/product-image-surface"
 
 interface ProductCardProps {
@@ -39,7 +38,7 @@ export function ProductCard({ product, eagerImage = false }: ProductCardProps) {
 
   const price = defaultVariant.price
   const image = product.images[0]
-  const priceOnRequest = isPriceOnRequest(defaultVariant)
+  const priceOnRequest = true
   const availability = getAvailability(defaultVariant)
   const material = getProductMaterial(product)
   const option = defaultVariant.options.find((item) => /размер|длина|версия/i.test(item.name))
@@ -57,13 +56,13 @@ export function ProductCard({ product, eagerImage = false }: ProductCardProps) {
       variantName: defaultVariant.name,
       image: image ?? { url: PLACEHOLDER_IMAGE, alt: product.name },
       slug: product.slug,
-      price,
+      price: 0,
       priceOnRequest,
       quantity: 1,
-      lineTotal: price,
+      lineTotal: 0,
       currency: defaultVariant.currency,
     })
-    toast.success("Товар добавлен в расчёт", { action: { label: "Открыть", onClick: () => { router.push("/quote") } } })
+    toast.success("Товар добавлен в заявку", { action: { label: "Открыть", onClick: () => { router.push("/quote") } } })
   }
 
   function handleWishlist(event: MouseEvent<HTMLButtonElement>) {
@@ -108,9 +107,9 @@ export function ProductCard({ product, eagerImage = false }: ProductCardProps) {
         </Link>
         {(material || option) ? <p className="mt-2 line-clamp-2 text-xs leading-5 text-muted-foreground">{[material, option?.value].filter(Boolean).join(" · ")}</p> : null}
         <div className="mt-auto pt-3 sm:pt-4">
-          <p className="text-base font-semibold tracking-tight sm:text-lg">{priceOnRequest ? "Цена по запросу" : formatPrice(price, defaultVariant.currency)}</p>
-          {inQuote ? <Button variant="outline" className="mt-3 min-h-11 w-full px-2 text-xs sm:text-sm" asChild><Link href="/quote"><Check className="size-4" />В расчёте</Link></Button> :
-            <Button onClick={handleQuoteRequest} className="mt-3 min-h-11 w-full px-2 text-xs sm:text-sm"><Plus className="size-4" />В расчёт</Button>}
+          <p className="text-base font-semibold tracking-tight sm:text-lg">Цена индивидуально</p>
+          {inQuote ? <Button variant="outline" className="mt-3 min-h-11 w-full px-2 text-xs sm:text-sm" asChild><Link href="/quote"><Check className="size-4" />В заявке</Link></Button> :
+            <Button onClick={handleQuoteRequest} className="mt-3 min-h-11 w-full px-2 text-xs sm:text-sm"><Plus className="size-4" />В заявку</Button>}
         </div>
       </div>
     </article>
