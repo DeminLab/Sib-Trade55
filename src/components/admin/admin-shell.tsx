@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
-import { Archive, Boxes, BriefcaseBusiness, ClipboardList, FileText, FolderKanban, LayoutDashboard, Menu, Package, Tags, Users, X } from "lucide-react"
+import { Activity, Archive, Boxes, BriefcaseBusiness, ClipboardList, FileText, FolderKanban, LayoutDashboard, Menu, Package, Tags, Users, X } from "lucide-react"
 import { useState } from "react"
 
 import { Button } from "@/components/ui/button"
@@ -14,6 +14,7 @@ import { toast } from 'sonner'
 
 const adminNav = [
   { name: "Обзор", href: "/admin", icon: LayoutDashboard },
+  { name: "Посещения", href: "/admin/visitors", icon: Activity },
   { name: "Заказы", href: "/admin/orders", icon: Package },
   { name: "Все товары", href: "/admin/products", icon: Boxes },
   { name: "Каталог и категории", href: "/admin/categories", icon: Tags },

@@ -356,6 +356,34 @@ export async function listSqliteRequests(kind: RequestKind, page = 1, limit = 25
   return { items, total }
 }
 
+export async function listSqliteMobileNotifications(afterAt: string, afterId: string, limit = 100) {
+  await ensureSqliteStore()
+  await globalSqlite.sibTradeDatabaseWriteQueue
+  const db = getDatabase()
+  const requests = db.prepare("SELECT id, created_at, payload FROM customer_requests WHERE created_at >= ? ORDER BY created_at ASC, id ASC LIMIT ?").all(afterAt, limit * 2)
+  const orders = db.prepare("SELECT id, created_at, payload FROM orders WHERE created_at >= ? ORDER BY created_at ASC, id ASC LIMIT ?").all(afterAt, limit * 2)
+  return [...requests, ...orders]
+    .map((row) => {
+      const payload = JSON.parse(String(row.payload)) as RequestRecord | Order
+      const isOrder = "orderNumber" in payload
+      const id = String(row.id)
+      return { id, cursorId: `${isOrder ? "order" : "request"}:${id}`, createdAt: String(row.created_at), payload, isOrder }
+    })
+    .filter((event) => event.createdAt > afterAt || (event.createdAt === afterAt && event.cursorId > afterId))
+    .sort((left, right) => left.createdAt.localeCompare(right.createdAt) || left.cursorId.localeCompare(right.cursorId))
+    .slice(0, limit)
+    .map((event) => {
+      if (event.isOrder) {
+        const order = event.payload as Order
+        return { id: event.cursorId, createdAt: event.createdAt, title: "Новый заказ", requestNumber: order.orderNumber, url: "/admin/orders" }
+      }
+      const request = event.payload as RequestRecord
+      const links = { contact: "/admin/contacts", quote: "/admin/quotes", custom: "/admin/custom-requests" }
+      const labels = { contact: "Новое обращение", quote: "Новый запрос КП", custom: "Новая заявка по ТЗ" }
+      return { id: event.cursorId, createdAt: event.createdAt, title: labels[request.kind], requestNumber: request.requestNumber, url: links[request.kind] }
+    })
+}
+
 export async function getSqliteRequest(id: string): Promise<RequestRecord | null> {
   await ensureSqliteStore()
   await globalSqlite.sibTradeDatabaseWriteQueue

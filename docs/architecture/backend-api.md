@@ -53,6 +53,7 @@ Backend находится внутри Next.js: Route Handlers в `src/app/api`
 | `/api/custom-requests` | `POST`: multipart ТЗ с приватными вложениями |
 | `/api/admin/requests` | `GET`: список по типу с пагинацией |
 | `/api/admin/requests/[id]` | `PATCH`: статус или `retry_notification` |
+| `/api/admin/mobile/notifications` | `GET`: новые заказы и клиентские обращения для Android-приложения; требует подписанную сессию администратора |
 | `/api/admin/requests/[id]/files/[fileId]` | `GET`: скачивание файла после проверки сессии и принадлежности заявке |
 | `/api/auth/login`, `/api/auth/logout`, `/api/auth/register` | `POST`: вход, выход и демонстрационная регистрация |
 

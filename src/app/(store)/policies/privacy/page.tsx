@@ -8,12 +8,12 @@ export const metadata: Metadata = {
 
 export default async function PrivacyPolicyPage() {
   const override = await managedPage('policies-privacy')
-  if (override) return override
+  if (override) return <>{override}<VisitorAnalyticsDisclosure /></>
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
       <h1 className="text-3xl font-bold tracking-tight">Политика конфиденциальности</h1>
       <p className="mt-4 text-sm text-muted-foreground">
-        Последнее обновление: 1 января 2025 г.
+        Последнее обновление: 25 октября 2026 г.
       </p>
       <div className="mt-8 space-y-6 text-muted-foreground">
         <h2 className="text-xl font-semibold text-foreground">
@@ -24,6 +24,8 @@ export default async function PrivacyPolicyPage() {
           адрес доставки и информацию об оплате при оформлении заказа. Также мы
           автоматически собираем информацию об устройстве и активности на сайте.
         </p>
+
+        <VisitorAnalyticsDisclosure />
 
         <h2 className="text-xl font-semibold text-foreground">
           Как мы используем ваши данные
@@ -51,5 +53,23 @@ export default async function PrivacyPolicyPage() {
         </p>
       </div>
     </div>
+  )
+}
+
+function VisitorAnalyticsDisclosure() {
+  return (
+    <section className="mt-8 space-y-3 text-muted-foreground">
+      <h2 className="text-xl font-semibold text-foreground">Аналитика посещений</h2>
+      <p>
+        Для подсчёта посещений витрина использует first-party cookie со случайным
+        идентификатором браузера сроком на один год. Записываются просмотренные
+        страницы, время, тип устройства, браузер, операционная система и источник
+        перехода (домен и путь без параметров ссылки). Если покупатель авторизован,
+        к визитам привязываются ID и email из его учётной записи. IP-адреса и точная
+        геолокация не сохраняются. Анонимного посетителя можно отличить только по
+        случайному идентификатору браузера. Записи журнала сейчас не удаляются
+        автоматически. Вопросы можно направить на sib-trade55@yandex.ru.
+      </p>
+    </section>
   )
 }

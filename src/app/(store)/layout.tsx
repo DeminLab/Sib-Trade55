@@ -6,6 +6,7 @@ import { BackToTop } from "@/components/layout/back-to-top"
 import { categoryRepository } from "@/lib/repositories"
 import { getSiteSettings } from '@/lib/content/site-settings'
 import { SiteSettingsProvider } from '@/components/layout/site-settings-provider'
+import { SiteVisitTracker } from '@/components/analytics/site-visit-tracker'
 
 export const dynamic = "force-dynamic"
 
@@ -20,6 +21,7 @@ export default async function StoreLayout({
 
   return (
     <SiteSettingsProvider value={settings}>
+      <SiteVisitTracker />
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-md focus:bg-background focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-ring"

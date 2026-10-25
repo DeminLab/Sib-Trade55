@@ -13,7 +13,7 @@
 
 ## Технологии
 
-Next.js 16.4.0 (App Router), React 19.2.4, TypeScript, Tailwind CSS 4, shadcn/ui, Zustand, Zod и next-intl 4.14.9. Серверное хранилище — SQLite через `node:sqlite`; требуется **Node.js >= 22.13.0**. PostgreSQL используется для переноса прежних данных при инициализации SQLite и остаётся в Compose-конфигурациях.
+Next.js 16.4.0 (App Router), React 19.2.4, TypeScript, Tailwind CSS 4, shadcn/ui, Zustand, Zod и next-intl 4.14.9. Серверное хранилище — SQLite через `node:sqlite`; требуется **Node.js >= 22.13.0**. PostgreSQL используется для переноса прежних данных при инициализации SQLite и остаётся в Compose-конфигурациях. Android-приложение администратора находится в [`apps/admin-android`](apps/admin-android/README.md).
 
 ## Быстрый запуск в PowerShell
 
@@ -48,6 +48,8 @@ npm run dev:docker:down
 | Управление каталогом | Редактирование товаров и категорий, изображения, архив и восстановление |
 | Контент | Редактор страниц, блога, кейсов, материалов, покрытий и RAL; SQLite, архив/восстановление и защита от конфликтов |
 | Авторизация | Серверный вход администратора; демонстрационные пользователи только вне production |
+| Android для администратора | WebView для всех разделов админки и локальные уведомления о заказах, обращениях, КП и ТЗ; фоновая проверка не мгновенная |
+| Посещения | `/admin/visitors`: анонимные браузеры, визиты и просмотры страниц, устройство, источник и время; IP и точная геолокация не сохраняются |
 | Клиентский аккаунт | Регистрация демонстрационная; backend профиля, адресов и клиентской истории заказов не подключён |
 | Интеграции | Типизированные адаптеры внешнего API присутствуют; CRM, оплата и внешний backend не подключены |
 
@@ -80,7 +82,7 @@ tests/                Тесты заявок и браузерный smoke-test
 nginx/                HTTP reverse proxy
 ```
 
-Основные маршруты: `/shop`, `/[slug]` (товар, категория или бренд), `/cart`, `/checkout`, `/quote`, `/custom`, `/contact`, `/cases`, `/materials`, `/blog`, `/pages/[slug]`. Админка: `/admin/products`, `/admin/categories`, `/admin/orders`, `/admin/contacts`, `/admin/quotes`, `/admin/custom-requests`, `/admin/content`, `/admin/portfolio`; раздел клиентов ожидает подключения customer API.
+Основные маршруты: `/shop`, `/[slug]` (товар, категория или бренд), `/cart`, `/checkout`, `/quote`, `/custom`, `/contact`, `/cases`, `/materials`, `/blog`, `/pages/[slug]`. Админка: `/admin/visitors`, `/admin/products`, `/admin/categories`, `/admin/orders`, `/admin/contacts`, `/admin/quotes`, `/admin/custom-requests`, `/admin/content`, `/admin/portfolio`; раздел клиентов ожидает подключения customer API. Подробности сбора — [docs/visit-analytics.md](docs/visit-analytics.md).
 
 ## Проверки
 
