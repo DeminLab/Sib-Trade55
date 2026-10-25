@@ -54,12 +54,17 @@ function publicAccount(row) {
   return { id: row.id, email: row.email, firstName: row.name, lastName: '', createdAt: row.created_at, updatedAt: row.updated_at }
 }
 
-/** @param {{email: string, password: string, name?: string}} account */
-export async function createAdminAccount(account) {
-  const email = account.email.trim().toLowerCase()
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 320 || account.password.length < 8 || account.password.length > 1024) {
+function validateCredentials(email, password) {
+  const normalizedEmail = email.trim().toLowerCase()
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail) || normalizedEmail.length > 320 || password.length < 8 || password.length > 1024) {
     throw new Error('Для администратора нужны корректный email и пароль длиной от 8 до 1024 символов')
   }
+  return normalizedEmail
+}
+
+/** @param {{email: string, password: string, name?: string}} account */
+export async function createAdminAccount(account) {
+  const email = validateCredentials(account.email, account.password)
   const db = connect()
   try {
     const existing = db.prepare('SELECT * FROM admin_accounts WHERE email = ?').get(email)
@@ -73,11 +78,17 @@ export async function createAdminAccount(account) {
   } finally { db.close() }
 }
 
-export async function ensureConfiguredAdminAccount() {
-  const email = process.env.ADMIN_EMAIL?.trim()
-  const password = process.env.ADMIN_PASSWORD
-  if (!email || !password) return null
-  return createAdminAccount({ email, password, name: process.env.ADMIN_NAME })
+/** @param {{email: string, password: string}} account */
+export async function updateAdminPassword(account) {
+  const email = validateCredentials(account.email, account.password)
+  const hash = await hashPassword(account.password)
+  const db = connect()
+  try {
+    const now = new Date().toISOString()
+    const result = db.prepare('UPDATE admin_accounts SET password_hash = ?, updated_at = ? WHERE email = ?').run(hash, now, email)
+    if (result.changes !== 1) return null
+    return publicAccount(db.prepare('SELECT * FROM admin_accounts WHERE email = ?').get(email))
+  } finally { db.close() }
 }
 
 /** @param {string} email @param {string} password */

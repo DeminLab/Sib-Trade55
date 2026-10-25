@@ -17,7 +17,6 @@ if (-not (Test-Path -LiteralPath .env)) {
 | Переменная | Назначение |
 | --- | --- |
 | `NEXT_PUBLIC_BASE_URL` | Канонический URL, metadata и ссылки; задаётся до сборки |
-| `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `ADMIN_NAME` | Серверная учётная запись администратора |
 | `AUTH_SESSION_SECRET` | Секрет подписи сессии; обязателен для production-входа |
 | `AUTH_COOKIE_SECURE` | `true` — HTTPS cookie, `false` — разрешение HTTP; по умолчанию включено в production |
 | `DEMO_AUTH_PASSWORD` | Пароль демонстрационных аккаунтов вне production |
@@ -54,7 +53,7 @@ npm run dev:docker:down
 
 `docker-compose.dev.yml` запускает PostgreSQL и Next.js на порту 3000 с hot reload. Исходники подключены bind mount, `node_modules`, `.next`, PostgreSQL и `/app/data` — отдельные named volumes. Рабочая SQLite база находится в томе `sib_trade_dev_data`, а не в хостовой папке `data/`.
 
-Compose передаёт `DEMO_AUTH_PASSWORD` и Telegram, но не передаёт `ADMIN_*`, `AUTH_SESSION_SECRET`, `AUTH_COOKIE_SECURE` и `SQLITE_DATABASE_PATH` через `environment`. Хостовый `.env` виден через bind mount, однако production Compose исключает `.env` из образа. Не полагайтесь на одинаковые настройки двух режимов: проверяйте явное окружение сервиса. Локальная Docker-витрина использует `NEXT_PUBLIC_BASE_URL=http://localhost:3000`.
+Compose передаёт `DEMO_AUTH_PASSWORD` и Telegram, но не передаёт `AUTH_SESSION_SECRET`, `AUTH_COOKIE_SECURE` и `SQLITE_DATABASE_PATH` через `environment`. Хостовый `.env` виден через bind mount, однако production Compose исключает `.env` из образа. Не полагайтесь на одинаковые настройки двух режимов: проверяйте явное окружение сервиса. Локальная Docker-витрина использует `NEXT_PUBLIC_BASE_URL=http://localhost:3000`.
 
 Не запускайте хостовый сервер и development Compose одновременно на одном порту.
 
@@ -76,7 +75,7 @@ node --env-file=.env .next/standalone/server.js
 
 ## Docker production
 
-В `.env` заполните параметры администратора, секрет сессии, пароль PostgreSQL и канонический URL до сборки.
+В `.env` заполните секрет сессии, пароль PostgreSQL и канонический URL до сборки. Администратор создаётся интерактивной CLI-командой внутри контейнера; не храните его email и пароль в `.env`.
 Перед первым публичным запуском укажите DNS на сервер и получите TLS-сертификат по инструкции ниже; Nginx не стартует без смонтированных файлов сертификата.
 
 ```powershell
@@ -88,6 +87,8 @@ Invoke-WebRequest http://localhost/
 # Остановка с сохранением данных:
 docker compose down
 ```
+
+После первого запуска создайте администратора командой `docker compose exec -it app node scripts/create-admin.mjs`. Сменить пароль существующего аккаунта можно командой `docker compose exec -it app node scripts/create-admin.mjs reset`.
 
 `docker-compose.yml` запускает PostgreSQL, standalone-приложение и Nginx. Приложение слушает внутренний порт 3000, Nginx публикует порты 80 и 443. До запуска Nginx на хосте должны существовать сертификаты `/etc/letsencrypt/live/sib-trade55.ru/fullchain.pem` и `privkey.pem`; Compose монтирует `/etc/letsencrypt` в контейнер только для чтения. SQLite находится в `/app/data/catalog.sqlite` в томе `sib_trade_data`. Production Compose не передаёт `SQLITE_DATABASE_PATH` из `.env`; изменение пути требует правки окружения сервиса и соответствующего volume.
 

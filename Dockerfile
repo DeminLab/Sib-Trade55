@@ -48,7 +48,9 @@ COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder /app/scripts/prepare-image-cache.mjs ./scripts/prepare-image-cache.mjs
+COPY --from=builder /app/scripts/create-admin.mjs ./scripts/create-admin.mjs
 COPY --from=builder /app/src/lib/catalog/image-cache.mjs ./src/lib/catalog/image-cache.mjs
+COPY --from=builder /app/src/lib/auth/admin-accounts.mjs ./src/lib/auth/admin-accounts.mjs
 RUN mkdir -p /app/data /app/.next/cache/images && chown -R nextjs:nodejs /app/data /app/.next/cache
 
 USER nextjs

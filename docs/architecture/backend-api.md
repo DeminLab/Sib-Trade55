@@ -61,7 +61,7 @@ Backend находится внутри Next.js: Route Handlers в `src/app/api`
 
 ## Сессия и ограничения аккаунта
 
-В production вход администратора использует `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `AUTH_SESSION_SECRET`. Cookie `sib_trade_session` подписана HMAC-SHA256, имеет HttpOnly, SameSite=Lax и срок 7 дней. Secure управляется `AUTH_COOKIE_SECURE`, иначе включён в production. Клиентский expiresAt и серверная cookie рассчитаны на 7 дней. GET /api/auth/session восстанавливает состояние интерфейса после перезагрузки; права административных API по-прежнему проверяются на сервере.
+В production email и scrypt-хеш пароля администратора хранятся в таблице SQLite `admin_accounts`; аккаунт создаётся или сбрасывается интерактивной серверной CLI-командой. `.env` содержит только `AUTH_SESSION_SECRET`, которым HMAC-SHA256 подписывается cookie `sib_trade_session` (HttpOnly, SameSite=Lax, 7 дней). Secure управляется `AUTH_COOKIE_SECURE`, иначе включён в production. Клиентский expiresAt и серверная cookie рассчитаны на 7 дней. GET /api/auth/session восстанавливает состояние интерфейса после перезагрузки; права административных API по-прежнему проверяются на сервере.
 
 Демо-вход и регистрация разрешены только вне production. `/api/auth/login` отвечает 400 на некорректные данные, 401 на неверные данные при настроенной авторизации, 503 при недоступной конфигурации входа.
 

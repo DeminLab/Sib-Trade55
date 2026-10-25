@@ -25,6 +25,7 @@
   },
   "scripts": {
     "admin:create": "node scripts/create-admin.mjs",
+    "admin:reset": "node scripts/create-admin.mjs reset",
     "dev": "docker compose -f docker-compose.dev.yml up --build",
     "dev:next": "next dev --hostname 0.0.0.0",
     "dev:docker:down": "docker compose -f docker-compose.dev.yml down",

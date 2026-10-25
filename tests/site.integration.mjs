@@ -32,8 +32,17 @@ const secret = 'qa-site-session-secret'
 const sign = role => { const payload = Buffer.from(JSON.stringify({ role, expiresAt: Date.now() + 3600000 })).toString('base64url'); return `${payload}.${createHmac('sha256', secret).update(payload).digest('base64url')}` }
 const auth = { Cookie: `sib_trade_session=${sign('admin')}` }
 let child; let output = ''; const passed = []
-async function start({ bootstrapAdmin = true } = {}) {
-  child = spawn(process.execPath, ['.next/standalone/server.js'], { cwd: process.cwd(), env: { ...process.env, NODE_ENV: 'production', HOSTNAME: '127.0.0.1', PORT: String(port), SQLITE_DATABASE_PATH: databasePath, ADMIN_EMAIL: bootstrapAdmin ? 'qa-admin@example.com' : '', ADMIN_PASSWORD: bootstrapAdmin ? 'qa-testing-password' : '', AUTH_SESSION_SECRET: secret, AUTH_COOKIE_SECURE: 'false', TELEGRAM_BOT_TOKEN: '', TELEGRAM_CHAT_ID: '', DATABASE_URL: '', PGHOST: '' }, stdio: ['ignore', 'pipe', 'pipe'] })
+const previousDatabasePath = process.env.SQLITE_DATABASE_PATH
+process.env.SQLITE_DATABASE_PATH = databasePath
+try {
+  const { createAdminAccount } = await import('../src/lib/auth/admin-accounts.mjs?site-integration')
+  await createAdminAccount({ email: 'qa-admin@example.com', password: 'qa-testing-password', name: 'QA administrator' })
+} finally {
+  if (previousDatabasePath === undefined) delete process.env.SQLITE_DATABASE_PATH
+  else process.env.SQLITE_DATABASE_PATH = previousDatabasePath
+}
+async function start() {
+  child = spawn(process.execPath, ['.next/standalone/server.js'], { cwd: process.cwd(), env: { ...process.env, NODE_ENV: 'production', HOSTNAME: '127.0.0.1', PORT: String(port), SQLITE_DATABASE_PATH: databasePath, AUTH_SESSION_SECRET: secret, AUTH_COOKIE_SECURE: 'false', TELEGRAM_BOT_TOKEN: '', DATABASE_URL: '', PGHOST: '' }, stdio: ['ignore', 'pipe', 'pipe'] })
   child.stdout.on('data', chunk => { output += chunk }); child.stderr.on('data', chunk => { output += chunk })
   for (let i = 0; i < 100; i++) { if (child.exitCode !== null) throw new Error(output.slice(-2000)); try { if ((await fetch(`${base}/api/admin/settings`, { headers: auth })).ok) return } catch {} await new Promise(r => setTimeout(r, 200)) }
   throw new Error('QA server startup timed out')
@@ -132,7 +141,7 @@ try {
   pass('settings applied to storefront, real business totals and private server metrics')
   // Materials, coatings and RAL share one content document; snapshot after all edits.
   for (const collection of Object.keys(revisions)) revisions[collection] = (await call(`/api/admin/content/${collection}`)).revision
-  await stop(); await start({ bootstrapAdmin: false })
+  await stop(); await start()
   const persistedLogin = await call('/api/auth/login', 'POST', { email: 'qa-admin@example.com', password: 'qa-testing-password' }, 200, {})
   assert.equal(persistedLogin.user.id, loginUser.id)
   assert.equal(persistedLogin.user.role, 'admin')
