@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ArrowUpRight, Archive, Boxes, CircleAlert, FileEdit, PackageCheck } from "lucide-react"
+import { Activity, ArrowUpRight, Archive, Boxes, BriefcaseBusiness, CircleAlert, ClipboardList, FileEdit, Package, PackageCheck } from "lucide-react"
 
 import { adminRepository } from "@/lib/repositories"
 import { BusinessOverview } from '@/components/admin/business-overview'
@@ -7,23 +7,39 @@ import { BusinessOverview } from '@/components/admin/business-overview'
 const currency = new Intl.NumberFormat("ru-RU", { style: "currency", currency: "RUB", maximumFractionDigits: 0 })
 const dateFormat = new Intl.DateTimeFormat("ru-RU", { day: "numeric", month: "short", year: "numeric" })
 const statusLabels = { active: "Опубликован", draft: "Черновик", archived: "В архиве" } as const
+const shortcuts = [
+  { href: "/admin/orders", title: "Заказы", description: "Проверить и обновить статусы", icon: Package },
+  { href: "/admin/contacts", title: "Новые обращения", description: "Связаться с клиентами", icon: ClipboardList },
+  { href: "/admin/custom-requests", title: "Заявки на подбор", description: "Обработать запросы на поставку", icon: BriefcaseBusiness },
+  { href: "/admin/visitors", title: "Посещения", description: "Устройства, источники и время", icon: Activity },
+]
 
 export default async function AdminDashboardPage() {
   const dashboard = await adminRepository.getDashboard()
   const icons = [Boxes, PackageCheck, FileEdit, Archive]
 
   return (
-    <div className="space-y-8">
-      <header className="flex flex-col gap-5 border-b border-border pb-7 sm:flex-row sm:items-end sm:justify-between">
+    <div className="space-y-7">
+      <header className="flex flex-col gap-4 border-b border-border pb-6 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary">СИБ-ТРЕЙД / управление</p>
-          <h1 className="mt-3 text-4xl font-semibold tracking-[-0.06em] sm:text-5xl">Обзор</h1>
-          <p className="mt-3 max-w-xl text-sm leading-6 text-muted-foreground">Состояние каталога из текущего хранилища товаров.</p>
+          <h1 className="mt-2 text-3xl font-semibold tracking-[-0.05em] sm:text-4xl">Обзор</h1>
+          <p className="mt-2 max-w-xl text-sm leading-6 text-muted-foreground">Быстрый доступ к ежедневным задачам и состояние каталога.</p>
         </div>
-        <Link href="/admin/products" className="inline-flex min-h-11 items-center justify-center gap-2 bg-primary px-5 text-sm font-semibold text-primary-foreground hover:opacity-90">
-          Управлять товарами <ArrowUpRight className="size-4" />
+        <Link href="/admin/products" className="inline-flex min-h-11 items-center justify-center gap-2 self-start bg-primary px-5 text-sm font-semibold text-primary-foreground hover:opacity-90 sm:self-auto">
+          Перейти в каталог <ArrowUpRight className="size-4" />
         </Link>
       </header>
+
+      <section aria-label="Быстрые действия">
+        <div className="mb-3"><h2 className="text-base font-semibold">Быстрые действия</h2><p className="mt-1 text-sm text-muted-foreground">Основные разделы, к которым чаще всего нужно перейти.</p></div>
+        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+          {shortcuts.map(({ href, title, description, icon: Icon }) => <Link key={href} href={href} className="group flex min-h-24 items-start gap-3 border border-border bg-background p-4 transition-colors hover:border-primary/50 hover:bg-surface-subtle focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring">
+            <span className="flex size-9 shrink-0 items-center justify-center border border-primary/25 bg-primary/10 text-primary"><Icon aria-hidden="true" className="size-4" /></span>
+            <span className="min-w-0"><span className="block text-sm font-semibold group-hover:text-primary">{title}</span><span className="mt-1 block text-xs leading-5 text-muted-foreground">{description}</span></span>
+          </Link>)}
+        </div>
+      </section>
 
       <section aria-label="Показатели каталога" className="grid gap-px border border-border bg-border sm:grid-cols-2 xl:grid-cols-4">
         {dashboard.metrics.map((metric, index) => {

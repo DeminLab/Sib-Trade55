@@ -12,45 +12,57 @@ import { cn } from "@/lib/utils"
 import { useAuthStore } from '@/store/auth'
 import { toast } from 'sonner'
 
-const adminNav = [
-  { name: "Обзор", href: "/admin", icon: LayoutDashboard },
-  { name: "Посещения", href: "/admin/visitors", icon: Activity },
-  { name: "Заказы", href: "/admin/orders", icon: Package },
-  { name: "Все товары", href: "/admin/products", icon: Boxes },
-  { name: "Каталог и категории", href: "/admin/categories", icon: Tags },
-  { name: "Клиенты", href: "/admin/customers", icon: Users },
-  { name: "Запросы КП", href: "/admin/quotes", icon: ClipboardList },
-  { name: "Обращения", href: "/admin/contacts", icon: FileText },
-  { name: "Заявки на подбор и поставку", href: "/admin/custom-requests", icon: BriefcaseBusiness },
-  { name: "Портфолио", href: "/admin/portfolio", icon: FolderKanban },
-  { name: "Контент", href: "/admin/content", icon: FileText },
-  { name: "Настройки сайта", href: "/admin/settings", icon: FileText },
+const adminNavGroups = [
+  { name: "Работа с клиентами", items: [
+    { name: "Обзор", href: "/admin", icon: LayoutDashboard },
+    { name: "Заказы", href: "/admin/orders", icon: Package },
+    { name: "Обращения", href: "/admin/contacts", icon: FileText },
+    { name: "Запросы КП", href: "/admin/quotes", icon: ClipboardList },
+    { name: "Подбор и поставка", href: "/admin/custom-requests", icon: BriefcaseBusiness },
+    { name: "Клиенты", href: "/admin/customers", icon: Users },
+    { name: "Посещения", href: "/admin/visitors", icon: Activity },
+  ] },
+  { name: "Каталог", items: [
+    { name: "Все товары", href: "/admin/products", icon: Boxes },
+    { name: "Категории", href: "/admin/categories", icon: Tags },
+  ] },
+  { name: "Сайт", items: [
+    { name: "Портфолио", href: "/admin/portfolio", icon: FolderKanban },
+    { name: "Контент", href: "/admin/content", icon: FileText },
+    { name: "Настройки", href: "/admin/settings", icon: FileText },
+  ] },
 ]
 
 function NavItems({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname()
 
   return (
-    <nav className="space-y-1">
-      {adminNav.map((item) => {
-        const isActive = item.href === "/admin" ? pathname === "/admin" : pathname.startsWith(item.href)
-        const Icon = item.icon
+    <nav aria-label="Разделы админки" className="space-y-6">
+      {adminNavGroups.map((group) => <section key={group.name}>
+        <h2 className="px-4 pb-2 text-[10px] font-bold uppercase tracking-[0.16em] text-muted-foreground">{group.name}</h2>
+        <div className="space-y-0.5">
+          {group.items.map((item) => {
+            const isActive = item.href === "/admin" ? pathname === "/admin" : pathname.startsWith(item.href)
+            const Icon = item.icon
 
-        return (
-          <Link
-            key={item.href}
-            href={item.href}
-            onClick={onNavigate}
-            className={cn(
-              "group flex items-center gap-3 border-l-2 px-4 py-3 text-sm font-medium transition-colors",
-              isActive ? "border-primary bg-primary/10 text-foreground" : "border-transparent text-muted-foreground hover:border-primary/40 hover:bg-background hover:text-foreground"
-            )}
-          >
-            <Icon className={cn("size-4 shrink-0", isActive ? "text-primary" : "text-muted-foreground group-hover:text-primary")} />
-            <span>{item.name}</span>
-          </Link>
-        )
-      })}
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={isActive ? "page" : undefined}
+                onClick={onNavigate}
+                className={cn(
+                  "group flex min-h-10 items-center gap-3 border-l-2 px-4 py-2 text-sm font-medium transition-colors",
+                  isActive ? "border-primary bg-primary/10 text-foreground" : "border-transparent text-muted-foreground hover:border-primary/40 hover:bg-background hover:text-foreground"
+                )}
+              >
+                <Icon className={cn("size-4 shrink-0", isActive ? "text-primary" : "text-muted-foreground group-hover:text-primary")} />
+                <span>{item.name}</span>
+              </Link>
+            )
+          })}
+        </div>
+      </section>)}
     </nav>
   )
 }
@@ -58,6 +70,8 @@ function NavItems({ onNavigate }: { onNavigate?: () => void }) {
 export function AdminShell({ children }: { children: React.ReactNode }) {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [signingOut, setSigningOut] = useState(false)
+  const pathname = usePathname()
+  const currentSection = adminNavGroups.flatMap((group) => group.items).find((item) => item.href === "/admin" ? pathname === "/admin" : pathname.startsWith(item.href))
   const router = useRouter()
   async function signOut() {
     setSigningOut(true)
@@ -72,7 +86,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
           <Link href="/admin" className="text-xl font-bold tracking-[-0.04em]">СИБ-ТРЕЙД</Link>
           <span className="ml-3 border-l border-border pl-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">Admin</span>
         </div>
-        <div className="px-4 py-6"><p className="px-4 pb-3 text-[10px] font-bold uppercase tracking-[0.18em] text-muted-foreground">Управление</p><NavItems /></div>
+        <div className="min-h-0 flex-1 overflow-y-auto px-4 py-6"><NavItems /></div>
         <div className="mt-auto border-t border-border p-5"><Link href="/" className="flex items-center gap-2 px-2 text-sm text-muted-foreground transition-colors hover:text-foreground"><Archive className="size-4" />На сайт</Link></div>
       </aside>
 
@@ -88,7 +102,16 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
         </SheetContent>
       </Sheet>
 
-      <main className="min-h-screen min-w-0 lg:pl-64"><div className="mx-auto max-w-[1600px] p-3.5 min-[420px]:p-4 sm:p-8 lg:p-12"><div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center"><div className="min-w-0 flex-1"><AdminGlobalSearch /></div><Button variant="outline" disabled={signingOut} onClick={() => void signOut()}>{signingOut ? 'Выходим…' : 'Выйти'}</Button></div>{children}</div></main>
+      <main className="min-h-screen min-w-0 lg:pl-64"><div className="mx-auto max-w-[1600px] px-4 pb-8 pt-3.5 min-[420px]:px-5 sm:px-8 sm:pb-10 sm:pt-6 lg:px-10 lg:pb-12">
+        <div className="mb-7 flex flex-col gap-3 border-b border-border pb-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="min-w-0 flex-1"><AdminGlobalSearch /></div>
+          <div className="flex items-center justify-between gap-3 sm:justify-end">
+            <p className="text-xs font-medium text-muted-foreground">Админка <span className="px-1">/</span> {currentSection?.name ?? "Раздел"}</p>
+            <Button variant="outline" disabled={signingOut} onClick={() => void signOut()}>{signingOut ? 'Выходим…' : 'Выйти'}</Button>
+          </div>
+        </div>
+        {children}
+      </div></main>
     </div>
   )
 }

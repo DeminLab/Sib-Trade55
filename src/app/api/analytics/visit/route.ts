@@ -33,20 +33,22 @@ export async function POST(request: Request) {
   try {
     const contentLength = Number(request.headers.get("content-length") ?? 0)
     if (contentLength > 4096) return NextResponse.json({ ok: false }, { status: 413 })
-    const body = await request.json() as { page?: unknown; source?: unknown }
+    const body = await request.json() as { page?: unknown; source?: unknown; visitorId?: unknown }
     const page = safePath(body.page)
     if (!page) return NextResponse.json({ ok: false }, { status: 400 })
 
     const cookieStore = await cookies()
     const storedId = cookieStore.get(visitorCookie)?.value
-    const visitorId = storedId && visitorPattern.test(storedId) ? storedId : randomUUID()
+    const cookieVisitorId = storedId && visitorPattern.test(storedId) ? storedId : null
+    const requestVisitorId = typeof body.visitorId === "string" && visitorPattern.test(body.visitorId) ? body.visitorId : null
+    const visitorId = cookieVisitorId ?? requestVisitorId ?? randomUUID()
     const session = readSessionCookie(cookieStore.get("sib_trade_session")?.value)
     const user = session?.role === "customer" ? session : null
     const agent = deviceInfo(request.headers.get("user-agent") ?? "")
     recordVisit({ visitorId, userId: user?.id ?? null, email: user?.email ?? null, page, source: safeSource(body.source), ...agent, visitedAt: new Date().toISOString() })
 
-    const response = NextResponse.json({ ok: true }, { headers: { "Cache-Control": "no-store" } })
-    if (!storedId || !visitorPattern.test(storedId)) response.cookies.set(visitorCookie, visitorId, {
+    const response = NextResponse.json({ ok: true, visitorId }, { headers: { "Cache-Control": "no-store" } })
+    if (cookieVisitorId !== visitorId) response.cookies.set(visitorCookie, visitorId, {
       httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "lax", path: "/", maxAge: 60 * 60 * 24 * 365,
     })
     return response
